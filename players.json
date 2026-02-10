@@ -1,0 +1,802 @@
+[
+  {
+    "id": 5304,
+    "name": "Pedro Correia Vaz",
+    "club": "Clube De Ténis De Santarém",
+    "section": "Masculinos 5",
+    "location": "Portugal, Santarém",
+    "age": "ABS"
+  },
+  {
+    "id": 7544,
+    "name": "Eduardo Bonneville Carona",
+    "club": "Valténis Country Club",
+    "section": "Masculinos 1",
+    "location": "Portugal, Lisboa",
+    "age": "+40"
+  },
+  {
+    "id": 9188,
+    "name": "Joana Figueirôa",
+    "club": "",
+    "section": "Femininos 1",
+    "location": "Portugal, Madeira, Funchal",
+    "age": "+40"
+  },
+  {
+    "id": 15828,
+    "name": "Leonor Peixoto",
+    "club": "Padel Factory",
+    "section": "Femininos 2",
+    "location": "Portugal, Lisboa",
+    "age": "ABS"
+  },
+  {
+    "id": 16292,
+    "name": "Martim Flores Ribeiro",
+    "club": "Lx Indoor Padel",
+    "section": "Masculinos 2",
+    "location": "Portugal, Lisboa",
+    "age": "ABS"
+  },
+  {
+    "id": 18263,
+    "name": "Rui Almada",
+    "club": "NovoPadelClubSetubal",
+    "section": "Masculinos 2",
+    "location": "Portugal",
+    "age": "ABS"
+  },
+  {
+    "id": 23412,
+    "name": "Pedro Borges",
+    "club": "AirfutPadelIndoor",
+    "section": "Masculinos 3",
+    "location": "Portugal, Lisboa",
+    "age": "+40"
+  },
+  {
+    "id": 26552,
+    "name": "Paulo Antunes",
+    "club": "OsPadeleiros-CPCOR-ClubePadeld",
+    "section": "Masculinos 4",
+    "location": "Portugal, Santarém, Cartaxo",
+    "age": "+50"
+  },
+  {
+    "id": 27460,
+    "name": "Carlos Morais",
+    "club": "PadelExperienceCenter",
+    "section": "Masculinos 2",
+    "location": "Portugal, Lisboa",
+    "age": "+40"
+  },
+  {
+    "id": 27618,
+    "name": "Afonso Amaral",
+    "club": "GCP-PadelAmoreiras",
+    "section": "Masculinos 5",
+    "location": "Portugal, Santarém",
+    "age": "ABS"
+  },
+  {
+    "id": 29603,
+    "name": "José Melo",
+    "club": "Clube de Padel Alcântara",
+    "section": "Masculinos 4",
+    "location": "Portugal, Lisboa",
+    "age": "+50"
+  },
+  {
+    "id": 32213,
+    "name": "Ricardo Branco",
+    "club": "Capital Padel Academy",
+    "section": "Masculinos 3",
+    "location": "Portugal, Lisboa, Cascais",
+    "age": "+45"
+  },
+  {
+    "id": 33668,
+    "name": "João Beja",
+    "club": "Valténis Country Club",
+    "section": "Masculinos 1",
+    "location": "Portugal, Lisboa, Cascais",
+    "age": "ABS"
+  },
+  {
+    "id": 33975,
+    "name": "Ricardo Lourenço",
+    "club": "W Padel Country Club",
+    "section": "Masculinos 1",
+    "location": "Portugal, Lisboa, Amadora",
+    "age": "+40"
+  },
+  {
+    "id": 36800,
+    "name": "Carlos Moreno",
+    "club": "Padel Estoril",
+    "section": "Masculinos 4",
+    "location": "Portugal, Lisboa, Cascais",
+    "age": "+45"
+  },
+  {
+    "id": 37926,
+    "name": "Rodolfo Morgado",
+    "club": "",
+    "section": "Masculinos 3",
+    "location": "Portugal",
+    "age": "+50"
+  },
+  {
+    "id": 40692,
+    "name": "Maria José Lima",
+    "club": "OeirasPadelAcademy",
+    "section": "Femininos 5",
+    "location": "Portugal",
+    "age": "+70"
+  },
+  {
+    "id": 40762,
+    "name": "KARLITO PINTCHO",
+    "club": "A-ZPadelSintra",
+    "section": "Masculinos 3",
+    "location": "Portugal",
+    "age": "+40"
+  },
+  {
+    "id": 40783,
+    "name": "Bruno Martins",
+    "club": "",
+    "section": "Masculinos 3",
+    "location": "Portugal, Lamego",
+    "age": "+40"
+  },
+  {
+    "id": 44595,
+    "name": "Jorge Fontoura",
+    "club": "Ultra Padel Club",
+    "section": "Masculinos 1",
+    "location": "Portugal",
+    "age": "+40"
+  },
+  {
+    "id": 44610,
+    "name": "Nuno Correia",
+    "club": "OeirasPadelAcademy",
+    "section": "Masculinos 3",
+    "location": "Portugal",
+    "age": "+50"
+  },
+  {
+    "id": 44616,
+    "name": "Gonçalo Vasconcelos",
+    "club": "Padel Factory",
+    "section": "Masculinos 1, Masculinos 2",
+    "location": "Portugal, Lisboa",
+    "age": "+50"
+  },
+  {
+    "id": 44617,
+    "name": "Joao Amaral Gomes",
+    "club": "Padel Factory",
+    "section": "Masculinos 4",
+    "location": "Portugal",
+    "age": "+55"
+  },
+  {
+    "id": 44634,
+    "name": "Brasão",
+    "club": "Padel Factory",
+    "section": "Masculinos 3",
+    "location": "",
+    "age": "+45"
+  },
+  {
+    "id": 45964,
+    "name": "Teresa Pereira Leite",
+    "club": "Indoor Padel Center",
+    "section": "Femininos 5",
+    "location": "Portugal, Lisboa, Linda-a-Velha",
+    "age": "+40"
+  },
+  {
+    "id": 50066,
+    "name": "Leonor Salgado",
+    "club": "Padel Campo Grande",
+    "section": "Femininos 6",
+    "location": "Portugal, Setúbal, Azeitão",
+    "age": "+40"
+  },
+  {
+    "id": 54104,
+    "name": "Pedro SP Carvalho",
+    "club": "Lx Indoor Padel",
+    "section": "Masculinos 5",
+    "location": "Portugal, Lisboa",
+    "age": "+50"
+  },
+  {
+    "id": 54972,
+    "name": "Ricardo Sousa",
+    "club": "",
+    "section": "Masculinos 4",
+    "location": "Portugal, Lisboa",
+    "age": "+50"
+  },
+  {
+    "id": 57018,
+    "name": "Luis Manuel Brilha",
+    "club": "JCPADEL",
+    "section": "Masculinos 6",
+    "location": "Portugal, Lisboa, Vila Franca de Xira",
+    "age": "+45"
+  },
+  {
+    "id": 59429,
+    "name": "Afonso Castro",
+    "club": "Indoor Padel Center",
+    "section": "Masculinos 4",
+    "location": "Portugal, Lisboa",
+    "age": "+35"
+  },
+  {
+    "id": 62863,
+    "name": "João Ruivo",
+    "club": "",
+    "section": "Masculinos 3",
+    "location": "Portugal",
+    "age": "ABS"
+  },
+  {
+    "id": 67792,
+    "name": "João Jacinto",
+    "club": "SociedadedeEducacaoeRecreio“Os",
+    "section": "Masculinos 4",
+    "location": "Portugal, Lisboa, Algueirão-Mem Martins",
+    "age": "+45"
+  },
+  {
+    "id": 67810,
+    "name": "André Roriz",
+    "club": "",
+    "section": "Masculinos 4",
+    "location": "Portugal, Lisboa, Cascais",
+    "age": "+35"
+  },
+  {
+    "id": 69890,
+    "name": "Jose Renato",
+    "club": "",
+    "section": "Masculinos 5",
+    "location": "Portugal, Lisboa",
+    "age": "+55"
+  },
+  {
+    "id": 70706,
+    "name": "Cláudia Paris Vicente",
+    "club": "",
+    "section": "Femininos 6",
+    "location": "Portugal, Odivelas",
+    "age": "+50"
+  },
+  {
+    "id": 71034,
+    "name": "Teresa Moura Pereira",
+    "club": "Clube de Padel Alcântara",
+    "section": "Femininos 3",
+    "location": "Portugal",
+    "age": "+35"
+  },
+  {
+    "id": 71924,
+    "name": "Helga Rocha",
+    "club": "Padel Factory",
+    "section": "Femininos 4",
+    "location": "Portugal, Lisboa",
+    "age": "+45"
+  },
+  {
+    "id": 72164,
+    "name": "Mafalda Machado",
+    "club": "W Padel Country Club",
+    "section": "Femininos 2",
+    "location": "Portugal",
+    "age": "+35"
+  },
+  {
+    "id": 72710,
+    "name": "Pedro Campos",
+    "club": "Lx Indoor Padel",
+    "section": "Masculinos 5",
+    "location": "Portugal",
+    "age": "+50"
+  },
+  {
+    "id": 72976,
+    "name": "Marta Ramalho",
+    "club": "Padel Factory",
+    "section": "Femininos 5",
+    "location": "Portugal, Lisboa",
+    "age": "+45"
+  },
+  {
+    "id": 73900,
+    "name": "Francisco Martinez",
+    "club": "DreamPadelCenterSetubal",
+    "section": "Masculinos 3",
+    "location": "Portugal",
+    "age": "ABS"
+  },
+  {
+    "id": 74165,
+    "name": "Francisco Ferreira",
+    "club": "W Padel Country Club",
+    "section": "Masculinos 5",
+    "location": "Portugal",
+    "age": "+40"
+  },
+  {
+    "id": 74221,
+    "name": "João Ferro",
+    "club": "A-ZPadelSintra",
+    "section": "Masculinos 4",
+    "location": "Portugal",
+    "age": "+45"
+  },
+  {
+    "id": 74368,
+    "name": "Zé Pedro",
+    "club": "SociedadedeEducacaoeRecreio“Os",
+    "section": "Masculinos 4",
+    "location": "Portugal",
+    "age": "+40"
+  },
+  {
+    "id": 74528,
+    "name": "Paola Graça",
+    "club": "Lisboa Racket Centre",
+    "section": "Femininos 5",
+    "location": "Portugal",
+    "age": "+55"
+  },
+  {
+    "id": 74662,
+    "name": "Jesús Lizarbe",
+    "club": "Padel Factory",
+    "section": "Masculinos 2",
+    "location": "Portugal, Lisboa, Odivelas",
+    "age": "+45"
+  },
+  {
+    "id": 74740,
+    "name": "PAULA ARAÚJO",
+    "club": "",
+    "section": "Femininos 2",
+    "location": "Portugal, Braga",
+    "age": "+50"
+  },
+  {
+    "id": 74818,
+    "name": "Afonso Pinheiro",
+    "club": "Rackets Pro EUL",
+    "section": "Masculinos 6",
+    "location": "Portugal",
+    "age": "ABS"
+  },
+  {
+    "id": 75207,
+    "name": "Paulo Seiça Neves",
+    "club": "Padel Factory",
+    "section": "Masculinos 4",
+    "location": "Portugal, Lisboa, Paço de Arcos",
+    "age": "+60"
+  },
+  {
+    "id": 75750,
+    "name": "Joana Gonçalves",
+    "club": "Carcavelos Ténis",
+    "section": "Femininos 3",
+    "location": "Portugal, Lisboa, Parede",
+    "age": "+40"
+  },
+  {
+    "id": 75754,
+    "name": "Sara Nobre",
+    "club": "",
+    "section": "Femininos 2",
+    "location": "Portugal, Oeiras",
+    "age": "+45"
+  },
+  {
+    "id": 75755,
+    "name": "Raquel Leal Loureiro",
+    "club": "Padel Factory",
+    "section": "Femininos 2",
+    "location": "Portugal",
+    "age": "+35"
+  },
+  {
+    "id": 75766,
+    "name": "Neusa de Almeida Cunha",
+    "club": "Inn Court",
+    "section": "Femininos 6",
+    "location": "Portugal, Lisboa, Belas",
+    "age": "+45"
+  },
+  {
+    "id": 75975,
+    "name": "Manuel Marques",
+    "club": "Padel Factory",
+    "section": "Masculinos 1",
+    "location": "Portugal, Lisboa",
+    "age": "+50"
+  },
+  {
+    "id": 76280,
+    "name": "Sofia Formigal",
+    "club": "",
+    "section": "Femininos 1",
+    "location": "Portugal, Lisboa",
+    "age": "+30"
+  },
+  {
+    "id": 76283,
+    "name": "Natalia Oxley",
+    "club": "Padel Factory",
+    "section": "Femininos 1",
+    "location": "Portugal, Lisboa, Oeiras",
+    "age": "+40"
+  },
+  {
+    "id": 76284,
+    "name": "Zé",
+    "club": "DreamPadelCenterSetubal",
+    "section": "Masculinos 3",
+    "location": "Portugal",
+    "age": "ABS"
+  },
+  {
+    "id": 76705,
+    "name": "Daniel Teodoro",
+    "club": "Padel Campo Grande",
+    "section": "Masculinos 4",
+    "location": "Portugal, Lisboa",
+    "age": "ABS"
+  },
+  {
+    "id": 76887,
+    "name": "Ricardo Varela",
+    "club": "PIC Padel Club",
+    "section": "Masculinos 3",
+    "location": "Portugal, Setúbal, Sesimbra",
+    "age": "+45"
+  },
+  {
+    "id": 77334,
+    "name": "João Almeida Dias",
+    "club": "Indoor Padel Center",
+    "section": "Masculinos 2",
+    "location": "Portugal, Lisboa",
+    "age": "ABS"
+  },
+  {
+    "id": 77357,
+    "name": "Diogo  Cartaxo",
+    "club": "Lx Indoor Padel",
+    "section": "Masculinos 3",
+    "location": "Portugal",
+    "age": "ABS"
+  },
+  {
+    "id": 77417,
+    "name": "Tiago Cunha",
+    "club": "",
+    "section": "Masculinos 4",
+    "location": "Portugal, Lisboa, Belas",
+    "age": "+45"
+  },
+  {
+    "id": 77481,
+    "name": "Jorge Duarte",
+    "club": "",
+    "section": "Masculinos 5",
+    "location": "Portugal",
+    "age": "+45"
+  },
+  {
+    "id": 77961,
+    "name": "Christoph Sievert",
+    "club": "",
+    "section": "Masculinos 2",
+    "location": "Portugal, Setúbal",
+    "age": "+45"
+  },
+  {
+    "id": 78045,
+    "name": "Filipe Varão",
+    "club": "Padel Factory",
+    "section": "Masculinos 1, Masculinos 2",
+    "location": "Portugal, Lisboa, Oeiras",
+    "age": "+35"
+  },
+  {
+    "id": 78186,
+    "name": "Rui Ferreira",
+    "club": "Time2padelCenter",
+    "section": "Masculinos 6",
+    "location": "Portugal, Lisboa, Colares",
+    "age": "ABS"
+  },
+  {
+    "id": 79087,
+    "name": "Fernando Silvério",
+    "club": "Arruda Fun Padel",
+    "section": "Masculinos 5",
+    "location": "Portugal, Lisboa",
+    "age": "+40"
+  },
+  {
+    "id": 79353,
+    "name": "Hugo Libório",
+    "club": "ClubePadeldasCaldas",
+    "section": "Masculinos 5",
+    "location": "Portugal",
+    "age": "+40"
+  },
+  {
+    "id": 80125,
+    "name": "Pedro Simões",
+    "club": "MrPadel",
+    "section": "Masculinos 6",
+    "location": "Portugal",
+    "age": "+40"
+  },
+  {
+    "id": 80470,
+    "name": "Toni",
+    "club": "Capital Padel Academy",
+    "section": "Masculinos 4",
+    "location": "Portugal, Lisboa, Parede",
+    "age": "+45"
+  },
+  {
+    "id": 81583,
+    "name": "David Pinto",
+    "club": "A-ZPadelSintra",
+    "section": "Masculinos 3",
+    "location": "Portugal, Algarve",
+    "age": "ABS"
+  },
+  {
+    "id": 81636,
+    "name": "Hugo Menino Aguiar",
+    "club": "My Padel Center",
+    "section": "Masculinos 5",
+    "location": "Portugal",
+    "age": "+40"
+  },
+  {
+    "id": 83361,
+    "name": "Zé F. Santos",
+    "club": "Clube de Padel Alcântara",
+    "section": "Masculinos 4",
+    "location": "Portugal, Lisboa",
+    "age": "+35"
+  },
+  {
+    "id": 83733,
+    "name": "Luis Daniel",
+    "club": "SociedadedeEducacaoeRecreio“Os",
+    "section": "Masculinos 5",
+    "location": "Portugal, Lisboa, São Domingos de Rana",
+    "age": "+40"
+  },
+  {
+    "id": 83759,
+    "name": "Gaibino",
+    "club": "SociedadedeEducacaoeRecreio“Os",
+    "section": "Masculinos 5",
+    "location": "Portugal",
+    "age": "+35"
+  },
+  {
+    "id": 84029,
+    "name": "Fábio Martins",
+    "club": "OeirasPadelAcademy",
+    "section": "Masculinos 3",
+    "location": "Portugal, Lisboa, Sintra",
+    "age": "+35"
+  },
+  {
+    "id": 84393,
+    "name": "Marta Salgado",
+    "club": "Lisboa Racket Centre",
+    "section": "Femininos 2",
+    "location": "Portugal, Lisboa",
+    "age": "+40"
+  },
+  {
+    "id": 84398,
+    "name": "Tiago Tainha",
+    "club": "",
+    "section": "Masculinos 2",
+    "location": "Portugal",
+    "age": "ABS"
+  },
+  {
+    "id": 85152,
+    "name": "Diogo Macedo",
+    "club": "W Padel Country Club",
+    "section": "Masculinos 1",
+    "location": "Portugal, Lisboa, Carnaxide",
+    "age": "ABS"
+  },
+  {
+    "id": 85217,
+    "name": "Martim Félix",
+    "club": "Lisboa Racket Centre",
+    "section": "Masculinos 4",
+    "location": "Portugal",
+    "age": "ABS"
+  },
+  {
+    "id": 86152,
+    "name": "Maria João Gaivéu",
+    "club": "Academia Padel Setúbal",
+    "section": "Femininos 6",
+    "location": "Portugal, Setúbal",
+    "age": "+45"
+  },
+  {
+    "id": 86369,
+    "name": "Sérgio Fernandes",
+    "club": "AirfutPadelIndoor",
+    "section": "Masculinos 5",
+    "location": "Portugal",
+    "age": "+35"
+  },
+  {
+    "id": 86706,
+    "name": "Rúben Sequeira",
+    "club": "AirfutPadelIndoor",
+    "section": "Masculinos 2",
+    "location": "Portugal, Lisboa",
+    "age": "+35"
+  },
+  {
+    "id": 86782,
+    "name": "Rui Brás",
+    "club": "My Padel Center",
+    "section": "Masculinos 5",
+    "location": "Portugal, Lisboa",
+    "age": "+45"
+  },
+  {
+    "id": 86865,
+    "name": "Joel Ribeiro",
+    "club": "Lx Indoor Padel",
+    "section": "Masculinos 2",
+    "location": "Portugal",
+    "age": "+45"
+  },
+  {
+    "id": 87266,
+    "name": "Bijou",
+    "club": "",
+    "section": "Masculinos 6",
+    "location": "Portugal, Lisboa, Cascais",
+    "age": "+50"
+  },
+  {
+    "id": 87828,
+    "name": "Rodrigo Raposo",
+    "club": "",
+    "section": "Masculinos 3",
+    "location": "Portugal, Setúbal, Almada",
+    "age": "ABS"
+  },
+  {
+    "id": 88029,
+    "name": "Margarida Abreu",
+    "club": "",
+    "section": "Femininos 1",
+    "location": "Portugal",
+    "age": "ABS"
+  },
+  {
+    "id": 88497,
+    "name": "Francisco Tavares",
+    "club": "",
+    "section": "Masculinos 4",
+    "location": "Portugal, Lisboa, Sintra",
+    "age": "+40"
+  },
+  {
+    "id": 88903,
+    "name": "Rodrigo Teixeira",
+    "club": "Padel Estoril",
+    "section": "Masculinos 4",
+    "location": "Portugal, Lisboa, Cascais",
+    "age": "+50"
+  },
+  {
+    "id": 89215,
+    "name": "João Pinto",
+    "club": "Padel Academy",
+    "section": "Masculinos 4",
+    "location": "Portugal",
+    "age": "+35"
+  },
+  {
+    "id": 89775,
+    "name": "Manuel LopesdaCosta",
+    "club": "Lisboa Racket Centre",
+    "section": "Masculinos 5",
+    "location": "Portugal, Lisboa",
+    "age": "+60"
+  },
+  {
+    "id": 90170,
+    "name": "André Soares",
+    "club": "SmashPadelAlmada",
+    "section": "Masculinos 5",
+    "location": "Portugal, Lisboa, Odivelas",
+    "age": "+40"
+  },
+  {
+    "id": 91195,
+    "name": "Miguel Romão",
+    "club": "",
+    "section": "Masculinos 3",
+    "location": "Portugal, Lisboa, Loures",
+    "age": "ABS"
+  },
+  {
+    "id": 91265,
+    "name": "Gonçalo Bernardo",
+    "club": "Carcavelos Ténis",
+    "section": "Masculinos 4",
+    "location": "Portugal, Lisboa, Cascais",
+    "age": "+50"
+  },
+  {
+    "id": 92460,
+    "name": "Ricardo Rua",
+    "club": "",
+    "section": "Masculinos 3",
+    "location": "Portugal, Lisboa",
+    "age": "+35"
+  },
+  {
+    "id": 92767,
+    "name": "Filipa Figueira",
+    "club": "Padel Estoril",
+    "section": "Femininos 3",
+    "location": "Portugal",
+    "age": "+45"
+  },
+  {
+    "id": 92781,
+    "name": "Vasco Leslie",
+    "club": "OeirasPadelAcademy",
+    "section": "Masculinos 2",
+    "location": "Portugal, Lisboa, Oeiras",
+    "age": "ABS"
+  },
+  {
+    "id": 92853,
+    "name": "Afonso Janine",
+    "club": "MastersPremiumPadel",
+    "section": "Masculinos 3",
+    "location": "Portugal, Lisboa",
+    "age": "+35"
+  },
+  {
+    "id": 93105,
+    "name": "Carlos Ferreira",
+    "club": "ProPadelAcademy",
+    "section": "Masculinos 3",
+    "location": "Portugal, Lisboa, Torres Vedras",
+    "age": "+40"
+  }
+]
