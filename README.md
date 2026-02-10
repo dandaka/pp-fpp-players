@@ -50,11 +50,11 @@ Results table columns: Ranking, Variação, Licença, Jogador, Pontos, Clube, N�
 
 ## Data files
 
-| File | Description |
-|------|-------------|
-| `players.json` | All 526 players with pontos (null if no Nível 5/6 match) |
-| `players.csv` | Same data in CSV format |
-| `players-with-scores.json` | Detailed ranking entries per player |
+| File                       | Description                                              |
+| -------------------------- | -------------------------------------------------------- |
+| `players.json`             | All 526 players with pontos (null if no Nível 5/6 match) |
+| `players.csv`              | Same data in CSV format                                  |
+| `players-with-scores.json` | Detailed ranking entries per player                      |
 
 ## Player breakdown by section
 
