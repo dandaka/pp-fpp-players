@@ -48,6 +48,41 @@ The rankings page is an ASP.NET app with UpdatePanels. Simple HTTP requests fail
 
 Results table columns: Ranking, Variação, Licença, Jogador, Pontos, Clube, Nível, Escalão, Torneios
 
+## Query scripts
+
+### Look up a player
+
+```bash
+bun query-player.ts "Vlad Ra"
+```
+
+Shows player details, pontos, rank within section, and all matching ranking entries.
+
+### List all players in a section
+
+```bash
+bun query-section.ts "Masculinos 5"
+```
+
+Lists all players in a section sorted by pontos descending.
+
+### Top N players in a section
+
+```bash
+bun query-top.ts "Masculinos 6" 10
+```
+
+Shows top N players (default 10) in a section by pontos.
+
+### Nível boundaries
+
+```bash
+bun query-levels.ts                          # all players
+bun query-levels.ts --section "Masculinos"   # filter by section
+```
+
+Shows lowest/highest 5 players for Nível 5 and Nível 6.
+
 ## Data files
 
 | File                       | Description                                              |
