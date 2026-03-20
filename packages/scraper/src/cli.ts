@@ -10,17 +10,21 @@ switch (cmd) {
     await seedPlayersFromJson();
     break;
 
-  case "enrich":
-    await enrichPlayerProfiles(parseInt(process.argv[3] ?? "50"));
+  case "enrich": {
+    const allFlag = process.argv.includes("--all");
+    const batch = parseInt(process.argv[3] ?? "100");
+    await enrichPlayerProfiles(batch, 200, allFlag);
     break;
+  }
 
   case "import":
     await importMatchesFromJson(process.argv[3]);
     break;
 
   case "scrape": {
-    const file = process.argv[3] ?? "api";
-    const mod = await import("./scrape-all-tournaments");
+    // Pass source as argv[3] so scrape-all-tournaments picks it up
+    if (!process.argv[3]) process.argv[3] = "db";
+    await import("./scrape-all-tournaments");
     break;
   }
 

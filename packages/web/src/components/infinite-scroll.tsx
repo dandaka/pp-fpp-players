@@ -10,14 +10,19 @@ interface InfiniteScrollProps {
 
 export function InfiniteScroll({ onLoadMore, hasMore, loading }: InfiniteScrollProps) {
   const sentinelRef = useRef<HTMLDivElement>(null);
+  const onLoadMoreRef = useRef(onLoadMore);
+  onLoadMoreRef.current = onLoadMore;
+
+  const hasMoreRef = useRef(hasMore);
+  hasMoreRef.current = hasMore;
+  const loadingRef = useRef(loading);
+  loadingRef.current = loading;
 
   useEffect(() => {
-    if (!hasMore || loading) return;
-
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) {
-          onLoadMore();
+        if (entries[0].isIntersecting && hasMoreRef.current && !loadingRef.current) {
+          onLoadMoreRef.current();
         }
       },
       { threshold: 0.1 }
@@ -29,7 +34,7 @@ export function InfiniteScroll({ onLoadMore, hasMore, loading }: InfiniteScrollP
     return () => {
       if (sentinel) observer.unobserve(sentinel);
     };
-  }, [hasMore, loading, onLoadMore]);
+  }, []);
 
   return (
     <div ref={sentinelRef} className="py-4 text-center">

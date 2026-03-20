@@ -3,6 +3,7 @@ export interface PlayerSearchResult {
   name: string
   club: string | null
   globalRank: number
+  rating: PlayerRating | null
 }
 
 export interface Player {
@@ -40,6 +41,7 @@ export interface MatchPlayerInfo {
   name: string
   categoryRank: number | null
   genderRank: number | null
+  rating: PlayerRating | null
 }
 
 export interface Tournament {
@@ -55,6 +57,11 @@ export interface TournamentDetail {
   club: string | null
   date: string | null
   linkWeb: string | null
+}
+
+export interface PlayerRating {
+  score: number;       // 0.0–100.0, min-max normalized ordinal
+  reliability: number; // 0–100, saturating curve from matches_counted
 }
 
 export interface TournamentPlayer {

@@ -24,14 +24,28 @@ interface NewsItem {
   UIDTOU: string;
 }
 
-async function fetchNewsFeed(codtouHeader: number, offset: number): Promise<NewsItem[]> {
-  const res = await fetch("https://fpp.tiepadel.com/methods.aspx/get_news_by_codtou_header", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ codtou_header: codtouHeader, count_items: offset }),
-  });
-  const data = (await res.json()) as { d: NewsItem[] };
-  return data.d ?? [];
+async function fetchNewsFeed(codtouHeader: number, offset: number, retries = 3): Promise<NewsItem[]> {
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      const res = await fetch("https://fpp.tiepadel.com/methods.aspx/get_news_by_codtou_header", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ codtou_header: codtouHeader, count_items: offset }),
+        signal: AbortSignal.timeout(30000),
+      });
+      const data = (await res.json()) as { d: NewsItem[] };
+      return data.d ?? [];
+    } catch (err) {
+      if (attempt < retries) {
+        console.log(`    Retry ${attempt}/${retries} for tournament ${codtouHeader} offset ${offset}`);
+        await Bun.sleep(2000 * attempt);
+      } else {
+        console.error(`    Failed after ${retries} retries: tournament ${codtouHeader} offset ${offset}`);
+        return [];
+      }
+    }
+  }
+  return [];
 }
 
 function parseWinner(title: string): "a" | "b" | null {
@@ -171,10 +185,14 @@ async function main() {
     if (getCursor(cursorKey) === "done") continue;
 
     console.log(`[${processed}/${targets.length}] ${t.name} (ID: ${t.id})`);
-    saveTournament(db, t.id, t.name, t.date);
-    const count = await scrapeTournament(t.id, t.name);
-    if (count > 0) console.log(`  → ${count} matches`);
-    grandTotal += count;
+    try {
+      saveTournament(db, t.id, t.name, t.date);
+      const count = await scrapeTournament(t.id, t.name);
+      if (count > 0) console.log(`  → ${count} matches`);
+      grandTotal += count;
+    } catch (err) {
+      console.error(`  Error scraping tournament ${t.id}: ${err}`);
+    }
   }
 
   const stats = {

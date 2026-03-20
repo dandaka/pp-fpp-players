@@ -1,30 +1,18 @@
 import Link from "next/link";
-import { RankBadge } from "./rank-badge";
-import { ScoreDisplay } from "./score-display";
+import { RatingBadge } from "./rating-badge";
 
 import type { MatchDetail, MatchPlayerInfo } from "@fpp/db";
 
-function PlayerName({ player, isWinnerSide }: { player: MatchPlayerInfo; isWinnerSide: boolean }) {
+function PlayerCell({ player, isWinnerSide }: { player: MatchPlayerInfo; isWinnerSide: boolean }) {
   return (
-    <div className="flex items-center gap-1 flex-wrap">
+    <div className="flex items-center gap-1 min-w-0">
       <Link
         href={`/players/${player.id}`}
-        className={`hover:underline ${isWinnerSide ? "font-semibold" : ""}`}
+        className={`truncate hover:underline ${isWinnerSide ? "font-semibold" : ""}`}
       >
         {player.name}
       </Link>
-      <RankBadge rank={player.genderRank} />
-      <RankBadge rank={player.categoryRank} label="cat" />
-    </div>
-  );
-}
-
-function SidePlayers({ players, isWinnerSide }: { players: MatchPlayerInfo[]; isWinnerSide: boolean }) {
-  return (
-    <div className="space-y-0.5">
-      {players.map((p) => (
-        <PlayerName key={p.id} player={p} isWinnerSide={isWinnerSide} />
-      ))}
+      {player.rating && <RatingBadge score={player.rating.score} className="shrink-0" />}
     </div>
   );
 }
@@ -34,45 +22,56 @@ interface MatchCardProps {
   currentPlayerId: number;
 }
 
-export function MatchCard({ match, currentPlayerId }: MatchCardProps) {
-  const isOnSideA = match.sideA.some((p) => p.id === currentPlayerId);
-  const playerWon = (isOnSideA && match.winnerSide === "a") || (!isOnSideA && match.winnerSide === "b");
-  const hasResult = match.winnerSide !== null;
+export function MatchCard({ match }: MatchCardProps) {
+  const maxPlayers = Math.max(match.sideA.length, match.sideB.length);
+  const isDoubles = maxPlayers > 1;
+  // columns: player1, [×, player2], gap, score1, score2, ...
+  const gridCols = isDoubles
+    ? `auto auto auto 1.5rem${" auto".repeat(match.sets.length)}`
+    : `auto 1.5rem${" auto".repeat(match.sets.length)}`;
 
   return (
-    <div className="rounded-lg border p-3 space-y-2">
-      <div className="flex items-center justify-between">
-        <div className="min-w-0 flex-1">
-          {match.tournamentId ? (
-            <Link href={`/tournaments/${match.tournamentId}`} className="text-sm text-muted-foreground hover:underline truncate block">
-              {match.tournamentName}
-            </Link>
-          ) : (
-            <span className="text-sm text-muted-foreground truncate block">{match.tournamentName}</span>
-          )}
-        </div>
-        {hasResult && (
-          <span className={`shrink-0 ml-2 rounded-md px-1.5 py-0.5 text-xs font-medium ${
-            playerWon ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
-          }`}>
-            {playerWon ? "W" : "L"}
-          </span>
+    <div className="rounded-lg border p-3 space-y-1">
+      <div className="inline-grid items-center gap-x-4 gap-y-1" style={{ gridTemplateColumns: gridCols }}>
+        {/* Side A row */}
+        <PlayerCell player={match.sideA[0]} isWinnerSide={match.winnerSide === "a"} />
+        {isDoubles && (
+          <>
+            <span className="row-span-2 self-center text-muted-foreground text-sm">×</span>
+            <PlayerCell player={match.sideA[1]} isWinnerSide={match.winnerSide === "a"} />
+          </>
         )}
-      </div>
+        <span />
+        {match.sets.map((s, i) => (
+          <span key={i} className={`text-sm ${match.winnerSide === "a" ? "font-semibold" : "text-muted-foreground"}`}>
+            {s.setA}
+          </span>
+        ))}
 
-      <div className="flex items-center gap-3">
-        <div className="flex-1 min-w-0">
-          <SidePlayers players={match.sideA} isWinnerSide={match.winnerSide === "a"} />
-        </div>
-        <div className="shrink-0 text-muted-foreground text-xs">vs</div>
-        <div className="flex-1 min-w-0">
-          <SidePlayers players={match.sideB} isWinnerSide={match.winnerSide === "b"} />
-        </div>
+        {/* Side B row */}
+        <PlayerCell player={match.sideB[0]} isWinnerSide={match.winnerSide === "b"} />
+        {isDoubles && (
+          <PlayerCell player={match.sideB[1]} isWinnerSide={match.winnerSide === "b"} />
+        )}
+        <span />
+        {match.sets.map((s, i) => (
+          <span key={i} className={`text-sm ${match.winnerSide === "b" ? "font-semibold" : "text-muted-foreground"}`}>
+            {s.setB}
+          </span>
+        ))}
       </div>
 
       <div className="flex items-center justify-between text-xs text-muted-foreground">
-        <ScoreDisplay sets={match.sets} winnerSide={match.winnerSide} />
-        {match.dateTime && <span>{match.dateTime}</span>}
+        <div className="min-w-0 flex-1">
+          {match.tournamentId ? (
+            <Link href={`/tournaments/${match.tournamentId}`} className="hover:underline truncate block">
+              {match.tournamentName}
+            </Link>
+          ) : (
+            <span className="truncate block">{match.tournamentName}</span>
+          )}
+        </div>
+        {match.dateTime && <span className="shrink-0 ml-2">{match.dateTime}</span>}
       </div>
     </div>
   );

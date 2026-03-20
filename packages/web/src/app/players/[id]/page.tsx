@@ -1,5 +1,6 @@
-import { getPlayer, getPlayerRanks } from "@fpp/db";
+import { getPlayer, getPlayerRanks, getPlayerRating } from "@fpp/db";
 import { notFound } from "next/navigation";
+import { RatingBadge } from "@/components/rating-badge";
 import { PlayerMatches } from "./matches";
 
 export default async function PlayerPage({ params }: { params: Promise<{ id: string }> }) {
@@ -8,6 +9,7 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
   if (!player) notFound();
 
   const ranks = getPlayerRanks(player.id);
+  const rating = getPlayerRating(player.id);
 
   return (
     <div className="space-y-6">
@@ -20,7 +22,10 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
           />
         )}
         <div>
-          <h1 className="text-xl font-bold">{player.name}</h1>
+          <div className="flex items-center gap-2">
+            <h1 className="text-xl font-bold">{player.name}</h1>
+            {rating && <RatingBadge score={rating.score} reliability={rating.reliability} />}
+          </div>
           {player.club && <p className="text-sm text-muted-foreground">{player.club}</p>}
           {player.location && <p className="text-sm text-muted-foreground">{player.location}</p>}
         </div>

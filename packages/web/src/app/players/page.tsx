@@ -10,6 +10,7 @@ interface PlayerResult {
   name: string;
   club: string | null;
   globalRank: number;
+  rating: { score: number; reliability: number } | null;
 }
 
 export default function PlayersPage() {

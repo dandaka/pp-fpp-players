@@ -30,16 +30,8 @@ export async function seedPlayersFromJson() {
   console.log(`Seeded ${players.length} players from players.json`);
 }
 
-export async function enrichPlayerProfiles(batchSize = 10, delayMs = 500) {
+export async function enrichPlayerProfiles(batchSize = 10, delayMs = 200, loop = false) {
   const db = getDb();
-  const unsynced = db.query(
-    "SELECT id, name FROM players WHERE profile_synced_at IS NULL ORDER BY id LIMIT ?"
-  ).all(batchSize) as { id: number; name: string }[];
-
-  if (unsynced.length === 0) {
-    console.log("All player profiles already synced");
-    return;
-  }
 
   const update = db.prepare(`
     UPDATE players SET photo_url = ?, share_url = ?, license_number = ?, gender = ?,
@@ -47,27 +39,54 @@ export async function enrichPlayerProfiles(batchSize = 10, delayMs = 500) {
     WHERE id = ?
   `);
 
-  for (const p of unsynced) {
-    try {
-      const profile = await getPlayerProfile(p.id);
-      if (profile.status !== 1) {
-        console.log(`  Skip ${p.name}: API status ${profile.status}`);
-        continue;
-      }
+  const markSynced = db.prepare(`
+    UPDATE players SET profile_synced_at = datetime('now') WHERE id = ?
+  `);
 
-      const gender = profile.list?.find((l) => l.title === "Gender")?.text ?? null;
-      const license = profile.list?.find((l) => l.title?.includes("License"))?.text ?? null;
+  let totalEnriched = 0;
+  let totalSkipped = 0;
+  let totalErrors = 0;
 
-      update.run(profile.player_photo, profile.share_url, license, gender, p.id);
-      console.log(`  Enriched: ${p.name}`);
+  while (true) {
+    const unsynced = db.query(
+      "SELECT id, name FROM players WHERE profile_synced_at IS NULL ORDER BY id LIMIT ?"
+    ).all(batchSize) as { id: number; name: string }[];
 
-      if (delayMs > 0) await Bun.sleep(delayMs);
-    } catch (err) {
-      console.error(`  Error enriching ${p.name}:`, err);
+    if (unsynced.length === 0) {
+      console.log("All player profiles already synced");
+      break;
     }
+
+    for (const p of unsynced) {
+      try {
+        const profile = await getPlayerProfile(p.id);
+        if (profile.status !== 1) {
+          markSynced.run(p.id);
+          totalSkipped++;
+          continue;
+        }
+
+        const gender = profile.list?.find((l) => l.title === "Gender")?.text ?? null;
+        const license = profile.list?.find((l) => l.title?.includes("License"))?.text ?? null;
+
+        update.run(profile.player_photo, profile.share_url, license, gender, p.id);
+        totalEnriched++;
+
+        if (delayMs > 0) await Bun.sleep(delayMs);
+      } catch (err) {
+        console.error(`  Error enriching ${p.name}:`, err);
+        markSynced.run(p.id);
+        totalErrors++;
+      }
+    }
+
+    const remaining = (db.query("SELECT COUNT(*) as cnt FROM players WHERE profile_synced_at IS NULL").get() as { cnt: number }).cnt;
+    console.log(`Progress: ${totalEnriched} enriched, ${totalSkipped} skipped, ${totalErrors} errors, ${remaining} remaining`);
+
+    if (!loop) break;
   }
 
-  console.log(`Enriched ${unsynced.length} player profiles`);
+  console.log(`\nDone: ${totalEnriched} enriched, ${totalSkipped} skipped, ${totalErrors} errors`);
 }
 
 if (import.meta.main) {

@@ -1,6 +1,6 @@
 import { getDb } from "../connection";
 import { normalizeString, scoreMatch } from "../lib/fuzzy-search";
-import type { PlayerSearchResult, Player, PlayerRanks } from "../types";
+import type { PlayerSearchResult, Player, PlayerRanks, PlayerRating } from "../types";
 
 // Cache all player names for fuzzy search (loaded once, ~46k rows, ~3MB)
 let _playerCache: Array<{ id: number; name: string; club: string | null; normalized: string }> | null = null;
@@ -11,6 +11,28 @@ function getPlayerCache() {
   const rows = db.query("SELECT id, name, club FROM players").all() as Array<{ id: number; name: string; club: string | null }>;
   _playerCache = rows.map((r) => ({ ...r, normalized: normalizeString(r.name) }));
   return _playerCache;
+}
+
+const RELIABILITY_K = 5; // matches/(matches+K) curve; K=20 means 50% at 20 games
+
+function computeRating(ordinal: number, matchesCounted: number, minOrd: number, maxOrd: number): PlayerRating {
+  const range = maxOrd - minOrd;
+  const score = range > 0 ? Math.round(((ordinal - minOrd) / range) * 1000) / 10 : 0;
+  const reliability = Math.round((matchesCounted / (matchesCounted + RELIABILITY_K)) * 100);
+  return { score, reliability };
+}
+
+export function getPlayerRating(id: number): PlayerRating | null {
+  const db = getDb();
+  const row = db.query(`
+    SELECT r.ordinal, r.matches_counted,
+      (SELECT MIN(ordinal) FROM ratings) as minOrd,
+      (SELECT MAX(ordinal) FROM ratings) as maxOrd
+    FROM ratings r WHERE r.player_id = ?
+  `).get(id) as { ordinal: number; matches_counted: number; minOrd: number; maxOrd: number } | null;
+
+  if (!row) return null;
+  return computeRating(row.ordinal, row.matches_counted, row.minOrd, row.maxOrd);
 }
 
 export function searchPlayers(query: string, limit = 20): PlayerSearchResult[] {
@@ -38,9 +60,20 @@ export function searchPlayers(query: string, limit = 20): PlayerSearchResult[] {
 
   const rankMap = new Map(rankRows.map((r) => [r.id, r.globalRank]));
 
+  // Batch-fetch ratings for matched players
+  const ratingRows = db.query(`
+    SELECT r.player_id as id, r.ordinal, r.matches_counted,
+      (SELECT MIN(ordinal) FROM ratings) as minOrd,
+      (SELECT MAX(ordinal) FROM ratings) as maxOrd
+    FROM ratings r WHERE r.player_id IN (${placeholders})
+  `).all(...ids) as Array<{ id: number; ordinal: number; matches_counted: number; minOrd: number; maxOrd: number }>;
+
+  const ratingMap = new Map(ratingRows.map((r) => [r.id, computeRating(r.ordinal, r.matches_counted, r.minOrd, r.maxOrd)]));
+
   return scored.map(({ score, normalized, ...rest }) => ({
     ...rest,
     globalRank: rankMap.get(rest.id) ?? 0,
+    rating: ratingMap.get(rest.id) ?? null,
   }));
 }
 

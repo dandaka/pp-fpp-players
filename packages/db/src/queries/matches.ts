@@ -1,5 +1,5 @@
 import { getDb } from "../connection";
-import type { MatchDetail } from "../types";
+import type { MatchDetail, PlayerRating } from "../types";
 
 function parseTournamentIdFromSource(source: string | null): number | null {
   if (!source) return null;
@@ -43,6 +43,29 @@ function batchGetGenderRanks(playerIds: number[]): Map<number, number | null> {
   return map;
 }
 
+const RELIABILITY_K = 5;
+
+function batchGetRatings(playerIds: number[]): Map<number, PlayerRating> {
+  if (playerIds.length === 0) return new Map();
+  const db = getDb();
+  const placeholders = playerIds.map(() => "?").join(",");
+
+  const bounds = db.query("SELECT MIN(ordinal) as minOrd, MAX(ordinal) as maxOrd FROM ratings").get() as { minOrd: number; maxOrd: number };
+  const rows = db.query(`
+    SELECT player_id as id, ordinal, matches_counted
+    FROM ratings WHERE player_id IN (${placeholders})
+  `).all(...playerIds) as Array<{ id: number; ordinal: number; matches_counted: number }>;
+
+  const range = bounds.maxOrd - bounds.minOrd;
+  const map = new Map<number, PlayerRating>();
+  for (const r of rows) {
+    const score = range > 0 ? Math.round(((r.ordinal - bounds.minOrd) / range) * 1000) / 10 : 0;
+    const reliability = Math.round((r.matches_counted / (r.matches_counted + RELIABILITY_K)) * 100);
+    map.set(r.id, { score, reliability });
+  }
+  return map;
+}
+
 export function getPlayerMatches(
   playerId: number,
   cursor?: string,
@@ -51,7 +74,7 @@ export function getPlayerMatches(
   const db = getDb();
 
   let query = `
-    SELECT m.guid, m.tournament_name, m.section_name, m.round_name, m.date_time,
+    SELECT DISTINCT m.guid, m.tournament_name, m.section_name, m.round_name, m.date_time,
            m.sets_json, m.winner_side, m.source,
            m.side_a_ids, m.side_b_ids, m.side_a_names, m.side_b_names
     FROM matches m
@@ -88,7 +111,9 @@ export function getPlayerMatches(
     return { ...row, sideAIds, sideBIds };
   });
 
-  const genderRanks = batchGetGenderRanks([...allPlayerIds]);
+  const allPlayerIdList = [...allPlayerIds];
+  const genderRanks = batchGetGenderRanks(allPlayerIdList);
+  const ratings = batchGetRatings(allPlayerIdList);
 
   const matches: MatchDetail[] = parsedRows.map((row) => {
     const sideANames = (row.side_a_names ?? "").split(" / ");
@@ -107,13 +132,15 @@ export function getPlayerMatches(
         id,
         name: sideANames[i] ?? "",
         genderRank: genderRanks.get(id) ?? null,
-        categoryRank: null, // section_name is empty in current data
+        categoryRank: null,
+        rating: ratings.get(id) ?? null,
       })),
       sideB: row.sideBIds.map((id: number, i: number) => ({
         id,
         name: sideBNames[i] ?? "",
         genderRank: genderRanks.get(id) ?? null,
         categoryRank: null,
+        rating: ratings.get(id) ?? null,
       })),
     };
   });

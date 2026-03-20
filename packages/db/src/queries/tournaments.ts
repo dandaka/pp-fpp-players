@@ -59,7 +59,12 @@ export function getTournamentPlayers(
   if (!tournament) return [];
 
   let query = `
-    SELECT DISTINCT p.id, p.name, p.gender, r.ordinal
+    SELECT DISTINCT p.id, p.name, p.gender, r.ordinal,
+      CASE WHEN r.ordinal IS NOT NULL AND p.gender IS NOT NULL THEN
+        (SELECT COUNT(*) + 1 FROM ratings r2
+         JOIN players p2 ON p2.id = r2.player_id
+         WHERE r2.ordinal > r.ordinal AND p2.gender = p.gender)
+      ELSE NULL END as gender_rank
     FROM players p
     JOIN match_players mp ON mp.player_id = p.id
     JOIN matches m ON m.guid = mp.match_guid
@@ -76,26 +81,14 @@ export function getTournamentPlayers(
   query += " ORDER BY r.ordinal DESC NULLS LAST";
 
   const rows = db.query(query).all(...params) as Array<{
-    id: number; name: string; gender: string | null; ordinal: number | null;
+    id: number; name: string; gender: string | null; ordinal: number | null; gender_rank: number | null;
   }>;
 
-  return rows.map((row) => {
-    let genderRank: number | null = null;
-    if (row.gender && row.ordinal !== null) {
-      const rank = db.query(`
-        SELECT COUNT(*) + 1 as rank FROM ratings r
-        JOIN players p ON p.id = r.player_id
-        WHERE r.ordinal > ? AND p.gender = ?
-      `).get(row.ordinal, row.gender) as { rank: number };
-      genderRank = rank.rank;
-    }
-
-    return {
-      id: row.id,
-      name: row.name,
-      genderRank,
-      categoryRank: null,
-      ordinal: row.ordinal ?? 0,
-    };
-  });
+  return rows.map((row) => ({
+    id: row.id,
+    name: row.name,
+    genderRank: row.gender_rank,
+    categoryRank: null,
+    ordinal: row.ordinal ?? 0,
+  }));
 }

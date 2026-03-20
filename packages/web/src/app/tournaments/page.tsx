@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getTournaments } from "@fpp/db";
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button-variants";
 
 export default async function TournamentsPage({
   searchParams,
