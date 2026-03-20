@@ -1,5 +1,4 @@
 import { seedPlayersFromJson, enrichPlayerProfiles } from "./sync-players";
-import { syncPlayerMatches } from "./sync-matches";
 import { importMatchesFromJson } from "./import-matches";
 import { calculateRatings, printLeaderboard } from "./calculate-ratings";
 import { getDb } from "./db";
@@ -15,22 +14,46 @@ switch (cmd) {
     await enrichPlayerProfiles(parseInt(process.argv[3] ?? "50"));
     break;
 
-  case "sync":
-    await syncPlayerMatches();
-    break;
-
   case "import":
     await importMatchesFromJson(process.argv[3]);
     break;
+
+  case "scrape": {
+    const file = process.argv[3] ?? "api";
+    const mod = await import("./scrape-all-tournaments");
+    break;
+  }
 
   case "rate":
     calculateRatings();
     printLeaderboard(parseInt(process.argv[3] ?? "30"));
     break;
 
+  case "recalculate": {
+    const db = getDb();
+    db.run("DELETE FROM ratings");
+    console.log("Cleared old ratings");
+    calculateRatings();
+    printLeaderboard(parseInt(process.argv[3] ?? "30"));
+    break;
+  }
+
   case "leaderboard":
     printLeaderboard(parseInt(process.argv[3] ?? "30"));
     break;
+
+  case "player": {
+    const db = getDb();
+    const search = process.argv[3];
+    if (!search) { console.log("Usage: bun src/cli.ts player <name>"); break; }
+    const players = db.query(
+      "SELECT p.*, r.mu, r.sigma, r.ordinal, r.matches_counted FROM players p LEFT JOIN ratings r ON r.player_id = p.id WHERE p.name LIKE ? ORDER BY r.ordinal DESC NULLS LAST LIMIT 10"
+    ).all(`%${search}%`) as any[];
+    for (const p of players) {
+      console.log(`${p.name} (ID: ${p.id}) | ${p.section ?? "?"} | ordinal: ${p.ordinal?.toFixed(2) ?? "N/A"} | μ: ${p.mu?.toFixed(2) ?? "N/A"} | σ: ${p.sigma?.toFixed(2) ?? "N/A"} | matches: ${p.matches_counted ?? 0}`);
+    }
+    break;
+  }
 
   case "stats": {
     const db = getDb();
@@ -38,30 +61,24 @@ switch (cmd) {
     const matches = db.query("SELECT COUNT(*) as cnt FROM matches").get() as { cnt: number };
     const rated = db.query("SELECT COUNT(*) as cnt FROM ratings").get() as { cnt: number };
     const withResults = db.query("SELECT COUNT(*) as cnt FROM matches WHERE winner_side IS NOT NULL").get() as { cnt: number };
+    const tournaments = db.query("SELECT COUNT(*) as cnt FROM tournaments").get() as { cnt: number };
     console.log(`Players: ${players.cnt}`);
     console.log(`Matches: ${matches.cnt} (${withResults.cnt} with results)`);
+    console.log(`Tournaments: ${tournaments.cnt}`);
     console.log(`Rated players: ${rated.cnt}`);
     break;
   }
-
-  case "full":
-    console.log("=== Full sync pipeline ===");
-    await seedPlayersFromJson();
-    await syncPlayerMatches();
-    calculateRatings();
-    printLeaderboard();
-    break;
 
   default:
     console.log(`Usage: bun src/cli.ts <command>
 
 Commands:
-  seed          Seed players from players.json
-  enrich [n]    Enrich n player profiles from API (default: 50)
-  sync          Sync all player matches from API (token owner only)
-  import [file] Import matches from scraped JSON (default: matches.json)
-  rate [n]      Calculate ratings and show top n (default: 30)
-  leaderboard [n]  Show top n rated players
-  stats         Show database statistics
-  full          Run full pipeline: seed → sync → rate`);
+  seed            Seed players from players.json
+  enrich [n]      Enrich n player profiles from API (default: 50)
+  import [file]   Import matches from scraped JSON (default: matches.json)
+  rate [n]        Calculate ratings and show top n (default: 30)
+  recalculate [n] Clear and recalculate all ratings
+  leaderboard [n] Show top n rated players
+  player <name>   Search player by name
+  stats           Show database statistics`);
 }
