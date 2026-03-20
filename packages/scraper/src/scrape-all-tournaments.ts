@@ -140,11 +140,18 @@ function saveTournament(db: ReturnType<typeof getDb>, id: number, name: string, 
 
 async function main() {
   const db = getDb();
-  const source = process.argv[2] ?? "api";
+  // When called via cli.ts, source is argv[3]; when called directly, argv[2]
+  const source = process.argv[3] && !process.argv[3].startsWith("-")
+    ? process.argv[3]
+    : process.argv[2] ?? "api";
 
   let targets: { id: number; name: string; date: string }[];
 
-  if (source === "api") {
+  if (source === "db") {
+    // Load all tournaments from DB
+    targets = db.query("SELECT id, name, date FROM tournaments ORDER BY id").all() as typeof targets;
+    console.log(`Loaded ${targets.length} tournaments from DB\n`);
+  } else if (source === "api") {
     const tournaments = await getTournaments(0);
     targets = tournaments.map((t) => ({ id: t.id, name: t.title, date: t.date }));
     console.log(`Found ${targets.length} tournaments from API\n`);

@@ -24,6 +24,21 @@ switch (cmd) {
     break;
   }
 
+  case "scan": {
+    const { scanTournaments } = await import("./find-tournaments");
+    const scanArgs = process.argv.slice(3).filter((a) => !a.startsWith("--"));
+    const force = process.argv.includes("--force");
+    if (force) {
+      const db = getDb();
+      db.run("DELETE FROM sync_cursors WHERE key = 'scan_tournaments_last_id'");
+      console.log("Force mode: resetting scan cursor");
+    }
+    const start = parseInt(scanArgs[0] ?? "1");
+    const end = parseInt(scanArgs[1] ?? "25000");
+    await scanTournaments(start, end);
+    break;
+  }
+
   case "rate":
     calculateRatings();
     printLeaderboard(parseInt(process.argv[3] ?? "30"));
@@ -73,12 +88,15 @@ switch (cmd) {
     console.log(`Usage: bun src/cli.ts <command>
 
 Commands:
-  seed            Seed players from players.json
-  enrich [n]      Enrich n player profiles from API (default: 50)
-  import [file]   Import matches from scraped JSON (default: matches.json)
-  rate [n]        Calculate ratings and show top n (default: 30)
-  recalculate [n] Clear and recalculate all ratings
-  leaderboard [n] Show top n rated players
-  player <name>   Search player by name
-  stats           Show database statistics`);
+  scan [start] [end]  Scan tournament IDs and store to DB (default: 1-25000)
+    --force           Rescan from beginning
+  seed                Seed players from players.json
+  enrich [n]          Enrich n player profiles from API (default: 50)
+  import [file]       Import matches from scraped JSON (default: matches.json)
+  scrape [file|api]   Scrape matches from tournaments
+  rate [n]            Calculate ratings and show top n (default: 30)
+  recalculate [n]     Clear and recalculate all ratings
+  leaderboard [n]     Show top n rated players
+  player <name>       Search player by name
+  stats               Show database statistics`);
 }

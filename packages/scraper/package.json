@@ -1,0 +1,12 @@
+{
+  "name": "@fpp/scraper",
+  "private": true,
+  "type": "module",
+  "main": "src/cli.ts",
+  "dependencies": {
+    "@fpp/db": "workspace:*",
+    "cheerio": "^1.2.0",
+    "openskill": "^4.1.1",
+    "playwright": "^1.58.2"
+  }
+}
