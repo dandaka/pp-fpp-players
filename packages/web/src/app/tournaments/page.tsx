@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getTournaments } from "@fpp/db";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 
 export default async function TournamentsPage({
   searchParams,
@@ -35,17 +35,17 @@ export default async function TournamentsPage({
       {totalPages > 1 && (
         <div className="flex items-center justify-center gap-2 py-4">
           {page > 1 && (
-            <Button variant="outline" size="sm" asChild>
-              <Link href={`/tournaments?page=${page - 1}`}>Previous</Link>
-            </Button>
+            <Link href={`/tournaments?page=${page - 1}`} className={buttonVariants({ variant: "outline", size: "sm" })}>
+              Previous
+            </Link>
           )}
           <span className="text-sm text-muted-foreground">
             Page {page} of {totalPages}
           </span>
           {page < totalPages && (
-            <Button variant="outline" size="sm" asChild>
-              <Link href={`/tournaments?page=${page + 1}`}>Next</Link>
-            </Button>
+            <Link href={`/tournaments?page=${page + 1}`} className={buttonVariants({ variant: "outline", size: "sm" })}>
+              Next
+            </Link>
           )}
         </div>
       )}
