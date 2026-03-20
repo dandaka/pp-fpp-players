@@ -1,5 +1,5 @@
 import { getDb } from "../connection";
-import type { MatchDetail, MatchPlayerInfo } from "../types";
+import type { MatchDetail } from "../types";
 
 function parseTournamentIdFromSource(source: string | null): number | null {
   if (!source) return null;

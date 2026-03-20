@@ -6,7 +6,7 @@ test("getPlayerMatches returns matches for a known player", () => {
   const players = searchPlayers("silva", 1);
   if (players.length === 0) return;
 
-  const { matches, nextCursor } = getPlayerMatches(players[0].id, undefined, 5);
+  const { matches } = getPlayerMatches(players[0].id, undefined, 5);
   expect(matches.length).toBeGreaterThanOrEqual(0);
 
   if (matches.length > 0) {

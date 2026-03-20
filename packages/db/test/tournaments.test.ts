@@ -1,5 +1,5 @@
 import { test, expect } from "bun:test";
-import { getTournaments, getTournament, getTournamentCategories, getTournamentPlayers } from "../src/queries/tournaments";
+import { getTournaments, getTournament, getTournamentPlayers } from "../src/queries/tournaments";
 
 test("getTournaments returns paginated results", () => {
   const { tournaments, total } = getTournaments(1, 10);
