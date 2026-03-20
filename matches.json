@@ -1,0 +1,6331 @@
+{
+  "tournament": {
+    "name": "V Open Smartpath",
+    "id": 22959,
+    "guid": "e0e378f9-4aeb-4ca7-a80c-e67168cd971a",
+    "codtou_header": 22959
+  },
+  "total_matches": 186,
+  "unique_players": 384,
+  "scraped_at": "2026-03-20T11:57:58.382Z",
+  "matches": [
+    {
+      "news_id": 7714597,
+      "news_uid": "eb3299d5-e28d-46fd-a4de-84ed156d27ba",
+      "date": "2026-02-22, 18:00",
+      "scores": "6-4, 4-6, 6-1",
+      "side_a": [
+        {
+          "id": 226832,
+          "name": "Leticia R."
+        },
+        {
+          "id": 206507,
+          "name": "Sílvia S."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 189726,
+          "name": "Vera C."
+        },
+        {
+          "id": 139215,
+          "name": "Vera M."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7714736,
+      "news_uid": "8485974e-9da4-4355-a91a-092bd40d99e0",
+      "date": "2026-02-22, 18:00",
+      "scores": "Walkover",
+      "side_a": [
+        {
+          "id": 82463,
+          "name": "Luís V."
+        },
+        {
+          "id": 22651,
+          "name": "Plínio F."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 87181,
+          "name": "Pedro P."
+        },
+        {
+          "id": 16290,
+          "name": "Gonçalo P."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7714519,
+      "news_uid": "89355be4-e1a8-4a62-9a46-d5e880dd98b3",
+      "date": "2026-02-22, 17:45",
+      "scores": "6-4, 6-1",
+      "side_a": [
+        {
+          "id": 149854,
+          "name": "JAVIER E."
+        },
+        {
+          "id": 92781,
+          "name": "Vasco L."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 230223,
+          "name": "Rui J."
+        },
+        {
+          "id": 81583,
+          "name": "David P."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7714550,
+      "news_uid": "1067e55a-8e99-4dc5-b6b1-6bc24f5097c8",
+      "date": "2026-02-22, 17:45",
+      "scores": "6-3, 6-2",
+      "side_a": [
+        {
+          "id": 77961,
+          "name": "Christoph S."
+        },
+        {
+          "id": 74662,
+          "name": "Jesús L."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 154570,
+          "name": "André F."
+        },
+        {
+          "id": 84398,
+          "name": "Tiago T."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7714584,
+      "news_uid": "41860287-f210-4fc5-bfd1-608ff413bbc5",
+      "date": "2026-02-22, 17:45",
+      "scores": "7-5, 6-7(4), 6-3",
+      "side_a": [
+        {
+          "id": 251905,
+          "name": "André M."
+        },
+        {
+          "id": 104504,
+          "name": "Manuel R."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 284411,
+          "name": "Pedro M."
+        },
+        {
+          "id": 73900,
+          "name": "Francisco M."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7714908,
+      "news_uid": "adbd8908-438e-4102-934a-283a2024cf5a",
+      "date": "2026-02-22, 17:45",
+      "scores": "7-5, 6-3",
+      "side_a": [
+        {
+          "id": 412842,
+          "name": "Inês C."
+        },
+        {
+          "id": 174955,
+          "name": "Margarida M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 389198,
+          "name": "Cláudia C."
+        },
+        {
+          "id": 269416,
+          "name": "Tiz M."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7714894,
+      "news_uid": "a1b5e85e-ba44-48d3-adbc-801acde78faf",
+      "date": "2026-02-22, 16:30",
+      "scores": "6-2, 6-4",
+      "side_a": [
+        {
+          "id": 232796,
+          "name": "Carolina G."
+        },
+        {
+          "id": 40804,
+          "name": "Inês S."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 168648,
+          "name": "Suzana K."
+        },
+        {
+          "id": 75750,
+          "name": "Joana G."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7714891,
+      "news_uid": "ab776273-c7d7-4cd8-9986-e9e9e5b504f5",
+      "date": "2026-02-22, 16:30",
+      "scores": "6-4, 6-1",
+      "side_a": [
+        {
+          "id": 317997,
+          "name": "David C."
+        },
+        {
+          "id": 264815,
+          "name": "João B."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 74368,
+          "name": "Zé P."
+        },
+        {
+          "id": 67792,
+          "name": "João J."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7714374,
+      "news_uid": "4f5ad7f3-9173-49f1-a92e-3cabd6f2edda",
+      "date": "2026-02-22, 16:30",
+      "scores": "6-0, 6-1",
+      "side_a": [
+        {
+          "id": 367680,
+          "name": "Joana J."
+        },
+        {
+          "id": 349202,
+          "name": "Rafaela C."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 317447,
+          "name": "Vera l."
+        },
+        {
+          "id": 231470,
+          "name": "Raquel C."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7714386,
+      "news_uid": "a0d87e63-fe92-4a91-b8b6-a9947b30a64d",
+      "date": "2026-02-22, 16:30",
+      "scores": "6-1, 6-4",
+      "side_a": [
+        {
+          "id": 337765,
+          "name": "Eric J."
+        },
+        {
+          "id": 180473,
+          "name": "Hugo C."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 392487,
+          "name": "Nuno M."
+        },
+        {
+          "id": 304080,
+          "name": "André S."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7714442,
+      "news_uid": "b92eb039-f25a-468d-8fec-2e9b09d51256",
+      "date": "2026-02-22, 16:30",
+      "scores": "6-4, 6-0",
+      "side_a": [
+        {
+          "id": 88360,
+          "name": "Maria R."
+        },
+        {
+          "id": 21050,
+          "name": "Maria P."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 88029,
+          "name": "Margarida A."
+        },
+        {
+          "id": 76283,
+          "name": "Natália O."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7714501,
+      "news_uid": "0a4271e4-28fe-4011-b1a8-d3a5d79c5a1f",
+      "date": "2026-02-22, 16:30",
+      "scores": "7-6(6), 6-1",
+      "side_a": [
+        {
+          "id": 476712,
+          "name": "Mia N."
+        },
+        {
+          "id": 228290,
+          "name": "Ana C."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 274140,
+          "name": "Miriam V."
+        },
+        {
+          "id": 235952,
+          "name": "Sofia P."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7714397,
+      "news_uid": "d289b993-3d6e-4741-ae41-c1cc7fadc016",
+      "date": "2026-02-22, 15:15",
+      "scores": "6-3, 3-6, 6-3",
+      "side_a": [
+        {
+          "id": 154570,
+          "name": "André F."
+        },
+        {
+          "id": 84398,
+          "name": "Tiago T."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 352074,
+          "name": "Francisco A."
+        },
+        {
+          "id": 136019,
+          "name": "Ricardo A."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7714303,
+      "news_uid": "76ff849f-5759-400e-a3bd-2acdd49c5c2a",
+      "date": "2026-02-22, 15:15",
+      "scores": "6-4, 7-5",
+      "side_a": [
+        {
+          "id": 77961,
+          "name": "Christoph S."
+        },
+        {
+          "id": 74662,
+          "name": "Jesús L."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 252143,
+          "name": "Franco N."
+        },
+        {
+          "id": 103874,
+          "name": "Miguel A."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7714323,
+      "news_uid": "ae0c6b96-3362-456a-ab78-fcdc0c8339aa",
+      "date": "2026-02-22, 14:45",
+      "scores": "6-3, 6-3",
+      "side_a": [
+        {
+          "id": 189726,
+          "name": "Vera C."
+        },
+        {
+          "id": 139215,
+          "name": "Vera M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 251285,
+          "name": "Maria S."
+        },
+        {
+          "id": 174986,
+          "name": "Mariana R."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7714290,
+      "news_uid": "d0a299be-7e7c-4c8f-983d-48105eeda77c",
+      "date": "2026-02-22, 14:45",
+      "scores": "6-1, 6-2",
+      "side_a": [
+        {
+          "id": 230223,
+          "name": "Rui J."
+        },
+        {
+          "id": 81583,
+          "name": "David P."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 413414,
+          "name": "Rodrigo N."
+        },
+        {
+          "id": 86865,
+          "name": "Joel R."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7714297,
+      "news_uid": "0811cf1f-6281-4222-a777-4107c03d105e",
+      "date": "2026-02-22, 14:45",
+      "scores": "6-0, 6-2",
+      "side_a": [
+        {
+          "id": 149854,
+          "name": "JAVIER E."
+        },
+        {
+          "id": 92781,
+          "name": "Vasco L."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 242128,
+          "name": "Filipe P."
+        },
+        {
+          "id": 23412,
+          "name": "Pedro F."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7714551,
+      "news_uid": "28ba1f3a-682a-418b-bb4b-96065c1338ac",
+      "date": "2026-02-22, 14:45",
+      "scores": "6-3, 4-6, 10-5",
+      "side_a": [
+        {
+          "id": 226832,
+          "name": "Leticia R."
+        },
+        {
+          "id": 206507,
+          "name": "Sílvia S."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 338532,
+          "name": "Mada Á."
+        },
+        {
+          "id": 101522,
+          "name": "Inês S."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7714789,
+      "news_uid": "24cbb2bb-4474-4fd8-ad60-b0177e88cfde",
+      "date": "2026-02-22, 14:00",
+      "scores": "6-2, 7-6(3)",
+      "side_a": [
+        {
+          "id": 412842,
+          "name": "Inês C."
+        },
+        {
+          "id": 174955,
+          "name": "Margarida M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 262952,
+          "name": "Patricia C."
+        },
+        {
+          "id": 156806,
+          "name": "Luzi R."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7714177,
+      "news_uid": "2d9f2e85-d776-4fd8-ba20-c29027ee77cf",
+      "date": "2026-02-22, 14:00",
+      "scores": "6-2, 6-4",
+      "side_a": [
+        {
+          "id": 389198,
+          "name": "Cláudia C."
+        },
+        {
+          "id": 269416,
+          "name": "Tiz M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 299603,
+          "name": "Margarida G."
+        },
+        {
+          "id": 277132,
+          "name": "Andreia G."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7713852,
+      "news_uid": "22f644b6-a2a8-4de0-98cd-a645c40ea878",
+      "date": "2026-02-22, 13:30",
+      "scores": "6-2, 6-4",
+      "side_a": [
+        {
+          "id": 88360,
+          "name": "Maria R."
+        },
+        {
+          "id": 21050,
+          "name": "Maria P."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 505534,
+          "name": "Dana"
+        },
+        {
+          "id": 505532,
+          "name": "TAO T."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7713876,
+      "news_uid": "d1f34150-f06e-4105-9fd8-135f66d349d2",
+      "date": "2026-02-22, 13:30",
+      "scores": "6-3, 6-1",
+      "side_a": [
+        {
+          "id": 88029,
+          "name": "Margarida A."
+        },
+        {
+          "id": 76283,
+          "name": "Natália O."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 162161,
+          "name": "Vlada K."
+        },
+        {
+          "id": 152253,
+          "name": "Maria C."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7713968,
+      "news_uid": "e81e6079-302a-4c83-9f9c-8959e8adce79",
+      "date": "2026-02-22, 13:30",
+      "scores": "6-2, 6-1",
+      "side_a": [
+        {
+          "id": 232796,
+          "name": "Carolina G."
+        },
+        {
+          "id": 40804,
+          "name": "Inês S."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 315297,
+          "name": "Madalena C."
+        },
+        {
+          "id": 231532,
+          "name": "Solange B."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7714893,
+      "news_uid": "f7da86d4-abf0-42ab-8285-ea512e84ed56",
+      "date": "2026-02-22, 13:30",
+      "scores": "2-6, 7-5, 10-7",
+      "side_a": [
+        {
+          "id": 168648,
+          "name": "Suzana K."
+        },
+        {
+          "id": 75750,
+          "name": "Joana G."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 182781,
+          "name": "Inês P."
+        },
+        {
+          "id": 92874,
+          "name": "Isabel V."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7714890,
+      "news_uid": "fa704cc0-3309-462e-904a-2a5fe181717c",
+      "date": "2026-02-22, 12:30",
+      "scores": "6-4, 7-6(5)",
+      "side_a": [
+        {
+          "id": 317997,
+          "name": "David C."
+        },
+        {
+          "id": 264815,
+          "name": "João B."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 136576,
+          "name": "Filipe F."
+        },
+        {
+          "id": 139730,
+          "name": "João S."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7714219,
+      "news_uid": "cc861113-8578-432d-ac49-4f71609dab58",
+      "date": "2026-02-22, 12:30",
+      "scores": "6-7(3), 7-6(6), 10-8",
+      "side_a": [
+        {
+          "id": 317447,
+          "name": "Vera l."
+        },
+        {
+          "id": 231470,
+          "name": "Raquel C."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 245966,
+          "name": "Bee M."
+        },
+        {
+          "id": 228244,
+          "name": "Inês M."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7713630,
+      "news_uid": "b883ed77-fb2e-4918-bd71-3a74b00b7326",
+      "date": "2026-02-22, 12:30",
+      "scores": "1-6, 6-2, 10-7",
+      "side_a": [
+        {
+          "id": 74368,
+          "name": "Zé P."
+        },
+        {
+          "id": 67792,
+          "name": "João J."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 207437,
+          "name": "Jaime D."
+        },
+        {
+          "id": 76705,
+          "name": "Daniel T."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7713632,
+      "news_uid": "98ef8db0-b6af-4ae7-82aa-5306a7879b9c",
+      "date": "2026-02-22, 12:30",
+      "scores": "7-5, 6-2",
+      "side_a": [
+        {
+          "id": 367680,
+          "name": "Joana J."
+        },
+        {
+          "id": 349202,
+          "name": "Rafaela C."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 418870,
+          "name": "Lucie M."
+        },
+        {
+          "id": 411002,
+          "name": "Mariana M."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7713657,
+      "news_uid": "df348ed8-c824-48ca-a111-cfdb491c7d8b",
+      "date": "2026-02-22, 12:00",
+      "scores": "6-4, 2-6, 13-11",
+      "side_a": [
+        {
+          "id": 337765,
+          "name": "Eric J."
+        },
+        {
+          "id": 180473,
+          "name": "Hugo C."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 260496,
+          "name": "Miguel R."
+        },
+        {
+          "id": 181511,
+          "name": "João M."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7713679,
+      "news_uid": "6d7bdf78-6fd3-4f7f-9aa7-f8e5acaa72a2",
+      "date": "2026-02-22, 12:00",
+      "scores": "6-2, 7-6(6)",
+      "side_a": [
+        {
+          "id": 251905,
+          "name": "André M."
+        },
+        {
+          "id": 104504,
+          "name": "Manuel R."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 175267,
+          "name": "Miguel F."
+        },
+        {
+          "id": 151247,
+          "name": "Miguel N."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7713681,
+      "news_uid": "51156d45-6340-4ecb-adcb-350ac4958666",
+      "date": "2026-02-22, 12:00",
+      "scores": "7-5, 5-7, 10-4",
+      "side_a": [
+        {
+          "id": 284411,
+          "name": "Pedro M."
+        },
+        {
+          "id": 73900,
+          "name": "Francisco M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 214015,
+          "name": "Ivan V."
+        },
+        {
+          "id": 101400,
+          "name": "João B."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7713683,
+      "news_uid": "0916edf5-1aec-4671-89d6-34c83f749f08",
+      "date": "2026-02-22, 12:00",
+      "scores": "7-5, 6-3",
+      "side_a": [
+        {
+          "id": 392487,
+          "name": "Nuno M."
+        },
+        {
+          "id": 304080,
+          "name": "André S."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 319350,
+          "name": "Pedro M."
+        },
+        {
+          "id": 233172,
+          "name": "Fábio V."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7713395,
+      "news_uid": "28949ae0-052f-41c5-972f-7664a00e2f96",
+      "date": "2026-02-22, 11:15",
+      "scores": "6-1, 6-1",
+      "side_a": [
+        {
+          "id": 476712,
+          "name": "Mia N."
+        },
+        {
+          "id": 228290,
+          "name": "Ana C."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 409723,
+          "name": "Daniela B."
+        },
+        {
+          "id": 401147,
+          "name": "Cátia F."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7713397,
+      "news_uid": "027274d6-e3f6-4bb4-af47-03bbe373ad6c",
+      "date": "2026-02-22, 11:15",
+      "scores": "6-4, 6-1",
+      "side_a": [
+        {
+          "id": 274140,
+          "name": "Miriam V."
+        },
+        {
+          "id": 235952,
+          "name": "Sofia P."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 323697,
+          "name": "Ekaterina T."
+        },
+        {
+          "id": 269054,
+          "name": "Alexandra S."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7713525,
+      "news_uid": "1d0efc59-f3eb-414c-8bd4-7a25d37475d1",
+      "date": "2026-02-22, 11:15",
+      "scores": "6-4, 6-7(2), 10-5",
+      "side_a": [
+        {
+          "id": 251285,
+          "name": "Maria S."
+        },
+        {
+          "id": 174986,
+          "name": "Mariana R."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 254546,
+          "name": "Carolina L."
+        },
+        {
+          "id": 230545,
+          "name": "Mafalda A."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7713608,
+      "news_uid": "cf23bee1-4bf6-4178-a03b-51a114ec9358",
+      "date": "2026-02-22, 10:30",
+      "scores": "6-4, 6-2",
+      "side_a": [
+        {
+          "id": 299603,
+          "name": "Margarida G."
+        },
+        {
+          "id": 277132,
+          "name": "Andreia G."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 261361,
+          "name": "Carla R."
+        },
+        {
+          "id": 43514,
+          "name": "Joana L."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7713452,
+      "news_uid": "be3b2d4d-c987-469b-bfbf-b059f0197179",
+      "date": "2026-02-22, 10:30",
+      "scores": "6-2, 6-3",
+      "side_a": [
+        {
+          "id": 412842,
+          "name": "Inês C."
+        },
+        {
+          "id": 174955,
+          "name": "Margarida M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 101163,
+          "name": "Vera B."
+        },
+        {
+          "id": 76047,
+          "name": "Sofia G."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7713384,
+      "news_uid": "8b29743b-43f6-474e-b5fd-1297f64622f5",
+      "date": "2026-02-22, 10:30",
+      "scores": "6-2, 7-6(3)",
+      "side_a": [
+        {
+          "id": 262952,
+          "name": "Patricia C."
+        },
+        {
+          "id": 156806,
+          "name": "Luzi R."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 189687,
+          "name": "Ana D."
+        },
+        {
+          "id": 363,
+          "name": "Nance S."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7713393,
+      "news_uid": "8627ea44-2c2f-4b28-8fc7-95e9e390661a",
+      "date": "2026-02-22, 10:30",
+      "scores": "6-2, 7-5",
+      "side_a": [
+        {
+          "id": 389198,
+          "name": "Cláudia C."
+        },
+        {
+          "id": 269416,
+          "name": "Tiz M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 154277,
+          "name": "Rita C."
+        },
+        {
+          "id": 104577,
+          "name": "Mara O."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712666,
+      "news_uid": "a552fb5e-e86e-47e9-892f-773e53647296",
+      "date": "2026-02-21, 23:00",
+      "scores": "6-2, 3-6, 10-6",
+      "side_a": [
+        {
+          "id": 242128,
+          "name": "Filipe P."
+        },
+        {
+          "id": 23412,
+          "name": "Pedro F."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 184428,
+          "name": "Ruben G."
+        },
+        {
+          "id": 76887,
+          "name": "Ricardo V."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712676,
+      "news_uid": "0021b8ca-479f-4057-b9a8-87f23560f3f5",
+      "date": "2026-02-21, 23:00",
+      "scores": "6-2, 3-6, 10-2",
+      "side_a": [
+        {
+          "id": 149854,
+          "name": "JAVIER E."
+        },
+        {
+          "id": 92781,
+          "name": "Vasco L."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 162669,
+          "name": "André S."
+        },
+        {
+          "id": 27541,
+          "name": "Daniel G."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712600,
+      "news_uid": "795df60c-0591-40a9-8b86-1c37738a5a98",
+      "date": "2026-02-21, 21:45",
+      "scores": "6-1, 6-7(6), 10-8",
+      "side_a": [
+        {
+          "id": 252143,
+          "name": "Franco N."
+        },
+        {
+          "id": 103874,
+          "name": "Miguel A."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 155545,
+          "name": "João G."
+        },
+        {
+          "id": 18263,
+          "name": "Rui A."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712888,
+      "news_uid": "1abaf4a9-254d-49b4-bdff-a6fc97bcdfb7",
+      "date": "2026-02-21, 21:45",
+      "scores": "6-4, 6-7(5), 10-7",
+      "side_a": [
+        {
+          "id": 413414,
+          "name": "Rodrigo N."
+        },
+        {
+          "id": 86865,
+          "name": "Joel R."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 303661,
+          "name": "Tiago L."
+        },
+        {
+          "id": 62863,
+          "name": "João R."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712516,
+      "news_uid": "849b5305-4b5e-40dc-bf3f-cee63b0a2906",
+      "date": "2026-02-21, 21:45",
+      "scores": "6-1, 6-3",
+      "side_a": [
+        {
+          "id": 230223,
+          "name": "Rui J."
+        },
+        {
+          "id": 81583,
+          "name": "David P."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 189759,
+          "name": "Pedro D."
+        },
+        {
+          "id": 44610,
+          "name": "Nuno C."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712577,
+      "news_uid": "102a6f3b-c331-4376-9f82-591fda6eaa5e",
+      "date": "2026-02-21, 21:45",
+      "scores": "6-4, 6-3",
+      "side_a": [
+        {
+          "id": 136576,
+          "name": "Filipe F."
+        },
+        {
+          "id": 139730,
+          "name": "João S."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 201682,
+          "name": "Filipe S."
+        },
+        {
+          "id": 86369,
+          "name": "Sérgio F."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712624,
+      "news_uid": "e4379939-0a6c-4d16-8f58-6438f1457cbd",
+      "date": "2026-02-21, 21:45",
+      "scores": "6-2, 4-6, 10-6",
+      "side_a": [
+        {
+          "id": 189726,
+          "name": "Vera C."
+        },
+        {
+          "id": 139215,
+          "name": "Vera M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 185146,
+          "name": "Jasmina M."
+        },
+        {
+          "id": 71034,
+          "name": "Teresa P."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712626,
+      "news_uid": "5ed7280c-0675-4ac8-be7a-971ac155616a",
+      "date": "2026-02-21, 21:45",
+      "scores": "7-5, 6-3",
+      "side_a": [
+        {
+          "id": 77961,
+          "name": "Christoph S."
+        },
+        {
+          "id": 74662,
+          "name": "Jesús L."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 324518,
+          "name": "João F."
+        },
+        {
+          "id": 180198,
+          "name": "Rafael C."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7714763,
+      "news_uid": "11547ccc-10d7-4307-93be-5ee0a53e3ec5",
+      "date": "2026-02-21, 21:45",
+      "scores": "6-1, 7-6(4)",
+      "side_a": [
+        {
+          "id": 317997,
+          "name": "David C."
+        },
+        {
+          "id": 264815,
+          "name": "João B."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 343162,
+          "name": "Ricardo P."
+        },
+        {
+          "id": 79353,
+          "name": "Hugo L."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712629,
+      "news_uid": "d16c70cb-a930-4722-8ebf-c86f1bf65e95",
+      "date": "2026-02-21, 20:30",
+      "scores": "7-6(3), 6-4",
+      "side_a": [
+        {
+          "id": 245966,
+          "name": "Bee M."
+        },
+        {
+          "id": 228244,
+          "name": "Inês M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 142482,
+          "name": "Joana B."
+        },
+        {
+          "id": 119197,
+          "name": "Melissa R."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712657,
+      "news_uid": "c4fdbf6c-2bd1-4f5d-b6da-f50435263de7",
+      "date": "2026-02-21, 20:30",
+      "scores": "6-2, 6-4",
+      "side_a": [
+        {
+          "id": 392487,
+          "name": "Nuno M."
+        },
+        {
+          "id": 304080,
+          "name": "André S."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 429060,
+          "name": "Alvaro S."
+        },
+        {
+          "id": 296175,
+          "name": "Dimen"
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712664,
+      "news_uid": "db98b668-7fa8-4b3f-b08f-9fd49aa0477c",
+      "date": "2026-02-21, 20:30",
+      "scores": "6-3, 6-3",
+      "side_a": [
+        {
+          "id": 352074,
+          "name": "Francisco A."
+        },
+        {
+          "id": 136019,
+          "name": "Ricardo A."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 211976,
+          "name": "Vasco P."
+        },
+        {
+          "id": 103487,
+          "name": "Joao S."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712518,
+      "news_uid": "43f587e2-7fb0-4d5e-b7d1-504f05c1a252",
+      "date": "2026-02-21, 20:30",
+      "scores": "6-1, 6-3",
+      "side_a": [
+        {
+          "id": 87181,
+          "name": "Pedro P."
+        },
+        {
+          "id": 16290,
+          "name": "Gonçalo P."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 101739,
+          "name": "Samuel O."
+        },
+        {
+          "id": 27460,
+          "name": "Carlos M."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712444,
+      "news_uid": "0f129585-0c2e-47e4-ade8-77da58b438fc",
+      "date": "2026-02-21, 20:30",
+      "scores": "4-6, 6-1, 10-7",
+      "side_a": [
+        {
+          "id": 242128,
+          "name": "Filipe P."
+        },
+        {
+          "id": 23412,
+          "name": "Pedro F."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 44634,
+          "name": "Luís B."
+        },
+        {
+          "id": 40762,
+          "name": "Carlos O."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712445,
+      "news_uid": "ea8ca8e7-a37c-4dcb-b2de-f906d98c31cd",
+      "date": "2026-02-21, 20:30",
+      "scores": "6-3, 6-4",
+      "side_a": [
+        {
+          "id": 162669,
+          "name": "André S."
+        },
+        {
+          "id": 27541,
+          "name": "Daniel G."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 179337,
+          "name": "Daniel D."
+        },
+        {
+          "id": 92853,
+          "name": "Afonso J."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712465,
+      "news_uid": "08a4c07c-1e7c-4e68-b7b4-45741f061112",
+      "date": "2026-02-21, 20:30",
+      "scores": "6-3, 7-5",
+      "side_a": [
+        {
+          "id": 319350,
+          "name": "Pedro M."
+        },
+        {
+          "id": 233172,
+          "name": "Fábio V."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 337389,
+          "name": "Eduardo M."
+        },
+        {
+          "id": 260854,
+          "name": "Mykhailo O."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712484,
+      "news_uid": "53f4b38e-babf-400a-84aa-c48328750397",
+      "date": "2026-02-21, 20:30",
+      "scores": "6-4, 6-2",
+      "side_a": [
+        {
+          "id": 149854,
+          "name": "JAVIER E."
+        },
+        {
+          "id": 92781,
+          "name": "Vasco L."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 225326,
+          "name": "Hugo S."
+        },
+        {
+          "id": 84029,
+          "name": "Fábio M."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712488,
+      "news_uid": "f536e5b5-3e49-477d-a5f1-5b19ce2792a3",
+      "date": "2026-02-21, 20:30",
+      "scores": "6-3, 7-6(4)",
+      "side_a": [
+        {
+          "id": 184428,
+          "name": "Ruben G."
+        },
+        {
+          "id": 76887,
+          "name": "Ricardo V."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 257606,
+          "name": "Guilherme C."
+        },
+        {
+          "id": 102625,
+          "name": "Bernardo P."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712466,
+      "news_uid": "818de351-8693-4d96-b2fe-1a85a69c8778",
+      "date": "2026-02-21, 19:15",
+      "scores": "4-6, 6-4, 10-6",
+      "side_a": [
+        {
+          "id": 154570,
+          "name": "André F."
+        },
+        {
+          "id": 84398,
+          "name": "Tiago T."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 235795,
+          "name": "Gabriel B."
+        },
+        {
+          "id": 150919,
+          "name": "Vasco R."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712456,
+      "news_uid": "69610195-6c6f-45e3-b04b-8aa6bb0bafaa",
+      "date": "2026-02-21, 19:15",
+      "scores": "6-1, 6-3",
+      "side_a": [
+        {
+          "id": 337765,
+          "name": "Eric J."
+        },
+        {
+          "id": 180473,
+          "name": "Hugo C."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 434266,
+          "name": "Gonçalo R."
+        },
+        {
+          "id": 74818,
+          "name": "Afonso P."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712095,
+      "news_uid": "d0d7e097-51ee-4b44-b455-f286c4102a1e",
+      "date": "2026-02-21, 19:15",
+      "scores": "6-0, 6-1",
+      "side_a": [
+        {
+          "id": 303661,
+          "name": "Tiago L."
+        },
+        {
+          "id": 62863,
+          "name": "João R."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 201131,
+          "name": "Gonçalo G."
+        },
+        {
+          "id": 87828,
+          "name": "Rodrigo R."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712369,
+      "news_uid": "74046fe9-3117-4553-a44c-669a47f2a57f",
+      "date": "2026-02-21, 19:15",
+      "scores": "4-6, 7-5, 10-6",
+      "side_a": [
+        {
+          "id": 230223,
+          "name": "Rui J."
+        },
+        {
+          "id": 81583,
+          "name": "David P."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 411446,
+          "name": "Leonardo R."
+        },
+        {
+          "id": 347492,
+          "name": "Vladêslav R."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712401,
+      "news_uid": "aa15f54c-08db-4c4b-bc72-f47f03f2afb7",
+      "date": "2026-02-21, 19:15",
+      "scores": "6-7(3), 6-4, 10-6",
+      "side_a": [
+        {
+          "id": 189759,
+          "name": "Pedro D."
+        },
+        {
+          "id": 44610,
+          "name": "Nuno C."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 180372,
+          "name": "Manuel E."
+        },
+        {
+          "id": 118957,
+          "name": "Tomás M."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712437,
+      "news_uid": "d4c4230b-9f53-490d-88fd-3d656b3aff26",
+      "date": "2026-02-21, 19:15",
+      "scores": "6-1, 1-6, 11-9",
+      "side_a": [
+        {
+          "id": 413414,
+          "name": "Rodrigo N."
+        },
+        {
+          "id": 86865,
+          "name": "Joel R."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 235743,
+          "name": "Miguel G."
+        },
+        {
+          "id": 92563,
+          "name": "Miguel L."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712440,
+      "news_uid": "59cb9dea-7919-4ecd-92f0-9d8a5bf0668a",
+      "date": "2026-02-21, 19:15",
+      "scores": "6-1, 6-2",
+      "side_a": [
+        {
+          "id": 418870,
+          "name": "Lucie M."
+        },
+        {
+          "id": 411002,
+          "name": "Mariana M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 241709,
+          "name": "Carolina C."
+        },
+        {
+          "id": 176746,
+          "name": "Raquel P."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712443,
+      "news_uid": "33495865-8fe6-4945-8270-60ac79a7e42b",
+      "date": "2026-02-21, 19:15",
+      "scores": "6-3, 6-3",
+      "side_a": [
+        {
+          "id": 260496,
+          "name": "Miguel R."
+        },
+        {
+          "id": 181511,
+          "name": "João M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 392730,
+          "name": "Alex S."
+        },
+        {
+          "id": 250184,
+          "name": "Aleksandr K."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7713350,
+      "news_uid": "90554154-dbd9-4a5a-b56f-edc305795263",
+      "date": "2026-02-21, 19:15",
+      "scores": "6-2, 6-3",
+      "side_a": [
+        {
+          "id": 317447,
+          "name": "Vera l."
+        },
+        {
+          "id": 231470,
+          "name": "Raquel C."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 328393,
+          "name": "Andreia V."
+        },
+        {
+          "id": 104097,
+          "name": "Catarina M."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712203,
+      "news_uid": "9642a2b5-e06d-4014-b5f5-24bd448d07e1",
+      "date": "2026-02-21, 18:00",
+      "scores": "6-2, 6-1",
+      "side_a": [
+        {
+          "id": 155545,
+          "name": "João G."
+        },
+        {
+          "id": 18263,
+          "name": "Rui A."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 175629,
+          "name": "Sacramento"
+        },
+        {
+          "id": 175457,
+          "name": "Mikael S."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712071,
+      "news_uid": "44e55918-356a-4156-ba87-8e8d47cdb4ca",
+      "date": "2026-02-21, 18:00",
+      "scores": "6-3, 6-4",
+      "side_a": [
+        {
+          "id": 251285,
+          "name": "Maria S."
+        },
+        {
+          "id": 174986,
+          "name": "Mariana R."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 331269,
+          "name": "Larissa D."
+        },
+        {
+          "id": 92767,
+          "name": "Filipa F."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712129,
+      "news_uid": "676bf57b-886a-4b72-a598-a11ad21f1680",
+      "date": "2026-02-21, 18:00",
+      "scores": "6-3, 6-7(3), 10-4",
+      "side_a": [
+        {
+          "id": 245966,
+          "name": "Bee M."
+        },
+        {
+          "id": 228244,
+          "name": "Inês M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 317601,
+          "name": "Erin K."
+        },
+        {
+          "id": 149287,
+          "name": "Lucia S."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711963,
+      "news_uid": "429810c1-eda5-4dd3-8ac8-1bd8d0ba11ab",
+      "date": "2026-02-21, 18:00",
+      "scores": "6-1, 6-2",
+      "side_a": [
+        {
+          "id": 189726,
+          "name": "Vera C."
+        },
+        {
+          "id": 139215,
+          "name": "Vera M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 268162,
+          "name": "Teresa A."
+        },
+        {
+          "id": 185123,
+          "name": "Marta M."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711965,
+      "news_uid": "c9fa167c-0ffd-4256-a44f-168f9f4f6cb8",
+      "date": "2026-02-21, 18:00",
+      "scores": "5-7, 6-4, 10-8",
+      "side_a": [
+        {
+          "id": 324518,
+          "name": "João F."
+        },
+        {
+          "id": 180198,
+          "name": "Rafael C."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 141697,
+          "name": "Martim G."
+        },
+        {
+          "id": 16292,
+          "name": "Martim R."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711971,
+      "news_uid": "9d70ba7c-aa19-4299-a081-d9e09d74386a",
+      "date": "2026-02-21, 18:00",
+      "scores": "6-2, 6-4",
+      "side_a": [
+        {
+          "id": 142482,
+          "name": "Joana B."
+        },
+        {
+          "id": 119197,
+          "name": "Melissa R."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 401180,
+          "name": "Joana B."
+        },
+        {
+          "id": 325181,
+          "name": "Marta C."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711982,
+      "news_uid": "b7474b62-70d9-4891-90aa-b1d65cd9687a",
+      "date": "2026-02-21, 18:00",
+      "scores": "6-1, 6-4",
+      "side_a": [
+        {
+          "id": 82463,
+          "name": "Luís V."
+        },
+        {
+          "id": 22651,
+          "name": "Plínio F."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 18334,
+          "name": "Nuno P."
+        },
+        {
+          "id": 64100,
+          "name": "Tomas V."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711996,
+      "news_uid": "a16444ec-6191-4206-8805-faa9cdf0fb57",
+      "date": "2026-02-21, 18:00",
+      "scores": "6-2, 6-4",
+      "side_a": [
+        {
+          "id": 77961,
+          "name": "Christoph S."
+        },
+        {
+          "id": 74662,
+          "name": "Jesús L."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 177145,
+          "name": "Afonso R."
+        },
+        {
+          "id": 86880,
+          "name": "João A."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712033,
+      "news_uid": "83551c65-bcee-4e5a-ad82-da09802ed3e2",
+      "date": "2026-02-21, 18:00",
+      "scores": "6-4, 6-4",
+      "side_a": [
+        {
+          "id": 252143,
+          "name": "Franco N."
+        },
+        {
+          "id": 103874,
+          "name": "Miguel A."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 424340,
+          "name": "Carlos I."
+        },
+        {
+          "id": 337825,
+          "name": "Nico A."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711677,
+      "news_uid": "1a783de3-abe6-4bcb-9f4e-086065191ccd",
+      "date": "2026-02-21, 16:30",
+      "scores": "4-6, 7-5, 10-6",
+      "side_a": [
+        {
+          "id": 338532,
+          "name": "Mada Á."
+        },
+        {
+          "id": 101522,
+          "name": "Inês S."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 98787,
+          "name": "Ana A."
+        },
+        {
+          "id": 97885,
+          "name": "Madalena C."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711726,
+      "news_uid": "cccb2b53-846c-4a36-9b6d-5b9cf54fadb9",
+      "date": "2026-02-21, 16:30",
+      "scores": "6-3, 6-4",
+      "side_a": [
+        {
+          "id": 226832,
+          "name": "Leticia R."
+        },
+        {
+          "id": 206507,
+          "name": "Sílvia S."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 312971,
+          "name": "Sara G."
+        },
+        {
+          "id": 231708,
+          "name": "Claudia R."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711759,
+      "news_uid": "5f64c087-7564-4795-b908-1a46b593c4ea",
+      "date": "2026-02-21, 16:30",
+      "scores": "4-6, 6-2, 10-8",
+      "side_a": [
+        {
+          "id": 211976,
+          "name": "Vasco P."
+        },
+        {
+          "id": 103487,
+          "name": "Joao S."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 287585,
+          "name": "Diarmuid M."
+        },
+        {
+          "id": 77334,
+          "name": "João D."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711621,
+      "news_uid": "399b830c-b0dd-478b-ac3b-ccaba03cafeb",
+      "date": "2026-02-21, 16:30",
+      "scores": "6-4, 6-4",
+      "side_a": [
+        {
+          "id": 88029,
+          "name": "Margarida A."
+        },
+        {
+          "id": 76283,
+          "name": "Natália O."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 419604,
+          "name": "Alexandra M."
+        },
+        {
+          "id": 283801,
+          "name": "Inês B."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711630,
+      "news_uid": "fb47a239-f9ff-40f9-8f87-04aea780a322",
+      "date": "2026-02-21, 16:30",
+      "scores": "6-4, 6-4",
+      "side_a": [
+        {
+          "id": 162161,
+          "name": "Vlada K."
+        },
+        {
+          "id": 152253,
+          "name": "Maria C."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 267786,
+          "name": "Constança A."
+        },
+        {
+          "id": 384522,
+          "name": "Vera C."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711631,
+      "news_uid": "0e98c34e-95b6-4a71-95af-64dff39343bd",
+      "date": "2026-02-21, 16:30",
+      "scores": "6-2, 6-4",
+      "side_a": [
+        {
+          "id": 505534,
+          "name": "Dana"
+        },
+        {
+          "id": 505532,
+          "name": "TAO T."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 76280,
+          "name": "Sofia F."
+        },
+        {
+          "id": 9188,
+          "name": "Joana F."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711645,
+      "news_uid": "3cb26474-1020-4dc4-ba2c-ee654e1916e5",
+      "date": "2026-02-21, 16:30",
+      "scores": "6-1, 6-3",
+      "side_a": [
+        {
+          "id": 87181,
+          "name": "Pedro P."
+        },
+        {
+          "id": 16290,
+          "name": "Gonçalo P."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 33972,
+          "name": "João R."
+        },
+        {
+          "id": 74379,
+          "name": "Pedro S."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711648,
+      "news_uid": "0b983cd2-9198-4a79-bc36-72687cd5f651",
+      "date": "2026-02-21, 16:30",
+      "scores": "6-3, 6-2",
+      "side_a": [
+        {
+          "id": 352074,
+          "name": "Francisco A."
+        },
+        {
+          "id": 136019,
+          "name": "Ricardo A."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 182428,
+          "name": "João M."
+        },
+        {
+          "id": 106127,
+          "name": "Francisco V."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712602,
+      "news_uid": "d696658b-aba4-4388-92e2-938e8c572abd",
+      "date": "2026-02-21, 16:30",
+      "scores": "6-4, 6-3",
+      "side_a": [
+        {
+          "id": 367680,
+          "name": "Joana J."
+        },
+        {
+          "id": 349202,
+          "name": "Rafaela C."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 182090,
+          "name": "Catarina F."
+        },
+        {
+          "id": 178940,
+          "name": "Ana M."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712905,
+      "news_uid": "59badda5-12c0-4c56-a4ef-c8148c792c5b",
+      "date": "2026-02-21, 15:15",
+      "scores": "6-1, 7-6(5)",
+      "side_a": [
+        {
+          "id": 182781,
+          "name": "Inês P."
+        },
+        {
+          "id": 92874,
+          "name": "Isabel V."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 243343,
+          "name": "Sofia A."
+        },
+        {
+          "id": 227738,
+          "name": "Sofia G."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712679,
+      "news_uid": "a387ee00-ef7d-4237-864e-14ce28fcda3b",
+      "date": "2026-02-21, 15:15",
+      "scores": "3-6, 6-4, 10-5",
+      "side_a": [
+        {
+          "id": 317447,
+          "name": "Vera l."
+        },
+        {
+          "id": 231470,
+          "name": "Raquel C."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 328153,
+          "name": "Filipa J."
+        },
+        {
+          "id": 284776,
+          "name": "Vera F."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712810,
+      "news_uid": "6bc40237-3da6-400e-9d9f-5018fa31a194",
+      "date": "2026-02-21, 15:15",
+      "scores": "6-4, 3-6, 10-5",
+      "side_a": [
+        {
+          "id": 323697,
+          "name": "Ekaterina T."
+        },
+        {
+          "id": 269054,
+          "name": "Alexandra S."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 473648,
+          "name": "Mafalda A."
+        },
+        {
+          "id": 282976,
+          "name": "Sara M."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712587,
+      "news_uid": "b4d054fe-534a-4b98-8dba-8b8d009bdf44",
+      "date": "2026-02-21, 15:15",
+      "scores": "3-6, 6-4, 10-3",
+      "side_a": [
+        {
+          "id": 392487,
+          "name": "Nuno M."
+        },
+        {
+          "id": 304080,
+          "name": "André S."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 272930,
+          "name": "Tiago D."
+        },
+        {
+          "id": 154809,
+          "name": "Tiago P."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711654,
+      "news_uid": "86523875-eed3-4b33-8e43-d3a5ed604dba",
+      "date": "2026-02-21, 15:15",
+      "scores": "7-6(5), 4-6, 10-7",
+      "side_a": [
+        {
+          "id": 207437,
+          "name": "Jaime D."
+        },
+        {
+          "id": 76705,
+          "name": "Daniel T."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 201442,
+          "name": "Carlos L."
+        },
+        {
+          "id": 175567,
+          "name": "David J."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711657,
+      "news_uid": "129fff55-4f2f-47ad-acf0-6a57c723b8d8",
+      "date": "2026-02-21, 15:15",
+      "scores": "6-1, 6-2",
+      "side_a": [
+        {
+          "id": 154570,
+          "name": "André F."
+        },
+        {
+          "id": 84398,
+          "name": "Tiago T."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 505527,
+          "name": "Bryan C."
+        },
+        {
+          "id": 505535,
+          "name": "Ericson M."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711281,
+      "news_uid": "d75bb430-8867-4825-af56-b00d22d1490a",
+      "date": "2026-02-21, 15:15",
+      "scores": "6-2, 6-1",
+      "side_a": [
+        {
+          "id": 235795,
+          "name": "Gabriel B."
+        },
+        {
+          "id": 150919,
+          "name": "Vasco R."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 269168,
+          "name": "André L."
+        },
+        {
+          "id": 233234,
+          "name": "Tomás P."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711324,
+      "news_uid": "13b4a33a-56ac-44b8-ac5a-34314db96c55",
+      "date": "2026-02-21, 15:15",
+      "scores": "7-6(4), 6-1",
+      "side_a": [
+        {
+          "id": 101739,
+          "name": "Samuel O."
+        },
+        {
+          "id": 27460,
+          "name": "Carlos M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 188876,
+          "name": "Afonso R."
+        },
+        {
+          "id": 86706,
+          "name": "Rúben S."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711327,
+      "news_uid": "0be4c9a7-5dce-4bee-9e6a-7095e205b8c3",
+      "date": "2026-02-21, 15:15",
+      "scores": "6-2, 1-6, 10-8",
+      "side_a": [
+        {
+          "id": 328393,
+          "name": "Andreia V."
+        },
+        {
+          "id": 104097,
+          "name": "Catarina M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 160781,
+          "name": "Ana P."
+        },
+        {
+          "id": 152641,
+          "name": "Rita F."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711358,
+      "news_uid": "953417c5-a098-49c3-90c9-25e47e4a805e",
+      "date": "2026-02-21, 15:15",
+      "scores": "7-5, 7-5",
+      "side_a": [
+        {
+          "id": 409723,
+          "name": "Daniela B."
+        },
+        {
+          "id": 401147,
+          "name": "Cátia F."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 377170,
+          "name": "Fisoure"
+        },
+        {
+          "id": 268032,
+          "name": "Sofia P."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712039,
+      "news_uid": "acecaef8-44f8-4281-b266-22393b878a44",
+      "date": "2026-02-21, 15:15",
+      "scores": "6-3, 6-2",
+      "side_a": [
+        {
+          "id": 434266,
+          "name": "Gonçalo R."
+        },
+        {
+          "id": 74818,
+          "name": "Afonso P."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 323523,
+          "name": "Nuno C."
+        },
+        {
+          "id": 311661,
+          "name": "Tome S."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7712191,
+      "news_uid": "613ce1e3-f6b5-4571-aea5-8aed208fab3d",
+      "date": "2026-02-21, 15:15",
+      "scores": "6-0, 4-6, 10-8",
+      "side_a": [
+        {
+          "id": 74368,
+          "name": "Zé P."
+        },
+        {
+          "id": 67792,
+          "name": "João J."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 46482,
+          "name": "Eduardo C."
+        },
+        {
+          "id": 84276,
+          "name": "Rafael C."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711608,
+      "news_uid": "ea2b5a9d-5400-494b-a7b7-a0be63b75e58",
+      "date": "2026-02-21, 15:15",
+      "scores": "6-3, 6-4",
+      "side_a": [
+        {
+          "id": 337389,
+          "name": "Eduardo M."
+        },
+        {
+          "id": 260854,
+          "name": "Mykhailo O."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 325763,
+          "name": "Miguel"
+        },
+        {
+          "id": 144839,
+          "name": "João D."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711196,
+      "news_uid": "397ab19b-7d7a-4844-b128-21b46439fd86",
+      "date": "2026-02-21, 15:15",
+      "scores": "6-1, 6-1",
+      "side_a": [
+        {
+          "id": 319350,
+          "name": "Pedro M."
+        },
+        {
+          "id": 233172,
+          "name": "Fábio V."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 260859,
+          "name": "Bassam"
+        },
+        {
+          "id": 205950,
+          "name": "Carlos F."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7714839,
+      "news_uid": "46fb190a-d48b-428d-8249-ef5a19447710",
+      "date": "2026-02-21, 15:15",
+      "scores": "6-2, 6-0",
+      "side_a": [
+        {
+          "id": 168648,
+          "name": "Suzana K."
+        },
+        {
+          "id": 75750,
+          "name": "Joana G."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 84393,
+          "name": "Marta S."
+        },
+        {
+          "id": 75755,
+          "name": "Raquel L."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711201,
+      "news_uid": "7dfcf59d-58df-49eb-906f-ebd491790e13",
+      "date": "2026-02-21, 14:00",
+      "scores": "6-4, 4-6, 11-9",
+      "side_a": [
+        {
+          "id": 136576,
+          "name": "Filipe F."
+        },
+        {
+          "id": 139730,
+          "name": "João S."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 316697,
+          "name": "Guilherme N."
+        },
+        {
+          "id": 223162,
+          "name": "Pedro R."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711219,
+      "news_uid": "52085e23-0404-4585-bdb1-e47bc3fec161",
+      "date": "2026-02-21, 14:00",
+      "scores": "7-6(3), 4-6, 10-8",
+      "side_a": [
+        {
+          "id": 337765,
+          "name": "Eric J."
+        },
+        {
+          "id": 180473,
+          "name": "Hugo C."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 244666,
+          "name": "Carlos C."
+        },
+        {
+          "id": 57018,
+          "name": "Luis B."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711181,
+      "news_uid": "7fbb9847-d0ce-4452-8a6c-48ee69296274",
+      "date": "2026-02-21, 14:00",
+      "scores": "6-4, 7-6(2)",
+      "side_a": [
+        {
+          "id": 201682,
+          "name": "Filipe S."
+        },
+        {
+          "id": 86369,
+          "name": "Sérgio F."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 177221,
+          "name": "Raphaël G."
+        },
+        {
+          "id": 154231,
+          "name": "Fauler C."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7710712,
+      "news_uid": "06c0a15a-b863-427e-8790-51af925ce68d",
+      "date": "2026-02-21, 14:00",
+      "scores": "6-1, 6-0",
+      "side_a": [
+        {
+          "id": 232796,
+          "name": "Carolina G."
+        },
+        {
+          "id": 40804,
+          "name": "Inês S."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 229091,
+          "name": "Maria V."
+        },
+        {
+          "id": 175293,
+          "name": "Mónica G."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7710808,
+      "news_uid": "fc7708ac-8aea-4133-ac35-e9ac393cf656",
+      "date": "2026-02-21, 14:00",
+      "scores": "6-2, 6-3",
+      "side_a": [
+        {
+          "id": 18334,
+          "name": "Nuno P."
+        },
+        {
+          "id": 64100,
+          "name": "Tomas V."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 231440,
+          "name": "Daniel P."
+        },
+        {
+          "id": 119328,
+          "name": "Rodrigo A."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7710922,
+      "news_uid": "c56b1bc8-b198-4a11-859e-b54ace9445f3",
+      "date": "2026-02-21, 14:00",
+      "scores": "6-1, 6-1",
+      "side_a": [
+        {
+          "id": 476712,
+          "name": "Mia N."
+        },
+        {
+          "id": 228290,
+          "name": "Ana C."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 84163,
+          "name": "Ana M."
+        },
+        {
+          "id": 72866,
+          "name": "Tania C."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7710929,
+      "news_uid": "de4cd0d6-1cc9-47ed-a687-ad043a5cc397",
+      "date": "2026-02-21, 14:00",
+      "scores": "6-2, 6-3",
+      "side_a": [
+        {
+          "id": 88360,
+          "name": "Maria R."
+        },
+        {
+          "id": 21050,
+          "name": "Maria P."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 88029,
+          "name": "Margarida A."
+        },
+        {
+          "id": 76283,
+          "name": "Natália O."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7710953,
+      "news_uid": "3b771bea-3113-4fad-b552-24eac4465550",
+      "date": "2026-02-21, 14:00",
+      "scores": "6-3, 7-6(4)",
+      "side_a": [
+        {
+          "id": 315297,
+          "name": "Madalena C."
+        },
+        {
+          "id": 231532,
+          "name": "Solange B."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 74740,
+          "name": "PAULA A."
+        },
+        {
+          "id": 15828,
+          "name": "Leonor P."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7710959,
+      "news_uid": "9b811e75-5e1c-457f-a20d-0a65033be1fb",
+      "date": "2026-02-21, 14:00",
+      "scores": "7-5, 6-3",
+      "side_a": [
+        {
+          "id": 182090,
+          "name": "Catarina F."
+        },
+        {
+          "id": 178940,
+          "name": "Ana M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 334243,
+          "name": "Catarina P."
+        },
+        {
+          "id": 324797,
+          "name": "Raquel S."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711044,
+      "news_uid": "5dc3624c-1f33-4e85-8115-ab2558657c5d",
+      "date": "2026-02-21, 14:00",
+      "scores": "6-1, 6-2",
+      "side_a": [
+        {
+          "id": 82463,
+          "name": "Luís V."
+        },
+        {
+          "id": 22651,
+          "name": "Plínio F."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 78045,
+          "name": "Filipe V."
+        },
+        {
+          "id": 33975,
+          "name": "Ricardo L."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711076,
+      "news_uid": "5cfdc04f-f15b-495e-bb12-94d6ce251e1b",
+      "date": "2026-02-21, 14:00",
+      "scores": "3-6, 6-1, 10-5",
+      "side_a": [
+        {
+          "id": 241709,
+          "name": "Carolina C."
+        },
+        {
+          "id": 176746,
+          "name": "Raquel P."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 347903,
+          "name": "Marta S."
+        },
+        {
+          "id": 262820,
+          "name": "Catarina V."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711117,
+      "news_uid": "6e21e009-c75c-4d1b-bf92-5fb4231b9826",
+      "date": "2026-02-21, 14:00",
+      "scores": "6-2, 6-3",
+      "side_a": [
+        {
+          "id": 418870,
+          "name": "Lucie M."
+        },
+        {
+          "id": 411002,
+          "name": "Mariana M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 241799,
+          "name": "Marta F."
+        },
+        {
+          "id": 101158,
+          "name": "Carla B."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711482,
+      "news_uid": "fc1779fc-94b3-4f05-a61a-f490fb3b94c6",
+      "date": "2026-02-21, 14:00",
+      "scores": "6-4, 6-2",
+      "side_a": [
+        {
+          "id": 392730,
+          "name": "Alex S."
+        },
+        {
+          "id": 250184,
+          "name": "Aleksandr K."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 501595,
+          "name": "Jorge C."
+        },
+        {
+          "id": 338182,
+          "name": "Pedro R."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711825,
+      "news_uid": "75f9ed0c-85fa-4848-bef7-ad02eebf241a",
+      "date": "2026-02-21, 14:00",
+      "scores": "7-6(5), 7-6(4)",
+      "side_a": [
+        {
+          "id": 429060,
+          "name": "Alvaro S."
+        },
+        {
+          "id": 296175,
+          "name": "Dimen"
+        }
+      ],
+      "side_b": [
+        {
+          "id": 226034,
+          "name": "Joao B."
+        },
+        {
+          "id": 167926,
+          "name": "Nuno S."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711411,
+      "news_uid": "bc299af6-c8df-4802-91dc-f5362db58a84",
+      "date": "2026-02-21, 14:00",
+      "scores": "6-2, 6-1",
+      "side_a": [
+        {
+          "id": 260496,
+          "name": "Miguel R."
+        },
+        {
+          "id": 181511,
+          "name": "João M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 261610,
+          "name": "Nuno C."
+        },
+        {
+          "id": 244466,
+          "name": "Ricardo B."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711448,
+      "news_uid": "c1a59ab2-85f1-40b1-964e-4c6ae5394247",
+      "date": "2026-02-21, 13:00",
+      "scores": "6-1, 6-4",
+      "side_a": [
+        {
+          "id": 317997,
+          "name": "David C."
+        },
+        {
+          "id": 264815,
+          "name": "João B."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 324991,
+          "name": "Alison A."
+        },
+        {
+          "id": 258390,
+          "name": "Diogo C."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7710799,
+      "news_uid": "30aa359c-ad9a-4c34-be50-5d6ae1cc4899",
+      "date": "2026-02-21, 13:00",
+      "scores": "6-4, 7-6(5)",
+      "side_a": [
+        {
+          "id": 46482,
+          "name": "Eduardo C."
+        },
+        {
+          "id": 84276,
+          "name": "Rafael C."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 40757,
+          "name": "Romani"
+        },
+        {
+          "id": 268342,
+          "name": "Tomás A."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7710755,
+      "news_uid": "a39bef81-c970-47c4-9e03-576db4a3a0ce",
+      "date": "2026-02-21, 13:00",
+      "scores": "6-2, 3-6, 10-2",
+      "side_a": [
+        {
+          "id": 201442,
+          "name": "Carlos L."
+        },
+        {
+          "id": 175567,
+          "name": "David J."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 88497,
+          "name": "Francisco T."
+        },
+        {
+          "id": 74221,
+          "name": "João F."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7710644,
+      "news_uid": "bde1eec5-8a4c-4ed0-998d-f74b6a18db2c",
+      "date": "2026-02-21, 13:00",
+      "scores": "6-4, 6-4",
+      "side_a": [
+        {
+          "id": 343162,
+          "name": "Ricardo P."
+        },
+        {
+          "id": 79353,
+          "name": "Hugo L."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 244180,
+          "name": "Tomás J."
+        },
+        {
+          "id": 101276,
+          "name": "Frederico M."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7710647,
+      "news_uid": "22c3800d-b31f-4ae1-8548-9b759b8e6f59",
+      "date": "2026-02-21, 13:00",
+      "scores": "6-2, 7-6(7)",
+      "side_a": [
+        {
+          "id": 207437,
+          "name": "Jaime D."
+        },
+        {
+          "id": 76705,
+          "name": "Daniel T."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 337573,
+          "name": "Filipe R."
+        },
+        {
+          "id": 288167,
+          "name": "Tiago L."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7710679,
+      "news_uid": "4b9a1dd0-fd82-4c21-b3c6-370f864f43ab",
+      "date": "2026-02-21, 13:00",
+      "scores": "6-7(3), 6-3, 10-7",
+      "side_a": [
+        {
+          "id": 74368,
+          "name": "Zé P."
+        },
+        {
+          "id": 67792,
+          "name": "João J."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 91265,
+          "name": "Gonçalo B."
+        },
+        {
+          "id": 67810,
+          "name": "Andre R."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7710585,
+      "news_uid": "d7db30ba-bba2-4e94-a35e-bcef441dd282",
+      "date": "2026-02-21, 12:30",
+      "scores": "6-3, 6-4",
+      "side_a": [
+        {
+          "id": 162161,
+          "name": "Vlada K."
+        },
+        {
+          "id": 152253,
+          "name": "Maria C."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 76280,
+          "name": "Sofia F."
+        },
+        {
+          "id": 9188,
+          "name": "Joana F."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7710588,
+      "news_uid": "92537f03-3d5a-4b69-b154-5dabdfa6a303",
+      "date": "2026-02-21, 12:30",
+      "scores": "6-3, 6-2",
+      "side_a": [
+        {
+          "id": 505534,
+          "name": "Dana"
+        },
+        {
+          "id": 505532,
+          "name": "TAO T."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 267786,
+          "name": "Constança A."
+        },
+        {
+          "id": 384522,
+          "name": "Vera C."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7710595,
+      "news_uid": "ee038892-107a-4ed1-afd7-bb2dac0ba8df",
+      "date": "2026-02-21, 12:30",
+      "scores": "6-2, 6-4",
+      "side_a": [
+        {
+          "id": 338532,
+          "name": "Mada Á."
+        },
+        {
+          "id": 101522,
+          "name": "Inês S."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 101567,
+          "name": "Vera A."
+        },
+        {
+          "id": 99616,
+          "name": "Margarida C."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7710603,
+      "news_uid": "f1b502c6-7e46-4ce5-814f-3e10242b7aa9",
+      "date": "2026-02-21, 12:30",
+      "scores": "7-5, 6-3",
+      "side_a": [
+        {
+          "id": 312971,
+          "name": "Sara G."
+        },
+        {
+          "id": 231708,
+          "name": "Claudia R."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 167343,
+          "name": "Rita S."
+        },
+        {
+          "id": 98850,
+          "name": "luisa r."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7710613,
+      "news_uid": "b68b12b9-bd23-4b4a-8952-b6b10522f0c8",
+      "date": "2026-02-21, 12:30",
+      "scores": "5-7, 6-2, 10-6",
+      "side_a": [
+        {
+          "id": 284411,
+          "name": "Pedro M."
+        },
+        {
+          "id": 73900,
+          "name": "Francisco M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 264890,
+          "name": "João F."
+        },
+        {
+          "id": 176450,
+          "name": "Hugo M."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7710787,
+      "news_uid": "c726a9be-ed95-4088-95bd-3c7e289bf869",
+      "date": "2026-02-21, 12:30",
+      "scores": "6-2, 6-3",
+      "side_a": [
+        {
+          "id": 251905,
+          "name": "André M."
+        },
+        {
+          "id": 104504,
+          "name": "Manuel R."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 350247,
+          "name": "Franco S."
+        },
+        {
+          "id": 186561,
+          "name": "Bruno P."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7710748,
+      "news_uid": "ef58220b-4e55-4d4b-99ae-a92e4baf4e04",
+      "date": "2026-02-21, 12:30",
+      "scores": "7-5, 2-6, 10-4",
+      "side_a": [
+        {
+          "id": 274140,
+          "name": "Miriam V."
+        },
+        {
+          "id": 235952,
+          "name": "Sofia P."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 86152,
+          "name": "Maria J."
+        },
+        {
+          "id": 50066,
+          "name": "Leonor S."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711186,
+      "news_uid": "cb875be2-9e51-42a4-bfed-1267dfa5b55b",
+      "date": "2026-02-21, 12:30",
+      "scores": "6-7(4), 7-6(4), 10-7",
+      "side_a": [
+        {
+          "id": 175267,
+          "name": "Miguel F."
+        },
+        {
+          "id": 151247,
+          "name": "Miguel N."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 83361,
+          "name": "Zé S."
+        },
+        {
+          "id": 29603,
+          "name": "José M."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7711178,
+      "news_uid": "f9387f8f-babc-435e-a292-d86106b448f3",
+      "date": "2026-02-21, 12:30",
+      "scores": "7-5, 7-6(5)",
+      "side_a": [
+        {
+          "id": 214015,
+          "name": "Ivan V."
+        },
+        {
+          "id": 101400,
+          "name": "João B."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 77417,
+          "name": "Tiago C."
+        },
+        {
+          "id": 54972,
+          "name": "Ricardo S."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7709996,
+      "news_uid": "a6ed05f3-7b51-4d60-b666-1c32da414d60",
+      "date": "2026-02-21, 11:15",
+      "scores": "6-4, 4-6, 10-7",
+      "side_a": [
+        {
+          "id": 409723,
+          "name": "Daniela B."
+        },
+        {
+          "id": 401147,
+          "name": "Cátia F."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 385417,
+          "name": "Filipa D."
+        },
+        {
+          "id": 376236,
+          "name": "Madalena B."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7710063,
+      "news_uid": "06e30049-c7ad-48e0-a84c-62d260074124",
+      "date": "2026-02-21, 11:15",
+      "scores": "6-2, 6-1",
+      "side_a": [
+        {
+          "id": 188876,
+          "name": "Afonso R."
+        },
+        {
+          "id": 86706,
+          "name": "Rúben S."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 152189,
+          "name": "Antonio R."
+        },
+        {
+          "id": 94515,
+          "name": "Filipe B."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7710064,
+      "news_uid": "693a482b-af8b-4b96-a0da-952f32f6a44e",
+      "date": "2026-02-21, 11:15",
+      "scores": "6-2, 6-0",
+      "side_a": [
+        {
+          "id": 367680,
+          "name": "Joana J."
+        },
+        {
+          "id": 349202,
+          "name": "Rafaela C."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 186115,
+          "name": "Mariana"
+        },
+        {
+          "id": 173954,
+          "name": "Inês M."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7710103,
+      "news_uid": "d6a5d6ab-5860-4ad4-b7ce-bee96da8ee02",
+      "date": "2026-02-21, 11:15",
+      "scores": "6-2, 6-4",
+      "side_a": [
+        {
+          "id": 323697,
+          "name": "Ekaterina T."
+        },
+        {
+          "id": 269054,
+          "name": "Alexandra S."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 231630,
+          "name": "Paula O."
+        },
+        {
+          "id": 205644,
+          "name": "Filipa B."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7710105,
+      "news_uid": "8e71f31d-0188-489b-9db5-d52809247411",
+      "date": "2026-02-21, 11:15",
+      "scores": "6-4, 6-4",
+      "side_a": [
+        {
+          "id": 377170,
+          "name": "Fisoure"
+        },
+        {
+          "id": 268032,
+          "name": "Sofia P."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 251063,
+          "name": "Francisca M."
+        },
+        {
+          "id": 178083,
+          "name": "Helena P."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7710111,
+      "news_uid": "aa6673eb-a1d6-4cfc-8510-4fe02b979a39",
+      "date": "2026-02-21, 11:15",
+      "scores": "6-3, 7-5",
+      "side_a": [
+        {
+          "id": 243343,
+          "name": "Sofia A."
+        },
+        {
+          "id": 227738,
+          "name": "Sofia G."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 292985,
+          "name": "María S."
+        },
+        {
+          "id": 4400,
+          "name": "Inês D."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7710217,
+      "news_uid": "b55821d5-d64a-429b-91ea-4954c9a2909f",
+      "date": "2026-02-21, 11:15",
+      "scores": "6-0, 6-2",
+      "side_a": [
+        {
+          "id": 88360,
+          "name": "Maria R."
+        },
+        {
+          "id": 21050,
+          "name": "Maria P."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 419604,
+          "name": "Alexandra M."
+        },
+        {
+          "id": 283801,
+          "name": "Inês B."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7710230,
+      "news_uid": "036d793a-add1-4bea-9e87-01fb53d36342",
+      "date": "2026-02-21, 11:15",
+      "scores": "6-1, 6-1",
+      "side_a": [
+        {
+          "id": 168648,
+          "name": "Suzana K."
+        },
+        {
+          "id": 75750,
+          "name": "Joana G."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 63318,
+          "name": "Joana B."
+        },
+        {
+          "id": 74528,
+          "name": "Paola G."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7710305,
+      "news_uid": "8e976db0-33c8-4bd7-af08-caab7735d21b",
+      "date": "2026-02-21, 11:15",
+      "scores": "6-0, 6-0",
+      "side_a": [
+        {
+          "id": 473648,
+          "name": "Mafalda A."
+        },
+        {
+          "id": 282976,
+          "name": "Sara M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 236994,
+          "name": "Sara N."
+        },
+        {
+          "id": 161475,
+          "name": "Maria M."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7709877,
+      "news_uid": "d2fdf2ec-5c3e-4219-997f-da591eae5ec3",
+      "date": "2026-02-21, 10:00",
+      "scores": "6-2, 6-3",
+      "side_a": [
+        {
+          "id": 412842,
+          "name": "Inês C."
+        },
+        {
+          "id": 174955,
+          "name": "Margarida M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 104880,
+          "name": "Vera s."
+        },
+        {
+          "id": 72976,
+          "name": "Marta R."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7709984,
+      "news_uid": "1d4a898b-086b-4706-a83f-ea59f75c1cf4",
+      "date": "2026-02-21, 10:00",
+      "scores": "6-1, 6-3",
+      "side_a": [
+        {
+          "id": 86152,
+          "name": "Maria J."
+        },
+        {
+          "id": 50066,
+          "name": "Leonor S."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 343254,
+          "name": "Filipa M."
+        },
+        {
+          "id": 171340,
+          "name": "Kylie B."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7709995,
+      "news_uid": "877db1c4-8e0f-4fc4-8b2e-dc6d842f012e",
+      "date": "2026-02-21, 10:00",
+      "scores": "6-1, 6-2",
+      "side_a": [
+        {
+          "id": 476712,
+          "name": "Mia N."
+        },
+        {
+          "id": 228290,
+          "name": "Ana C."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 75766,
+          "name": "Neusa A."
+        },
+        {
+          "id": 70706,
+          "name": "Claudia V."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7709724,
+      "news_uid": "359a9c3e-3c27-4bf5-a3da-38abf9ba3998",
+      "date": "2026-02-21, 10:00",
+      "scores": "6-0, 6-0",
+      "side_a": [
+        {
+          "id": 232796,
+          "name": "Carolina G."
+        },
+        {
+          "id": 40804,
+          "name": "Inês S."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 75754,
+          "name": "Sara N."
+        },
+        {
+          "id": 72164,
+          "name": "Mafalda M."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7709734,
+      "news_uid": "6cad9e29-72f0-491a-9fd7-7cbb5fe2c15f",
+      "date": "2026-02-21, 10:00",
+      "scores": "6-1, 6-0",
+      "side_a": [
+        {
+          "id": 84163,
+          "name": "Ana M."
+        },
+        {
+          "id": 72866,
+          "name": "Tania C."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 416748,
+          "name": "Beatriz L."
+        },
+        {
+          "id": 415714,
+          "name": "Susana M."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7709763,
+      "news_uid": "0380819f-ccb9-4411-ac93-483464955632",
+      "date": "2026-02-21, 10:00",
+      "scores": "6-4, 6-3",
+      "side_a": [
+        {
+          "id": 262952,
+          "name": "Patricia C."
+        },
+        {
+          "id": 156806,
+          "name": "Luzi R."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 207017,
+          "name": "Raquel A."
+        },
+        {
+          "id": 186224,
+          "name": "Rita Q."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7709809,
+      "news_uid": "7faed519-8100-46af-a09d-8f5473221477",
+      "date": "2026-02-21, 10:00",
+      "scores": "1-6, 6-3, 10-5",
+      "side_a": [
+        {
+          "id": 299603,
+          "name": "Margarida G."
+        },
+        {
+          "id": 277132,
+          "name": "Andreia G."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 501881,
+          "name": "Inês P."
+        },
+        {
+          "id": 293094,
+          "name": "Sofia M."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7709813,
+      "news_uid": "ba6f0d3a-b178-4253-96c0-ad08abb1c08e",
+      "date": "2026-02-21, 10:00",
+      "scores": "6-3, 3-6, 10-1",
+      "side_a": [
+        {
+          "id": 389198,
+          "name": "Cláudia C."
+        },
+        {
+          "id": 269416,
+          "name": "Tiz M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 239493,
+          "name": "Assunção C."
+        },
+        {
+          "id": 228913,
+          "name": "Marta C."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7709845,
+      "news_uid": "d0acca55-9f1a-4268-9b0e-81caf5ff68df",
+      "date": "2026-02-21, 09:00",
+      "scores": "6-7(5), 6-4, 10-2",
+      "side_a": [
+        {
+          "id": 175267,
+          "name": "Miguel F."
+        },
+        {
+          "id": 151247,
+          "name": "Miguel N."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 83759,
+          "name": "Gaibino"
+        },
+        {
+          "id": 83733,
+          "name": "Luis D."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7709858,
+      "news_uid": "5fd69bfc-1467-43a1-869d-52177206663d",
+      "date": "2026-02-21, 09:00",
+      "scores": "6-1, 6-3",
+      "side_a": [
+        {
+          "id": 83361,
+          "name": "Zé S."
+        },
+        {
+          "id": 29603,
+          "name": "José M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 167218,
+          "name": "André P."
+        },
+        {
+          "id": 93105,
+          "name": "Carlos F."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7709673,
+      "news_uid": "01e9878f-b657-4c03-8d31-6e213571b5c6",
+      "date": "2026-02-21, 09:00",
+      "scores": "7-5, 6-1",
+      "side_a": [
+        {
+          "id": 350247,
+          "name": "Franco S."
+        },
+        {
+          "id": 186561,
+          "name": "Bruno P."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 299649,
+          "name": "Pedro G."
+        },
+        {
+          "id": 150962,
+          "name": "Manuel T."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7709687,
+      "news_uid": "52bb9513-04fe-4471-a741-c28daaf640c7",
+      "date": "2026-02-21, 09:00",
+      "scores": "6-2, 6-2",
+      "side_a": [
+        {
+          "id": 284411,
+          "name": "Pedro M."
+        },
+        {
+          "id": 73900,
+          "name": "Francisco M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 317585,
+          "name": "João R."
+        },
+        {
+          "id": 26552,
+          "name": "Paulo A."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7709693,
+      "news_uid": "4894cb62-cbd0-4f96-b384-9db9af0156f4",
+      "date": "2026-02-21, 09:00",
+      "scores": "6-4, 6-1",
+      "side_a": [
+        {
+          "id": 214015,
+          "name": "Ivan V."
+        },
+        {
+          "id": 101400,
+          "name": "João B."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 232185,
+          "name": "Sérgio V."
+        },
+        {
+          "id": 231552,
+          "name": "João B."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7709699,
+      "news_uid": "48a71822-ab47-40cd-abf8-0d9e260d1fec",
+      "date": "2026-02-21, 09:00",
+      "scores": "6-2, 6-1",
+      "side_a": [
+        {
+          "id": 264890,
+          "name": "João F."
+        },
+        {
+          "id": 176450,
+          "name": "Hugo M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 325114,
+          "name": "Joao R."
+        },
+        {
+          "id": 225314,
+          "name": "Tomás A."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7709722,
+      "news_uid": "c04b6363-0338-45ab-b96f-ea9c44ab7cf1",
+      "date": "2026-02-21, 09:00",
+      "scores": "6-1, 6-0",
+      "side_a": [
+        {
+          "id": 274140,
+          "name": "Miriam V."
+        },
+        {
+          "id": 235952,
+          "name": "Sofia P."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 277471,
+          "name": "Tetiana V."
+        },
+        {
+          "id": 245534,
+          "name": "Anastasia Z."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7710328,
+      "news_uid": "fe20e000-f593-4bdd-a2c6-a1ee569a1518",
+      "date": "2026-02-21, 09:00",
+      "scores": "6-4, 3-6, 10-8",
+      "side_a": [
+        {
+          "id": 77417,
+          "name": "Tiago C."
+        },
+        {
+          "id": 54972,
+          "name": "Ricardo S."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 283521,
+          "name": "Diogo M."
+        },
+        {
+          "id": 231540,
+          "name": "Joao"
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7709013,
+      "news_uid": "e54bfcde-3a56-4327-9ca3-8a4976f9bbdb",
+      "date": "2026-02-21, 00:54",
+      "scores": "Walkover",
+      "side_a": [
+        {
+          "id": 251905,
+          "name": "André M."
+        },
+        {
+          "id": 104504,
+          "name": "Manuel R."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 75207,
+          "name": "Paulo N."
+        },
+        {
+          "id": 44617,
+          "name": "João G."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708982,
+      "news_uid": "6bf9b38e-5dfb-4ad5-9105-f4c312257338",
+      "date": "2026-02-20, 21:45",
+      "scores": "4-6, 6-1, 10-4",
+      "side_a": [
+        {
+          "id": 245966,
+          "name": "Bee M."
+        },
+        {
+          "id": 228244,
+          "name": "Inês M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 174459,
+          "name": "Ana S."
+        },
+        {
+          "id": 155192,
+          "name": "Beatriz C."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7709004,
+      "news_uid": "7e983386-ad27-4286-b422-8a6fe6d1a605",
+      "date": "2026-02-20, 21:45",
+      "scores": "6-2, 6-1",
+      "side_a": [
+        {
+          "id": 317447,
+          "name": "Vera l."
+        },
+        {
+          "id": 231470,
+          "name": "Raquel C."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 324796,
+          "name": "Joana M."
+        },
+        {
+          "id": 233788,
+          "name": "Madalena J."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708928,
+      "news_uid": "43c226be-17ac-40e8-8ced-839a9bb2e989",
+      "date": "2026-02-20, 21:45",
+      "scores": "6-2, 6-1",
+      "side_a": [
+        {
+          "id": 317601,
+          "name": "Erin K."
+        },
+        {
+          "id": 149287,
+          "name": "Lucia S."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 156781,
+          "name": "Sofia F."
+        },
+        {
+          "id": 143001,
+          "name": "Cláudia C."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708954,
+      "news_uid": "0d18a524-bcc4-48f0-b931-dea9d96d9354",
+      "date": "2026-02-20, 21:45",
+      "scores": "6-1, 6-0",
+      "side_a": [
+        {
+          "id": 418870,
+          "name": "Lucie M."
+        },
+        {
+          "id": 411002,
+          "name": "Mariana M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 223167,
+          "name": "Vera G."
+        },
+        {
+          "id": 200895,
+          "name": "Joana M."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708960,
+      "news_uid": "87b67eab-e624-42d0-8073-344d9bffef9d",
+      "date": "2026-02-20, 21:45",
+      "scores": "6-4, 6-1",
+      "side_a": [
+        {
+          "id": 160781,
+          "name": "Ana P."
+        },
+        {
+          "id": 152641,
+          "name": "Rita F."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 248655,
+          "name": "Nina C."
+        },
+        {
+          "id": 102204,
+          "name": "Eduarda T."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708917,
+      "news_uid": "95598aa8-cbdc-49c0-84ab-841e1d7ccba0",
+      "date": "2026-02-20, 21:45",
+      "scores": "6-3, 6-1",
+      "side_a": [
+        {
+          "id": 328153,
+          "name": "Filipa J."
+        },
+        {
+          "id": 284776,
+          "name": "Vera F."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 501869,
+          "name": "Joana"
+        },
+        {
+          "id": 430725,
+          "name": "Bruna B."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708963,
+      "news_uid": "d3e25a0a-91e6-491b-ba39-560a62ba7648",
+      "date": "2026-02-20, 21:30",
+      "scores": "6-0, 6-2",
+      "side_a": [
+        {
+          "id": 142482,
+          "name": "Joana B."
+        },
+        {
+          "id": 119197,
+          "name": "Melissa R."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 302118,
+          "name": "Mathilde S."
+        },
+        {
+          "id": 265882,
+          "name": "Mariana L."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708933,
+      "news_uid": "8499fcdf-f28b-4c49-9a9b-10dcec7fadb2",
+      "date": "2026-02-20, 20:45",
+      "scores": "6-2, 6-1",
+      "side_a": [
+        {
+          "id": 334243,
+          "name": "Catarina P."
+        },
+        {
+          "id": 324797,
+          "name": "Raquel S."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 389112,
+          "name": "Daniela M."
+        },
+        {
+          "id": 240032,
+          "name": "Sara G."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708921,
+      "news_uid": "ba805f03-aa21-4cba-92b9-0df272c083c0",
+      "date": "2026-02-20, 20:45",
+      "scores": "6-3, 6-1",
+      "side_a": [
+        {
+          "id": 182090,
+          "name": "Catarina F."
+        },
+        {
+          "id": 178940,
+          "name": "Ana M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 232802,
+          "name": "Cloé C."
+        },
+        {
+          "id": 136377,
+          "name": "Duda"
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708924,
+      "news_uid": "bb409854-7aad-4b2a-8271-d546447b9808",
+      "date": "2026-02-20, 20:45",
+      "scores": "7-5, 6-4",
+      "side_a": [
+        {
+          "id": 241709,
+          "name": "Carolina C."
+        },
+        {
+          "id": 176746,
+          "name": "Raquel P."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 229690,
+          "name": "Inês V."
+        },
+        {
+          "id": 173488,
+          "name": "Sara C."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708925,
+      "news_uid": "d6634ddd-0c8d-4ced-a7bf-61b01de65863",
+      "date": "2026-02-20, 20:45",
+      "scores": "6-1, 6-2",
+      "side_a": [
+        {
+          "id": 401180,
+          "name": "Joana B."
+        },
+        {
+          "id": 325181,
+          "name": "Marta C."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 157373,
+          "name": "Vanessa A."
+        },
+        {
+          "id": 157332,
+          "name": "Dalila A."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708926,
+      "news_uid": "23bc44b8-0dfc-41ad-a61c-c33df9662a10",
+      "date": "2026-02-20, 20:45",
+      "scores": "6-3, 7-6(2)",
+      "side_a": [
+        {
+          "id": 241799,
+          "name": "Marta F."
+        },
+        {
+          "id": 101158,
+          "name": "Carla B."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 342412,
+          "name": "Inês W."
+        },
+        {
+          "id": 337118,
+          "name": "Carolina A."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708927,
+      "news_uid": "c94f4bec-c93e-45b2-976a-bd62139c2d30",
+      "date": "2026-02-20, 20:45",
+      "scores": "6-4, 4-6, 11-9",
+      "side_a": [
+        {
+          "id": 328393,
+          "name": "Andreia V."
+        },
+        {
+          "id": 104097,
+          "name": "Catarina M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 410025,
+          "name": "Inês D."
+        },
+        {
+          "id": 226251,
+          "name": "Raquel C."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708900,
+      "news_uid": "40f4e122-ebd1-4132-bffe-a30ab8cc4b9b",
+      "date": "2026-02-20, 20:45",
+      "scores": "6-3, 6-4",
+      "side_a": [
+        {
+          "id": 347903,
+          "name": "Marta S."
+        },
+        {
+          "id": 262820,
+          "name": "Catarina V."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 231722,
+          "name": "Sofia A."
+        },
+        {
+          "id": 145561,
+          "name": "Claudia E."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708915,
+      "news_uid": "da183c89-1c70-4c33-8466-1bf7a3bf94cb",
+      "date": "2026-02-20, 20:45",
+      "scores": "6-0, 6-3",
+      "side_a": [
+        {
+          "id": 186115,
+          "name": "Mariana"
+        },
+        {
+          "id": 173954,
+          "name": "Inês M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 244223,
+          "name": "Catarina P."
+        },
+        {
+          "id": 147172,
+          "name": "Heidy M."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708773,
+      "news_uid": "2398a8c1-be8d-4910-a726-e519d97147ae",
+      "date": "2026-02-20, 19:30",
+      "scores": "6-3, 6-4",
+      "side_a": [
+        {
+          "id": 162161,
+          "name": "Vlada K."
+        },
+        {
+          "id": 152253,
+          "name": "Maria C."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 505534,
+          "name": "Dana"
+        },
+        {
+          "id": 505532,
+          "name": "TAO T."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708779,
+      "news_uid": "fcb432ff-d3b8-408b-b6a9-6e9e0135e4fc",
+      "date": "2026-02-20, 19:30",
+      "scores": "6-1, 6-2",
+      "side_a": [
+        {
+          "id": 367680,
+          "name": "Joana J."
+        },
+        {
+          "id": 349202,
+          "name": "Rafaela C."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 320382,
+          "name": "Malú S."
+        },
+        {
+          "id": 45964,
+          "name": "Teresa L."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708786,
+      "news_uid": "b4a8c083-145b-4f54-80e1-b1f4a065b4d0",
+      "date": "2026-02-20, 19:30",
+      "scores": "6-2, 6-1",
+      "side_a": [
+        {
+          "id": 343254,
+          "name": "Filipa M."
+        },
+        {
+          "id": 171340,
+          "name": "Kylie B."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 436826,
+          "name": "Patrícia S."
+        },
+        {
+          "id": 324481,
+          "name": "Joana R."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708807,
+      "news_uid": "fe4e0e66-ba53-4747-9275-77ebb55758e0",
+      "date": "2026-02-20, 19:30",
+      "scores": "6-2, 7-6(6)",
+      "side_a": [
+        {
+          "id": 377170,
+          "name": "Fisoure"
+        },
+        {
+          "id": 268032,
+          "name": "Sofia P."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 503315,
+          "name": "Sofia E."
+        },
+        {
+          "id": 343216,
+          "name": "Raquel C."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708853,
+      "news_uid": "e7d44193-2e0d-4d93-961b-ddb831a6d759",
+      "date": "2026-02-20, 19:30",
+      "scores": "6-4, 6-3",
+      "side_a": [
+        {
+          "id": 473648,
+          "name": "Mafalda A."
+        },
+        {
+          "id": 282976,
+          "name": "Sara M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 322976,
+          "name": "Inês F."
+        },
+        {
+          "id": 268978,
+          "name": "Filipa G."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708890,
+      "news_uid": "52e58bf0-34d7-49c3-9610-c50a2f987774",
+      "date": "2026-02-20, 19:30",
+      "scores": "6-3, 3-6, 7-6(3)",
+      "side_a": [
+        {
+          "id": 33972,
+          "name": "João R."
+        },
+        {
+          "id": 74379,
+          "name": "Pedro S."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 223614,
+          "name": "Diogo S."
+        },
+        {
+          "id": 54234,
+          "name": "Ricardo A."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708893,
+      "news_uid": "7ba036c0-7bf7-4df9-8ecc-eaa52752d268",
+      "date": "2026-02-20, 19:30",
+      "scores": "7-5, 0-6, 6-3",
+      "side_a": [
+        {
+          "id": 101739,
+          "name": "Samuel O."
+        },
+        {
+          "id": 27460,
+          "name": "Carlos M."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 174961,
+          "name": "Daniel A."
+        },
+        {
+          "id": 97966,
+          "name": "Stéphane C."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708622,
+      "news_uid": "971757dd-e8e9-43d3-ad79-8e04f49656fe",
+      "date": "2026-02-20, 19:08",
+      "scores": "Walkover",
+      "side_a": [
+        {
+          "id": 74740,
+          "name": "PAULA A."
+        },
+        {
+          "id": 15828,
+          "name": "Leonor P."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 294715,
+          "name": "Liliana S."
+        },
+        {
+          "id": 247628,
+          "name": "Laura P."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708669,
+      "news_uid": "839f6c14-f276-43ca-a89d-e07db524539a",
+      "date": "2026-02-20, 18:30",
+      "scores": "6-2, 6-4",
+      "side_a": [
+        {
+          "id": 76280,
+          "name": "Sofia F."
+        },
+        {
+          "id": 9188,
+          "name": "Joana F."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 267786,
+          "name": "Constança A."
+        },
+        {
+          "id": 384522,
+          "name": "Vera C."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708673,
+      "news_uid": "e5bf9922-e967-4eca-bd2e-14902a5b96ec",
+      "date": "2026-02-20, 18:30",
+      "scores": "6-0, 6-2",
+      "side_a": [
+        {
+          "id": 18334,
+          "name": "Nuno P."
+        },
+        {
+          "id": 64100,
+          "name": "Tomas V."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 85152,
+          "name": "Diogo M."
+        },
+        {
+          "id": 44595,
+          "name": "Jorge F."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708674,
+      "news_uid": "8bfa2651-c69d-4d9f-b868-4912880a94ea",
+      "date": "2026-02-20, 18:30",
+      "scores": "6-1, 6-2",
+      "side_a": [
+        {
+          "id": 87181,
+          "name": "Pedro P."
+        },
+        {
+          "id": 16290,
+          "name": "Gonçalo P."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 33668,
+          "name": "João B."
+        },
+        {
+          "id": 7544,
+          "name": "Eduardo C."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708678,
+      "news_uid": "f9d34191-f903-49f0-80fd-45a9eb217780",
+      "date": "2026-02-20, 18:30",
+      "scores": "7-6(5), 7-6(5)",
+      "side_a": [
+        {
+          "id": 78045,
+          "name": "Filipe V."
+        },
+        {
+          "id": 33975,
+          "name": "Ricardo L."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 44616,
+          "name": "Gonçalo V."
+        },
+        {
+          "id": 75975,
+          "name": "Manuel M."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708682,
+      "news_uid": "8524f3ae-9af4-4efe-9e73-e26c302c27ef",
+      "date": "2026-02-20, 18:30",
+      "scores": "6-1, 6-3",
+      "side_a": [
+        {
+          "id": 476712,
+          "name": "Mia N."
+        },
+        {
+          "id": 228290,
+          "name": "Ana C."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 356202,
+          "name": "Sara R."
+        },
+        {
+          "id": 250636,
+          "name": "Bárbara S."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708684,
+      "news_uid": "cfb93f9e-de89-4aea-96bb-603965d24876",
+      "date": "2026-02-20, 18:30",
+      "scores": "6-0, 6-1",
+      "side_a": [
+        {
+          "id": 385417,
+          "name": "Filipa D."
+        },
+        {
+          "id": 376236,
+          "name": "Madalena B."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 383101,
+          "name": "Ana m."
+        },
+        {
+          "id": 268119,
+          "name": "Susana S."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708778,
+      "news_uid": "a1d9a98d-c344-450d-8df7-d234326769f9",
+      "date": "2026-02-20, 18:30",
+      "scores": "6-4, 7-6(5)",
+      "side_a": [
+        {
+          "id": 287585,
+          "name": "Diarmuid M."
+        },
+        {
+          "id": 77334,
+          "name": "João D."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 7548,
+          "name": "Filipe F."
+        },
+        {
+          "id": 33695,
+          "name": "Paulo A."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    },
+    {
+      "news_id": 7708260,
+      "news_uid": "0be85bfe-2fe7-4680-a507-ff745ab41d8b",
+      "date": "2026-02-20, 08:18",
+      "scores": "Walkover",
+      "side_a": [
+        {
+          "id": 231440,
+          "name": "Daniel P."
+        },
+        {
+          "id": 119328,
+          "name": "Rodrigo A."
+        }
+      ],
+      "side_b": [
+        {
+          "id": 199306,
+          "name": "Luís C."
+        },
+        {
+          "id": 175320,
+          "name": "Morten E."
+        }
+      ],
+      "winner": "a",
+      "location": "Padel Factory",
+      "draw_info": ""
+    }
+  ],
+  "api_matches": [
+    {
+      "source": "homepage_matches",
+      "id": "88736E9E-362D-4D54-9654-42AB68DA2876",
+      "side_a": [
+        {
+          "id": 419604,
+          "name": "Alexandra Mozharovska",
+          "photo": "https://tiesports.s3.amazonaws.com/players/419604/e50b22bb-040b-487c-833c-83536b676216-small.jpg"
+        },
+        {
+          "id": 283801,
+          "name": "Inês Bento",
+          "photo": "https://tiesports.s3.amazonaws.com/players/283801/b8c727e2-faee-4823-9f31-a259c9b0d95e-small.jpg"
+        }
+      ],
+      "side_b": [
+        {
+          "id": 88029,
+          "name": "Margarida Abreu",
+          "photo": "https://tiesports.s3.amazonaws.com/players/88029/0ca0f151-3fdd-4fc7-948f-482856f840f9-small.jpg"
+        },
+        {
+          "id": 76283,
+          "name": "Natalia Oxley",
+          "photo": "https://tiesports.s3.amazonaws.com/players/76283/0864bed4-b9a3-4936-8b5d-b9ec184dc656-small.jpg"
+        }
+      ],
+      "total_a": "0",
+      "total_b": "2",
+      "sets": [
+        {
+          "set_a": 4,
+          "set_b": 6,
+          "tie_a": -1,
+          "tie_b": -1
+        },
+        {
+          "set_a": 4,
+          "set_b": 6,
+          "tie_a": -1,
+          "tie_b": -1
+        }
+      ],
+      "winner_a": false,
+      "winner_b": true,
+      "infos": {
+        "title_left": "",
+        "title_right": "",
+        "date_time": {
+          "date": "Sat 21 Feb",
+          "time": "16:30",
+          "str": "16:30, Sat 21 Feb"
+        },
+        "top_left": "Femininos 1 / F1-Grupo A - Round 3",
+        "top_right": "C1 | Padel Factory",
+        "player_a_info": "",
+        "player_b_info": ""
+      },
+      "have_live_scores": false,
+      "color": "#972a97",
+      "balance_value": ""
+    },
+    {
+      "source": "homepage_matches",
+      "id": "9032A8B8-ED55-4BB8-B4E8-CCD8E80FEED2",
+      "side_a": [
+        {
+          "id": 267786,
+          "name": "Constança Araújo",
+          "photo": "https://tiesports.s3.amazonaws.com/players/267786/edcefbf3-26db-4001-84b6-f326d65df8d7-small.jpg"
+        },
+        {
+          "id": 384522,
+          "name": "Vera Cavalheiro",
+          "photo": "https://tiesports.s3.amazonaws.com/players/384522/f45325d2-d323-4f26-b2f8-eb34f9adc889-small.jpg"
+        }
+      ],
+      "side_b": [
+        {
+          "id": 162161,
+          "name": "Vladyslava Kaplina",
+          "photo": "https://tiesports.s3.amazonaws.com/players/162161/3f4305e9-b75c-4372-8dd4-0b2fe098d837-small.jpg"
+        },
+        {
+          "id": 152253,
+          "name": "Maria Carracha",
+          "photo": "https://tiesports.s3.amazonaws.com/players/152253/d5d4376a-cd68-4a3e-b06c-1ea4437469bb-small.jpg"
+        }
+      ],
+      "total_a": "0",
+      "total_b": "2",
+      "sets": [
+        {
+          "set_a": 4,
+          "set_b": 6,
+          "tie_a": -1,
+          "tie_b": -1
+        },
+        {
+          "set_a": 4,
+          "set_b": 6,
+          "tie_a": -1,
+          "tie_b": -1
+        }
+      ],
+      "winner_a": false,
+      "winner_b": true,
+      "infos": {
+        "title_left": "",
+        "title_right": "",
+        "date_time": {
+          "date": "Sat 21 Feb",
+          "time": "16:30",
+          "str": "16:30, Sat 21 Feb"
+        },
+        "top_left": "Femininos 1 / F1-Grupo B - Round 3",
+        "top_right": "C3 | Padel Factory",
+        "player_a_info": "",
+        "player_b_info": ""
+      },
+      "have_live_scores": false,
+      "color": "#972a97",
+      "balance_value": ""
+    },
+    {
+      "source": "homepage_matches",
+      "id": "BF66A9A6-555B-42DC-A151-05C9E7D3234B",
+      "side_a": [
+        {
+          "id": 76280,
+          "name": "Sofia Formigal",
+          "photo": "https://tiesports.s3.amazonaws.com/players/76280/576cb0bb-8517-4dd0-8ed1-7e818080d3c1-small.jpg"
+        },
+        {
+          "id": 9188,
+          "name": "Joana Figueirôa",
+          "photo": "https://tiesports.s3.amazonaws.com/players/9188/df49ba58-b8a8-437a-b733-51d594531c31-small.jpg"
+        }
+      ],
+      "side_b": [
+        {
+          "id": 505534,
+          "name": "Dana Dana",
+          "photo": "https://tiesports.s3.amazonaws.com/default/user.jpg"
+        },
+        {
+          "id": 505532,
+          "name": "TAO TAO",
+          "photo": "https://tiesports.s3.amazonaws.com/default/user.jpg"
+        }
+      ],
+      "total_a": "0",
+      "total_b": "2",
+      "sets": [
+        {
+          "set_a": 2,
+          "set_b": 6,
+          "tie_a": -1,
+          "tie_b": -1
+        },
+        {
+          "set_a": 4,
+          "set_b": 6,
+          "tie_a": -1,
+          "tie_b": -1
+        }
+      ],
+      "winner_a": false,
+      "winner_b": true,
+      "infos": {
+        "title_left": "",
+        "title_right": "",
+        "date_time": {
+          "date": "Sat 21 Feb",
+          "time": "16:30",
+          "str": "16:30, Sat 21 Feb"
+        },
+        "top_left": "Femininos 1 / F1-Grupo B - Round 3",
+        "top_right": "C4 | Padel Factory",
+        "player_a_info": "",
+        "player_b_info": ""
+      },
+      "have_live_scores": false,
+      "color": "#972a97",
+      "balance_value": ""
+    },
+    {
+      "source": "homepage_matches",
+      "id": "9F3BA66D-C2C8-41F6-82A8-D8E352EBD64F",
+      "side_a": [
+        {
+          "id": 367680,
+          "name": "Joana Jorge",
+          "photo": "https://tiesports.s3.amazonaws.com/players/367680/5156e282-2cf6-45f5-9adf-08b3b24171a3-small.jpg"
+        },
+        {
+          "id": 349202,
+          "name": "Rafaela Costa",
+          "photo": "https://tiesports.s3.amazonaws.com/players/349202/aa35ea40-69d6-4c91-9a65-cdf9603a1d63-small.jpg"
+        }
+      ],
+      "side_b": [
+        {
+          "id": 317447,
+          "name": "Vera Laurentino",
+          "photo": "https://tiesports.s3.amazonaws.com/players/317447/9fdcb326-4968-4996-ba57-8717e71a5705-small.jpg"
+        },
+        {
+          "id": 231470,
+          "name": "Raquel Coelho",
+          "photo": "https://tiesports.s3.amazonaws.com/players/231470/232e0b6b-825e-4daf-ba28-4f5a6cdefba3-small.jpg"
+        }
+      ],
+      "total_a": "2",
+      "total_b": "0",
+      "sets": [
+        {
+          "set_a": 6,
+          "set_b": 0,
+          "tie_a": -1,
+          "tie_b": -1
+        },
+        {
+          "set_a": 6,
+          "set_b": 1,
+          "tie_a": -1,
+          "tie_b": -1
+        }
+      ],
+      "winner_a": true,
+      "winner_b": false,
+      "infos": {
+        "title_left": "",
+        "title_right": "",
+        "date_time": {
+          "date": "Sun 22 Feb",
+          "time": "16:30",
+          "str": "16:30, Sun 22 Feb"
+        },
+        "top_left": "Femininos 5 / F5-QP32 - Final",
+        "top_right": "C4 | Padel Factory",
+        "player_a_info": "",
+        "player_b_info": ""
+      },
+      "have_live_scores": false,
+      "color": "#ead1dc",
+      "balance_value": ""
+    },
+    {
+      "source": "homepage_matches",
+      "id": "EF9AE29D-56A8-4D6B-A303-BEECC81A2D59",
+      "side_a": [
+        {
+          "id": 476712,
+          "name": "Mia Nóbrega",
+          "photo": "https://tiesports.s3.amazonaws.com/players/476712/8231967d-b402-4b28-b900-da79d17f6a05-small.jpg"
+        },
+        {
+          "id": 228290,
+          "name": "Ana Catarina",
+          "photo": "https://tiesports.s3.amazonaws.com/players/228290/c68d996f-2c5e-483c-9909-a2c6e7bae1e3-small.jpg"
+        }
+      ],
+      "side_b": [
+        {
+          "id": 274140,
+          "name": "Miriam Vasconcelos",
+          "photo": "https://tiesports.s3.amazonaws.com/players/274140/261b9d80-4e02-494b-a71a-1cbed42b42bd-small.jpg"
+        },
+        {
+          "id": 235952,
+          "name": "Sofia Petronilho",
+          "photo": "https://tiesports.s3.amazonaws.com/players/235952/18f9c8c1-014f-4108-8ebf-50f523745f59-small.jpg"
+        }
+      ],
+      "total_a": "2",
+      "total_b": "0",
+      "sets": [
+        {
+          "set_a": 7,
+          "set_b": 6,
+          "tie_a": -1,
+          "tie_b": 6
+        },
+        {
+          "set_a": 6,
+          "set_b": 1,
+          "tie_a": -1,
+          "tie_b": -1
+        }
+      ],
+      "winner_a": true,
+      "winner_b": false,
+      "infos": {
+        "title_left": "",
+        "title_right": "",
+        "date_time": {
+          "date": "Sun 22 Feb",
+          "time": "16:30",
+          "str": "16:30, Sun 22 Feb"
+        },
+        "top_left": "Femininos 6 / F6-QP32 - Final",
+        "top_right": "C5 | Padel Factory",
+        "player_a_info": "",
+        "player_b_info": ""
+      },
+      "have_live_scores": false,
+      "color": "#ead1dc",
+      "balance_value": ""
+    },
+    {
+      "source": "homepage_matches",
+      "id": "5869BF91-6CB7-480C-87F6-1F7DFEFECEE9",
+      "side_a": [
+        {
+          "id": 74368,
+          "name": "Zé Pedro",
+          "photo": "https://tiesports.s3.amazonaws.com/players/74368/0da9629b-a3ab-48f2-98b8-1c952ad296f2-small.jpg"
+        },
+        {
+          "id": 67792,
+          "name": "João Jacinto",
+          "photo": "https://tiesports.s3.amazonaws.com/players/67792/b23f2e05-c104-41c8-a7bb-4557967e2753-small.jpg"
+        }
+      ],
+      "side_b": [
+        {
+          "id": 317997,
+          "name": "David Cardoso",
+          "photo": "https://tiesports.s3.amazonaws.com/players/317997/780c5654-4450-4f50-804d-94dc3ff5542e-small.jpg"
+        },
+        {
+          "id": 264815,
+          "name": "João Barreiro",
+          "photo": "https://tiesports.s3.amazonaws.com/players/264815/52ed3123-9d72-4056-8000-0c3ce54d5345-small.jpg"
+        }
+      ],
+      "total_a": "0",
+      "total_b": "2",
+      "sets": [
+        {
+          "set_a": 4,
+          "set_b": 6,
+          "tie_a": -1,
+          "tie_b": -1
+        },
+        {
+          "set_a": 1,
+          "set_b": 6,
+          "tie_a": -1,
+          "tie_b": -1
+        }
+      ],
+      "winner_a": false,
+      "winner_b": true,
+      "infos": {
+        "title_left": "",
+        "title_right": "",
+        "date_time": {
+          "date": "Sun 22 Feb",
+          "time": "16:30",
+          "str": "16:30, Sun 22 Feb"
+        },
+        "top_left": "Masculinos 5 / M5-QP16 - Final",
+        "top_right": "C3 | Padel Factory",
+        "player_a_info": "",
+        "player_b_info": ""
+      },
+      "have_live_scores": false,
+      "color": "#cfe2f3",
+      "balance_value": ""
+    },
+    {
+      "source": "homepage_matches",
+      "id": "0D6DE435-9111-40FE-86E7-9870D0FFF6F4",
+      "side_a": [
+        {
+          "id": 337765,
+          "name": "Eric Juma",
+          "photo": "https://tiesports.s3.amazonaws.com/players/337765/6f10cdad-74bd-4708-b7f5-801a674ecd45-small.jpg"
+        },
+        {
+          "id": 180473,
+          "name": "Hugo Cardoso",
+          "photo": "https://tiesports.s3.amazonaws.com/players/180473/60403763-1786-48ba-88fd-8fdb9d180f22-small.jpg"
+        }
+      ],
+      "side_b": [
+        {
+          "id": 392487,
+          "name": "Nuno Matos",
+          "photo": "https://tiesports.s3.amazonaws.com/players/392487/017617c0-ed28-4827-aaa4-793279a746f6-small.jpg"
+        },
+        {
+          "id": 304080,
+          "name": "André Sousa",
+          "photo": "https://tiesports.s3.amazonaws.com/players/304080/c1f209db-b6a7-40ac-ac00-fb7ec19397c2-small.jpg"
+        }
+      ],
+      "total_a": "2",
+      "total_b": "0",
+      "sets": [
+        {
+          "set_a": 6,
+          "set_b": 1,
+          "tie_a": -1,
+          "tie_b": -1
+        },
+        {
+          "set_a": 6,
+          "set_b": 4,
+          "tie_a": -1,
+          "tie_b": -1
+        }
+      ],
+      "winner_a": true,
+      "winner_b": false,
+      "infos": {
+        "title_left": "",
+        "title_right": "",
+        "date_time": {
+          "date": "Sun 22 Feb",
+          "time": "16:30",
+          "str": "16:30, Sun 22 Feb"
+        },
+        "top_left": "Masculinos 6 / M6-QP16 - Final",
+        "top_right": "C6 | Padel Factory",
+        "player_a_info": "",
+        "player_b_info": ""
+      },
+      "have_live_scores": false,
+      "color": "#cfe2f3",
+      "balance_value": ""
+    },
+    {
+      "source": "homepage_matches",
+      "id": "8854F634-685B-45F5-AFD8-A12558B5570D",
+      "side_a": [
+        {
+          "id": 88360,
+          "name": "Maria Ribeiro",
+          "photo": "https://tiesports.s3.amazonaws.com/players/88360/591b7300-c2d6-4116-bd69-ade8bf5924c2-small.jpg"
+        },
+        {
+          "id": 21050,
+          "name": "Luisa Pinho",
+          "photo": "https://tiesports.s3.amazonaws.com/players/21050/85a8e49a-036f-4101-93a4-6f48669dbc85-small.jpg"
+        }
+      ],
+      "side_b": [
+        {
+          "id": 88029,
+          "name": "Margarida Abreu",
+          "photo": "https://tiesports.s3.amazonaws.com/players/88029/0ca0f151-3fdd-4fc7-948f-482856f840f9-small.jpg"
+        },
+        {
+          "id": 76283,
+          "name": "Natalia Oxley",
+          "photo": "https://tiesports.s3.amazonaws.com/players/76283/0864bed4-b9a3-4936-8b5d-b9ec184dc656-small.jpg"
+        }
+      ],
+      "total_a": "2",
+      "total_b": "0",
+      "sets": [
+        {
+          "set_a": 6,
+          "set_b": 4,
+          "tie_a": -1,
+          "tie_b": -1
+        },
+        {
+          "set_a": 6,
+          "set_b": 0,
+          "tie_a": -1,
+          "tie_b": -1
+        }
+      ],
+      "winner_a": true,
+      "winner_b": false,
+      "infos": {
+        "title_left": "",
+        "title_right": "",
+        "date_time": {
+          "date": "Sun 22 Feb",
+          "time": "16:30",
+          "str": "16:30, Sun 22 Feb"
+        },
+        "top_left": "Femininos 1 / F1-QP - Final",
+        "top_right": "C1 | Padel Factory",
+        "player_a_info": "",
+        "player_b_info": ""
+      },
+      "have_live_scores": false,
+      "color": "#972a97",
+      "balance_value": ""
+    },
+    {
+      "source": "homepage_matches",
+      "id": "1A7A07D3-F534-4C32-9045-7ABC5BE71471",
+      "side_a": [
+        {
+          "id": 232796,
+          "name": "Carolina Gonçalves",
+          "photo": "https://tiesports.s3.amazonaws.com/players/232796/16519ee8-b65a-4539-b2b6-bb0064050140-small.jpg"
+        },
+        {
+          "id": 40804,
+          "name": "Inês Santos",
+          "photo": "https://tiesports.s3.amazonaws.com/players/40804/3d7783e7-996e-4b3a-a2cb-b20628c50da0-small.jpg"
+        }
+      ],
+      "side_b": [
+        {
+          "id": 168648,
+          "name": "Suzana Kuffner",
+          "photo": "https://tiesports.s3.amazonaws.com/players/168648/58094341-32da-411f-9a2a-e76237aa5f44-small.jpg"
+        },
+        {
+          "id": 75750,
+          "name": "Joana Gonçalves",
+          "photo": "https://tiesports.s3.amazonaws.com/players/75750/b4deb1f6-e8ee-4de8-a6fa-0e63f6b7198b-small.jpg"
+        }
+      ],
+      "total_a": "2",
+      "total_b": "0",
+      "sets": [
+        {
+          "set_a": 6,
+          "set_b": 2,
+          "tie_a": -1,
+          "tie_b": -1
+        },
+        {
+          "set_a": 6,
+          "set_b": 4,
+          "tie_a": -1,
+          "tie_b": -1
+        }
+      ],
+      "winner_a": true,
+      "winner_b": false,
+      "infos": {
+        "title_left": "",
+        "title_right": "",
+        "date_time": {
+          "date": "Sun 22 Feb",
+          "time": "16:30",
+          "str": "16:30, Sun 22 Feb"
+        },
+        "top_left": "Femininos 2 / F2-QP16 - Final",
+        "top_right": "C2 | Padel Factory",
+        "player_a_info": "",
+        "player_b_info": ""
+      },
+      "have_live_scores": false,
+      "color": "#db0cdb",
+      "balance_value": ""
+    },
+    {
+      "source": "homepage_matches",
+      "id": "11042ABC-0BE0-4AE2-94F1-E8BCC6DDE7DF",
+      "side_a": [
+        {
+          "id": 154570,
+          "name": "André Figueiredo",
+          "photo": "https://tiesports.s3.amazonaws.com/players/154570/fcd6dbe6-a56c-44e1-9acc-4bf1766b98b4-small.jpg"
+        },
+        {
+          "id": 84398,
+          "name": "Tiago Tainha",
+          "photo": "https://tiesports.s3.amazonaws.com/players/84398/7cebc6e2-5735-433e-a087-3ad9bc845772-small.jpg"
+        }
+      ],
+      "side_b": [
+        {
+          "id": 77961,
+          "name": "Christoph Sievert",
+          "photo": "https://tiesports.s3.amazonaws.com/players/77961/a83670e0-b6fa-4f13-b767-e4c1ba4d7e59-small.jpg"
+        },
+        {
+          "id": 74662,
+          "name": "Jesús Lizarbe",
+          "photo": "https://tiesports.s3.amazonaws.com/players/74662/ef1120dd-26fb-4706-9395-85ee9a86a488-small.jpg"
+        }
+      ],
+      "total_a": "0",
+      "total_b": "2",
+      "sets": [
+        {
+          "set_a": 3,
+          "set_b": 6,
+          "tie_a": -1,
+          "tie_b": -1
+        },
+        {
+          "set_a": 2,
+          "set_b": 6,
+          "tie_a": -1,
+          "tie_b": -1
+        }
+      ],
+      "winner_a": false,
+      "winner_b": true,
+      "infos": {
+        "title_left": "",
+        "title_right": "",
+        "date_time": {
+          "date": "Sun 22 Feb",
+          "time": "17:45",
+          "str": "17:45, Sun 22 Feb"
+        },
+        "top_left": "Masculinos 2 / M2-QP32 - Final",
+        "top_right": "C5 | Padel Factory",
+        "player_a_info": "",
+        "player_b_info": ""
+      },
+      "have_live_scores": false,
+      "color": "#3d85c6",
+      "balance_value": ""
+    },
+    {
+      "source": "matches_by_tournament",
+      "id": "e6ff6bb8-d22a-4272-bb46-b5aaf446f655",
+      "player_a": "André Figueiredo\r\nTiago Tainha",
+      "player_b": "Gabriel Barreiros\r\nVASCO RUSSO",
+      "sets": [
+        {
+          "set_a": 4,
+          "set_b": 6,
+          "tie_a": -1,
+          "tie_b": -1
+        },
+        {
+          "set_a": 6,
+          "set_b": 4,
+          "tie_a": -1,
+          "tie_b": -1
+        },
+        {
+          "set_a": 10,
+          "set_b": 6,
+          "tie_a": -1,
+          "tie_b": -1
+        }
+      ],
+      "winner_a": true,
+      "winner_b": false,
+      "player_a_info": "",
+      "player_b_info": "",
+      "info_bottom_left": "QuarterFinal  -  M2-QP32\r\nC5 | Padel Factory",
+      "info_bottom_right": "19:15, 2026-02-21",
+      "have_live_scores": false,
+      "sport_name": "QuarterFinal  -  M2-QP32\r\nC5 | Padel Factory",
+      "date_time": "19:15, 2026-02-21"
+    },
+    {
+      "source": "matches_by_tournament",
+      "id": "0284ae00-77c7-4bfe-bc88-dc931b61eda2",
+      "player_a": "Ines Freitas\r\nFilipa Almeida Garrett",
+      "player_b": "Mafalda Araújo\r\nSara Magalhães",
+      "sets": [
+        {
+          "set_a": 4,
+          "set_b": 6,
+          "tie_a": -1,
+          "tie_b": -1
+        },
+        {
+          "set_a": 3,
+          "set_b": 6,
+          "tie_a": -1,
+          "tie_b": -1
+        }
+      ],
+      "winner_a": false,
+      "winner_b": true,
+      "player_a_info": "",
+      "player_b_info": "",
+      "info_bottom_left": "R32  -  F6-QP32\r\nC5 | Padel Factory",
+      "info_bottom_right": "19:30, 2026-02-20",
+      "have_live_scores": false,
+      "sport_name": "R32  -  F6-QP32\r\nC5 | Padel Factory",
+      "date_time": "19:30, 2026-02-20"
+    },
+    {
+      "source": "matches_by_tournament",
+      "id": "2790df92-3d62-4fc1-909f-4ea85b261154",
+      "player_a": "Javier Perez\r\nVasco Leslie",
+      "player_b": "Hugo Fox\r\nFábio Martins",
+      "sets": [
+        {
+          "set_a": 6,
+          "set_b": 4,
+          "tie_a": -1,
+          "tie_b": -1
+        },
+        {
+          "set_a": 6,
+          "set_b": 2,
+          "tie_a": -1,
+          "tie_b": -1
+        }
+      ],
+      "winner_a": true,
+      "winner_b": false,
+      "player_a_info": "",
+      "player_b_info": "",
+      "info_bottom_left": "R16  -  M3-QP16\r\nC5 | Padel Factory",
+      "info_bottom_right": "20:30, 2026-02-21",
+      "have_live_scores": false,
+      "sport_name": "R16  -  M3-QP16\r\nC5 | Padel Factory",
+      "date_time": "20:30, 2026-02-21"
+    },
+    {
+      "source": "matches_by_tournament",
+      "id": "d6e31a13-3b59-49b5-bbb3-a7c8a0b62168",
+      "player_a": "Sofia Afonso\r\nClaudia Espirito-Santo",
+      "player_b": "Marta Bilstein Sequeira\r\nCatarina Vera",
+      "sets": [
+        {
+          "set_a": 3,
+          "set_b": 6,
+          "tie_a": -1,
+          "tie_b": -1
+        },
+        {
+          "set_a": 4,
+          "set_b": 6,
+          "tie_a": -1,
+          "tie_b": -1
+        }
+      ],
+      "winner_a": false,
+      "winner_b": true,
+      "player_a_info": "",
+      "player_b_info": "",
+      "info_bottom_left": "R32  -  F5-QP32\r\nC5 | Padel Factory",
+      "info_bottom_right": "20:45, 2026-02-20",
+      "have_live_scores": false,
+      "sport_name": "R32  -  F5-QP32\r\nC5 | Padel Factory",
+      "date_time": "20:45, 2026-02-20"
+    },
+    {
+      "source": "matches_by_tournament",
+      "id": "e0e530a1-be36-4564-be60-7a284cb15625",
+      "player_a": "Erin Kelly\r\nLucia Saldanha",
+      "player_b": "Sofia Ferreira\r\nCláudia Cheio",
+      "sets": [
+        {
+          "set_a": 6,
+          "set_b": 2,
+          "tie_a": -1,
+          "tie_b": -1
+        },
+        {
+          "set_a": 6,
+          "set_b": 1,
+          "tie_a": -1,
+          "tie_b": -1
+        }
+      ],
+      "winner_a": true,
+      "winner_b": false,
+      "player_a_info": "",
+      "player_b_info": "",
+      "info_bottom_left": "R32  -  F5-QP32\r\nC5 | Padel Factory",
+      "info_bottom_right": "21:45, 2026-02-20",
+      "have_live_scores": false,
+      "sport_name": "R32  -  F5-QP32\r\nC5 | Padel Factory",
+      "date_time": "21:45, 2026-02-20"
+    },
+    {
+      "source": "matches_by_tournament",
+      "id": "92f68ede-bfda-4dcc-88a1-ea4cdd29c578",
+      "player_a": "Filipe M. Ferreira\r\nJoão Pina dos Santos",
+      "player_b": "Filipe Sequeira\r\nSérgio Fernandes",
+      "sets": [
+        {
+          "set_a": 6,
+          "set_b": 4,
+          "tie_a": -1,
+          "tie_b": -1
+        },
+        {
+          "set_a": 6,
+          "set_b": 3,
+          "tie_a": -1,
+          "tie_b": -1
+        }
+      ],
+      "winner_a": true,
+      "winner_b": false,
+      "player_a_info": "",
+      "player_b_info": "",
+      "info_bottom_left": "QuarterFinal  -  M5-QP16\r\nC5 | Padel Factory",
+      "info_bottom_right": "21:45, 2026-02-21",
+      "have_live_scores": false,
+      "sport_name": "QuarterFinal  -  M5-QP16\r\nC5 | Padel Factory",
+      "date_time": "21:45, 2026-02-21"
+    },
+    {
+      "source": "matches_by_tournament",
+      "id": "8391eb3d-4918-40d8-a4ee-1d5bac50d6b2",
+      "player_a": "Ivan Valente\r\nJoão Branco",
+      "player_b": "Sérgio Vidigueira\r\nJoão Barreto",
+      "sets": [
+        {
+          "set_a": 6,
+          "set_b": 4,
+          "tie_a": -1,
+          "tie_b": -1
+        },
+        {
+          "set_a": 6,
+          "set_b": 1,
+          "tie_a": -1,
+          "tie_b": -1
+        }
+      ],
+      "winner_a": true,
+      "winner_b": false,
+      "player_a_info": "",
+      "player_b_info": "",
+      "info_bottom_left": "R16  -  M4-QP16\r\nC6 | Padel Factory",
+      "info_bottom_right": "09:00, 2026-02-21",
+      "have_live_scores": false,
+      "sport_name": "R16  -  M4-QP16\r\nC6 | Padel Factory",
+      "date_time": "09:00, 2026-02-21"
+    },
+    {
+      "source": "matches_by_tournament",
+      "id": "a7041b9e-847f-48eb-bcd5-5e48e3f40e1e",
+      "player_a": "Cláudia Costa\r\nTiz Morais",
+      "player_b": "Assunção Côrte-Real\r\nMarta Nobre Claro",
+      "sets": [
+        {
+          "set_a": 6,
+          "set_b": 3,
+          "tie_a": -1,
+          "tie_b": -1
+        },
+        {
+          "set_a": 3,
+          "set_b": 6,
+          "tie_a": -1,
+          "tie_b": -1
+        },
+        {
+          "set_a": 10,
+          "set_b": 1,
+          "tie_a": -1,
+          "tie_b": -1
+        }
+      ],
+      "winner_a": true,
+      "winner_b": false,
+      "player_a_info": "",
+      "player_b_info": "",
+      "info_bottom_left": "R16  -  F4-QP16\r\nC6 | Padel Factory",
+      "info_bottom_right": "10:00, 2026-02-21",
+      "have_live_scores": false,
+      "sport_name": "R16  -  F4-QP16\r\nC6 | Padel Factory",
+      "date_time": "10:00, 2026-02-21"
+    },
+    {
+      "source": "matches_by_tournament",
+      "id": "fb24470c-449e-4984-a64e-5f072ab113c7",
+      "player_a": "Ekaterina Tikhonova\r\nShaki",
+      "player_b": "Miriam Vasconcelos\r\nSofia Petronilho",
+      "sets": [
+        {
+          "set_a": 4,
+          "set_b": 6,
+          "tie_a": -1,
+          "tie_b": -1
+        },
+        {
+          "set_a": 1,
+          "set_b": 6,
+          "tie_a": -1,
+          "tie_b": -1
+        }
+      ],
+      "winner_a": false,
+      "winner_b": true,
+      "player_a_info": "",
+      "player_b_info": "",
+      "info_bottom_left": "SemiFinal  -  F6-QP32\r\nC6 | Padel Factory",
+      "info_bottom_right": "11:15, 2026-02-22",
+      "have_live_scores": false,
+      "sport_name": "SemiFinal  -  F6-QP32\r\nC6 | Padel Factory",
+      "date_time": "11:15, 2026-02-22"
+    },
+    {
+      "source": "matches_by_tournament",
+      "id": "03e04fe6-b144-429e-90b8-deb8083185fa",
+      "player_a": "Paula Oliveira\r\nFilipa Xavier de Basto",
+      "player_b": "Ekaterina Tikhonova\r\nShaki",
+      "sets": [
+        {
+          "set_a": 2,
+          "set_b": 6,
+          "tie_a": -1,
+          "tie_b": -1
+        },
+        {
+          "set_a": 4,
+          "set_b": 6,
+          "tie_a": -1,
+          "tie_b": -1
+        }
+      ],
+      "winner_a": false,
+      "winner_b": true,
+      "player_a_info": "",
+      "player_b_info": "",
+      "info_bottom_left": "R16  -  F6-QP32\r\nC6 | Padel Factory",
+      "info_bottom_right": "11:15, 2026-02-21",
+      "have_live_scores": false,
+      "sport_name": "R16  -  F6-QP32\r\nC6 | Padel Factory",
+      "date_time": "11:15, 2026-02-21"
+    }
+  ]
+}
