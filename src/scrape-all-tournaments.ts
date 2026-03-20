@@ -140,24 +140,33 @@ function saveTournament(db: ReturnType<typeof getDb>, id: number, name: string, 
 
 async function main() {
   const db = getDb();
+  const source = process.argv[2] ?? "api";
 
-  // Get all tournaments from API
-  const tournaments = await getTournaments(0);
-  console.log(`Found ${tournaments.length} tournaments\n`);
+  let targets: { id: number; name: string; date: string }[];
 
-  // Filter 2026 tournaments (date starts with "2026" or is a weekday name for upcoming)
-  const targets = tournaments.filter((t) =>
-    t.date.startsWith("2026") || t.date.startsWith("2025") ||
-    ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].includes(t.date)
-  );
+  if (source === "api") {
+    const tournaments = await getTournaments(0);
+    targets = tournaments.map((t) => ({ id: t.id, name: t.title, date: t.date }));
+    console.log(`Found ${targets.length} tournaments from API\n`);
+  } else {
+    // Load from discovered tournaments JSON
+    const data: Array<{ id: number; name: string; date: string }> = await Bun.file(source).json();
+    targets = data;
+    console.log(`Loaded ${targets.length} tournaments from ${source}\n`);
+  }
 
   let grandTotal = 0;
+  let processed = 0;
 
   for (const t of targets) {
-    console.log(`Scraping: ${t.title} (ID: ${t.id}, date: ${t.date})`);
-    saveTournament(db, t.id, t.title, t.date);
-    const count = await scrapeTournament(t.id, t.title);
-    console.log(`  → ${count} matches\n`);
+    processed++;
+    const cursorKey = `scrape_tournament_${t.id}`;
+    if (getCursor(cursorKey) === "done") continue;
+
+    console.log(`[${processed}/${targets.length}] ${t.name} (ID: ${t.id})`);
+    saveTournament(db, t.id, t.name, t.date);
+    const count = await scrapeTournament(t.id, t.name);
+    if (count > 0) console.log(`  → ${count} matches`);
     grandTotal += count;
   }
 
