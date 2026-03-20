@@ -18,10 +18,10 @@ function parseMatchInfo(m: ApiMatch) {
     const topRight = m.infos.top_right ?? "";
     const parts = topRight.split("\r\n");
     if (parts.length >= 2) {
-      roundName = parts[0];
-      sectionName = parts[1];
+      roundName = parts[0] ?? "";
+      sectionName = parts[1] ?? "";
     } else if (parts.length === 1) {
-      sectionName = parts[0];
+      sectionName = parts[0] ?? "";
     }
   }
 

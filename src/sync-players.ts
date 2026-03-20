@@ -1,4 +1,4 @@
-import { getDb, getCursor, setCursor } from "./db";
+import { getDb } from "./db";
 import { getPlayerProfile } from "./api";
 
 interface SeedPlayer {

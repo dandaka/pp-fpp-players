@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "cheerio": "^1.2.0",
+    "openskill": "^4.1.1",
     "playwright": "^1.58.2"
   }
 }

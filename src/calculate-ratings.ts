@@ -42,15 +42,17 @@ export function calculateRatings() {
     const ranks = m.winner_side === "a" ? [1, 2] : [2, 1];
 
     try {
-      const [newA, newB] = rate([teamA, teamB], { rank: ranks });
+      const result = rate([teamA, teamB], { rank: ranks });
+      const newA = result[0]!;
+      const newB = result[1]!;
 
       for (let i = 0; i < sideAIds.length; i++) {
-        playerRatings.set(sideAIds[i], newA[i]);
-        playerMatchCounts.set(sideAIds[i], (playerMatchCounts.get(sideAIds[i]) ?? 0) + 1);
+        playerRatings.set(sideAIds[i]!, newA[i]!);
+        playerMatchCounts.set(sideAIds[i]!, (playerMatchCounts.get(sideAIds[i]!) ?? 0) + 1);
       }
       for (let i = 0; i < sideBIds.length; i++) {
-        playerRatings.set(sideBIds[i], newB[i]);
-        playerMatchCounts.set(sideBIds[i], (playerMatchCounts.get(sideBIds[i]) ?? 0) + 1);
+        playerRatings.set(sideBIds[i]!, newB[i]!);
+        playerMatchCounts.set(sideBIds[i]!, (playerMatchCounts.get(sideBIds[i]!) ?? 0) + 1);
       }
     } catch (err) {
       console.error(`Error rating match ${m.guid}:`, err);
