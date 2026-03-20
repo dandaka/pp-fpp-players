@@ -1,5 +1,6 @@
 import { seedPlayersFromJson, enrichPlayerProfiles } from "./sync-players";
 import { syncPlayerMatches } from "./sync-matches";
+import { importMatchesFromJson } from "./import-matches";
 import { calculateRatings, printLeaderboard } from "./calculate-ratings";
 import { getDb } from "./db";
 
@@ -16,6 +17,10 @@ switch (cmd) {
 
   case "sync":
     await syncPlayerMatches();
+    break;
+
+  case "import":
+    await importMatchesFromJson(process.argv[3]);
     break;
 
   case "rate":
@@ -53,7 +58,8 @@ switch (cmd) {
 Commands:
   seed          Seed players from players.json
   enrich [n]    Enrich n player profiles from API (default: 50)
-  sync          Sync all player matches from API
+  sync          Sync all player matches from API (token owner only)
+  import [file] Import matches from scraped JSON (default: matches.json)
   rate [n]      Calculate ratings and show top n (default: 30)
   leaderboard [n]  Show top n rated players
   stats         Show database statistics
