@@ -1,0 +1,66 @@
+export interface PlayerSearchResult {
+  id: number
+  name: string
+  club: string | null
+  globalRank: number
+}
+
+export interface Player {
+  id: number
+  name: string
+  club: string | null
+  photoUrl: string | null
+  gender: string | null
+  location: string | null
+  ageGroup: string | null
+  fppPontos: number | null
+}
+
+export interface PlayerRanks {
+  global: { rank: number; total: number }
+  gender: { rank: number; total: number; label: string } | null
+  club: { rank: number; total: number; label: string } | null
+}
+
+export interface MatchDetail {
+  guid: string
+  tournamentId: number | null
+  tournamentName: string | null
+  sectionName: string | null
+  roundName: string | null
+  dateTime: string | null
+  sets: Array<{ setA: number; setB: number; tieA: number; tieB: number }>
+  winnerSide: string | null
+  sideA: MatchPlayerInfo[]
+  sideB: MatchPlayerInfo[]
+}
+
+export interface MatchPlayerInfo {
+  id: number
+  name: string
+  categoryRank: number | null
+  genderRank: number | null
+}
+
+export interface Tournament {
+  id: number
+  name: string
+  club: string | null
+  date: string | null
+}
+
+export interface TournamentDetail {
+  id: number
+  name: string
+  club: string | null
+  date: string | null
+  linkWeb: string | null
+}
+
+export interface TournamentPlayer {
+  id: number
+  name: string
+  genderRank: number | null
+  categoryRank: number | null
+  ordinal: number
+}
