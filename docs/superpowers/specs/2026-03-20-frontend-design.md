@@ -34,6 +34,31 @@ pp-fpp-players/
 
 Bun workspaces in root `package.json`. Packages reference each other as `@fpp/db`, `@fpp/scraper`, `@fpp/web`.
 
+## Schema Migration Required
+
+The `matches` table currently has `tournament_name` (free text) but no foreign key to `tournaments`. Add:
+
+```sql
+ALTER TABLE matches ADD COLUMN tournament_id INTEGER REFERENCES tournaments(id);
+CREATE INDEX idx_matches_tournament ON matches(tournament_id);
+CREATE INDEX idx_matches_section ON matches(section_name);
+```
+
+Backfill `tournament_id` by matching `tournament_name` to `tournaments.name`. Update the scraper to populate `tournament_id` on new inserts.
+
+## Ranking Definitions
+
+All rankings use the global OpenSkill `ordinal` value from the `ratings` table. The ranking is always the same number — only the **cohort** (who you're ranked against) changes:
+
+- **Global rank**: position among all rated players
+- **Gender rank**: position among players with same `gender`
+- **Club rank**: position among players with same `club`
+- **Category rank**: position among all rated players who have at least one match with the same `section_name` value (e.g., "F3", "M2"). This is a global category cohort, not per-tournament.
+- **Tournament rank**: position among all players who participated in that tournament
+- **Tournament + category rank**: position among players in that category within that tournament
+
+Computed via: `COUNT(*) + 1 WHERE ordinal > player.ordinal` filtered to the cohort.
+
 ## Database Access (`packages/db`)
 
 ### Connection
@@ -67,7 +92,7 @@ Bun workspaces in root `package.json`. Packages reference each other as `@fpp/db
   - Winner side
   - Both sides: player names, player IDs
   - For each player: category rank, global gender rank
-- Cursor-based pagination using date_time + guid
+- Cursor-based pagination: cursor format is `"<date_time>|<guid>"`, query uses `WHERE (date_time, guid) < (?, ?)` on the split values
 
 **`getTournaments(page: number, pageSize?: number): { tournaments: Tournament[], total: number }`**
 - Ordered by date DESC
@@ -128,8 +153,8 @@ interface MatchDetail {
 interface MatchPlayerInfo {
   id: number
   name: string
-  categoryRank: number | null   // rank in section_name cohort
-  genderRank: number | null     // global gender rank
+  categoryRank: number | null   // rank among all players in the same section_name cohort globally
+  genderRank: number | null     // rank among all players with same gender globally
 }
 
 interface Tournament {
@@ -219,3 +244,5 @@ Redirects to `/players`.
 - No caching layer in v1 — SQLite reads are fast enough
 - No authentication
 - `padel.db` stays at project root, referenced by relative path or env var
+- **Runtime:** All Next.js commands must run via `bun --bun` (e.g., `bun --bun next dev`, `bun --bun next build`) to ensure `bun:sqlite` is available. Standard `next dev` uses Node.js which lacks `bun:sqlite`.
+- **Type separation:** `packages/db` owns domain types (Player, Match, Tournament). `packages/scraper` keeps API types (ApiMatch, ApiPlayerProfile) locally — no cross-dependency on API types from web.
