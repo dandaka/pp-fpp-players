@@ -8,6 +8,12 @@ interface CategoryFilterProps {
   tournamentId: number;
 }
 
+function compactLabel(category: string): string {
+  const match = category.match(/- (.+)$/);
+  if (!match) return category;
+  return match[1].trim().replace(/-QP$/, "");
+}
+
 export function CategoryFilter({ categories, selected, tournamentId }: CategoryFilterProps) {
   const router = useRouter();
 
@@ -36,7 +42,7 @@ export function CategoryFilter({ categories, selected, tournamentId }: CategoryF
             selected === cat ? "bg-foreground text-background" : "bg-muted text-muted-foreground hover:bg-muted/80"
           }`}
         >
-          {cat}
+          {compactLabel(cat)}
         </button>
       ))}
     </div>
