@@ -1,0 +1,29 @@
+services:
+  api:
+    build:
+      context: .
+      target: api
+    ports:
+      - "${API_PORT:-3001}:3001"
+    volumes:
+      - db-data:/data
+    environment:
+      - DB_PATH=/data/padel.db
+      - API_PORT=3001
+    restart: unless-stopped
+
+  scraper:
+    build:
+      context: .
+      target: scraper
+    volumes:
+      - db-data:/data
+    environment:
+      - DB_PATH=/data/padel.db
+    restart: unless-stopped
+    depends_on:
+      - api
+
+volumes:
+  db-data:
+    driver: local

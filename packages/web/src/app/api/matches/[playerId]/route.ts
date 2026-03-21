@@ -1,4 +1,4 @@
-import { getPlayerMatches } from "@fpp/db";
+import { getPlayerMatches } from "@/lib/api-client";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
@@ -7,6 +7,11 @@ export async function GET(
 ) {
   const { playerId } = await params;
   const cursor = request.nextUrl.searchParams.get("cursor") ?? undefined;
-  const result = getPlayerMatches(parseInt(playerId), cursor, 20);
-  return NextResponse.json(result);
+  try {
+    const result = await getPlayerMatches(parseInt(playerId), cursor, 20);
+    return NextResponse.json(result);
+  } catch (err) {
+    console.error("API fetch failed:", err);
+    return NextResponse.json({ matches: [], nextCursor: null }, { status: 502 });
+  }
 }

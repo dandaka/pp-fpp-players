@@ -7,7 +7,7 @@ import { RankBadge } from "@/components/rank-badge";
 import { MatchCard } from "@/components/match-card";
 import { CategoryFilter } from "./category-filter";
 
-import type { MatchDetail, UpcomingMatchDetail } from "@fpp/db";
+import type { MatchDetail, UpcomingMatchDetail } from "@/lib/api-client";
 
 interface Tournament {
   id: number;

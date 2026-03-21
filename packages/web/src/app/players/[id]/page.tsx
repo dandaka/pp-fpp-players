@@ -1,4 +1,4 @@
-import { getPlayer, getPlayerRanks, getPlayerRating, getPlayerTournamentsCount, getPlayerUpcomingMatches } from "@fpp/db";
+import { getPlayer, getPlayerUpcomingMatches } from "@/lib/api-client";
 import { notFound } from "next/navigation";
 import { RatingBadge } from "@/components/rating-badge";
 import { MatchCard } from "@/components/match-card";
@@ -6,13 +6,16 @@ import { PlayerMatches } from "./matches";
 
 export default async function PlayerPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const player = getPlayer(parseInt(id));
-  if (!player) notFound();
 
-  const ranks = getPlayerRanks(player.id);
-  const rating = getPlayerRating(player.id);
-  const tournamentsCount = getPlayerTournamentsCount(player.id);
-  const upcomingMatches = getPlayerUpcomingMatches(player.id);
+  let data;
+  try {
+    data = await getPlayer(parseInt(id));
+  } catch {
+    notFound();
+  }
+
+  const { player, ranks, rating, tournamentsCount } = data;
+  const upcomingMatches = await getPlayerUpcomingMatches(player.id);
 
   return (
     <div className="space-y-6">

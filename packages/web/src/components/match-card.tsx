@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
 import { RatingBadge } from "./rating-badge";
 
-import type { MatchDetail, MatchPlayerInfo } from "@fpp/db";
+import type { MatchDetail, MatchPlayerInfo } from "@/lib/api-client";
 
 function PlayerCell({
   player,

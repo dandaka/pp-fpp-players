@@ -1,4 +1,4 @@
-import { getTournament, getTournamentCategories, getTournamentPlayers, getTournamentMatches } from "@fpp/db";
+import { getTournament } from "@/lib/api-client";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
@@ -8,14 +8,11 @@ export async function GET(
   const { id } = await params;
   const category = request.nextUrl.searchParams.get("category") ?? undefined;
 
-  const tournament = getTournament(parseInt(id));
-  if (!tournament) {
-    return NextResponse.json({ error: "Not found" }, { status: 404 });
+  try {
+    const data = await getTournament(parseInt(id), category);
+    return NextResponse.json(data);
+  } catch (err) {
+    console.error("API fetch failed:", err);
+    return NextResponse.json({ error: "Backend unavailable" }, { status: 502 });
   }
-
-  const categories = getTournamentCategories(tournament.id);
-  const players = getTournamentPlayers(tournament.id, category);
-  const matches = getTournamentMatches(tournament.id, category);
-
-  return NextResponse.json({ tournament, categories, players, matches });
 }

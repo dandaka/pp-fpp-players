@@ -1,7 +1,5 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  serverExternalPackages: ["bun:sqlite", "@fpp/db"],
-};
+const nextConfig: NextConfig = {};
 
 export default nextConfig;

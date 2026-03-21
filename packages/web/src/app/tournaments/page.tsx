@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getTournaments } from "@fpp/db";
+import { getTournaments } from "@/lib/api-client";
 import { buttonVariants } from "@/components/ui/button-variants";
 
 export default async function TournamentsPage({
@@ -10,7 +10,7 @@ export default async function TournamentsPage({
   const { page: pageStr } = await searchParams;
   const page = Math.max(1, parseInt(pageStr ?? "1"));
   const pageSize = 30;
-  const { tournaments, total } = getTournaments(page, pageSize);
+  const { tournaments, total } = await getTournaments(page, pageSize);
   const totalPages = Math.ceil(total / pageSize);
 
   return (
