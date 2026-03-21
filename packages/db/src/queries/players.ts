@@ -1,17 +1,6 @@
 import { getDb } from "../connection";
-import { normalizeString, scoreMatch } from "../lib/fuzzy-search";
+import { scoreMatch } from "../lib/fuzzy-search";
 import type { PlayerSearchResult, Player, PlayerRanks, PlayerRating } from "../types";
-
-// Cache all player names for fuzzy search (loaded once, ~46k rows, ~3MB)
-let _playerCache: Array<{ id: number; name: string; club: string | null; normalized: string }> | null = null;
-
-function getPlayerCache() {
-  if (_playerCache) return _playerCache;
-  const db = getDb();
-  const rows = db.query("SELECT id, name, club FROM players").all() as Array<{ id: number; name: string; club: string | null }>;
-  _playerCache = rows.map((r) => ({ ...r, normalized: normalizeString(r.name) }));
-  return _playerCache;
-}
 
 const RELIABILITY_K = 5; // matches/(matches+K) curve; K=20 means 50% at 20 games
 
@@ -39,15 +28,26 @@ export function searchPlayers(query: string, limit = 20): PlayerSearchResult[] {
   if (!query || query.trim().length === 0) return [];
 
   const db = getDb();
-  const cache = getPlayerCache();
 
-  const scored = cache
+  // Build WHERE clause: each query word must appear in the name
+  const words = query.trim().split(/\s+/).filter(Boolean);
+  const conditions = words.map(() => "name LIKE ?").join(" AND ");
+  const params = words.map((w) => `%${w}%`);
+
+  const rows = db.query(`
+    SELECT id, name, club FROM players
+    WHERE ${conditions}
+    ORDER BY name
+    LIMIT ?
+  `).all(...params, limit * 3) as Array<{ id: number; name: string; club: string | null }>;
+
+  // Re-rank with fuzzy scoring
+  const scored = rows
     .map((row) => ({ ...row, score: scoreMatch(query, row.name) }))
     .filter((r) => r.score > 0)
     .sort((a, b) => b.score - a.score)
     .slice(0, limit);
 
-  // Batch-fetch ranks for matched players
   if (scored.length === 0) return [];
 
   const ids = scored.map((r) => r.id);
@@ -81,7 +81,7 @@ export function searchPlayers(query: string, limit = 20): PlayerSearchResult[] {
 
   const lastMatchMap = new Map(lastMatchRows.map((r) => [r.id, r.lastMatch]));
 
-  return scored.map(({ score, normalized, ...rest }) => ({
+  return scored.map(({ score, ...rest }) => ({
     ...rest,
     globalRank: rankMap.get(rest.id) ?? 0,
     rating: ratingMap.get(rest.id) ?? null,
