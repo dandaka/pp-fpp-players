@@ -206,7 +206,8 @@ export async function scrapeMatchesPage(
     for (const tab of dateTabs) {
       console.log(`Scraping ${tab.text}...`);
       await page.click(`#${tab.id}`);
-      await page.waitForTimeout(3000);
+      await page.waitForLoadState("networkidle", { timeout: 15_000 }).catch(() => {});
+      await page.waitForTimeout(1000);
 
       const matches = await scrapeAllPages(page, tab.text, tournamentYear);
       console.log(`  Found ${matches.length} matches`);
@@ -217,7 +218,8 @@ export async function scrapeMatchesPage(
     for (const opt of dateDropdown) {
       console.log(`Scraping ${opt.text}...`);
       await page.selectOption("#drop_days_all_matches", opt.value);
-      await page.waitForTimeout(3000);
+      await page.waitForLoadState("networkidle", { timeout: 15_000 }).catch(() => {});
+      await page.waitForTimeout(1000);
 
       // Dropdown value is already ISO date (e.g. "2023-03-17"), use directly
       const isoDate = opt.value;

@@ -31,7 +31,7 @@ function getTournamentYear(tournamentId: number): number {
   return new Date().getFullYear();
 }
 
-export async function scrapeSchedule(tournamentId: number, urlOrSlug: string) {
+export async function scrapeSchedule(tournamentId: number, urlOrSlug: string, options?: { signal?: AbortSignal }) {
   const { matchesUrl, drawsUrl, slug } = resolveTournamentUrl(urlOrSlug);
   const tournamentYear = getTournamentYear(tournamentId);
 
@@ -46,6 +46,10 @@ export async function scrapeSchedule(tournamentId: number, urlOrSlug: string) {
   }
 
   const browser = await chromium.launch({ headless: true });
+
+  // Close browser if abort signal fires (timeout from caller)
+  const onAbort = () => { browser.close().catch(() => {}); };
+  options?.signal?.addEventListener("abort", onAbort, { once: true });
 
   try {
     const page = await browser.newPage();
@@ -87,7 +91,8 @@ export async function scrapeSchedule(tournamentId: number, urlOrSlug: string) {
 
     console.log("\nDone!");
   } finally {
-    await browser.close();
+    options?.signal?.removeEventListener("abort", onAbort);
+    await browser.close().catch(() => {});
   }
 }
 
