@@ -32,75 +32,80 @@ export function MatchCard({ match, court, sideAWinProbability }: MatchCardProps)
 
   const playerCols = isDoubles ? "auto auto auto" : "auto";
   const scoreCols = hasScores ? ` 1.5rem${" auto".repeat(match.sets.length)}` : "";
-  const gridCols = `${playerCols}${scoreCols}`;
+  const probCols = hasProb ? " 0.5rem minmax(4rem, 8rem) auto" : "";
+  const gridCols = `${playerCols}${scoreCols}${probCols}`;
 
   const probA = hasProb ? Math.round(sideAWinProbability! * 100) : 0;
   const probB = hasProb ? 100 - probA : 0;
   const sideAFavored = probA >= 50;
+  const winPct = sideAFavored ? probA : probB;
+  const losePct = sideAFavored ? probB : probA;
 
   return (
     <div className="rounded-lg border p-3 space-y-1">
-      <div className="flex items-start gap-3">
-        <div className="flex-1 min-w-0">
-          <div className="inline-grid items-center gap-x-2 gap-y-2" style={{ gridTemplateColumns: gridCols }}>
-            {/* Side A row */}
-            <PlayerCell player={match.sideA[0]} isWinnerSide={match.winnerSide === "a"} />
-            {isDoubles && (
-              <>
-                <span className="text-muted-foreground text-sm">×</span>
-                <PlayerCell player={match.sideA[1]} isWinnerSide={match.winnerSide === "a"} />
-              </>
-            )}
-            {hasScores && <span />}
-            {match.sets.map((s, i) => (
-              <span key={i} className={`text-sm ${s.setA > s.setB ? "font-semibold" : "text-muted-foreground"}`}>
-                {s.setA}
-              </span>
-            ))}
+      <div className="inline-grid items-center gap-x-2 gap-y-2" style={{ gridTemplateColumns: gridCols }}>
+        {/* Side A row */}
+        <PlayerCell player={match.sideA[0]} isWinnerSide={match.winnerSide === "a"} />
+        {isDoubles && (
+          <>
+            <span className="text-muted-foreground text-sm">×</span>
+            <PlayerCell player={match.sideA[1]} isWinnerSide={match.winnerSide === "a"} />
+          </>
+        )}
+        {hasScores && <span />}
+        {match.sets.map((s, i) => (
+          <span key={i} className={`text-sm ${s.setA > s.setB ? "font-semibold" : "text-muted-foreground"}`}>
+            {s.setA}
+          </span>
+        ))}
+        {hasProb && sideAFavored && (
+          <>
+            <span />
+            <div className="flex h-2 rounded-full overflow-hidden bg-muted">
+              <div className="bg-foreground/60 rounded-l-full" style={{ width: `${winPct}%` }} />
+              <div className="bg-foreground/20 rounded-r-full" style={{ width: `${losePct}%` }} />
+            </div>
+            <span className="text-xs text-muted-foreground">{winPct}% win</span>
+          </>
+        )}
+        {hasProb && !sideAFavored && (
+          <>
+            <span />
+            <span />
+            <span />
+          </>
+        )}
 
-            {/* Side B row */}
-            <PlayerCell player={match.sideB[0]} isWinnerSide={match.winnerSide === "b"} />
-            {isDoubles && (
-              <>
-                <span className="text-muted-foreground text-sm">×</span>
-                <PlayerCell player={match.sideB[1]} isWinnerSide={match.winnerSide === "b"} />
-              </>
-            )}
-            {hasScores && <span />}
-            {match.sets.map((s, i) => (
-              <span key={i} className={`text-sm ${s.setB > s.setA ? "font-semibold" : "text-muted-foreground"}`}>
-                {s.setB}
-              </span>
-            ))}
-          </div>
-        </div>
-        {hasProb && (
-          <div className="shrink-0 flex flex-col justify-center gap-2 w-32 self-center">
-            {/* Side A probability */}
-            {sideAFavored ? (
-              <div className="flex items-center gap-1.5">
-                <div className="flex-1 flex h-2 rounded-full overflow-hidden bg-muted">
-                  <div className="bg-foreground/60 rounded-l-full" style={{ width: `${probA}%` }} />
-                  <div className="bg-foreground/20 rounded-r-full" style={{ width: `${probB}%` }} />
-                </div>
-                <span className="text-xs text-muted-foreground shrink-0">{probA}% win</span>
-              </div>
-            ) : (
-              <div />
-            )}
-            {/* Side B probability */}
-            {!sideAFavored ? (
-              <div className="flex items-center gap-1.5">
-                <div className="flex-1 flex h-2 rounded-full overflow-hidden bg-muted">
-                  <div className="bg-foreground/60 rounded-l-full" style={{ width: `${probB}%` }} />
-                  <div className="bg-foreground/20 rounded-r-full" style={{ width: `${probA}%` }} />
-                </div>
-                <span className="text-xs text-muted-foreground shrink-0">{probB}% win</span>
-              </div>
-            ) : (
-              <div />
-            )}
-          </div>
+        {/* Side B row */}
+        <PlayerCell player={match.sideB[0]} isWinnerSide={match.winnerSide === "b"} />
+        {isDoubles && (
+          <>
+            <span className="text-muted-foreground text-sm">×</span>
+            <PlayerCell player={match.sideB[1]} isWinnerSide={match.winnerSide === "b"} />
+          </>
+        )}
+        {hasScores && <span />}
+        {match.sets.map((s, i) => (
+          <span key={i} className={`text-sm ${s.setB > s.setA ? "font-semibold" : "text-muted-foreground"}`}>
+            {s.setB}
+          </span>
+        ))}
+        {hasProb && !sideAFavored && (
+          <>
+            <span />
+            <div className="flex h-2 rounded-full overflow-hidden bg-muted">
+              <div className="bg-foreground/60 rounded-l-full" style={{ width: `${winPct}%` }} />
+              <div className="bg-foreground/20 rounded-r-full" style={{ width: `${losePct}%` }} />
+            </div>
+            <span className="text-xs text-muted-foreground">{winPct}% win</span>
+          </>
+        )}
+        {hasProb && sideAFavored && (
+          <>
+            <span />
+            <span />
+            <span />
+          </>
         )}
       </div>
 
