@@ -30,9 +30,9 @@ export function MatchCard({ match, court, sideAWinProbability }: MatchCardProps)
   const hasScores = match.sets.length > 0;
   const hasProb = sideAWinProbability != null && !hasScores;
 
-  const playerCols = isDoubles ? "auto auto auto" : "auto";
+  const playerCols = isDoubles ? "auto auto 1fr" : "1fr";
   const scoreCols = hasScores ? ` 1.5rem${" auto".repeat(match.sets.length)}` : "";
-  const probCols = hasProb ? " 0.5rem minmax(4rem, 8rem) auto" : "";
+  const probCols = hasProb ? " 1rem 5rem auto" : "";
   const gridCols = `${playerCols}${scoreCols}${probCols}`;
 
   const probA = hasProb ? Math.round(sideAWinProbability! * 100) : 0;
@@ -43,7 +43,7 @@ export function MatchCard({ match, court, sideAWinProbability }: MatchCardProps)
 
   return (
     <div className="rounded-lg border p-3 space-y-1">
-      <div className="inline-grid items-center gap-x-2 gap-y-2" style={{ gridTemplateColumns: gridCols }}>
+      <div className="grid items-center gap-x-2 gap-y-2" style={{ gridTemplateColumns: gridCols }}>
         {/* Side A row */}
         <PlayerCell player={match.sideA[0]} isWinnerSide={match.winnerSide === "a"} />
         {isDoubles && (
