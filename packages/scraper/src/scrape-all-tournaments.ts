@@ -1,5 +1,6 @@
 import { getDb, setCursor, getCursor } from "./db";
 import { getTournaments, getTournament } from "./api";
+import { scrapeSchedule } from "./scrape-upcoming-matches";
 
 const PAGE_SIZE = 10;
 
@@ -229,8 +230,22 @@ export async function scrapeAllTournaments(source = "db") {
       }
 
       const count = await scrapeTournament(t.id, t.name);
-      if (count > 0) console.log(`  → ${count} matches`);
-      grandTotal += count;
+      if (count > 0) {
+        console.log(`  → ${count} matches`);
+        grandTotal += count;
+      } else {
+        // News feed had no player-level data (e.g. Liga de Clubes team results).
+        // Fall back to Playwright scraping of the Matches/Draws pages.
+        const linkWeb = (db.query("SELECT link_web FROM tournaments WHERE id = ?").get(t.id) as { link_web: string | null } | null)?.link_web;
+        if (linkWeb) {
+          console.log(`  News feed empty, trying Playwright scrape...`);
+          try {
+            await scrapeSchedule(t.id, linkWeb);
+          } catch (err) {
+            console.error(`  Playwright scrape failed: ${err}`);
+          }
+        }
+      }
     } catch (err) {
       console.error(`  Error scraping tournament ${t.id}: ${err}`);
     }

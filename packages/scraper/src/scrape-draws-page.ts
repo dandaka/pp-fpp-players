@@ -123,14 +123,17 @@ export async function scrapeDrawsPage(page: Page): Promise<DrawMatch[]> {
     await page.selectOption("#drop_tournaments", cat.value);
     await page.waitForTimeout(3000);
 
-    // Check for sub-draw tabs (e.g. M6-QP, M6-Quali)
+    // Check for sub-draw tabs (e.g. M6-QP, M6-Quali, Grupo A, Grupo B)
     const subDrawTabs = await page.evaluate(() => {
+      const navTabIds = new Set([
+        "link_tournament_open_draw", "link_tournament_open_matches",
+        "link_tournament_open_teams", "link_tournament_open_info",
+      ]);
       const tabs: { text: string; id: string }[] = [];
-      // Sub-draw tabs are links in menu_inside_tournament that look like "M6-QP"
       const menuLinks = document.querySelectorAll("#menu_inside_tournament a, .menu_inside_tournament a");
       for (const a of menuLinks) {
         const text = a.textContent?.trim() || "";
-        if (text.match(/^(M|F)\d+-/)) {
+        if (text && a.id && !navTabIds.has(a.id)) {
           tabs.push({ text, id: a.id });
         }
       }

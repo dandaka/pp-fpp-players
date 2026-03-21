@@ -49,8 +49,12 @@ export function parsePortugueseDate(tabText: string, tournamentYear: number): st
  * Parse category string like "Masculinos 6 - M6-QP" into parts.
  */
 export function parseCategory(raw: string): { category: string; subcategory: string } {
+  // Standard format: "Masculinos 6 - M6-QP" → { category: "M6", subcategory: "QP" }
   const m = raw.match(/^(?:Masculinos|Femininos|Mistos)\s+\d+\s*-\s*(\w+)-(.+)$/);
   if (m) return { category: m[1], subcategory: m[2] };
+  // Liga de Clubes format: "Masculinos 5 - Grupo E" → { category: "Masculinos 5", subcategory: "Grupo E" }
+  const liga = raw.match(/^((?:Masculinos|Femininos|Mistos)\s+\d+)\s*-\s*(.+)$/);
+  if (liga) return { category: liga[1], subcategory: liga[2] };
   return { category: raw, subcategory: "" };
 }
 
@@ -174,6 +178,7 @@ export async function scrapeMatchesPage(
   page: Page,
   tournamentYear: number
 ): Promise<ScrapedMatchRow[]> {
+  // Try tab-based date selector first (standard tournaments)
   const dateTabs = await page.evaluate(() => {
     const tabs: { text: string; id: string }[] = [];
     document.querySelectorAll("a[id*='repeater_days_all_matches']").forEach((a) => {
@@ -185,18 +190,73 @@ export async function scrapeMatchesPage(
     return tabs;
   });
 
-  console.log(`Found ${dateTabs.length} date tabs: ${dateTabs.map((t) => t.text).join(", ")}`);
+  // Fall back to dropdown date selector (Liga de Clubes)
+  const dateDropdown = dateTabs.length === 0 ? await page.evaluate(() => {
+    const select = document.getElementById("drop_days_all_matches") as HTMLSelectElement | null;
+    if (!select || select.options.length === 0) return [];
+    return Array.from(select.options)
+      .filter((opt) => opt.value) // skip "A anunciar" (empty value)
+      .map((opt) => ({ value: opt.value, text: opt.textContent?.trim() || "" }));
+  }) : [];
 
   const allMatches: ScrapedMatchRow[] = [];
 
-  for (const tab of dateTabs) {
-    console.log(`Scraping ${tab.text}...`);
-    await page.click(`#${tab.id}`);
-    await page.waitForTimeout(3000);
+  if (dateTabs.length > 0) {
+    console.log(`Found ${dateTabs.length} date tabs: ${dateTabs.map((t) => t.text).join(", ")}`);
+    for (const tab of dateTabs) {
+      console.log(`Scraping ${tab.text}...`);
+      await page.click(`#${tab.id}`);
+      await page.waitForTimeout(3000);
 
-    const matches = await scrapeAllPages(page, tab.text, tournamentYear);
-    console.log(`  Found ${matches.length} matches`);
-    allMatches.push(...matches);
+      const matches = await scrapeAllPages(page, tab.text, tournamentYear);
+      console.log(`  Found ${matches.length} matches`);
+      allMatches.push(...matches);
+    }
+  } else if (dateDropdown.length > 0) {
+    console.log(`Found ${dateDropdown.length} dates in dropdown`);
+    for (const opt of dateDropdown) {
+      console.log(`Scraping ${opt.text}...`);
+      await page.selectOption("#drop_days_all_matches", opt.value);
+      await page.waitForTimeout(3000);
+
+      // Dropdown value is already ISO date (e.g. "2023-03-17"), use directly
+      const isoDate = opt.value;
+      const firstPage = await scrapeCurrentPage(page);
+      const matchRows = firstPage.map((raw) => toMatchRow(raw, isoDate));
+
+      // Handle pagination
+      const pageCount = await page.evaluate(() => {
+        const links = document.querySelectorAll("a[href*='grid_all_matches']");
+        let max = 1;
+        links.forEach((a) => {
+          const num = parseInt(a.textContent?.trim() || "0");
+          if (num > max) max = num;
+        });
+        return max;
+      });
+
+      for (let p = 2; p <= pageCount; p++) {
+        const clicked = await page.evaluate((pageNum) => {
+          const links = document.querySelectorAll('a[href*="grid_all_matches"]');
+          for (const link of links) {
+            if (link.textContent?.trim() === String(pageNum)) {
+              (link as HTMLElement).click();
+              return true;
+            }
+          }
+          return false;
+        }, p);
+        if (!clicked) break;
+        await page.waitForTimeout(2000);
+        const pageData = await scrapeCurrentPage(page);
+        matchRows.push(...pageData.map((raw) => toMatchRow(raw, isoDate)));
+      }
+
+      console.log(`  Found ${matchRows.length} matches`);
+      allMatches.push(...matchRows);
+    }
+  } else {
+    console.log("No date tabs or dropdown found");
   }
 
   return allMatches;

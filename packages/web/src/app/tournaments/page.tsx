@@ -79,7 +79,7 @@ export default function TournamentsPage() {
                 <div className="flex gap-2 text-sm text-muted-foreground">
                   {t.club && <span>{t.club}</span>}
                   {t.club && t.date && <span>·</span>}
-                  {t.date && <span>{t.date.split(" ")[0]}</span>}
+                  {t.date && <span>{t.date.split(" ")[0].replace(/,+$/, "")}</span>}
                 </div>
               </div>
             </Link>
