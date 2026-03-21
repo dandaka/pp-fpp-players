@@ -1,5 +1,5 @@
 import { getDb } from "../connection";
-import type { MatchDetail, PlayerRating, TournamentMatch } from "../types";
+import type { MatchDetail, PlayerRating, UpcomingMatchDetail } from "../types";
 
 function parseTournamentIdFromSource(source: string | null): number | null {
   if (!source) return null;
@@ -159,40 +159,79 @@ export function getPlayerMatches(
   return { matches, nextCursor };
 }
 
-export function getPlayerUpcomingMatches(playerId: number): TournamentMatch[] {
+/**
+ * Compute win probability for side A using Bradley-Terry model from OpenSkill mu/sigma.
+ * For doubles, combine team ratings by summing mu and root-sum-square of sigma.
+ */
+function computeWinProbability(
+  sideARatings: Array<{ mu: number; sigma: number }>,
+  sideBRatings: Array<{ mu: number; sigma: number }>
+): number | null {
+  if (sideARatings.length === 0 || sideBRatings.length === 0) return null;
+
+  const muA = sideARatings.reduce((sum, r) => sum + r.mu, 0);
+  const muB = sideBRatings.reduce((sum, r) => sum + r.mu, 0);
+  const sigmaA = Math.sqrt(sideARatings.reduce((sum, r) => sum + r.sigma * r.sigma, 0));
+  const sigmaB = Math.sqrt(sideBRatings.reduce((sum, r) => sum + r.sigma * r.sigma, 0));
+
+  const deltaMu = muA - muB;
+  const denominator = Math.sqrt(2 * (sigmaA * sigmaA + sigmaB * sigmaB));
+  if (denominator === 0) return 0.5;
+
+  // Approximation of normal CDF using error function
+  const x = deltaMu / denominator;
+  const t = 1 / (1 + 0.3275911 * Math.abs(x));
+  const erf = 1 - (0.254829592 * t - 0.284496736 * t * t + 1.421413741 * t ** 3
+    - 1.453152027 * t ** 4 + 1.061405429 * t ** 5) * Math.exp(-x * x);
+  const phi = 0.5 * (1 + (x >= 0 ? erf : -erf));
+
+  return Math.round(phi * 100) / 100;
+}
+
+export function getPlayerUpcomingMatches(playerId: number): UpcomingMatchDetail[] {
   const db = getDb();
 
   const rows = db.query(`
-    SELECT m.guid, m.section_name, m.round_name, m.date_time, m.court,
-           m.category, m.subcategory, m.sets_json, m.winner_side,
-           m.side_a_ids, m.side_b_ids, m.side_a_names, m.side_b_names, m.source
+    SELECT m.guid, m.tournament_name, m.section_name, m.round_name, m.date_time, m.court,
+           m.category, m.subcategory, m.source,
+           m.side_a_ids, m.side_b_ids, m.side_a_names, m.side_b_names
     FROM matches m
     JOIN match_players mp ON mp.match_guid = m.guid
     WHERE mp.player_id = ? AND m.winner_side IS NULL
     ORDER BY m.date_time ASC
   `).all(playerId) as Array<{
-    guid: string; section_name: string | null; round_name: string | null;
-    date_time: string | null; court: string | null; category: string | null;
-    subcategory: string | null; sets_json: string | null; winner_side: string | null;
+    guid: string; tournament_name: string | null; section_name: string | null;
+    round_name: string | null; date_time: string | null; court: string | null;
+    category: string | null; subcategory: string | null; source: string | null;
     side_a_ids: string; side_b_ids: string; side_a_names: string | null; side_b_names: string | null;
-    source: string | null;
   }>;
 
-  // Batch-fetch player names
+  // Collect all player IDs
   const allPlayerIds = new Set<number>();
   for (const row of rows) {
     for (const id of JSON.parse(row.side_a_ids)) allPlayerIds.add(id);
     for (const id of JSON.parse(row.side_b_ids)) allPlayerIds.add(id);
   }
   const idList = [...allPlayerIds];
-  const nameMap = new Map<number, string>();
+
+  // Batch-fetch names, ratings, and mu/sigma
+  const fullNames = new Map<number, string>();
+  const muSigma = new Map<number, { mu: number; sigma: number }>();
   if (idList.length > 0) {
     const placeholders = idList.map(() => "?").join(",");
     const nameRows = db.query(
       `SELECT id, name FROM players WHERE id IN (${placeholders})`
     ).all(...idList) as Array<{ id: number; name: string }>;
-    for (const r of nameRows) nameMap.set(r.id, r.name);
+    for (const r of nameRows) fullNames.set(r.id, r.name);
+
+    const ratingRows = db.query(
+      `SELECT player_id, mu, sigma FROM ratings WHERE player_id IN (${placeholders})`
+    ).all(...idList) as Array<{ player_id: number; mu: number; sigma: number }>;
+    for (const r of ratingRows) muSigma.set(r.player_id, { mu: r.mu, sigma: r.sigma });
   }
+
+  const genderRanks = batchGetGenderRanks(idList);
+  const ratings = batchGetRatings(idList);
 
   return rows.map((row) => {
     const sideAIds: number[] = JSON.parse(row.side_a_ids);
@@ -200,17 +239,36 @@ export function getPlayerUpcomingMatches(playerId: number): TournamentMatch[] {
     const sideANames = (row.side_a_names ?? "").split(" / ");
     const sideBNames = (row.side_b_names ?? "").split(" / ");
 
+    const sideARatingsRaw = sideAIds.map((id) => muSigma.get(id)).filter(Boolean) as Array<{ mu: number; sigma: number }>;
+    const sideBRatingsRaw = sideBIds.map((id) => muSigma.get(id)).filter(Boolean) as Array<{ mu: number; sigma: number }>;
+
     return {
       guid: row.guid,
-      category: row.category,
-      subcategory: row.subcategory,
+      tournamentId: parseTournamentIdFromSource(row.source),
+      tournamentName: row.tournament_name,
+      sectionName: row.section_name,
       roundName: row.round_name,
       dateTime: row.date_time,
       court: row.court,
+      category: row.category,
+      subcategory: row.subcategory,
       sets: [],
       winnerSide: null,
-      sideA: sideAIds.map((id, i) => ({ id, name: nameMap.get(id) ?? sideANames[i] ?? "" })),
-      sideB: sideBIds.map((id, i) => ({ id, name: nameMap.get(id) ?? sideBNames[i] ?? "" })),
+      sideA: sideAIds.map((id, i) => ({
+        id,
+        name: fullNames.get(id) ?? sideANames[i] ?? "",
+        genderRank: genderRanks.get(id) ?? null,
+        categoryRank: null,
+        rating: ratings.get(id) ?? null,
+      })),
+      sideB: sideBIds.map((id, i) => ({
+        id,
+        name: fullNames.get(id) ?? sideBNames[i] ?? "",
+        genderRank: genderRanks.get(id) ?? null,
+        categoryRank: null,
+        rating: ratings.get(id) ?? null,
+      })),
+      sideAWinProbability: computeWinProbability(sideARatingsRaw, sideBRatingsRaw),
     };
   });
 }

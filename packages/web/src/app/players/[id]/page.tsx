@@ -1,7 +1,7 @@
 import { getPlayer, getPlayerRanks, getPlayerRating, getPlayerUpcomingMatches } from "@fpp/db";
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import { RatingBadge } from "@/components/rating-badge";
+import { MatchCard } from "@/components/match-card";
 import { PlayerMatches } from "./matches";
 
 export default async function PlayerPage({ params }: { params: Promise<{ id: string }> }) {
@@ -62,30 +62,29 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
           <h2 className="mb-3 text-sm font-medium text-muted-foreground">Upcoming Match</h2>
           <div className="space-y-2">
             {upcomingMatches.map((match) => (
-              <div key={match.guid} className="rounded-lg border border-primary/20 bg-primary/5 p-3 space-y-2">
-                <div className="flex items-center justify-between text-xs text-muted-foreground">
-                  <div className="flex gap-2">
-                    {match.category && <span>{match.category}{match.subcategory ? `-${match.subcategory}` : ""}</span>}
-                    {match.roundName && <span>{match.roundName}</span>}
+              <div key={match.guid} className="space-y-2">
+                <MatchCard match={match} currentPlayerId={player.id} />
+                {match.sideAWinProbability != null && (
+                  <div className="px-3 space-y-1">
+                    <div className="flex justify-between text-xs text-muted-foreground">
+                      <span>{Math.round(match.sideAWinProbability * 100)}%</span>
+                      <span>{Math.round((1 - match.sideAWinProbability) * 100)}%</span>
+                    </div>
+                    <div className="flex h-1.5 rounded-full overflow-hidden bg-muted">
+                      <div
+                        className="bg-foreground/60 rounded-l-full"
+                        style={{ width: `${match.sideAWinProbability * 100}%` }}
+                      />
+                      <div
+                        className="bg-foreground/20 rounded-r-full"
+                        style={{ width: `${(1 - match.sideAWinProbability) * 100}%` }}
+                      />
+                    </div>
                   </div>
-                  <div className="flex gap-2">
-                    {match.court && <span>{match.court}</span>}
-                    {match.dateTime && <span>{match.dateTime}</span>}
-                  </div>
-                </div>
-                <div className="space-y-1">
-                  <div className="flex gap-1 text-sm">
-                    {match.sideA.map((p) => (
-                      <Link key={p.id} href={`/players/${p.id}`} className="hover:underline">{p.name}</Link>
-                    ))}
-                  </div>
-                  <div className="text-xs text-muted-foreground">vs</div>
-                  <div className="flex gap-1 text-sm">
-                    {match.sideB.map((p) => (
-                      <Link key={p.id} href={`/players/${p.id}`} className="hover:underline">{p.name}</Link>
-                    ))}
-                  </div>
-                </div>
+                )}
+                {match.court && (
+                  <p className="px-3 text-xs text-muted-foreground">{match.court}</p>
+                )}
               </div>
             ))}
           </div>

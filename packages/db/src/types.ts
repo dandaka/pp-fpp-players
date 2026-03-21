@@ -36,6 +36,13 @@ export interface MatchDetail {
   sideB: MatchPlayerInfo[]
 }
 
+export interface UpcomingMatchDetail extends MatchDetail {
+  court: string | null
+  category: string | null
+  subcategory: string | null
+  sideAWinProbability: number | null
+}
+
 export interface MatchPlayerInfo {
   id: number
   name: string
