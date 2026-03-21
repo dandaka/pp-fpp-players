@@ -54,9 +54,11 @@ export async function importMatchesFromJson(filePath = "matches.json") {
     for (const m of data.matches) {
       const sideAIds = m.side_a.map((p) => p.id);
       const sideBIds = m.side_b.map((p) => p.id);
+      const isSingles = m.side_a.length === 1 && m.side_b.length === 1;
+      if (isSingles) continue; // Skip singles matches
+
       const sideANames = m.side_a.map((p) => p.name).join(" / ");
       const sideBNames = m.side_b.map((p) => p.name).join(" / ");
-      const isSingles = m.side_a.length === 1 && m.side_b.length === 1;
       const sets = parseScores(m.scores);
 
       insertMatch.run(

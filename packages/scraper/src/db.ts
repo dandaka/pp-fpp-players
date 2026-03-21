@@ -4,7 +4,7 @@ let _db: Database | null = null;
 
 export function getDb(): Database {
   if (_db) return _db;
-  _db = new Database("padel.db", { create: true });
+  _db = new Database(process.env.DB_PATH || "padel.db", { create: true });
   _db.run("PRAGMA journal_mode = WAL");
   _db.run("PRAGMA foreign_keys = ON");
   migrate(_db);
@@ -121,6 +121,47 @@ function migrate(db: Database) {
 
   db.run("CREATE INDEX IF NOT EXISTS idx_matches_tournament_id ON matches(tournament_id)");
   db.run("CREATE INDEX IF NOT EXISTS idx_matches_category ON matches(category)");
+
+  // New columns for tournament metadata
+  const tournamentCols = db.query("PRAGMA table_info(tournaments)").all() as Array<{ name: string }>;
+  const tColNames = new Set(tournamentCols.map((c) => c.name));
+
+  if (!tColNames.has("sport")) {
+    db.run("ALTER TABLE tournaments ADD COLUMN sport TEXT");
+  }
+  if (!tColNames.has("surface")) {
+    db.run("ALTER TABLE tournaments ADD COLUMN surface TEXT");
+  }
+  if (!tColNames.has("club_id")) {
+    db.run("ALTER TABLE tournaments ADD COLUMN club_id INTEGER");
+  }
+  if (!tColNames.has("cover")) {
+    db.run("ALTER TABLE tournaments ADD COLUMN cover TEXT");
+  }
+  if (!tColNames.has("latitude")) {
+    db.run("ALTER TABLE tournaments ADD COLUMN latitude REAL");
+  }
+  if (!tColNames.has("longitude")) {
+    db.run("ALTER TABLE tournaments ADD COLUMN longitude REAL");
+  }
+  if (!tColNames.has("address")) {
+    db.run("ALTER TABLE tournaments ADD COLUMN address TEXT");
+  }
+
+  db.run("CREATE INDEX IF NOT EXISTS idx_tournaments_sport ON tournaments(sport)");
+
+  db.run(`
+    CREATE TABLE IF NOT EXISTS match_ratings (
+      match_guid TEXT NOT NULL,
+      player_id INTEGER NOT NULL,
+      ordinal_before REAL NOT NULL,
+      ordinal_delta REAL NOT NULL,
+      PRIMARY KEY (match_guid, player_id),
+      FOREIGN KEY (match_guid) REFERENCES matches(guid),
+      FOREIGN KEY (player_id) REFERENCES players(id)
+    )
+  `);
+  db.run("CREATE INDEX IF NOT EXISTS idx_match_ratings_player ON match_ratings(player_id)");
 }
 
 export function getCursor(key: string): string | null {

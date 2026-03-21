@@ -63,5 +63,12 @@ export interface ApiTournamentDetail {
   name: string;
   club: { id: number; name: string };
   header_texts: string[];
+  info_texts: Array<{ title: string; text: string }>;
+  location: {
+    latitude: number;
+    longitude: number;
+    address: string;
+  } | null;
+  cover: string;
   link_web: string;
 }

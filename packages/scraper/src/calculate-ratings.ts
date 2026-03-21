@@ -14,16 +14,22 @@ export function calculateRatings() {
   const db = getDb();
 
   const matches = db.query(`
-    SELECT guid, side_a_ids, side_b_ids, winner_side, date_time, is_singles
-    FROM matches
-    WHERE winner_side IS NOT NULL
-    ORDER BY date_time ASC
+    SELECT m.guid, m.side_a_ids, m.side_b_ids, m.winner_side, m.date_time, m.is_singles
+    FROM matches m
+    LEFT JOIN tournaments t ON t.id = m.tournament_id
+    WHERE m.winner_side IS NOT NULL
+      AND m.is_singles = 0
+      AND (t.sport IS NULL OR t.sport = 'Padel')
+    ORDER BY m.date_time ASC
   `).all() as MatchRow[];
 
   console.log(`Processing ${matches.length} matches with results...`);
 
   const playerRatings = new Map<number, ReturnType<typeof rating>>();
   const playerMatchCounts = new Map<number, number>();
+
+  // Collect match rating snapshots: { matchGuid, playerId, ordinalBefore, ordinalDelta }
+  const matchRatingRows: Array<{ matchGuid: string; playerId: number; ordinalBefore: number; ordinalDelta: number }> = [];
 
   function getRating(playerId: number) {
     if (!playerRatings.has(playerId)) {
@@ -35,6 +41,13 @@ export function calculateRatings() {
   for (const m of matches) {
     const sideAIds: number[] = JSON.parse(m.side_a_ids);
     const sideBIds: number[] = JSON.parse(m.side_b_ids);
+    const allIds = [...sideAIds, ...sideBIds];
+
+    // Snapshot ordinals before the match
+    const ordinalsBefore = new Map<number, number>();
+    for (const id of allIds) {
+      ordinalsBefore.set(id, ordinal(getRating(id)));
+    }
 
     const teamA = sideAIds.map((id) => getRating(id));
     const teamB = sideBIds.map((id) => getRating(id));
@@ -54,6 +67,13 @@ export function calculateRatings() {
         playerRatings.set(sideBIds[i]!, newB[i]!);
         playerMatchCounts.set(sideBIds[i]!, (playerMatchCounts.get(sideBIds[i]!) ?? 0) + 1);
       }
+
+      // Record before/delta for each player
+      for (const id of allIds) {
+        const before = ordinalsBefore.get(id)!;
+        const after = ordinal(getRating(id));
+        matchRatingRows.push({ matchGuid: m.guid, playerId: id, ordinalBefore: before, ordinalDelta: after - before });
+      }
     } catch (err) {
       console.error(`Error rating match ${m.guid}:`, err);
     }
@@ -68,16 +88,30 @@ export function calculateRatings() {
       mu = ?, sigma = ?, ordinal = ?, matches_counted = ?, calculated_at = datetime('now')
   `);
 
+  const insertMatchRating = db.prepare(`
+    INSERT INTO match_ratings (match_guid, player_id, ordinal_before, ordinal_delta)
+    VALUES (?, ?, ?, ?)
+    ON CONFLICT(match_guid, player_id) DO UPDATE SET
+      ordinal_before = ?, ordinal_delta = ?
+  `);
+
   const tx = db.transaction(() => {
+    // Clear old match ratings (full recalc)
+    db.run("DELETE FROM match_ratings");
+
     for (const [playerId, r] of playerRatings) {
       const ord = ordinal(r);
       const cnt = playerMatchCounts.get(playerId) ?? 0;
       upsert.run(playerId, r.mu, r.sigma, ord, cnt, r.mu, r.sigma, ord, cnt);
     }
+
+    for (const row of matchRatingRows) {
+      insertMatchRating.run(row.matchGuid, row.playerId, row.ordinalBefore, row.ordinalDelta, row.ordinalBefore, row.ordinalDelta);
+    }
   });
   tx();
 
-  console.log("Ratings saved to database");
+  console.log(`Ratings saved to database (${matchRatingRows.length} match rating snapshots)`);
 }
 
 export function printLeaderboard(limit = 30) {

@@ -2,6 +2,7 @@
 // Uses concurrent batches for speed, cursor tracking for resumability
 
 import { getDb, getCursor, setCursor } from "./db";
+import { getTournament } from "./api";
 
 const API_URL = "https://fpp.tiepadel.com/methods.aspx/get_news_by_codtou_header";
 const CONCURRENCY = 20;
@@ -78,8 +79,41 @@ export async function scanTournaments(startId = 1, endId = MAX_ID) {
       });
       tx();
 
+      // Fetch and store tournament detail metadata (sport, surface, location, etc.)
       for (const t of results) {
         console.log(`  [${t.id}] ${t.name}`);
+        try {
+          const detail = await getTournament(t.id);
+          const infoMap = new Map(detail.info_texts?.map((i) => [i.title, i.text]) ?? []);
+          const sport = infoMap.get("Sport") ?? null;
+          const surface = infoMap.get("Surface") ?? null;
+
+          db.run(
+            `UPDATE tournaments SET
+              sport = COALESCE(?, sport),
+              surface = COALESCE(?, surface),
+              club_id = COALESCE(?, club_id),
+              club = COALESCE(?, club),
+              cover = COALESCE(?, cover),
+              link_web = COALESCE(?, link_web),
+              latitude = COALESCE(?, latitude),
+              longitude = COALESCE(?, longitude),
+              address = COALESCE(?, address)
+            WHERE id = ?`,
+            [
+              sport, surface,
+              detail.club?.id ?? null, detail.club?.name ?? null,
+              detail.cover ?? null, detail.link_web ?? null,
+              detail.location?.latitude ?? null, detail.location?.longitude ?? null,
+              detail.location?.address ?? null,
+              t.id,
+            ]
+          );
+
+          if (sport) console.log(`    Sport: ${sport}`);
+        } catch {
+          // Non-critical: detail fetch can fail for old tournaments
+        }
       }
       found += results.length;
     }

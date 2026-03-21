@@ -36,8 +36,14 @@ export async function scrapeSchedule(tournamentId: number, urlOrSlug: string) {
   const tournamentYear = getTournamentYear(tournamentId);
 
   const db = getDb();
-  const tournament = db.query("SELECT name FROM tournaments WHERE id = ?").get(tournamentId) as { name: string } | null;
+  const tournament = db.query("SELECT name, sport FROM tournaments WHERE id = ?").get(tournamentId) as { name: string; sport: string | null } | null;
   const tournamentName = tournament?.name ?? slug;
+
+  // Only scrape Padel tournaments
+  if (tournament?.sport && tournament.sport !== "Padel") {
+    console.log(`Skipping ${tournamentName} (sport: ${tournament.sport})`);
+    return;
+  }
 
   const browser = await chromium.launch({ headless: true });
 

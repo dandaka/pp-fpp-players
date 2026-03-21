@@ -167,11 +167,16 @@ export function storeSchedule(
         }
       }
 
+      const isSingles = m.sideA.length === 1 && m.sideB.length === 1 ? 1 : 0;
+      if (isSingles) {
+        skipped++;
+        continue;
+      }
+
       const sideAIdsJson = JSON.stringify(sideAIds);
       const sideBIdsJson = JSON.stringify(sideBIds);
       const sideANames = m.sideA.map((p) => p.name).join(" / ");
       const sideBNames = m.sideB.map((p) => p.name).join(" / ");
-      const isSingles = m.sideA.length === 1 && m.sideB.length === 1 ? 1 : 0;
 
       const guid = generateScheduleGuid(tournamentId, sideAIds, sideBIds);
       const sets = parseResultScores(m.result);
@@ -288,11 +293,16 @@ export function storeDrawsMatches(
         if (p.id) insertNewPlayer.run(p.id, p.name);
       }
 
+      const isSingles = d.sideA.length === 1 && d.sideB.length === 1 ? 1 : 0;
+      if (isSingles) {
+        skipped++;
+        continue;
+      }
+
       const sideAIdsJson = JSON.stringify(sideAIds);
       const sideBIdsJson = JSON.stringify(sideBIds);
       const sideANames = d.sideA.map((p) => p.name).join(" / ");
       const sideBNames = d.sideB.map((p) => p.name).join(" / ");
-      const isSingles = d.sideA.length === 1 && d.sideB.length === 1 ? 1 : 0;
       const sets = parseResultScores(d.result);
       const winnerSide = determineWinner(sets);
 

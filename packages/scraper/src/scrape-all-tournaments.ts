@@ -1,5 +1,5 @@
 import { getDb, setCursor, getCursor } from "./db";
-import { getTournaments } from "./api";
+import { getTournaments, getTournament } from "./api";
 
 const PAGE_SIZE = 10;
 
@@ -108,8 +108,10 @@ async function scrapeTournament(tournamentId: number, tournamentName: string) {
 
         if (sideA.length === 0 || sideB.length === 0) continue;
 
-        const winner = parseWinner(item.TEXT_TITLE);
         const isSingles = sideA.length === 1 && sideB.length === 1;
+        if (isSingles) continue; // Skip singles matches
+
+        const winner = parseWinner(item.TEXT_TITLE);
         const sets = parseScores(item.SCORES);
 
         insertMatch.run(
@@ -144,12 +146,48 @@ async function scrapeTournament(tournamentId: number, tournamentName: string) {
   return totalMatches;
 }
 
-// Also store tournament in DB
-function saveTournament(db: ReturnType<typeof getDb>, id: number, name: string, date: string) {
+// Store tournament in DB and fetch detail metadata (sport, surface, location, etc.)
+async function saveTournament(db: ReturnType<typeof getDb>, id: number, name: string, date: string) {
   db.run(
     "INSERT OR IGNORE INTO tournaments (id, name, date) VALUES (?, ?, ?)",
     [id, name, date]
   );
+
+  // Fetch detail to get sport, surface, location, cover, club_id
+  try {
+    const detail = await getTournament(id);
+    const infoMap = new Map(detail.info_texts?.map((i) => [i.title, i.text]) ?? []);
+    const sport = infoMap.get("Sport") ?? null;
+    const surface = infoMap.get("Surface") ?? null;
+
+    db.run(
+      `UPDATE tournaments SET
+        sport = COALESCE(?, sport),
+        surface = COALESCE(?, surface),
+        club_id = COALESCE(?, club_id),
+        club = COALESCE(?, club),
+        cover = COALESCE(?, cover),
+        link_web = COALESCE(?, link_web),
+        latitude = COALESCE(?, latitude),
+        longitude = COALESCE(?, longitude),
+        address = COALESCE(?, address)
+      WHERE id = ?`,
+      [
+        sport, surface,
+        detail.club?.id ?? null, detail.club?.name ?? null,
+        detail.cover ?? null, detail.link_web ?? null,
+        detail.location?.latitude ?? null, detail.location?.longitude ?? null,
+        detail.location?.address ?? null,
+        id,
+      ]
+    );
+
+    if (sport && sport !== "Padel") {
+      console.log(`    ⚠ Sport: ${sport}`);
+    }
+  } catch (err) {
+    console.error(`    Failed to fetch detail for tournament ${id}: ${err}`);
+  }
 }
 
 export async function scrapeAllTournaments(source = "db") {
@@ -181,7 +219,15 @@ export async function scrapeAllTournaments(source = "db") {
 
     console.log(`[${processed}/${targets.length}] ${t.name} (ID: ${t.id})`);
     try {
-      saveTournament(db, t.id, t.name, t.date);
+      await saveTournament(db, t.id, t.name, t.date);
+
+      // Only scrape matches from Padel tournaments
+      const sport = (db.query("SELECT sport FROM tournaments WHERE id = ?").get(t.id) as { sport: string | null } | null)?.sport;
+      if (sport && sport !== "Padel") {
+        console.log(`  Skipping matches (sport: ${sport})`);
+        continue;
+      }
+
       const count = await scrapeTournament(t.id, t.name);
       if (count > 0) console.log(`  → ${count} matches`);
       grandTotal += count;

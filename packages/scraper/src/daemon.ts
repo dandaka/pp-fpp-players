@@ -28,6 +28,7 @@ function getActiveTournaments(): { id: number; name: string; url: string }[] {
     JOIN matches m ON m.tournament_id = t.id
     WHERE m.date_time >= date('now', '-7 days')
       AND t.link_web IS NOT NULL
+      AND (t.sport IS NULL OR t.sport = 'Padel')
     ORDER BY t.id DESC
   `).all() as { id: number; name: string; link_web: string }[];
 
