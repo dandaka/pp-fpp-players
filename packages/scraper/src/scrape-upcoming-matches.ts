@@ -49,17 +49,19 @@ export async function scrapeSchedule(tournamentId: number, urlOrSlug: string) {
 
   try {
     const page = await browser.newPage();
+    page.setDefaultNavigationTimeout(30_000);
+    page.setDefaultTimeout(15_000);
 
     // Step 1: Scrape Matches page
     console.log(`\n=== Scraping Matches: ${matchesUrl} ===`);
-    await page.goto(matchesUrl, { waitUntil: "networkidle" });
+    await page.goto(matchesUrl, { waitUntil: "networkidle", timeout: 30_000 });
     await page.waitForTimeout(2000);
     const matches = await scrapeMatchesPage(page, tournamentYear);
     console.log(`Total: ${matches.length} matches from Matches page`);
 
     // Step 2: Scrape Draws page (Encontros tab)
     console.log(`\n=== Scraping Draws: ${drawsUrl} ===`);
-    await page.goto(drawsUrl, { waitUntil: "networkidle" });
+    await page.goto(drawsUrl, { waitUntil: "networkidle", timeout: 30_000 });
     await page.waitForTimeout(2000);
     const draws = await scrapeDrawsPage(page);
     console.log(`Total: ${draws.length} draw matches`);

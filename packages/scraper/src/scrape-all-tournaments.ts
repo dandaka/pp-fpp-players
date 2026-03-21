@@ -226,6 +226,7 @@ export async function scrapeAllTournaments(source = "db") {
       const sport = (db.query("SELECT sport FROM tournaments WHERE id = ?").get(t.id) as { sport: string | null } | null)?.sport;
       if (sport && sport !== "Padel") {
         console.log(`  Skipping matches (sport: ${sport})`);
+        setCursor(cursorKey, "done");
         continue;
       }
 
@@ -238,9 +239,15 @@ export async function scrapeAllTournaments(source = "db") {
         // Fall back to Playwright scraping of the Matches/Draws pages.
         const linkWeb = (db.query("SELECT link_web FROM tournaments WHERE id = ?").get(t.id) as { link_web: string | null } | null)?.link_web;
         if (linkWeb) {
-          console.log(`  News feed empty, trying Playwright scrape...`);
+          console.log(`  News feed empty, trying Playwright scrape (120s timeout)...`);
           try {
-            await scrapeSchedule(t.id, linkWeb);
+            const result = await Promise.race([
+              scrapeSchedule(t.id, linkWeb).then(() => "ok" as const),
+              Bun.sleep(120_000).then(() => "timeout" as const),
+            ]);
+            if (result === "timeout") {
+              console.error(`  Playwright scrape timed out after 120s`);
+            }
           } catch (err) {
             console.error(`  Playwright scrape failed: ${err}`);
           }

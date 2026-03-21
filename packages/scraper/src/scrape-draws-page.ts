@@ -116,7 +116,7 @@ export async function scrapeDrawsPage(page: Page): Promise<DrawMatch[]> {
     console.log(`  Scraping draw: ${cat.text}...`);
 
     // Reload draws page to get fresh dropdown
-    await page.goto(drawsUrl, { waitUntil: "networkidle" });
+    await page.goto(drawsUrl, { waitUntil: "networkidle", timeout: 30_000 });
     await page.waitForTimeout(1000);
 
     // Select category (triggers __doPostBack, page re-renders)
