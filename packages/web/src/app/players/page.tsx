@@ -11,6 +11,7 @@ interface PlayerResult {
   club: string | null;
   globalRank: number;
   rating: { score: number; reliability: number } | null;
+  lastMatch: string | null;
 }
 
 export default function PlayersPage() {

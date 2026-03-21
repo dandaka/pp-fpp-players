@@ -4,6 +4,7 @@ export interface PlayerSearchResult {
   club: string | null
   globalRank: number
   rating: PlayerRating | null
+  lastMatch: string | null
 }
 
 export interface Player {
@@ -75,6 +76,7 @@ export interface PlayerRating {
 export interface TournamentPlayer {
   id: number
   name: string
+  globalRank: number | null
   genderRank: number | null
   categoryRank: number | null
   ordinal: number

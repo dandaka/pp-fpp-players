@@ -70,10 +70,22 @@ export function searchPlayers(query: string, limit = 20): PlayerSearchResult[] {
 
   const ratingMap = new Map(ratingRows.map((r) => [r.id, computeRating(r.ordinal, r.matches_counted, r.minOrd, r.maxOrd)]));
 
+  // Batch-fetch last match dates
+  const lastMatchRows = db.query(`
+    SELECT mp.player_id as id, MAX(m.date_time) as lastMatch
+    FROM match_players mp
+    JOIN matches m ON m.guid = mp.match_guid
+    WHERE mp.player_id IN (${placeholders}) AND m.date_time IS NOT NULL
+    GROUP BY mp.player_id
+  `).all(...ids) as Array<{ id: number; lastMatch: string }>;
+
+  const lastMatchMap = new Map(lastMatchRows.map((r) => [r.id, r.lastMatch]));
+
   return scored.map(({ score, normalized, ...rest }) => ({
     ...rest,
     globalRank: rankMap.get(rest.id) ?? 0,
     rating: ratingMap.get(rest.id) ?? null,
+    lastMatch: lastMatchMap.get(rest.id) ?? null,
   }));
 }
 
