@@ -101,6 +101,17 @@ export function getPlayer(id: number): Player | null {
   };
 }
 
+export function getPlayerTournamentsCount(id: number): number {
+  const db = getDb();
+  const row = db.query(`
+    SELECT COUNT(DISTINCT m.tournament_name) as count
+    FROM matches m
+    JOIN match_players mp ON mp.match_guid = m.guid
+    WHERE mp.player_id = ? AND m.tournament_name IS NOT NULL
+  `).get(id) as { count: number };
+  return row.count;
+}
+
 export function getPlayerRanks(id: number): PlayerRanks | null {
   const db = getDb();
 

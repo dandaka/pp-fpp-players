@@ -201,6 +201,7 @@ export function getPlayerUpcomingMatches(playerId: number): UpcomingMatchDetail[
     FROM matches m
     JOIN match_players mp ON mp.match_guid = m.guid
     WHERE mp.player_id = ? AND m.winner_side IS NULL
+      AND m.date_time > datetime('now', '-1 day')
     ORDER BY m.date_time ASC
   `).all(playerId) as Array<{
     guid: string; tournament_name: string | null; section_name: string | null;

@@ -259,7 +259,8 @@ export function storeDrawsMatches(
   `);
 
   const updateFeedMatch = db.prepare(`
-    UPDATE matches SET date_time = ?, round_name = ?, court = ?, tournament_id = ?
+    UPDATE matches SET date_time = ?, round_name = ?, court = ?, tournament_id = ?,
+      side_a_names = ?, side_b_names = ?
     WHERE guid = ?
   `);
 
@@ -317,8 +318,8 @@ export function storeDrawsMatches(
       ) as { guid: string; winner_side: string | null; source: string } | null;
 
       if (feedMatch) {
-        // Update the news feed match with correct date/time and round name from draws
-        updateFeedMatch.run(d.dateTime, d.roundName, d.court, tournamentId, feedMatch.guid);
+        // Update the news feed match with correct date/time, round name, and full names from draws
+        updateFeedMatch.run(d.dateTime, d.roundName, d.court, tournamentId, sideANames, sideBNames, feedMatch.guid);
         updated++;
         continue;
       }

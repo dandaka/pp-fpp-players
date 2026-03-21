@@ -1,4 +1,4 @@
-import { getPlayer, getPlayerRanks, getPlayerRating, getPlayerUpcomingMatches } from "@fpp/db";
+import { getPlayer, getPlayerRanks, getPlayerRating, getPlayerTournamentsCount, getPlayerUpcomingMatches } from "@fpp/db";
 import { notFound } from "next/navigation";
 import { RatingBadge } from "@/components/rating-badge";
 import { MatchCard } from "@/components/match-card";
@@ -11,6 +11,7 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
 
   const ranks = getPlayerRanks(player.id);
   const rating = getPlayerRating(player.id);
+  const tournamentsCount = getPlayerTournamentsCount(player.id);
   const upcomingMatches = getPlayerUpcomingMatches(player.id);
 
   return (
@@ -33,29 +34,38 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
         </div>
       </div>
 
-      {ranks && (
-        <div className="rounded-lg border p-4 space-y-2">
-          <h2 className="text-sm font-medium text-muted-foreground">Rankings</h2>
-          <div className="space-y-1">
-            <p className="text-sm">
-              <span className="font-semibold">#{ranks.global.rank}</span>
-              <span className="text-muted-foreground"> of {ranks.global.total.toLocaleString()} players</span>
-            </p>
-            {ranks.gender && (
-              <p className="text-sm">
-                <span className="font-semibold">#{ranks.gender.rank}</span>
-                <span className="text-muted-foreground"> of {ranks.gender.total.toLocaleString()} {ranks.gender.label}</span>
-              </p>
-            )}
-            {ranks.club && (
-              <p className="text-sm">
-                <span className="font-semibold">#{ranks.club.rank}</span>
-                <span className="text-muted-foreground"> of {ranks.club.total.toLocaleString()} in {ranks.club.label}</span>
-              </p>
-            )}
-          </div>
+      <div>
+        <h2 className="mb-3 text-sm font-medium text-muted-foreground">Profile</h2>
+        <div className="rounded-lg border p-4 space-y-3">
+          {rating && (
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-muted-foreground">Rating</span>
+              <span className="text-sm font-semibold">{rating.score}</span>
+            </div>
+          )}
+          {rating && (
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-muted-foreground">Reliability</span>
+              <span className="text-sm font-semibold">{rating.reliability}%</span>
+            </div>
+          )}
+          {ranks && (
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-muted-foreground">Ranking</span>
+              <span className="text-sm">
+                <span className="font-semibold">#{ranks.global.rank.toLocaleString()}</span>
+                <span className="text-muted-foreground"> ({ranks.global.total.toLocaleString()})</span>
+              </span>
+            </div>
+          )}
+          {tournamentsCount > 0 && (
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-muted-foreground">Tournaments</span>
+              <span className="text-sm font-semibold">{tournamentsCount}</span>
+            </div>
+          )}
         </div>
-      )}
+      </div>
 
       {upcomingMatches.length > 0 && (
         <div>
