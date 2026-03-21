@@ -29,11 +29,15 @@ export function MatchCard({ match, court, sideAWinProbability }: MatchCardProps)
   const isDoubles = maxPlayers > 1;
   const hasScores = match.sets.length > 0;
   const hasProb = sideAWinProbability != null && !hasScores;
+  const sideAFavored = hasProb && sideAWinProbability! >= 0.5;
 
   const playerCols = isDoubles ? "auto auto auto" : "auto";
   const scoreCols = hasScores ? ` 1.5rem${" auto".repeat(match.sets.length)}` : "";
   const probCol = hasProb ? " 1.5rem 1fr" : "";
   const gridCols = `${playerCols}${scoreCols}${!hasScores && !hasProb ? "" : probCol}`;
+
+  const probA = hasProb ? Math.round(sideAWinProbability! * 100) : 0;
+  const probB = hasProb ? 100 - probA : 0;
 
   return (
     <div className="rounded-lg border p-3 space-y-1">
@@ -55,10 +59,19 @@ export function MatchCard({ match, court, sideAWinProbability }: MatchCardProps)
         {hasProb && (
           <>
             <span />
-            <div className="flex h-2 rounded-full overflow-hidden bg-muted" style={{ gridRow: "1 / 3" }}>
-              <div className="bg-foreground/60 rounded-l-full" style={{ width: `${sideAWinProbability! * 100}%` }} />
-              <div className="bg-foreground/20 rounded-r-full" style={{ width: `${(1 - sideAWinProbability!) * 100}%` }} />
-            </div>
+            {sideAFavored ? (
+              <div className="flex items-center gap-2">
+                <div className="flex-1 flex h-2 rounded-full overflow-hidden bg-muted">
+                  <div className="bg-foreground/60 rounded-l-full" style={{ width: `${probA}%` }} />
+                  <div className="bg-foreground/20 rounded-r-full" style={{ width: `${probB}%` }} />
+                </div>
+                <span className="text-xs text-muted-foreground shrink-0">{probA}% win</span>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-muted-foreground shrink-0">{probA}% lose</span>
+              </div>
+            )}
           </>
         )}
 
@@ -76,13 +89,25 @@ export function MatchCard({ match, court, sideAWinProbability }: MatchCardProps)
             {s.setB}
           </span>
         ))}
+        {hasProb && (
+          <>
+            <span />
+            {!sideAFavored ? (
+              <div className="flex items-center gap-2">
+                <div className="flex-1 flex h-2 rounded-full overflow-hidden bg-muted">
+                  <div className="bg-foreground/60 rounded-l-full" style={{ width: `${probB}%` }} />
+                  <div className="bg-foreground/20 rounded-r-full" style={{ width: `${probA}%` }} />
+                </div>
+                <span className="text-xs text-muted-foreground shrink-0">{probB}% win</span>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-muted-foreground shrink-0">{probB}% lose</span>
+              </div>
+            )}
+          </>
+        )}
       </div>
-      {hasProb && (
-        <div className="flex justify-between text-xs text-muted-foreground">
-          <span>{Math.round(sideAWinProbability! * 100)}% win</span>
-          <span>{Math.round((1 - sideAWinProbability!) * 100)}% win</span>
-        </div>
-      )}
 
       <div className="flex items-center justify-between text-xs text-muted-foreground">
         <div className="min-w-0 flex-1 flex items-center gap-1">
