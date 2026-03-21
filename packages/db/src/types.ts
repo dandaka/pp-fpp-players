@@ -46,6 +46,7 @@ export interface UpcomingMatchDetail extends MatchDetail {
 export interface MatchPlayerInfo {
   id: number
   name: string
+  photoUrl: string | null
   categoryRank: number | null
   genderRank: number | null
   rating: PlayerRating | null

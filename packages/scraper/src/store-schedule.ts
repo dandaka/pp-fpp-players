@@ -1,6 +1,6 @@
 import { getDb } from "./db";
 import type { ScrapedMatchRow } from "./scrape-matches-page";
-import type { DrawEntry } from "./scrape-draws-page";
+import type { DrawMatch } from "./scrape-draws-page";
 
 interface SetScore {
   set_a: number;
@@ -64,38 +64,25 @@ interface CrossRefResult {
 
 /**
  * Cross-reference Matches page data with Draws page data.
- * Match by player name to enrich with license numbers and round names.
+ * Draws now provide round names directly via the Encontros tab.
+ * @param tournamentId - used to build the schedule GUID key for roundNames lookup
  */
 export function crossReference(
-  matches: ScrapedMatchRow[],
-  draws: DrawEntry[]
+  tournamentId: number,
+  draws: DrawMatch[]
 ): CrossRefResult {
   const licenseUpdates: Array<{ playerId: number; license: string }> = [];
   const roundNames = new Map<string, string>();
 
-  // Build name→player mapping from matches (which have IDs)
-  const nameToId = new Map<string, number>();
-  for (const m of matches) {
-    for (const p of [...m.sideA, ...m.sideB]) {
-      if (p.id && p.name) {
-        nameToId.set(p.name.toLowerCase(), p.id);
-      }
-    }
-  }
-
-  // Enrich license numbers from draws
+  // Build a lookup: schedule GUID → round name from draws
   for (const d of draws) {
-    if (d.licenseNumber) {
-      const id = nameToId.get(d.player1Name.toLowerCase());
-      if (id) {
-        licenseUpdates.push({ playerId: id, license: d.licenseNumber });
-      }
+    const sideAIds = d.sideA.map((p) => p.id).filter((id): id is number => id !== null);
+    const sideBIds = d.sideB.map((p) => p.id).filter((id): id is number => id !== null);
+    if (sideAIds.length > 0 && sideBIds.length > 0 && d.roundName) {
+      const guid = generateScheduleGuid(tournamentId, sideAIds, sideBIds);
+      roundNames.set(guid, d.roundName);
     }
   }
-
-  // TODO: Populate roundNames by matching draw bracket positions to matches.
-  // Requires Draws page scraper to provide per-match round context.
-  // For now, round_name will remain null for schedule-sourced matches.
 
   return { licenseUpdates, roundNames };
 }
@@ -233,4 +220,125 @@ export function storeSchedule(
   tx();
 
   console.log(`Store complete: ${inserted} inserted, ${updated} updated, ${enriched} enriched, ${skipped} skipped, ${newPlayers} new players`);
+}
+
+/**
+ * Store matches from Draws/Encontros page.
+ * Updates existing news feed matches with correct date_time and round_name.
+ * Inserts new matches that only exist in draws (e.g. later rounds not yet in the news feed).
+ */
+export function storeDrawsMatches(
+  tournamentId: number,
+  tournamentName: string,
+  draws: DrawMatch[]
+) {
+  const db = getDb();
+  const source = `schedule:tournament:${tournamentId}`;
+
+  const insertMatch = db.prepare(`
+    INSERT INTO matches (guid, tournament_name, section_name, round_name, date_time,
+      is_singles, side_a_ids, side_b_ids, side_a_names, side_b_names,
+      sets_json, winner_side, source, tournament_id, court)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `);
+
+  const insertMatchPlayer = db.prepare(`
+    INSERT OR IGNORE INTO match_players (match_guid, player_id, side) VALUES (?, ?, ?)
+  `);
+
+  const insertNewPlayer = db.prepare(`
+    INSERT OR IGNORE INTO players (id, name) VALUES (?, ?)
+  `);
+
+  const existingByGuid = db.prepare(`SELECT guid, winner_side FROM matches WHERE guid = ?`);
+
+  const findByPlayersAndTournament = db.prepare(`
+    SELECT guid, winner_side, source FROM matches
+    WHERE tournament_name = ?
+    AND ((side_a_ids = ? AND side_b_ids = ?) OR (side_a_ids = ? AND side_b_ids = ?))
+  `);
+
+  const updateFeedMatch = db.prepare(`
+    UPDATE matches SET date_time = ?, round_name = ?, court = ?, tournament_id = ?
+    WHERE guid = ?
+  `);
+
+  const updateMatchResult = db.prepare(`
+    UPDATE matches SET sets_json = ?, winner_side = ?, date_time = ?, round_name = ?, court = ?
+    WHERE guid = ?
+  `);
+
+  let inserted = 0;
+  let updated = 0;
+  let skipped = 0;
+
+  const tx = db.transaction(() => {
+    for (const d of draws) {
+      const sideAIds = d.sideA.map((p) => p.id).filter((id): id is number => id !== null);
+      const sideBIds = d.sideB.map((p) => p.id).filter((id): id is number => id !== null);
+
+      if (sideAIds.length === 0 || sideBIds.length === 0) {
+        skipped++;
+        continue;
+      }
+
+      // Insert new players
+      for (const p of [...d.sideA, ...d.sideB]) {
+        if (p.id) insertNewPlayer.run(p.id, p.name);
+      }
+
+      const sideAIdsJson = JSON.stringify(sideAIds);
+      const sideBIdsJson = JSON.stringify(sideBIds);
+      const sideANames = d.sideA.map((p) => p.name).join(" / ");
+      const sideBNames = d.sideB.map((p) => p.name).join(" / ");
+      const isSingles = d.sideA.length === 1 && d.sideB.length === 1 ? 1 : 0;
+      const sets = parseResultScores(d.result);
+      const winnerSide = determineWinner(sets);
+
+      const guid = generateScheduleGuid(tournamentId, sideAIds, sideBIds);
+
+      // Check if schedule GUID already exists
+      const existing = existingByGuid.get(guid) as { guid: string; winner_side: string | null } | null;
+      if (existing) {
+        if (!existing.winner_side && winnerSide) {
+          updateMatchResult.run(
+            JSON.stringify(sets), winnerSide, d.dateTime, d.roundName, d.court, guid
+          );
+          updated++;
+        } else {
+          skipped++;
+        }
+        continue;
+      }
+
+      // Check if same players exist from news feed (scrape:tournament:*)
+      const feedMatch = findByPlayersAndTournament.get(
+        tournamentName, sideAIdsJson, sideBIdsJson, sideBIdsJson, sideAIdsJson
+      ) as { guid: string; winner_side: string | null; source: string } | null;
+
+      if (feedMatch) {
+        // Update the news feed match with correct date/time and round name from draws
+        updateFeedMatch.run(d.dateTime, d.roundName, d.court, tournamentId, feedMatch.guid);
+        updated++;
+        continue;
+      }
+
+      // Insert new match (only exists in draws, e.g. later rounds)
+      insertMatch.run(
+        guid, tournamentName, d.categoryName, d.roundName, d.dateTime,
+        isSingles, sideAIdsJson, sideBIdsJson, sideANames, sideBNames,
+        sets.length > 0 ? JSON.stringify(sets) : null, winnerSide, source,
+        tournamentId, d.court
+      );
+
+      for (const id of sideAIds) insertMatchPlayer.run(guid, id, "a");
+      for (const id of sideBIds) insertMatchPlayer.run(guid, id, "b");
+
+      inserted++;
+    }
+  });
+
+  tx();
+
+  console.log(`Draws store: ${inserted} inserted, ${updated} updated, ${skipped} skipped`);
 }

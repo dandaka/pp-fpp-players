@@ -115,12 +115,13 @@ export function getPlayerMatches(
   const genderRanks = batchGetGenderRanks(allPlayerIdList);
   const ratings = batchGetRatings(allPlayerIdList);
 
-  // Batch-fetch full names from players table
+  // Batch-fetch full names and photos from players table
   const namePlaceholders = allPlayerIdList.map(() => "?").join(",");
   const nameRows = allPlayerIdList.length > 0
-    ? db.query(`SELECT id, name FROM players WHERE id IN (${namePlaceholders})`).all(...allPlayerIdList) as Array<{ id: number; name: string }>
+    ? db.query(`SELECT id, name, photo_url FROM players WHERE id IN (${namePlaceholders})`).all(...allPlayerIdList) as Array<{ id: number; name: string; photo_url: string | null }>
     : [];
   const fullNames = new Map(nameRows.map((r) => [r.id, r.name]));
+  const photoUrls = new Map(nameRows.map((r) => [r.id, r.photo_url]));
 
   const matches: MatchDetail[] = parsedRows.map((row) => {
     const sideANames = (row.side_a_names ?? "").split(" / ");
@@ -138,6 +139,7 @@ export function getPlayerMatches(
       sideA: row.sideAIds.map((id: number, i: number) => ({
         id,
         name: fullNames.get(id) ?? sideANames[i] ?? "",
+        photoUrl: photoUrls.get(id) ?? null,
         genderRank: genderRanks.get(id) ?? null,
         categoryRank: null,
         rating: ratings.get(id) ?? null,
@@ -145,6 +147,7 @@ export function getPlayerMatches(
       sideB: row.sideBIds.map((id: number, i: number) => ({
         id,
         name: fullNames.get(id) ?? sideBNames[i] ?? "",
+        photoUrl: photoUrls.get(id) ?? null,
         genderRank: genderRanks.get(id) ?? null,
         categoryRank: null,
         rating: ratings.get(id) ?? null,
@@ -214,15 +217,17 @@ export function getPlayerUpcomingMatches(playerId: number): UpcomingMatchDetail[
   }
   const idList = [...allPlayerIds];
 
-  // Batch-fetch names, ratings, and mu/sigma
+  // Batch-fetch names, photos, ratings, and mu/sigma
   const fullNames = new Map<number, string>();
+  const photoUrls = new Map<number, string | null>();
   const muSigma = new Map<number, { mu: number; sigma: number }>();
   if (idList.length > 0) {
     const placeholders = idList.map(() => "?").join(",");
     const nameRows = db.query(
-      `SELECT id, name FROM players WHERE id IN (${placeholders})`
-    ).all(...idList) as Array<{ id: number; name: string }>;
+      `SELECT id, name, photo_url FROM players WHERE id IN (${placeholders})`
+    ).all(...idList) as Array<{ id: number; name: string; photo_url: string | null }>;
     for (const r of nameRows) fullNames.set(r.id, r.name);
+    for (const r of nameRows) photoUrls.set(r.id, r.photo_url);
 
     const ratingRows = db.query(
       `SELECT player_id, mu, sigma FROM ratings WHERE player_id IN (${placeholders})`
@@ -257,6 +262,7 @@ export function getPlayerUpcomingMatches(playerId: number): UpcomingMatchDetail[
       sideA: sideAIds.map((id, i) => ({
         id,
         name: fullNames.get(id) ?? sideANames[i] ?? "",
+        photoUrl: photoUrls.get(id) ?? null,
         genderRank: genderRanks.get(id) ?? null,
         categoryRank: null,
         rating: ratings.get(id) ?? null,
@@ -264,6 +270,7 @@ export function getPlayerUpcomingMatches(playerId: number): UpcomingMatchDetail[
       sideB: sideBIds.map((id, i) => ({
         id,
         name: fullNames.get(id) ?? sideBNames[i] ?? "",
+        photoUrl: photoUrls.get(id) ?? null,
         genderRank: genderRanks.get(id) ?? null,
         categoryRank: null,
         rating: ratings.get(id) ?? null,

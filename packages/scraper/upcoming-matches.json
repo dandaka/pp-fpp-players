@@ -1,0 +1,8117 @@
+[
+  {
+    "category": "Masculinos 6 - M6-Quali",
+    "time": "19:00",
+    "court": "CAMPO 1-ANA JORGE - REMAX",
+    "result": "6-4  6-4",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 512775,
+        "name": "Gonçalo Antunes",
+        "dbMatch": {
+          "id": 512775,
+          "name": "Gonçalo A."
+        }
+      },
+      {
+        "id": 511997,
+        "name": "Francisco Antunes",
+        "dbMatch": {
+          "id": 511997,
+          "name": "Francisco A."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 501595,
+        "name": "Jorge Castella",
+        "dbMatch": {
+          "id": 501595,
+          "name": "Jorge Castella"
+        }
+      },
+      {
+        "id": 338182,
+        "name": "Pedro Ramos",
+        "dbMatch": {
+          "id": 338182,
+          "name": "Pedro Ramos"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-Quali",
+    "time": "20:15",
+    "court": "CAMPO 1-ANA JORGE - REMAX",
+    "result": "6-3  6-2",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 254197,
+        "name": "Guilherme Monteiro",
+        "dbMatch": {
+          "id": 254197,
+          "name": "Guilherme M."
+        }
+      },
+      {
+        "id": 213445,
+        "name": "João Brito",
+        "dbMatch": {
+          "id": 213445,
+          "name": "João B."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 208692,
+        "name": "Rui Rolo",
+        "dbMatch": {
+          "id": 208692,
+          "name": "Rui R."
+        }
+      },
+      {
+        "id": 98573,
+        "name": "Vasco Coelho",
+        "dbMatch": {
+          "id": 98573,
+          "name": "Vasco C."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-Quali",
+    "time": "21:30",
+    "court": "CAMPO 1-ANA JORGE - REMAX",
+    "result": "7-5  6-0",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 280085,
+        "name": "Pedro Guerreiro",
+        "dbMatch": {
+          "id": 280085,
+          "name": "Pedro G."
+        }
+      },
+      {
+        "id": 275638,
+        "name": "João Castro",
+        "dbMatch": {
+          "id": 275638,
+          "name": "Joao"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 512775,
+        "name": "Gonçalo Antunes",
+        "dbMatch": {
+          "id": 512775,
+          "name": "Gonçalo A."
+        }
+      },
+      {
+        "id": 511997,
+        "name": "Francisco Antunes",
+        "dbMatch": {
+          "id": 511997,
+          "name": "Francisco A."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-QP",
+    "time": "21:30",
+    "court": "CAMPO 1-ANA JORGE - REMAX",
+    "result": "6-4  7-5",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 506166,
+        "name": "Manuel Gata",
+        "dbMatch": {
+          "id": 506166,
+          "name": "Manuel G."
+        }
+      },
+      {
+        "id": 375044,
+        "name": "Diogo Santos",
+        "dbMatch": {
+          "id": 375044,
+          "name": "Diogo Santos"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 413022,
+        "name": "João Ramalheira",
+        "dbMatch": {
+          "id": 413022,
+          "name": "João Ramalheira"
+        }
+      },
+      {
+        "id": 390878,
+        "name": "Pedro Ribeiro",
+        "dbMatch": {
+          "id": 390878,
+          "name": "Pedro Ribeiro"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-Quali",
+    "time": "22:45",
+    "court": "CAMPO 1-ANA JORGE - REMAX",
+    "result": "6-3  6-3",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 228185,
+        "name": "Pedro Vieira",
+        "dbMatch": {
+          "id": 228185,
+          "name": "Pedro V."
+        }
+      },
+      {
+        "id": 14897,
+        "name": "Sérgio Camilo Gomes",
+        "dbMatch": {
+          "id": 14897,
+          "name": "Sergio G."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 382596,
+        "name": "Ricardo Pereira",
+        "dbMatch": {
+          "id": 382596,
+          "name": "Ricardo P."
+        }
+      },
+      {
+        "id": 208157,
+        "name": "Jose Marchant",
+        "dbMatch": {
+          "id": 208157,
+          "name": "Jose M."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-Quali",
+    "time": "19:00",
+    "court": "CAMPO 2- AXIANS",
+    "result": "3-6  7-5  10-8",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 448021,
+        "name": "Ricardo Belo",
+        "dbMatch": {
+          "id": 448021,
+          "name": "Ricardo Belo"
+        }
+      },
+      {
+        "id": 268373,
+        "name": "Tomás Carlos",
+        "dbMatch": {
+          "id": 268373,
+          "name": "Tomás Carlos"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 294510,
+        "name": "Pedro Casal",
+        "dbMatch": {
+          "id": 294510,
+          "name": "Pedro Casal"
+        }
+      },
+      {
+        "id": 164716,
+        "name": "Filipe Laginha",
+        "dbMatch": {
+          "id": 164716,
+          "name": "Filipe Laginha"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-QP",
+    "time": "20:15",
+    "court": "CAMPO 2- AXIANS",
+    "result": "4-6  3-6",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 228245,
+        "name": "André A. Ribeiro",
+        "dbMatch": {
+          "id": 228245,
+          "name": "André A. Ribeiro"
+        }
+      },
+      {
+        "id": 224613,
+        "name": "Vasco Marques",
+        "dbMatch": {
+          "id": 224613,
+          "name": "Vasco Marques"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 353776,
+        "name": "Diogo Nascimento",
+        "dbMatch": {
+          "id": 353776,
+          "name": "Diogo N."
+        }
+      },
+      {
+        "id": 209491,
+        "name": "Rafael Vidigal",
+        "dbMatch": {
+          "id": 209491,
+          "name": "Rafael V."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-Quali",
+    "time": "21:30",
+    "court": "CAMPO 2- AXIANS",
+    "result": "4-6  5-7",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 273631,
+        "name": "Bruno Teodoro",
+        "dbMatch": {
+          "id": 273631,
+          "name": "Bruno T."
+        }
+      },
+      {
+        "id": 251940,
+        "name": "Pedro Gomes",
+        "dbMatch": {
+          "id": 251940,
+          "name": "Pedro G."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 229128,
+        "name": "Pedro Nogueira",
+        "dbMatch": {
+          "id": 229128,
+          "name": "Pedro Nogueira"
+        }
+      },
+      {
+        "id": 148765,
+        "name": "Corretcha",
+        "dbMatch": {
+          "id": 148765,
+          "name": "Corretcha"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-Quali",
+    "time": "22:45",
+    "court": "CAMPO 2- AXIANS",
+    "result": "4-6  3-6",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 338634,
+        "name": "Pedro Pais",
+        "dbMatch": {
+          "id": 338634,
+          "name": "Pedro Pais"
+        }
+      },
+      {
+        "id": 242183,
+        "name": "Diogo Henriques",
+        "dbMatch": {
+          "id": 242183,
+          "name": "Diogo Henriques"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 254780,
+        "name": "Miguel Mauricio",
+        "dbMatch": {
+          "id": 254780,
+          "name": "Miguel M."
+        }
+      },
+      {
+        "id": 247393,
+        "name": "Fernando Mendes",
+        "dbMatch": {
+          "id": 247393,
+          "name": "Fernando M."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-Quali",
+    "time": "19:00",
+    "court": "CAMPO 3-MPC",
+    "result": "2-6  6-2  7-10",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 408668,
+        "name": "Leandro Esteves",
+        "dbMatch": {
+          "id": 408668,
+          "name": "Leandro E."
+        }
+      },
+      {
+        "id": 268880,
+        "name": "Alfama",
+        "dbMatch": {
+          "id": 268880,
+          "name": "Daniel B."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 332094,
+        "name": "Henrique Recto",
+        "dbMatch": {
+          "id": 332094,
+          "name": "Henrique Recto"
+        }
+      },
+      {
+        "id": 158508,
+        "name": "Bernardo Barros",
+        "dbMatch": {
+          "id": 158508,
+          "name": "Bernardo B."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 5 - F5-QP",
+    "time": "20:15",
+    "court": "CAMPO 3-MPC",
+    "result": "6-4  6-1",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 413800,
+        "name": "Ingrid Testa",
+        "dbMatch": {
+          "id": 413800,
+          "name": "Ingrid T."
+        }
+      },
+      {
+        "id": 119197,
+        "name": "Melissa Relva",
+        "dbMatch": {
+          "id": 119197,
+          "name": "Melissa Relva"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 290081,
+        "name": "Inês Paixão",
+        "dbMatch": {
+          "id": 290081,
+          "name": "Inês P."
+        }
+      },
+      {
+        "id": 158677,
+        "name": "Samanta Coelho",
+        "dbMatch": {
+          "id": 158677,
+          "name": "Sam C."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-QP",
+    "time": "21:30",
+    "court": "CAMPO 3-MPC",
+    "result": "3-6  4-6",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 377828,
+        "name": "TIAGO LEITÃO",
+        "dbMatch": {
+          "id": 377828,
+          "name": "TIAGO LEITÃO"
+        }
+      },
+      {
+        "id": 291843,
+        "name": "Gonçalo Pimenta",
+        "dbMatch": {
+          "id": 291843,
+          "name": "Gonçalo Pimenta"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 248693,
+        "name": "João Bernardo Silva",
+        "dbMatch": {
+          "id": 248693,
+          "name": "João S."
+        }
+      },
+      {
+        "id": 189917,
+        "name": "Afonso Côrte-Real",
+        "dbMatch": {
+          "id": 189917,
+          "name": "Afonso R."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-Quali",
+    "time": "22:45",
+    "court": "CAMPO 3-MPC",
+    "result": "5-7  0-6",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 330846,
+        "name": "Pedro Torres",
+        "dbMatch": {
+          "id": 330846,
+          "name": "Pedro T."
+        }
+      },
+      {
+        "id": 227786,
+        "name": "Tomás Luís",
+        "dbMatch": {
+          "id": 227786,
+          "name": "Tomás L."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 435205,
+        "name": "Nikita R",
+        "dbMatch": {
+          "id": 435205,
+          "name": "Nikita R"
+        }
+      },
+      {
+        "id": 432061,
+        "name": "Michael P",
+        "dbMatch": {
+          "id": 432061,
+          "name": "Michael P"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-Quali",
+    "time": "19:00",
+    "court": "CAMPO 4-MPC",
+    "result": "FC",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 273631,
+        "name": "Bruno Teodoro",
+        "dbMatch": {
+          "id": 273631,
+          "name": "Bruno T."
+        }
+      },
+      {
+        "id": 251940,
+        "name": "Pedro Gomes",
+        "dbMatch": {
+          "id": 251940,
+          "name": "Pedro G."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 375844,
+        "name": "Ricardo Silvão",
+        "dbMatch": {
+          "id": 375844,
+          "name": "Ricardo S."
+        }
+      },
+      {
+        "id": 341055,
+        "name": "Pedro Paulito",
+        "dbMatch": {
+          "id": 341055,
+          "name": "Pedro P."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 5 - F5-QP",
+    "time": "20:15",
+    "court": "CAMPO 4-MPC",
+    "result": "1-6  1-6",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 276514,
+        "name": "Vera Raposo",
+        "dbMatch": {
+          "id": 276514,
+          "name": "Vera R."
+        }
+      },
+      {
+        "id": 271275,
+        "name": "Luciana Fernandes",
+        "dbMatch": {
+          "id": 271275,
+          "name": "Luciana F."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 206874,
+        "name": "Catarina Fragoso",
+        "dbMatch": {
+          "id": 206874,
+          "name": "Catarina F."
+        }
+      },
+      {
+        "id": 197444,
+        "name": "Belén Garcia",
+        "dbMatch": {
+          "id": 197444,
+          "name": "Belén G."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-Quali",
+    "time": "21:30",
+    "court": "CAMPO 4-MPC",
+    "result": "6-3  6-2",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 279122,
+        "name": "João Violante",
+        "dbMatch": {
+          "id": 279122,
+          "name": "João V."
+        }
+      },
+      {
+        "id": 258649,
+        "name": "Rui Figueira",
+        "dbMatch": {
+          "id": 258649,
+          "name": "Rui F."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 377993,
+        "name": "Tiago Filipe",
+        "dbMatch": {
+          "id": 377993,
+          "name": "Tiago F."
+        }
+      },
+      {
+        "id": 149345,
+        "name": "Miguel Valsassina",
+        "dbMatch": {
+          "id": 149345,
+          "name": "Miguel V."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-Quali",
+    "time": "22:45",
+    "court": "CAMPO 4-MPC",
+    "result": "4-6  6-1  8-10",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 254197,
+        "name": "Guilherme Monteiro",
+        "dbMatch": {
+          "id": 254197,
+          "name": "Guilherme M."
+        }
+      },
+      {
+        "id": 213445,
+        "name": "João Brito",
+        "dbMatch": {
+          "id": 213445,
+          "name": "João B."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 239858,
+        "name": "Mateus Conde",
+        "dbMatch": {
+          "id": 239858,
+          "name": "Mateus C."
+        }
+      },
+      {
+        "id": 239091,
+        "name": "Goncalo Troncoso",
+        "dbMatch": {
+          "id": 239091,
+          "name": "Goncalo Troncoso"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 5 - F5-QP",
+    "time": "19:00",
+    "court": "CAMPO 5-DFL/DOM FIÚZA",
+    "result": "6-3  6-0",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 303579,
+        "name": "Sofia D. Rolão",
+        "dbMatch": {
+          "id": 303579,
+          "name": "Sofia D. Rolão"
+        }
+      },
+      {
+        "id": 40692,
+        "name": "Maria José Lima",
+        "dbMatch": {
+          "id": 40692,
+          "name": "Maria José Lima"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 323474,
+        "name": "Isabel Ribeiro",
+        "dbMatch": {
+          "id": 323474,
+          "name": "Isabel R."
+        }
+      },
+      {
+        "id": 41021,
+        "name": "Catarina Silva",
+        "dbMatch": {
+          "id": 41021,
+          "name": "Catarina S."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 5 - F5-QP",
+    "time": "20:15",
+    "court": "CAMPO 5-DFL/DOM FIÚZA",
+    "result": "6-4  7-5",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 275366,
+        "name": "Ana Lúcia Cabeça",
+        "dbMatch": {
+          "id": 275366,
+          "name": "Ana C."
+        }
+      },
+      {
+        "id": 257417,
+        "name": "Francisca Veloso da Veiga",
+        "dbMatch": {
+          "id": 257417,
+          "name": "Francisca V."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 273820,
+        "name": "Sandra Bento Cruz",
+        "dbMatch": {
+          "id": 273820,
+          "name": "Sandra C."
+        }
+      },
+      {
+        "id": 74067,
+        "name": "Helena Simas",
+        "dbMatch": {
+          "id": 74067,
+          "name": "Helena S."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 5 - F5-QP",
+    "time": "21:30",
+    "court": "CAMPO 5-DFL/DOM FIÚZA",
+    "result": "6-0  6-1",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 476712,
+        "name": "Mia Nóbrega",
+        "dbMatch": {
+          "id": 476712,
+          "name": "Mia Nóbrega"
+        }
+      },
+      {
+        "id": 228290,
+        "name": "Ana Catarina",
+        "dbMatch": {
+          "id": 228290,
+          "name": "Ana Catarina"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 416259,
+        "name": "Catarina Paulo de Matos",
+        "dbMatch": {
+          "id": 416259,
+          "name": "Catarina Paulo de Matos"
+        }
+      },
+      {
+        "id": 388429,
+        "name": "Catarina Urgueira",
+        "dbMatch": {
+          "id": 388429,
+          "name": "Catarina Urgueira"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-QP",
+    "time": "22:45",
+    "court": "CAMPO 5-DFL/DOM FIÚZA",
+    "result": "6-3  6-3",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 153130,
+        "name": "João Ganhoto",
+        "dbMatch": {
+          "id": 153130,
+          "name": "João G."
+        }
+      },
+      {
+        "id": 80279,
+        "name": "David Coutinho",
+        "dbMatch": {
+          "id": 80279,
+          "name": "David C."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 74368,
+        "name": "Zé Pedro",
+        "dbMatch": {
+          "id": 74368,
+          "name": "Zé Pedro"
+        }
+      },
+      {
+        "id": 67792,
+        "name": "João Jacinto",
+        "dbMatch": {
+          "id": 67792,
+          "name": "João Jacinto"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 5 - F5-QP",
+    "time": "19:00",
+    "court": "CAMPO 6-JOMALUX",
+    "result": "6-1  6-4",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 401180,
+        "name": "Joana Cordeiro",
+        "dbMatch": {
+          "id": 401180,
+          "name": "Joana Cordeiro"
+        }
+      },
+      {
+        "id": 325181,
+        "name": "Marta Cabral",
+        "dbMatch": {
+          "id": 325181,
+          "name": "Marta Cabral"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 142361,
+        "name": "Susana Santos Martins",
+        "dbMatch": {
+          "id": 142361,
+          "name": "Susana M."
+        }
+      },
+      {
+        "id": 77605,
+        "name": "Marisa Silva",
+        "dbMatch": {
+          "id": 77605,
+          "name": "Marisa S."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 5 - F5-QP",
+    "time": "20:15",
+    "court": "CAMPO 6-JOMALUX",
+    "result": "5-7  6-7(8)",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 244700,
+        "name": "Sofia Castro",
+        "dbMatch": {
+          "id": 244700,
+          "name": "Sofia Castro"
+        }
+      },
+      {
+        "id": 157332,
+        "name": "Dalila Alves",
+        "dbMatch": {
+          "id": 157332,
+          "name": "Dalila Alves"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 434822,
+        "name": "Michalina Marques",
+        "dbMatch": {
+          "id": 434822,
+          "name": "Michalina M."
+        }
+      },
+      {
+        "id": 102639,
+        "name": "Vera Santos",
+        "dbMatch": {
+          "id": 102639,
+          "name": "Vera S."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 5 - F5-QP",
+    "time": "21:30",
+    "court": "CAMPO 6-JOMALUX",
+    "result": "1-6  6-3  8-10",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 272827,
+        "name": "Sofia Jesus",
+        "dbMatch": {
+          "id": 272827,
+          "name": "Sofia J."
+        }
+      },
+      {
+        "id": 262820,
+        "name": "Catarina Vera",
+        "dbMatch": {
+          "id": 262820,
+          "name": "Catarina Vera"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 178940,
+        "name": "Ana Catarina Moniz",
+        "dbMatch": {
+          "id": 178940,
+          "name": "Ana Catarina Moniz"
+        }
+      },
+      {
+        "id": 77759,
+        "name": "Ana Isabel Santos",
+        "dbMatch": {
+          "id": 77759,
+          "name": "Ana S."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-QP",
+    "time": "22:45",
+    "court": "CAMPO 6-JOMALUX",
+    "result": "3-6  4-6",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 375331,
+        "name": "Victor Redondo",
+        "dbMatch": {
+          "id": 375331,
+          "name": "Victor Redondo"
+        }
+      },
+      {
+        "id": 297868,
+        "name": "Sebastião Ghira",
+        "dbMatch": {
+          "id": 297868,
+          "name": "Sebastião G."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 242504,
+        "name": "Tomás Silva",
+        "dbMatch": {
+          "id": 242504,
+          "name": "Tomás S."
+        }
+      },
+      {
+        "id": 234718,
+        "name": "André Moniz",
+        "dbMatch": {
+          "id": 234718,
+          "name": "Moniz"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 5 - F5-QP",
+    "time": "19:00",
+    "court": "CAMPO 7-CARLSBERG",
+    "result": "0-6  4-6",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 189148,
+        "name": "Patrícia Anacleto",
+        "dbMatch": {
+          "id": 189148,
+          "name": "Patrícia A."
+        }
+      },
+      {
+        "id": 99167,
+        "name": "Carla Peseta",
+        "dbMatch": {
+          "id": 99167,
+          "name": "Carla P."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 317450,
+        "name": "Mariana Marques do Carmo",
+        "dbMatch": {
+          "id": 317450,
+          "name": "Mariana C."
+        }
+      },
+      {
+        "id": 186224,
+        "name": "Maria Rita Quaresma",
+        "dbMatch": {
+          "id": 186224,
+          "name": "Rita Q."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-QP",
+    "time": "20:15",
+    "court": "CAMPO 7-CARLSBERG",
+    "result": "7-6(3)  6-3",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 337573,
+        "name": "Filipe Reis",
+        "dbMatch": {
+          "id": 337573,
+          "name": "Filipe Reis"
+        }
+      },
+      {
+        "id": 275747,
+        "name": "David Reis",
+        "dbMatch": {
+          "id": 275747,
+          "name": "David R."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 392487,
+        "name": "Nuno Matos",
+        "dbMatch": {
+          "id": 392487,
+          "name": "Nuno Matos"
+        }
+      },
+      {
+        "id": 93084,
+        "name": "Miguel Martins",
+        "dbMatch": {
+          "id": 93084,
+          "name": "Miguel"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-QP",
+    "time": "21:30",
+    "court": "CAMPO 7-CARLSBERG",
+    "result": "2-6  5-7",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 81636,
+        "name": "Hugo Menino Aguiar",
+        "dbMatch": {
+          "id": 81636,
+          "name": "Hugo Menino Aguiar"
+        }
+      },
+      {
+        "id": 78274,
+        "name": "Tiago Dias",
+        "dbMatch": {
+          "id": 78274,
+          "name": "Tiago D."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 255846,
+        "name": "Guillermo Orive",
+        "dbMatch": {
+          "id": 255846,
+          "name": "Guillermo O."
+        }
+      },
+      {
+        "id": 201442,
+        "name": "Carlos A. Lopes",
+        "dbMatch": {
+          "id": 201442,
+          "name": "Carlos A. Lopes"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 4 - M4-QP",
+    "time": "22:45",
+    "court": "CAMPO 7-CARLSBERG",
+    "result": "6-2  6-0",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 223162,
+        "name": "Pedro Rocha",
+        "dbMatch": {
+          "id": 223162,
+          "name": "Pedro Rocha"
+        }
+      },
+      {
+        "id": 223142,
+        "name": "Cláudio Silva",
+        "dbMatch": {
+          "id": 223142,
+          "name": "Claudio S."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 298654,
+        "name": "Redouan sidali",
+        "dbMatch": {
+          "id": 298654,
+          "name": "Redouan S."
+        }
+      },
+      {
+        "id": 77417,
+        "name": "Tiago Cunha",
+        "dbMatch": {
+          "id": 77417,
+          "name": "Tiago Cunha"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-Quali",
+    "time": "20:15",
+    "court": "CAMPO 8- MPC",
+    "result": "7-6(4)  6-4",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 338634,
+        "name": "Pedro Pais",
+        "dbMatch": {
+          "id": 338634,
+          "name": "Pedro Pais"
+        }
+      },
+      {
+        "id": 242183,
+        "name": "Diogo Henriques",
+        "dbMatch": {
+          "id": 242183,
+          "name": "Diogo Henriques"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 386097,
+        "name": "Ricardo Ladeira",
+        "dbMatch": {
+          "id": 386097,
+          "name": "Ricardo L."
+        }
+      },
+      {
+        "id": 339631,
+        "name": "Duarte Carvalho",
+        "dbMatch": {
+          "id": 339631,
+          "name": "Duarte C."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-QP",
+    "time": "22:45",
+    "court": "CAMPO 8- MPC",
+    "result": "7-5  6-3",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 201682,
+        "name": "Filipe Sequeira",
+        "dbMatch": {
+          "id": 201682,
+          "name": "Filipe Sequeira"
+        }
+      },
+      {
+        "id": 101841,
+        "name": "Miguel Silva",
+        "dbMatch": {
+          "id": 101841,
+          "name": "Miguel S."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 208366,
+        "name": "Rodrigo Fernandes",
+        "dbMatch": {
+          "id": 208366,
+          "name": "Rodrigo F."
+        }
+      },
+      {
+        "id": 86708,
+        "name": "Diogo Vieira",
+        "dbMatch": {
+          "id": 86708,
+          "name": "Diogo V."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-QP",
+    "time": "22:45",
+    "court": "CAMPO 9-MPC",
+    "result": "1-6  4-6",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 350231,
+        "name": "João Silva",
+        "dbMatch": {
+          "id": 350231,
+          "name": "Joao S."
+        }
+      },
+      {
+        "id": 319754,
+        "name": "João Raposo",
+        "dbMatch": {
+          "id": 319754,
+          "name": "João R."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 368546,
+        "name": "Frederico Rodrigues",
+        "dbMatch": {
+          "id": 368546,
+          "name": "Frederico Rodrigues"
+        }
+      },
+      {
+        "id": 187399,
+        "name": "Rodrigo Ramos",
+        "dbMatch": {
+          "id": 187399,
+          "name": "Rodrigo Ramos"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-QP",
+    "time": "",
+    "court": "Tba",
+    "result": "FC",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 232040,
+        "name": "Filipe Magalhães",
+        "dbMatch": {
+          "id": 232040,
+          "name": "Filipe Magalhães"
+        }
+      },
+      {
+        "id": 86369,
+        "name": "Sérgio Fernandes",
+        "dbMatch": {
+          "id": 86369,
+          "name": "Sérgio Fernandes"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 173813,
+        "name": "Vasco Conceição",
+        "dbMatch": {
+          "id": 173813,
+          "name": "Vasco C."
+        }
+      },
+      {
+        "id": 94605,
+        "name": "Afonso Roldão",
+        "dbMatch": {
+          "id": 94605,
+          "name": "Afonso R."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-Quali",
+    "time": "",
+    "court": "Tba",
+    "result": "FC",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 412298,
+        "name": "Rafael Nunes",
+        "dbMatch": {
+          "id": 412298,
+          "name": "Rafael N."
+        }
+      },
+      {
+        "id": 337067,
+        "name": "Nadim Raad",
+        "dbMatch": {
+          "id": 337067,
+          "name": "Nadim R."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 382596,
+        "name": "Ricardo Pereira",
+        "dbMatch": {
+          "id": 382596,
+          "name": "Ricardo P."
+        }
+      },
+      {
+        "id": 208157,
+        "name": "Jose Marchant",
+        "dbMatch": {
+          "id": 208157,
+          "name": "Jose M."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-Quali",
+    "time": "",
+    "court": "Tba",
+    "result": "FC",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 229128,
+        "name": "Pedro Nogueira",
+        "dbMatch": {
+          "id": 229128,
+          "name": "Pedro Nogueira"
+        }
+      },
+      {
+        "id": 148765,
+        "name": "Corretcha",
+        "dbMatch": {
+          "id": 148765,
+          "name": "Corretcha"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 241466,
+        "name": "Gui Domingues",
+        "dbMatch": {
+          "id": 241466,
+          "name": "Gui Domingues"
+        }
+      },
+      {
+        "id": 152578,
+        "name": "Filipe Costa Fonseca",
+        "dbMatch": {
+          "id": 152578,
+          "name": "Filipe F."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-Quali",
+    "time": "",
+    "court": "Tba",
+    "result": "FC",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 279122,
+        "name": "João Violante",
+        "dbMatch": {
+          "id": 279122,
+          "name": "João V."
+        }
+      },
+      {
+        "id": 258649,
+        "name": "Rui Figueira",
+        "dbMatch": {
+          "id": 258649,
+          "name": "Rui F."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 425293,
+        "name": "Manuel Conceição",
+        "dbMatch": {
+          "id": 425293,
+          "name": "Manuel C."
+        }
+      },
+      {
+        "id": 287871,
+        "name": "Vasco Sousa",
+        "dbMatch": {
+          "id": 287871,
+          "name": "Vasco S."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-Quali",
+    "time": "",
+    "court": "Tba",
+    "result": "FC",
+    "date": "qua, 18 mar",
+    "sideA": [
+      {
+        "id": 348538,
+        "name": "Pedro Catana",
+        "dbMatch": {
+          "id": 348538,
+          "name": "Pedro C."
+        }
+      },
+      {
+        "id": 275362,
+        "name": "Ventura Vilhena",
+        "dbMatch": {
+          "id": 275362,
+          "name": "Ventura J."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 377993,
+        "name": "Tiago Filipe",
+        "dbMatch": {
+          "id": 377993,
+          "name": "Tiago F."
+        }
+      },
+      {
+        "id": 149345,
+        "name": "Miguel Valsassina",
+        "dbMatch": {
+          "id": 149345,
+          "name": "Miguel V."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-Quali",
+    "time": "19:00",
+    "court": "CAMPO 1-ANA JORGE - REMAX",
+    "result": "4-6  6-1  10-8",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 280085,
+        "name": "Pedro Guerreiro",
+        "dbMatch": {
+          "id": 280085,
+          "name": "Pedro G."
+        }
+      },
+      {
+        "id": 275638,
+        "name": "João Castro",
+        "dbMatch": {
+          "id": 275638,
+          "name": "Joao"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 448021,
+        "name": "Ricardo Belo",
+        "dbMatch": {
+          "id": 448021,
+          "name": "Ricardo Belo"
+        }
+      },
+      {
+        "id": 268373,
+        "name": "Tomás Carlos",
+        "dbMatch": {
+          "id": 268373,
+          "name": "Tomás Carlos"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-QP",
+    "time": "20:15",
+    "court": "CAMPO 1-ANA JORGE - REMAX",
+    "result": "3-6  6-7(7)",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 277052,
+        "name": "Afonso Parra",
+        "dbMatch": {
+          "id": 277052,
+          "name": "Afonso P."
+        }
+      },
+      {
+        "id": 275761,
+        "name": "Guilherme Nascimento",
+        "dbMatch": {
+          "id": 275761,
+          "name": "Guilherme N."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 503257,
+        "name": "Rafael Dos Santos Lopes",
+        "dbMatch": {
+          "id": 503257,
+          "name": "Rafael Dos Santos Lopes"
+        }
+      },
+      {
+        "id": 314821,
+        "name": "Gonçalo Prata",
+        "dbMatch": {
+          "id": 314821,
+          "name": "Gonçalo Prata"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 3 - M3-QP",
+    "time": "21:30",
+    "court": "CAMPO 1-ANA JORGE - REMAX",
+    "result": "6-3  6-1",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 44615,
+        "name": "Diogo Lã",
+        "dbMatch": {
+          "id": 44615,
+          "name": "Diogo L."
+        }
+      },
+      {
+        "id": 33986,
+        "name": "Diogo Branco",
+        "dbMatch": {
+          "id": 33986,
+          "name": "Diogo B."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 325006,
+        "name": "Salvador Almeida",
+        "dbMatch": {
+          "id": 325006,
+          "name": "Salvador A."
+        }
+      },
+      {
+        "id": 101104,
+        "name": "João Batista",
+        "dbMatch": {
+          "id": 101104,
+          "name": "João B."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 4 - M4-QP",
+    "time": "22:45",
+    "court": "CAMPO 1-ANA JORGE - REMAX",
+    "result": "0-6  3-6",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 99525,
+        "name": "Tiago Bernardez",
+        "dbMatch": {
+          "id": 99525,
+          "name": "Tiago B."
+        }
+      },
+      {
+        "id": 88497,
+        "name": "Francisco Tavares",
+        "dbMatch": {
+          "id": 88497,
+          "name": "Francisco Tavares"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 84391,
+        "name": "Ricardo #1 Ribas",
+        "dbMatch": {
+          "id": 84391,
+          "name": "Ricardo r."
+        }
+      },
+      {
+        "id": 79331,
+        "name": "Tiago Gonçalves",
+        "dbMatch": {
+          "id": 79331,
+          "name": "Tiago G."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-QP",
+    "time": "19:00",
+    "court": "CAMPO 2- AXIANS",
+    "result": "FC",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 228185,
+        "name": "Pedro Vieira",
+        "dbMatch": {
+          "id": 228185,
+          "name": "Pedro V."
+        }
+      },
+      {
+        "id": 14897,
+        "name": "Sérgio Camilo Gomes",
+        "dbMatch": {
+          "id": 14897,
+          "name": "Sergio G."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 242235,
+        "name": "Gonçalo Sardinha",
+        "dbMatch": {
+          "id": 242235,
+          "name": "Gonçalo S."
+        }
+      },
+      {
+        "id": 53748,
+        "name": "Vasco Barrambana",
+        "dbMatch": {
+          "id": 53748,
+          "name": "Vasco B."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-QP",
+    "time": "20:15",
+    "court": "CAMPO 2- AXIANS",
+    "result": "6-3  6-4",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 330782,
+        "name": "Diogo Carvalho Santos",
+        "dbMatch": {
+          "id": 330782,
+          "name": "Diogo S."
+        }
+      },
+      {
+        "id": 37412,
+        "name": "Gonçalo Amaro Gomes",
+        "dbMatch": {
+          "id": 37412,
+          "name": "Gonçalo G."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 229128,
+        "name": "Pedro Nogueira",
+        "dbMatch": {
+          "id": 229128,
+          "name": "Pedro Nogueira"
+        }
+      },
+      {
+        "id": 148765,
+        "name": "Corretcha",
+        "dbMatch": {
+          "id": 148765,
+          "name": "Corretcha"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 3 - M3-QP",
+    "time": "21:30",
+    "court": "CAMPO 2- AXIANS",
+    "result": "6-4  6-4",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 106127,
+        "name": "Francisco Ventura",
+        "dbMatch": {
+          "id": 106127,
+          "name": "Francisco Ventura"
+        }
+      },
+      {
+        "id": 248,
+        "name": "Tiago Poeira",
+        "dbMatch": {
+          "id": 248,
+          "name": "Tiago P."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 98746,
+        "name": "Frederico Meneses",
+        "dbMatch": {
+          "id": 98746,
+          "name": "Frederico M."
+        }
+      },
+      {
+        "id": 40715,
+        "name": "Gonçalo Duarte Ramos",
+        "dbMatch": {
+          "id": 40715,
+          "name": "Gonçalo R."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 4 - M4-QP",
+    "time": "22:45",
+    "court": "CAMPO 2- AXIANS",
+    "result": "6-0  7-6(4)",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 301611,
+        "name": "Gonçalo Rodrigues",
+        "dbMatch": {
+          "id": 301611,
+          "name": "Gonçalo Rodrigues"
+        }
+      },
+      {
+        "id": 231540,
+        "name": "Joao Santos",
+        "dbMatch": {
+          "id": 231540,
+          "name": "Joao Santos"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 86782,
+        "name": "Rui Brás",
+        "dbMatch": {
+          "id": 86782,
+          "name": "Rui Brás"
+        }
+      },
+      {
+        "id": 77481,
+        "name": "Jorge Duarte",
+        "dbMatch": {
+          "id": 77481,
+          "name": "Jorge Duarte"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-QP",
+    "time": "19:00",
+    "court": "CAMPO 3-MPC",
+    "result": "6-7(1)  5-7",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 435205,
+        "name": "Nikita R",
+        "dbMatch": {
+          "id": 435205,
+          "name": "Nikita R"
+        }
+      },
+      {
+        "id": 432061,
+        "name": "Michael P",
+        "dbMatch": {
+          "id": 432061,
+          "name": "Michael P"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 266937,
+        "name": "Pedro Borges Rodrigues",
+        "dbMatch": {
+          "id": 266937,
+          "name": "Pedro R."
+        }
+      },
+      {
+        "id": 104256,
+        "name": "Nuno Borges Rodrigues",
+        "dbMatch": {
+          "id": 104256,
+          "name": "Nuno R."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-QP",
+    "time": "20:15",
+    "court": "CAMPO 3-MPC",
+    "result": "3-6  4-6",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 325763,
+        "name": "Miguel Andrade",
+        "dbMatch": {
+          "id": 325763,
+          "name": "Miguel Andrade"
+        }
+      },
+      {
+        "id": 144839,
+        "name": "João Domingues",
+        "dbMatch": {
+          "id": 144839,
+          "name": "João Domingues"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 211113,
+        "name": "Gonçalo Carvalho",
+        "dbMatch": {
+          "id": 211113,
+          "name": "Gonçalo C."
+        }
+      },
+      {
+        "id": 27618,
+        "name": "Afonso Amaral",
+        "dbMatch": {
+          "id": 27618,
+          "name": "Afonso Amaral"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 4 - M4-QP",
+    "time": "21:30",
+    "court": "CAMPO 3-MPC",
+    "result": "2-6  2-6",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 232743,
+        "name": "Renato Gil",
+        "dbMatch": {
+          "id": 232743,
+          "name": "Renato G."
+        }
+      },
+      {
+        "id": 178871,
+        "name": "Ricardo Verdugo",
+        "dbMatch": {
+          "id": 178871,
+          "name": "Ricardo V."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 264890,
+        "name": "João Figueira",
+        "dbMatch": {
+          "id": 264890,
+          "name": "João Figueira"
+        }
+      },
+      {
+        "id": 186561,
+        "name": "Bruno Pais",
+        "dbMatch": {
+          "id": 186561,
+          "name": "Bruno Pais"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 4 - M4-QP",
+    "time": "22:45",
+    "court": "CAMPO 3-MPC",
+    "result": "6-2  6-2",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 214195,
+        "name": "Miguel Correia",
+        "dbMatch": {
+          "id": 214195,
+          "name": "Miguel C."
+        }
+      },
+      {
+        "id": 77343,
+        "name": "António Afonso",
+        "dbMatch": {
+          "id": 77343,
+          "name": "António A."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 167218,
+        "name": "André Pais Pereira",
+        "dbMatch": {
+          "id": 167218,
+          "name": "André Pais Pereira"
+        }
+      },
+      {
+        "id": 93105,
+        "name": "Carlos Ferreira",
+        "dbMatch": {
+          "id": 93105,
+          "name": "Carlos Ferreira"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-QP",
+    "time": "19:00",
+    "court": "CAMPO 4-MPC",
+    "result": "2-6  5-7",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 239858,
+        "name": "Mateus Conde",
+        "dbMatch": {
+          "id": 239858,
+          "name": "Mateus C."
+        }
+      },
+      {
+        "id": 239091,
+        "name": "Goncalo Troncoso",
+        "dbMatch": {
+          "id": 239091,
+          "name": "Goncalo Troncoso"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 214239,
+        "name": "Nuno Pina Monteiro",
+        "dbMatch": {
+          "id": 214239,
+          "name": "Nuno M."
+        }
+      },
+      {
+        "id": 15904,
+        "name": "Alexandre Leitão",
+        "dbMatch": {
+          "id": 15904,
+          "name": "Alexandre L."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-QP",
+    "time": "20:15",
+    "court": "CAMPO 4-MPC",
+    "result": "6-2  5-7  6-10",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 381239,
+        "name": "Gonçalo Cruz",
+        "dbMatch": {
+          "id": 381239,
+          "name": "Gonçalo C."
+        }
+      },
+      {
+        "id": 279916,
+        "name": "Bruno Martins",
+        "dbMatch": {
+          "id": 279916,
+          "name": "Bruno Martins"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 264961,
+        "name": "Joao Mendes",
+        "dbMatch": {
+          "id": 264961,
+          "name": "Joao Mendes"
+        }
+      },
+      {
+        "id": 240962,
+        "name": "Hugo Varão",
+        "dbMatch": {
+          "id": 240962,
+          "name": "Hugo V."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 4 - F4-QP",
+    "time": "21:30",
+    "court": "CAMPO 4-MPC",
+    "result": "3-6  6-7(2)",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 351088,
+        "name": "Andreia Camelo",
+        "dbMatch": {
+          "id": 351088,
+          "name": "Andreia C."
+        }
+      },
+      {
+        "id": 324777,
+        "name": "Kerrie Martin",
+        "dbMatch": {
+          "id": 324777,
+          "name": "Kerrie M."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 262952,
+        "name": "Patrícia Correia",
+        "dbMatch": {
+          "id": 262952,
+          "name": "Patrícia Correia"
+        }
+      },
+      {
+        "id": 156806,
+        "name": "Luzi Reis",
+        "dbMatch": {
+          "id": 156806,
+          "name": "Luzi Reis"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 4 - M4-QP",
+    "time": "22:45",
+    "court": "CAMPO 4-MPC",
+    "result": "1-6  1-6",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 231552,
+        "name": "João Barreto",
+        "dbMatch": {
+          "id": 231552,
+          "name": "João Barreto"
+        }
+      },
+      {
+        "id": 97954,
+        "name": "Tiago Jesus",
+        "dbMatch": {
+          "id": 97954,
+          "name": "Tiago J."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 288218,
+        "name": "Diogo Petronilho",
+        "dbMatch": {
+          "id": 288218,
+          "name": "Diogo Petronilho"
+        }
+      },
+      {
+        "id": 76705,
+        "name": "Daniel Teodoro",
+        "dbMatch": {
+          "id": 76705,
+          "name": "Daniel Teodoro"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-QP",
+    "time": "19:00",
+    "court": "CAMPO 5-DFL/DOM FIÚZA",
+    "result": "1-6  4-6",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 101745,
+        "name": "Ventura Vilhena",
+        "dbMatch": {
+          "id": 101745,
+          "name": "Ventura V."
+        }
+      },
+      {
+        "id": 94033,
+        "name": "Ricardo Silva",
+        "dbMatch": {
+          "id": 94033,
+          "name": "Ricardo S."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 254780,
+        "name": "Miguel Mauricio",
+        "dbMatch": {
+          "id": 254780,
+          "name": "Miguel M."
+        }
+      },
+      {
+        "id": 247393,
+        "name": "Fernando Mendes",
+        "dbMatch": {
+          "id": 247393,
+          "name": "Fernando M."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-QP",
+    "time": "20:15",
+    "court": "CAMPO 5-DFL/DOM FIÚZA",
+    "result": "6-4  6-4",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 302829,
+        "name": "Ramalho",
+        "dbMatch": {
+          "id": 302829,
+          "name": "João R."
+        }
+      },
+      {
+        "id": 135926,
+        "name": "Pedro Rovisco Taborda",
+        "dbMatch": {
+          "id": 135926,
+          "name": "Pedro Rovisco Taborda"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 310867,
+        "name": "Gonçalves",
+        "dbMatch": {
+          "id": 310867,
+          "name": "Gonçalves"
+        }
+      },
+      {
+        "id": 186157,
+        "name": "Mario Teixeira",
+        "dbMatch": {
+          "id": 186157,
+          "name": "Mario T."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 4 - F4-QP",
+    "time": "21:30",
+    "court": "CAMPO 5-DFL/DOM FIÚZA",
+    "result": "6-3  6-3",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 367680,
+        "name": "Joana Jorge",
+        "dbMatch": {
+          "id": 367680,
+          "name": "Joana Jorge"
+        }
+      },
+      {
+        "id": 349202,
+        "name": "Rafaela Costa",
+        "dbMatch": {
+          "id": 349202,
+          "name": "Rafaela Costa"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 232611,
+        "name": "Daniela Freitas",
+        "dbMatch": {
+          "id": 232611,
+          "name": "Daniela F."
+        }
+      },
+      {
+        "id": 203789,
+        "name": "Inês Vitorino",
+        "dbMatch": {
+          "id": 203789,
+          "name": "Inês V."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-QP",
+    "time": "22:45",
+    "court": "CAMPO 5-DFL/DOM FIÚZA",
+    "result": "3-6  2-6",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 244666,
+        "name": "Carlos Cavaco",
+        "dbMatch": {
+          "id": 244666,
+          "name": "Carlos Cavaco"
+        }
+      },
+      {
+        "id": 188135,
+        "name": "Miguel Marques",
+        "dbMatch": {
+          "id": 188135,
+          "name": "Miguel M."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 222217,
+        "name": "Francisco Badalo",
+        "dbMatch": {
+          "id": 222217,
+          "name": "Francisco Badalo"
+        }
+      },
+      {
+        "id": 150962,
+        "name": "Manuel Maria Trigo",
+        "dbMatch": {
+          "id": 150962,
+          "name": "Manuel Maria Trigo"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 6 - F6-QP",
+    "time": "19:00",
+    "court": "CAMPO 6-JOMALUX",
+    "result": "4-6  1-6",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 343254,
+        "name": "Filipa Mendes",
+        "dbMatch": {
+          "id": 343254,
+          "name": "Filipa Mendes"
+        }
+      },
+      {
+        "id": 171340,
+        "name": "Kylie Barra",
+        "dbMatch": {
+          "id": 171340,
+          "name": "Kylie Barra"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 322721,
+        "name": "Raquel Pereira Mendes",
+        "dbMatch": {
+          "id": 322721,
+          "name": "Raquel M."
+        }
+      },
+      {
+        "id": 310461,
+        "name": "Joana Marques",
+        "dbMatch": {
+          "id": 310461,
+          "name": "Joana M."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-QP",
+    "time": "20:15",
+    "court": "CAMPO 6-JOMALUX",
+    "result": "2-6  0-6",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 261610,
+        "name": "Nuno Cardigos",
+        "dbMatch": {
+          "id": 261610,
+          "name": "Nuno Cardigos"
+        }
+      },
+      {
+        "id": 240479,
+        "name": "João Fernandes",
+        "dbMatch": {
+          "id": 240479,
+          "name": "João F."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 288167,
+        "name": "Tiago Luís",
+        "dbMatch": {
+          "id": 288167,
+          "name": "Tiago Luís"
+        }
+      },
+      {
+        "id": 191460,
+        "name": "Luís Rodrigues",
+        "dbMatch": {
+          "id": 191460,
+          "name": "Luís R."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-QP",
+    "time": "21:30",
+    "court": "CAMPO 6-JOMALUX",
+    "result": "1-6  1-6",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 323218,
+        "name": "Filipe Santos",
+        "dbMatch": {
+          "id": 323218,
+          "name": "Filipe"
+        }
+      },
+      {
+        "id": 175932,
+        "name": "Mauro Afonso",
+        "dbMatch": {
+          "id": 175932,
+          "name": "Mauro"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 168827,
+        "name": "Diogo Freire Ferreira",
+        "dbMatch": {
+          "id": 168827,
+          "name": "Diogo Freire Ferreira"
+        }
+      },
+      {
+        "id": 83733,
+        "name": "Luis Daniel",
+        "dbMatch": {
+          "id": 83733,
+          "name": "Luis Daniel"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-QP",
+    "time": "22:45",
+    "court": "CAMPO 6-JOMALUX",
+    "result": "2-6  5-7",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 279122,
+        "name": "João Violante",
+        "dbMatch": {
+          "id": 279122,
+          "name": "João V."
+        }
+      },
+      {
+        "id": 258649,
+        "name": "Rui Figueira",
+        "dbMatch": {
+          "id": 258649,
+          "name": "Rui F."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 251627,
+        "name": "André Campos",
+        "dbMatch": {
+          "id": 251627,
+          "name": "André Campos"
+        }
+      },
+      {
+        "id": 79087,
+        "name": "Fernando Silvério",
+        "dbMatch": {
+          "id": 79087,
+          "name": "Fernando Silvério"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 4 - F4-QP",
+    "time": "19:00",
+    "court": "CAMPO 7-CARLSBERG",
+    "result": "6-1  6-4",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 269416,
+        "name": "Tiz Morais",
+        "dbMatch": {
+          "id": 269416,
+          "name": "Tiz Morais"
+        }
+      },
+      {
+        "id": 149724,
+        "name": "Rita Jesus",
+        "dbMatch": {
+          "id": 149724,
+          "name": "Rita J."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 175914,
+        "name": "Marisa Almeida",
+        "dbMatch": {
+          "id": 175914,
+          "name": "Marisa A."
+        }
+      },
+      {
+        "id": 146760,
+        "name": "Patrícia Castanheira",
+        "dbMatch": {
+          "id": 146760,
+          "name": "Patrícia C."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-QP",
+    "time": "20:15",
+    "court": "CAMPO 7-CARLSBERG",
+    "result": "6-7(2)  6-1  10-2",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 334949,
+        "name": "Afonso Recto",
+        "dbMatch": {
+          "id": 334949,
+          "name": "Afonso R."
+        }
+      },
+      {
+        "id": 329924,
+        "name": "João Roso",
+        "dbMatch": {
+          "id": 329924,
+          "name": "João R."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 272964,
+        "name": "Tiago Meneses",
+        "dbMatch": {
+          "id": 272964,
+          "name": "Tiago Meneses"
+        }
+      },
+      {
+        "id": 90170,
+        "name": "André Soares",
+        "dbMatch": {
+          "id": 90170,
+          "name": "André Soares"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 4 - M4-QP",
+    "time": "21:30",
+    "court": "CAMPO 7-CARLSBERG",
+    "result": "6-2  6-2",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 103889,
+        "name": "Ricardo Neto",
+        "dbMatch": {
+          "id": 103889,
+          "name": "Ricardo Neto"
+        }
+      },
+      {
+        "id": 79107,
+        "name": "Bruno Lemos",
+        "dbMatch": {
+          "id": 79107,
+          "name": "Bruno L."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 207010,
+        "name": "Bernardo Raimond",
+        "dbMatch": {
+          "id": 207010,
+          "name": "Bernardo R."
+        }
+      },
+      {
+        "id": 87612,
+        "name": "Francisco Ventura",
+        "dbMatch": {
+          "id": 87612,
+          "name": "Francisco V."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-QP",
+    "time": "22:45",
+    "court": "CAMPO 7-CARLSBERG",
+    "result": "6-4  6-2",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 337765,
+        "name": "Eric Juma",
+        "dbMatch": {
+          "id": 337765,
+          "name": "Eric Juma"
+        }
+      },
+      {
+        "id": 180473,
+        "name": "Hugo Cardoso",
+        "dbMatch": {
+          "id": 180473,
+          "name": "Hugo Cardoso"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 198754,
+        "name": "Gonçalo Alves Silva",
+        "dbMatch": {
+          "id": 198754,
+          "name": "Gonçalo S."
+        }
+      },
+      {
+        "id": 166418,
+        "name": "Nuno Cachaço",
+        "dbMatch": {
+          "id": 166418,
+          "name": "Nuno C."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 6 - F6-QP",
+    "time": "19:00",
+    "court": "CAMPO 8- MPC",
+    "result": "7-6(6)  6-1",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 407874,
+        "name": "Catarina Hesse",
+        "dbMatch": {
+          "id": 407874,
+          "name": "Catarina P."
+        }
+      },
+      {
+        "id": 324304,
+        "name": "Rita Capitão",
+        "dbMatch": {
+          "id": 324304,
+          "name": "Rita C."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 505479,
+        "name": "Mariana Pires",
+        "dbMatch": {
+          "id": 505479,
+          "name": "Mariana P."
+        }
+      },
+      {
+        "id": 411981,
+        "name": "Maggie",
+        "dbMatch": {
+          "id": 411981,
+          "name": "Maggie"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-QP",
+    "time": "20:15",
+    "court": "CAMPO 8- MPC",
+    "result": "0-6  0-6",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 407714,
+        "name": "Pedro Gomes",
+        "dbMatch": {
+          "id": 407714,
+          "name": "Pedro G."
+        }
+      },
+      {
+        "id": 280031,
+        "name": "Gonçalo Nobre",
+        "dbMatch": {
+          "id": 280031,
+          "name": "Gonçalo N."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 275967,
+        "name": "Hélio Esteves",
+        "dbMatch": {
+          "id": 275967,
+          "name": "Hélio E."
+        }
+      },
+      {
+        "id": 218442,
+        "name": "João Penedo",
+        "dbMatch": {
+          "id": 218442,
+          "name": "João P."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 4 - M4-QP",
+    "time": "21:30",
+    "court": "CAMPO 8- MPC",
+    "result": "4-6  2-6",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 318241,
+        "name": "Bruno Pais",
+        "dbMatch": {
+          "id": 318241,
+          "name": "Bruno P."
+        }
+      },
+      {
+        "id": 272941,
+        "name": "Tiago Ferreira",
+        "dbMatch": {
+          "id": 272941,
+          "name": "Tiago F."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 172041,
+        "name": "José Vieira Marques",
+        "dbMatch": {
+          "id": 172041,
+          "name": "José M."
+        }
+      },
+      {
+        "id": 95089,
+        "name": "Pedro Oliveira",
+        "dbMatch": {
+          "id": 95089,
+          "name": "Pedro O."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-QP",
+    "time": "22:45",
+    "court": "CAMPO 8- MPC",
+    "result": "6-2  6-1",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 330876,
+        "name": "Leo",
+        "dbMatch": {
+          "id": 330876,
+          "name": "Leo P."
+        }
+      },
+      {
+        "id": 232933,
+        "name": "João Murta",
+        "dbMatch": {
+          "id": 232933,
+          "name": "João M."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 280085,
+        "name": "Pedro Guerreiro",
+        "dbMatch": {
+          "id": 280085,
+          "name": "Pedro G."
+        }
+      },
+      {
+        "id": 275638,
+        "name": "João Castro",
+        "dbMatch": {
+          "id": 275638,
+          "name": "Joao"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 6 - F6-QP",
+    "time": "19:00",
+    "court": "CAMPO 9-MPC",
+    "result": "0-6  2-6",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 416026,
+        "name": "Bruna  Pereira",
+        "dbMatch": {
+          "id": 416026,
+          "name": "Bruna P."
+        }
+      },
+      {
+        "id": 332093,
+        "name": "Cristina Recto",
+        "dbMatch": {
+          "id": 332093,
+          "name": "Cristina R."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 377170,
+        "name": "Fisoure",
+        "dbMatch": {
+          "id": 377170,
+          "name": "Fisoure"
+        }
+      },
+      {
+        "id": 268032,
+        "name": "Sofia Pinto",
+        "dbMatch": {
+          "id": 268032,
+          "name": "Sofia Pinto"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-QP",
+    "time": "20:15",
+    "court": "CAMPO 9-MPC",
+    "result": "6-1  6-2",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 347056,
+        "name": "Hugo Silva",
+        "dbMatch": {
+          "id": 347056,
+          "name": "Hugo Silva"
+        }
+      },
+      {
+        "id": 224978,
+        "name": "Nuno Vieri",
+        "dbMatch": {
+          "id": 224978,
+          "name": "Nuno Vieri"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 385503,
+        "name": "Rui José",
+        "dbMatch": {
+          "id": 385503,
+          "name": "Rui J."
+        }
+      },
+      {
+        "id": 287547,
+        "name": "Ricardo José",
+        "dbMatch": {
+          "id": 287547,
+          "name": "Ricardo José"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 4 - M4-QP",
+    "time": "21:30",
+    "court": "CAMPO 9-MPC",
+    "result": "6-3  6-3",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 364691,
+        "name": "Gonçalo Dias",
+        "dbMatch": {
+          "id": 364691,
+          "name": "Gonçalo D."
+        }
+      },
+      {
+        "id": 310634,
+        "name": "Tiago MLC Santos",
+        "dbMatch": {
+          "id": 310634,
+          "name": "Tiago S."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 139730,
+        "name": "João Pina dos Santos",
+        "dbMatch": {
+          "id": 139730,
+          "name": "João Pina dos Santos"
+        }
+      },
+      {
+        "id": 91715,
+        "name": "João Cidra",
+        "dbMatch": {
+          "id": 91715,
+          "name": "João C."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-QP",
+    "time": "",
+    "court": "Tba",
+    "result": "FC",
+    "date": "qui, 19 mar",
+    "sideA": [
+      {
+        "id": 362264,
+        "name": "Andre Romano",
+        "dbMatch": {
+          "id": 362264,
+          "name": "Andre R."
+        }
+      },
+      {
+        "id": 334067,
+        "name": "Ruben Antunes",
+        "dbMatch": {
+          "id": 334067,
+          "name": "Ruben A."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 167926,
+        "name": "Nuno Santos",
+        "dbMatch": {
+          "id": 167926,
+          "name": "Nuno Santos"
+        }
+      },
+      {
+        "id": 81629,
+        "name": "André Rodrigues",
+        "dbMatch": {
+          "id": 81629,
+          "name": "André R."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 2 - F2-QP",
+    "time": "19:00",
+    "court": "CAMPO 1-ANA JORGE - REMAX",
+    "result": "6-4  1-6  10-4",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 226832,
+        "name": "Leticia Rubín",
+        "dbMatch": {
+          "id": 226832,
+          "name": "Leticia R."
+        }
+      },
+      {
+        "id": 206507,
+        "name": "Sílvia Santos",
+        "dbMatch": {
+          "id": 206507,
+          "name": "Sílvia S."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 274609,
+        "name": "Beatriz Paixão",
+        "dbMatch": {
+          "id": 274609,
+          "name": "Beatriz P."
+        }
+      },
+      {
+        "id": 168648,
+        "name": "Suzana Kuffner",
+        "dbMatch": {
+          "id": 168648,
+          "name": "Suzana Kuffner"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 2 - F2-QP",
+    "time": "20:15",
+    "court": "CAMPO 1-ANA JORGE - REMAX",
+    "result": "2-6  4-6",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 14691,
+        "name": "Cristina Vinhas de Sousa",
+        "dbMatch": {
+          "id": 14691,
+          "name": "Cristina S."
+        }
+      },
+      {
+        "id": 44653,
+        "name": "Joana Telhada",
+        "dbMatch": {
+          "id": 44653,
+          "name": "Joana T."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 232796,
+        "name": "Carolina Gonçalves",
+        "dbMatch": {
+          "id": 232796,
+          "name": "Carolina G."
+        }
+      },
+      {
+        "id": 106126,
+        "name": "Beatriz Lopes",
+        "dbMatch": {
+          "id": 106126,
+          "name": "Beatriz L."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 4 - F4-QP",
+    "time": "21:30",
+    "court": "CAMPO 1-ANA JORGE - REMAX",
+    "result": "6-2  1-6  10-6",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 412842,
+        "name": "Inês Alves Correia",
+        "dbMatch": {
+          "id": 412842,
+          "name": "Inês Alves Correia"
+        }
+      },
+      {
+        "id": 174955,
+        "name": "Margarida Martinez",
+        "dbMatch": {
+          "id": 174955,
+          "name": "Margarida Martinez"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 237393,
+        "name": "Débora Bicho",
+        "dbMatch": {
+          "id": 237393,
+          "name": "Débora B."
+        }
+      },
+      {
+        "id": 65090,
+        "name": "Maria Inês Santos",
+        "dbMatch": {
+          "id": 65090,
+          "name": "Maria S."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 3 - M3-QP",
+    "time": "22:45",
+    "court": "CAMPO 1-ANA JORGE - REMAX",
+    "result": "1-6  4-6",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 342346,
+        "name": "Pedro Quental Cruz",
+        "dbMatch": {
+          "id": 342346,
+          "name": "Pedro C."
+        }
+      },
+      {
+        "id": 166761,
+        "name": "Bernardo Antunes",
+        "dbMatch": {
+          "id": 166761,
+          "name": "Bernardo A."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 235743,
+        "name": "MIGUEL GOMES",
+        "dbMatch": {
+          "id": 235743,
+          "name": "Miguel G."
+        }
+      },
+      {
+        "id": 182404,
+        "name": "Bernardo Serra",
+        "dbMatch": {
+          "id": 182404,
+          "name": "Bernardo S."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-QP",
+    "time": "19:00",
+    "court": "CAMPO 2- AXIANS",
+    "result": "6-1  6-3",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 337765,
+        "name": "Eric Juma",
+        "dbMatch": {
+          "id": 337765,
+          "name": "Eric Juma"
+        }
+      },
+      {
+        "id": 180473,
+        "name": "Hugo Cardoso",
+        "dbMatch": {
+          "id": 180473,
+          "name": "Hugo Cardoso"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 167926,
+        "name": "Nuno Santos",
+        "dbMatch": {
+          "id": 167926,
+          "name": "Nuno Santos"
+        }
+      },
+      {
+        "id": 81629,
+        "name": "André Rodrigues",
+        "dbMatch": {
+          "id": 81629,
+          "name": "André R."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 2 - F2-QP",
+    "time": "20:15",
+    "court": "CAMPO 2- AXIANS",
+    "result": "6-3  6-2",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 175293,
+        "name": "Mónica Galambas",
+        "dbMatch": {
+          "id": 175293,
+          "name": "Mónica Galambas"
+        }
+      },
+      {
+        "id": 23233,
+        "name": "Maria Rodrigues",
+        "dbMatch": {
+          "id": 23233,
+          "name": "Maria R."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 103640,
+        "name": "Paula Felícia",
+        "dbMatch": {
+          "id": 103640,
+          "name": "Paula F."
+        }
+      },
+      {
+        "id": 61810,
+        "name": "Kateryna Kharych",
+        "dbMatch": {
+          "id": 61810,
+          "name": "Kateryna K."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 2 - M2-QP",
+    "time": "21:30",
+    "court": "CAMPO 2- AXIANS",
+    "result": "6-1  6-2",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 150181,
+        "name": "Alejandro Solis",
+        "dbMatch": {
+          "id": 150181,
+          "name": "Alejandro S."
+        }
+      },
+      {
+        "id": 97966,
+        "name": "Stef",
+        "dbMatch": {
+          "id": 97966,
+          "name": "Stéphane C."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 74147,
+        "name": "Nuno Antunes",
+        "dbMatch": {
+          "id": 74147,
+          "name": "Nuno A."
+        }
+      },
+      {
+        "id": 103753,
+        "name": "Ricardo Quintela Costa",
+        "dbMatch": {
+          "id": 103753,
+          "name": "Ricardo C."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 3 - M3-QP",
+    "time": "22:45",
+    "court": "CAMPO 2- AXIANS",
+    "result": "5-7  2-6",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 225326,
+        "name": "Hugo Fox",
+        "dbMatch": {
+          "id": 225326,
+          "name": "Hugo Fox"
+        }
+      },
+      {
+        "id": 84029,
+        "name": "Fábio Martins",
+        "dbMatch": {
+          "id": 84029,
+          "name": "Fábio Martins"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 176720,
+        "name": "Tiago Miranda",
+        "dbMatch": {
+          "id": 176720,
+          "name": "Tiago Miranda"
+        }
+      },
+      {
+        "id": 143139,
+        "name": "Francisco Formigal",
+        "dbMatch": {
+          "id": 143139,
+          "name": "Francisco F."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-QP",
+    "time": "19:00",
+    "court": "CAMPO 3-MPC",
+    "result": "6-1  7-5  11-9",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 353011,
+        "name": "Miguel Henriques",
+        "dbMatch": {
+          "id": 353011,
+          "name": "Miguel H."
+        }
+      },
+      {
+        "id": 142695,
+        "name": "Tiago de Paula",
+        "dbMatch": {
+          "id": 142695,
+          "name": "Tiago P."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 356319,
+        "name": "Dani",
+        "dbMatch": {
+          "id": 356319,
+          "name": "Dani"
+        }
+      },
+      {
+        "id": 331340,
+        "name": "João Lopes",
+        "dbMatch": {
+          "id": 331340,
+          "name": "João Lopes"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 3 - M3-QP",
+    "time": "20:15",
+    "court": "CAMPO 3-MPC",
+    "result": "2-6  3-6",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 382112,
+        "name": "Fernando Sánchez",
+        "dbMatch": {
+          "id": 382112,
+          "name": "Fernando S."
+        }
+      },
+      {
+        "id": 175351,
+        "name": "Edgar Carvalho",
+        "dbMatch": {
+          "id": 175351,
+          "name": "Edgar Carvalho"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 182428,
+        "name": "João Marques",
+        "dbMatch": {
+          "id": 182428,
+          "name": "João Marques"
+        }
+      },
+      {
+        "id": 136126,
+        "name": "Guilherme Gomes",
+        "dbMatch": {
+          "id": 136126,
+          "name": "Guilherme G."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-Quali",
+    "time": "21:30",
+    "court": "CAMPO 3-MPC",
+    "result": "6-2  6-1",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 465688,
+        "name": "Tiago Costa",
+        "dbMatch": {
+          "id": 465688,
+          "name": "Tiago C."
+        }
+      },
+      {
+        "id": 288321,
+        "name": "Kiko",
+        "dbMatch": {
+          "id": 288321,
+          "name": "Kiko"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 332094,
+        "name": "Henrique Recto",
+        "dbMatch": {
+          "id": 332094,
+          "name": "Henrique Recto"
+        }
+      },
+      {
+        "id": 158508,
+        "name": "Bernardo Barros",
+        "dbMatch": {
+          "id": 158508,
+          "name": "Bernardo B."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 3 - M3-QP",
+    "time": "22:45",
+    "court": "CAMPO 3-MPC",
+    "result": "2-6  3-6",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 284411,
+        "name": "Pedro Lin Moniz",
+        "dbMatch": {
+          "id": 284411,
+          "name": "Pedro Lin Moniz"
+        }
+      },
+      {
+        "id": 171711,
+        "name": "Marcelo Vicente",
+        "dbMatch": {
+          "id": 171711,
+          "name": "Marcelo V."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 413414,
+        "name": "Rodrigo Neves",
+        "dbMatch": {
+          "id": 413414,
+          "name": "Rodrigo Neves"
+        }
+      },
+      {
+        "id": 12050,
+        "name": "Filipe Oleacu",
+        "dbMatch": {
+          "id": 12050,
+          "name": "Filipe O."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-Quali",
+    "time": "19:00",
+    "court": "CAMPO 4-MPC",
+    "result": "FC",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 307480,
+        "name": "Rodrigo Martins",
+        "dbMatch": {
+          "id": 307480,
+          "name": "Rodrigo M."
+        }
+      },
+      {
+        "id": 204356,
+        "name": "Henrique Barreto",
+        "dbMatch": {
+          "id": 204356,
+          "name": "Henrique B."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 465688,
+        "name": "Tiago Costa",
+        "dbMatch": {
+          "id": 465688,
+          "name": "Tiago C."
+        }
+      },
+      {
+        "id": 288321,
+        "name": "Kiko",
+        "dbMatch": {
+          "id": 288321,
+          "name": "Kiko"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 2 - M2-QP",
+    "time": "20:15",
+    "court": "CAMPO 4-MPC",
+    "result": "6-4  6-2",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 352074,
+        "name": "Francisco Amorim",
+        "dbMatch": {
+          "id": 352074,
+          "name": "Francisco Amorim"
+        }
+      },
+      {
+        "id": 136019,
+        "name": "Ricardo Almeida",
+        "dbMatch": {
+          "id": 136019,
+          "name": "Ricardo Almeida"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 229346,
+        "name": "Gonçalo Pacheco",
+        "dbMatch": {
+          "id": 229346,
+          "name": "Gonçalo P."
+        }
+      },
+      {
+        "id": 211976,
+        "name": "Vasco Peixoto",
+        "dbMatch": {
+          "id": 211976,
+          "name": "Vasco P."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 4 - M4-QP",
+    "time": "21:30",
+    "court": "CAMPO 4-MPC",
+    "result": "6-4  6-3",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 274313,
+        "name": "Eduardo Osório",
+        "dbMatch": {
+          "id": 274313,
+          "name": "Eduardo O."
+        }
+      },
+      {
+        "id": 103717,
+        "name": "Lousada",
+        "dbMatch": {
+          "id": 103717,
+          "name": "Luis L."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 333634,
+        "name": "Pedro Godinho",
+        "dbMatch": {
+          "id": 333634,
+          "name": "Pedro G."
+        }
+      },
+      {
+        "id": 227950,
+        "name": "Filipe Franco Frazão",
+        "dbMatch": {
+          "id": 227950,
+          "name": "Franco F."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 4 - M4-QP",
+    "time": "22:45",
+    "court": "CAMPO 4-MPC",
+    "result": "6-3  6-1",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 226990,
+        "name": "Weder Dos Santos",
+        "dbMatch": {
+          "id": 226990,
+          "name": "Weder S."
+        }
+      },
+      {
+        "id": 176181,
+        "name": "Guilherme Afonso",
+        "dbMatch": {
+          "id": 176181,
+          "name": "Guilherme A."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 325114,
+        "name": "Joao Rego",
+        "dbMatch": {
+          "id": 325114,
+          "name": "Joao R."
+        }
+      },
+      {
+        "id": 30133,
+        "name": "Victor Morais",
+        "dbMatch": {
+          "id": 30133,
+          "name": "Victor M."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 4 - M4-QP",
+    "time": "19:00",
+    "court": "CAMPO 5-DFL/DOM FIÚZA",
+    "result": "6-1  6-0",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 251905,
+        "name": "André Martins",
+        "dbMatch": {
+          "id": 251905,
+          "name": "André Martins"
+        }
+      },
+      {
+        "id": 104504,
+        "name": "Manuel Rocha",
+        "dbMatch": {
+          "id": 104504,
+          "name": "Manuel Rocha"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 342562,
+        "name": "Gustavo Barrela",
+        "dbMatch": {
+          "id": 342562,
+          "name": "Gustavo B."
+        }
+      },
+      {
+        "id": 232181,
+        "name": "Miguel Pita",
+        "dbMatch": {
+          "id": 232181,
+          "name": "Miguel P."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 3 - M3-QP",
+    "time": "20:15",
+    "court": "CAMPO 5-DFL/DOM FIÚZA",
+    "result": "3-6  4-6",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 303661,
+        "name": "Tiago Lavrador",
+        "dbMatch": {
+          "id": 303661,
+          "name": "Tiago Lavrador"
+        }
+      },
+      {
+        "id": 62863,
+        "name": "João Ruivo",
+        "dbMatch": {
+          "id": 62863,
+          "name": "João Ruivo"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 207509,
+        "name": "Gonçalo Branco",
+        "dbMatch": {
+          "id": 207509,
+          "name": "Gonçalo B."
+        }
+      },
+      {
+        "id": 118957,
+        "name": "Tomás Melro",
+        "dbMatch": {
+          "id": 118957,
+          "name": "Tomás Melro"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 2 - M2-QP",
+    "time": "21:30",
+    "court": "CAMPO 5-DFL/DOM FIÚZA",
+    "result": "6-1  2-6  10-4",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 223614,
+        "name": "Diogo Miguel Silva",
+        "dbMatch": {
+          "id": 223614,
+          "name": "Diogo S."
+        }
+      },
+      {
+        "id": 180198,
+        "name": "Rafael Carvalho",
+        "dbMatch": {
+          "id": 180198,
+          "name": "Rafael Carvalho"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 92781,
+        "name": "Vasco Leslie",
+        "dbMatch": {
+          "id": 92781,
+          "name": "Vasco Leslie"
+        }
+      },
+      {
+        "id": 77334,
+        "name": "João Almeida Dias",
+        "dbMatch": {
+          "id": 77334,
+          "name": "João Almeida Dias"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 3 - M3-QP",
+    "time": "22:45",
+    "court": "CAMPO 5-DFL/DOM FIÚZA",
+    "result": "3-6  6-3  10-3",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 233234,
+        "name": "Tomás Pinheiro",
+        "dbMatch": {
+          "id": 233234,
+          "name": "Tomás Pinheiro"
+        }
+      },
+      {
+        "id": 119340,
+        "name": "Rodrigo Fortunato",
+        "dbMatch": {
+          "id": 119340,
+          "name": "Rodrigo F."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 246011,
+        "name": "Ricardo Marques",
+        "dbMatch": {
+          "id": 246011,
+          "name": "Ricardo Marques"
+        }
+      },
+      {
+        "id": 101802,
+        "name": "Luís Soares",
+        "dbMatch": {
+          "id": 101802,
+          "name": "Luís Soares"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 5 - F5-QP",
+    "time": "19:00",
+    "court": "CAMPO 6-JOMALUX",
+    "result": "1-6  0-6",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 221217,
+        "name": "Francisca Santos",
+        "dbMatch": {
+          "id": 221217,
+          "name": "Francisca S."
+        }
+      },
+      {
+        "id": 243784,
+        "name": "Inês Nabais",
+        "dbMatch": {
+          "id": 243784,
+          "name": "Inês N."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 90414,
+        "name": "Ana Fernandes",
+        "dbMatch": {
+          "id": 90414,
+          "name": "Ana F."
+        }
+      },
+      {
+        "id": 227931,
+        "name": "Margarida Realista",
+        "dbMatch": {
+          "id": 227931,
+          "name": "Margarida R."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 2 - M2-QP",
+    "time": "20:15",
+    "court": "CAMPO 6-JOMALUX",
+    "result": "6-3  3-6  6-10",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 233705,
+        "name": "Salvador Kendall",
+        "dbMatch": {
+          "id": 233705,
+          "name": "Salvador K."
+        }
+      },
+      {
+        "id": 230223,
+        "name": "Rui Janota",
+        "dbMatch": {
+          "id": 230223,
+          "name": "Rui Janota"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 287585,
+        "name": "Diarmuid McGann",
+        "dbMatch": {
+          "id": 287585,
+          "name": "Diarmuid McGann"
+        }
+      },
+      {
+        "id": 92551,
+        "name": "Filipe Pereira",
+        "dbMatch": {
+          "id": 92551,
+          "name": "Filipe P."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 2 - M2-QP",
+    "time": "21:30",
+    "court": "CAMPO 6-JOMALUX",
+    "result": "4-6  4-6",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 54234,
+        "name": "Ricardo Azurara",
+        "dbMatch": {
+          "id": 54234,
+          "name": "Ricardo A."
+        }
+      },
+      {
+        "id": 44616,
+        "name": "Gonçalo Vasconcelos",
+        "dbMatch": {
+          "id": 44616,
+          "name": "Gonçalo Vasconcelos"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 83613,
+        "name": "Rodrigo Leite",
+        "dbMatch": {
+          "id": 83613,
+          "name": "Rodrigo L."
+        }
+      },
+      {
+        "id": 78045,
+        "name": "Filipe Varão",
+        "dbMatch": {
+          "id": 78045,
+          "name": "Filipe Varão"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 3 - M3-QP",
+    "time": "22:45",
+    "court": "CAMPO 6-JOMALUX",
+    "result": "5-7  2-6",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 316843,
+        "name": "Martim Henriques",
+        "dbMatch": {
+          "id": 316843,
+          "name": "Martim H."
+        }
+      },
+      {
+        "id": 76887,
+        "name": "Ricardo Varela",
+        "dbMatch": {
+          "id": 76887,
+          "name": "Ricardo Varela"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 411446,
+        "name": "Leonardo Rua",
+        "dbMatch": {
+          "id": 411446,
+          "name": "Leonardo Rua"
+        }
+      },
+      {
+        "id": 92460,
+        "name": "Ricardo Rua",
+        "dbMatch": {
+          "id": 92460,
+          "name": "Ricardo Rua"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 2 - F2-QP",
+    "time": "19:00",
+    "court": "CAMPO 7-CARLSBERG",
+    "result": "6-7(5)  6-4  10-2",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 370873,
+        "name": "Regina Orraca",
+        "dbMatch": {
+          "id": 370873,
+          "name": "Regina O."
+        }
+      },
+      {
+        "id": 282982,
+        "name": "Beatriz Katzenstein",
+        "dbMatch": {
+          "id": 282982,
+          "name": "Beatriz K."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 243343,
+        "name": "Sofia Albuquerque",
+        "dbMatch": {
+          "id": 243343,
+          "name": "Sofia Albuquerque"
+        }
+      },
+      {
+        "id": 75754,
+        "name": "Sara Nobre",
+        "dbMatch": {
+          "id": 75754,
+          "name": "Sara Nobre"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 2 - M2-QP",
+    "time": "20:15",
+    "court": "CAMPO 7-CARLSBERG",
+    "result": "6-4  6-4",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 137590,
+        "name": "JP Freitas",
+        "dbMatch": {
+          "id": 137590,
+          "name": "João F."
+        }
+      },
+      {
+        "id": 101739,
+        "name": "Samuel Oliveira",
+        "dbMatch": {
+          "id": 101739,
+          "name": "Samuel Oliveira"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 324518,
+        "name": "João Félix",
+        "dbMatch": {
+          "id": 324518,
+          "name": "João Félix"
+        }
+      },
+      {
+        "id": 78123,
+        "name": "Diogo Sanches",
+        "dbMatch": {
+          "id": 78123,
+          "name": "Diogo S."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 2 - M2-QP",
+    "time": "21:30",
+    "court": "CAMPO 7-CARLSBERG",
+    "result": "6-4  6-7(4)  4-10",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 77248,
+        "name": "André Arrimar",
+        "dbMatch": {
+          "id": 77248,
+          "name": "Andre A."
+        }
+      },
+      {
+        "id": 23639,
+        "name": "Tiago Pratas",
+        "dbMatch": {
+          "id": 23639,
+          "name": "Tiago P."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 252143,
+        "name": "Franco Noriega",
+        "dbMatch": {
+          "id": 252143,
+          "name": "Franco Noriega"
+        }
+      },
+      {
+        "id": 81583,
+        "name": "David Pinto",
+        "dbMatch": {
+          "id": 81583,
+          "name": "David Pinto"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 3 - M3-QP",
+    "time": "22:45",
+    "court": "CAMPO 7-CARLSBERG",
+    "result": "6-3  6-3",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 242128,
+        "name": "Filipe Penha",
+        "dbMatch": {
+          "id": 242128,
+          "name": "Filipe Penha"
+        }
+      },
+      {
+        "id": 23412,
+        "name": "Pedro Borges",
+        "dbMatch": {
+          "id": 23412,
+          "name": "Pedro Borges"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 175059,
+        "name": "André Chambel",
+        "dbMatch": {
+          "id": 175059,
+          "name": "André Chambel"
+        }
+      },
+      {
+        "id": 40783,
+        "name": "Bruno Martins",
+        "dbMatch": {
+          "id": 40783,
+          "name": "Bruno Martins"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 3 - M3-QP",
+    "time": "19:00",
+    "court": "CAMPO 8- MPC",
+    "result": "5-7  2-6",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 257606,
+        "name": "Guilherme Carvalho",
+        "dbMatch": {
+          "id": 257606,
+          "name": "Guilherme Carvalho"
+        }
+      },
+      {
+        "id": 102625,
+        "name": "Bernardo Pereira",
+        "dbMatch": {
+          "id": 102625,
+          "name": "Bernardo Pereira"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 230365,
+        "name": "Vasco Ribeiro",
+        "dbMatch": {
+          "id": 230365,
+          "name": "VASCO R."
+        }
+      },
+      {
+        "id": 102296,
+        "name": "Afonso Esteves",
+        "dbMatch": {
+          "id": 102296,
+          "name": "Afonso E."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 3 - M3-QP",
+    "time": "20:15",
+    "court": "CAMPO 8- MPC",
+    "result": "6-4  7-6(3)",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 227082,
+        "name": "Rui Terroso",
+        "dbMatch": {
+          "id": 227082,
+          "name": "Rui Terroso"
+        }
+      },
+      {
+        "id": 186539,
+        "name": "Ricardo Ginja",
+        "dbMatch": {
+          "id": 186539,
+          "name": "Ricardo Ginja"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 136010,
+        "name": "Vasco Guimarães",
+        "dbMatch": {
+          "id": 136010,
+          "name": "Vasco G."
+        }
+      },
+      {
+        "id": 84199,
+        "name": "Ricardo Conceição",
+        "dbMatch": {
+          "id": 84199,
+          "name": "RICARDO C."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 2 - M2-QP",
+    "time": "21:30",
+    "court": "CAMPO 8- MPC",
+    "result": "6-2  7-6(5)",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 154127,
+        "name": "Miguel Santos",
+        "dbMatch": {
+          "id": 154127,
+          "name": "Miguel S."
+        }
+      },
+      {
+        "id": 119328,
+        "name": "Rodrigo Alcobia",
+        "dbMatch": {
+          "id": 119328,
+          "name": "Rodrigo Alcobia"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 231440,
+        "name": "Daniel Parente",
+        "dbMatch": {
+          "id": 231440,
+          "name": "Daniel Parente"
+        }
+      },
+      {
+        "id": 99359,
+        "name": "Simon Gaspar",
+        "dbMatch": {
+          "id": 99359,
+          "name": "Simon G."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 3 - M3-QP",
+    "time": "22:45",
+    "court": "CAMPO 8- MPC",
+    "result": "6-4  6-7(5)  3-10",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 415344,
+        "name": "Duarte Girão",
+        "dbMatch": {
+          "id": 415344,
+          "name": "Duarte G."
+        }
+      },
+      {
+        "id": 86865,
+        "name": "Joel Ribeiro",
+        "dbMatch": {
+          "id": 86865,
+          "name": "Joel Ribeiro"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 162669,
+        "name": "André Santos",
+        "dbMatch": {
+          "id": 162669,
+          "name": "André S."
+        }
+      },
+      {
+        "id": 145765,
+        "name": "João Marques Leal",
+        "dbMatch": {
+          "id": 145765,
+          "name": "João L."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 3 - F3-QP",
+    "time": "19:00",
+    "court": "CAMPO 9-MPC",
+    "result": "1-6  6-3  6-10",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 191726,
+        "name": "PatriciaSantos",
+        "dbMatch": {
+          "id": 191726,
+          "name": "Patricia S."
+        }
+      },
+      {
+        "id": 102129,
+        "name": "Liliana Araújo",
+        "dbMatch": {
+          "id": 102129,
+          "name": "Liliana A."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 251285,
+        "name": "Maria Simões",
+        "dbMatch": {
+          "id": 251285,
+          "name": "Maria Simões"
+        }
+      },
+      {
+        "id": 174986,
+        "name": "Mariana Ribeiro",
+        "dbMatch": {
+          "id": 174986,
+          "name": "Mariana Ribeiro"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 3 - M3-QP",
+    "time": "20:15",
+    "court": "CAMPO 9-MPC",
+    "result": "6-4  4-6  10-8",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 92970,
+        "name": "Goncalo",
+        "dbMatch": {
+          "id": 92970,
+          "name": "Goncalo D."
+        }
+      },
+      {
+        "id": 176450,
+        "name": "Hugo Matias Marques",
+        "dbMatch": {
+          "id": 176450,
+          "name": "Hugo Matias Marques"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 241122,
+        "name": "Diogo Oliveira",
+        "dbMatch": {
+          "id": 241122,
+          "name": "Diogo O."
+        }
+      },
+      {
+        "id": 178332,
+        "name": "Guilherme Gomes",
+        "dbMatch": {
+          "id": 178332,
+          "name": "Guilherme G."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 2 - M2-QP",
+    "time": "21:30",
+    "court": "CAMPO 9-MPC",
+    "result": "3-6  4-6",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 246563,
+        "name": "Rafael Dos Santos Alturas",
+        "dbMatch": {
+          "id": 246563,
+          "name": "Rafael A."
+        }
+      },
+      {
+        "id": 42415,
+        "name": "Tiago Melro",
+        "dbMatch": {
+          "id": 42415,
+          "name": "Tiago M."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 183229,
+        "name": "Pedro Valido",
+        "dbMatch": {
+          "id": 183229,
+          "name": "Pedro V."
+        }
+      },
+      {
+        "id": 88385,
+        "name": "Ricardo Vidigal",
+        "dbMatch": {
+          "id": 88385,
+          "name": "Ricardo V."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 3 - M3-QP",
+    "time": "",
+    "court": "Tba",
+    "result": "FC",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 40756,
+        "name": "Luís Bento",
+        "dbMatch": {
+          "id": 40756,
+          "name": "Luís B."
+        }
+      },
+      {
+        "id": 36745,
+        "name": "Paulo Silva",
+        "dbMatch": {
+          "id": 36745,
+          "name": "Paulo S."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 87828,
+        "name": "Rodrigo Raposo",
+        "dbMatch": {
+          "id": 87828,
+          "name": "Rodrigo Raposo"
+        }
+      },
+      {
+        "id": 44610,
+        "name": "Nuno Correia",
+        "dbMatch": {
+          "id": 44610,
+          "name": "Nuno Correia"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-QP",
+    "time": "",
+    "court": "Tba",
+    "result": "FC",
+    "date": "sex, 20 mar",
+    "sideA": [
+      {
+        "id": 241233,
+        "name": "Pedro Matos",
+        "dbMatch": {
+          "id": 241233,
+          "name": "Pedro M."
+        }
+      },
+      {
+        "id": 165548,
+        "name": "Hugo Santos",
+        "dbMatch": {
+          "id": 165548,
+          "name": "Hugo S."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 181462,
+        "name": "Pedro Gonçalves",
+        "dbMatch": {
+          "id": 181462,
+          "name": "Pedro G."
+        }
+      },
+      {
+        "id": 147794,
+        "name": "Luis Paulino",
+        "dbMatch": {
+          "id": 147794,
+          "name": "Luis P."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 6 - F6-QP",
+    "time": "Início às 09:00",
+    "court": "CAMPO 1-ANA JORGE - REMAX",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 303774,
+        "name": "Leo Freitas",
+        "dbMatch": {
+          "id": 303774,
+          "name": "Leocádia F."
+        }
+      },
+      {
+        "id": 273626,
+        "name": "Filipa Romeiras",
+        "dbMatch": {
+          "id": 273626,
+          "name": "Filipa R."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 501869,
+        "name": "Joana Alves",
+        "dbMatch": {
+          "id": 501869,
+          "name": "Joana Alves"
+        }
+      },
+      {
+        "id": 430725,
+        "name": "Bruna Bilro",
+        "dbMatch": {
+          "id": 430725,
+          "name": "Bruna Bilro"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 5 - F5-QP",
+    "time": "Não antes de 10:15",
+    "court": "CAMPO 1-ANA JORGE - REMAX",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 316343,
+        "name": "Marta Hidalgo",
+        "dbMatch": {
+          "id": 316343,
+          "name": "Marta H."
+        }
+      },
+      {
+        "id": 268162,
+        "name": "teresa adónis",
+        "dbMatch": {
+          "id": 268162,
+          "name": "teresa adónis"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 303579,
+        "name": "Sofia D. Rolão",
+        "dbMatch": {
+          "id": 303579,
+          "name": "Sofia D. Rolão"
+        }
+      },
+      {
+        "id": 40692,
+        "name": "Maria José Lima",
+        "dbMatch": {
+          "id": 40692,
+          "name": "Maria José Lima"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 2 - F2-QP",
+    "time": "Início às 11:30",
+    "court": "CAMPO 1-ANA JORGE - REMAX",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 232796,
+        "name": "Carolina Gonçalves",
+        "dbMatch": {
+          "id": 232796,
+          "name": "Carolina G."
+        }
+      },
+      {
+        "id": 106126,
+        "name": "Beatriz Lopes",
+        "dbMatch": {
+          "id": 106126,
+          "name": "Beatriz L."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 87559,
+        "name": "Débora Marques",
+        "dbMatch": {
+          "id": 87559,
+          "name": "Débora M."
+        }
+      },
+      {
+        "id": 229091,
+        "name": "Maria Vacas",
+        "dbMatch": {
+          "id": 229091,
+          "name": "Maria Vacas"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 4 - F4-QP",
+    "time": "Não antes de 13:00",
+    "court": "CAMPO 1-ANA JORGE - REMAX",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 344739,
+        "name": "Filipa Naia",
+        "dbMatch": {
+          "id": 344739,
+          "name": "Filipa N."
+        }
+      },
+      {
+        "id": 332502,
+        "name": "Margarida Rodriguez",
+        "dbMatch": {
+          "id": 332502,
+          "name": "Margarida S."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 367680,
+        "name": "Joana Jorge",
+        "dbMatch": {
+          "id": 367680,
+          "name": "Joana Jorge"
+        }
+      },
+      {
+        "id": 349202,
+        "name": "Rafaela Costa",
+        "dbMatch": {
+          "id": 349202,
+          "name": "Rafaela Costa"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-QP",
+    "time": "Início às 14:15",
+    "court": "CAMPO 1-ANA JORGE - REMAX",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 242504,
+        "name": "Tomás Silva",
+        "dbMatch": {
+          "id": 242504,
+          "name": "Tomás S."
+        }
+      },
+      {
+        "id": 234718,
+        "name": "André Moniz",
+        "dbMatch": {
+          "id": 234718,
+          "name": "Moniz"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 353776,
+        "name": "Diogo Nascimento",
+        "dbMatch": {
+          "id": 353776,
+          "name": "Diogo N."
+        }
+      },
+      {
+        "id": 209491,
+        "name": "Rafael Vidigal",
+        "dbMatch": {
+          "id": 209491,
+          "name": "Rafael V."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 3 - M3-QP",
+    "time": "Não antes de 15:30",
+    "court": "CAMPO 1-ANA JORGE - REMAX",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 141697,
+        "name": "Martim Contreras Garcia",
+        "dbMatch": {
+          "id": 141697,
+          "name": "Martim Contreras Garcia"
+        }
+      },
+      {
+        "id": 16292,
+        "name": "Martim Flores Ribeiro",
+        "dbMatch": {
+          "id": 16292,
+          "name": "Martim Flores Ribeiro"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 106127,
+        "name": "Francisco Ventura",
+        "dbMatch": {
+          "id": 106127,
+          "name": "Francisco Ventura"
+        }
+      },
+      {
+        "id": 248,
+        "name": "Tiago Poeira",
+        "dbMatch": {
+          "id": 248,
+          "name": "Tiago P."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 2 - M2-QP",
+    "time": "Início às 17:00",
+    "court": "CAMPO 1-ANA JORGE - REMAX",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 137590,
+        "name": "JP Freitas",
+        "dbMatch": {
+          "id": 137590,
+          "name": "João F."
+        }
+      },
+      {
+        "id": 101739,
+        "name": "Samuel Oliveira",
+        "dbMatch": {
+          "id": 101739,
+          "name": "Samuel Oliveira"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 352074,
+        "name": "Francisco Amorim",
+        "dbMatch": {
+          "id": 352074,
+          "name": "Francisco Amorim"
+        }
+      },
+      {
+        "id": 136019,
+        "name": "Ricardo Almeida",
+        "dbMatch": {
+          "id": 136019,
+          "name": "Ricardo Almeida"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 3 - M3-QP",
+    "time": "Não antes de 18:15",
+    "court": "CAMPO 1-ANA JORGE - REMAX",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 233234,
+        "name": "Tomás Pinheiro",
+        "dbMatch": {
+          "id": 233234,
+          "name": "Tomás Pinheiro"
+        }
+      },
+      {
+        "id": 119340,
+        "name": "Rodrigo Fortunato",
+        "dbMatch": {
+          "id": 119340,
+          "name": "Rodrigo F."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 87828,
+        "name": "Rodrigo Raposo",
+        "dbMatch": {
+          "id": 87828,
+          "name": "Rodrigo Raposo"
+        }
+      },
+      {
+        "id": 44610,
+        "name": "Nuno Correia",
+        "dbMatch": {
+          "id": 44610,
+          "name": "Nuno Correia"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 4 - M4-QP",
+    "time": "Início às 19:30",
+    "court": "CAMPO 1-ANA JORGE - REMAX",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 201131,
+        "name": "Gonçalo Gomes",
+        "dbMatch": {
+          "id": 201131,
+          "name": "Gonçalo Gomes"
+        }
+      },
+      {
+        "id": 185180,
+        "name": "Marco Fernandes",
+        "dbMatch": {
+          "id": 185180,
+          "name": "Marco F."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 274313,
+        "name": "Eduardo Osório",
+        "dbMatch": {
+          "id": 274313,
+          "name": "Eduardo O."
+        }
+      },
+      {
+        "id": 103717,
+        "name": "Lousada",
+        "dbMatch": {
+          "id": 103717,
+          "name": "Luis L."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-QP",
+    "time": "Não antes de 21:00",
+    "court": "CAMPO 1-ANA JORGE - REMAX",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 347056,
+        "name": "Hugo Silva",
+        "dbMatch": {
+          "id": 347056,
+          "name": "Hugo Silva"
+        }
+      },
+      {
+        "id": 224978,
+        "name": "Nuno Vieri",
+        "dbMatch": {
+          "id": 224978,
+          "name": "Nuno Vieri"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 503257,
+        "name": "Rafael Dos Santos Lopes",
+        "dbMatch": {
+          "id": 503257,
+          "name": "Rafael Dos Santos Lopes"
+        }
+      },
+      {
+        "id": 314821,
+        "name": "Gonçalo Prata",
+        "dbMatch": {
+          "id": 314821,
+          "name": "Gonçalo Prata"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 6 - F6-QP",
+    "time": "Início às 09:00",
+    "court": "CAMPO 2- AXIANS",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 322721,
+        "name": "Raquel Pereira Mendes",
+        "dbMatch": {
+          "id": 322721,
+          "name": "Raquel M."
+        }
+      },
+      {
+        "id": 310461,
+        "name": "Joana Marques",
+        "dbMatch": {
+          "id": 310461,
+          "name": "Joana M."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 334200,
+        "name": "Carolina Galiano",
+        "dbMatch": {
+          "id": 334200,
+          "name": "Carolina Galiano"
+        }
+      },
+      {
+        "id": 212698,
+        "name": "Nádia Tarouca",
+        "dbMatch": {
+          "id": 212698,
+          "name": "Nádia T."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 5 - F5-QP",
+    "time": "Não antes de 10:15",
+    "court": "CAMPO 2- AXIANS",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 317450,
+        "name": "Mariana Marques do Carmo",
+        "dbMatch": {
+          "id": 317450,
+          "name": "Mariana C."
+        }
+      },
+      {
+        "id": 186224,
+        "name": "Maria Rita Quaresma",
+        "dbMatch": {
+          "id": 186224,
+          "name": "Rita Q."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 90414,
+        "name": "Ana Fernandes",
+        "dbMatch": {
+          "id": 90414,
+          "name": "Ana F."
+        }
+      },
+      {
+        "id": 227931,
+        "name": "Margarida Realista",
+        "dbMatch": {
+          "id": 227931,
+          "name": "Margarida R."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 1 - F1-QP",
+    "time": "Início às 11:30",
+    "court": "CAMPO 2- AXIANS",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 177136,
+        "name": "Inês Coelho",
+        "dbMatch": {
+          "id": 177136,
+          "name": "Inês C."
+        }
+      },
+      {
+        "id": 9188,
+        "name": "Joana Figueirôa",
+        "dbMatch": {
+          "id": 9188,
+          "name": "Joana Figueirôa"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 201663,
+        "name": "Laura Buteau",
+        "dbMatch": {
+          "id": 201663,
+          "name": "Laura"
+        }
+      },
+      {
+        "id": 515315,
+        "name": "Paloma Albornoz",
+        "dbMatch": {
+          "id": 515315,
+          "name": "Paloma A."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 1 - M1-QP",
+    "time": "Não antes de 13:00",
+    "court": "CAMPO 2- AXIANS",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 85009,
+        "name": "Henrique Orge",
+        "dbMatch": {
+          "id": 85009,
+          "name": "Henrique O."
+        }
+      },
+      {
+        "id": 44890,
+        "name": "Bernardo Tavares",
+        "dbMatch": {
+          "id": 44890,
+          "name": "Bernardo T."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 292574,
+        "name": "Tiago Abreu",
+        "dbMatch": {
+          "id": 292574,
+          "name": "Tiago A."
+        }
+      },
+      {
+        "id": 76294,
+        "name": "Miguel Vieira",
+        "dbMatch": {
+          "id": 76294,
+          "name": "Miguel V."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 1 - M1-QP",
+    "time": "Início às 14:15",
+    "court": "CAMPO 2- AXIANS",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 106125,
+        "name": "Pedro Luz",
+        "dbMatch": {
+          "id": 106125,
+          "name": "Pedro L."
+        }
+      },
+      {
+        "id": 16290,
+        "name": "Gonçalo Serras Pereira",
+        "dbMatch": {
+          "id": 16290,
+          "name": "Gonçalo P."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 200430,
+        "name": "Gonçalo Valente",
+        "dbMatch": {
+          "id": 200430,
+          "name": "Gonçalo V."
+        }
+      },
+      {
+        "id": 18290,
+        "name": "Guilherme Coelho",
+        "dbMatch": {
+          "id": 18290,
+          "name": "Guilherme C."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 2 - M2-QP",
+    "time": "Início às 17:00",
+    "court": "CAMPO 2- AXIANS",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 158463,
+        "name": "Vicente Rogado",
+        "dbMatch": {
+          "id": 158463,
+          "name": "Vicente R."
+        }
+      },
+      {
+        "id": 84368,
+        "name": "Ricardo Morgadinho",
+        "dbMatch": {
+          "id": 84368,
+          "name": "Ricardo M."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 223614,
+        "name": "Diogo Miguel Silva",
+        "dbMatch": {
+          "id": 223614,
+          "name": "Diogo S."
+        }
+      },
+      {
+        "id": 180198,
+        "name": "Rafael Carvalho",
+        "dbMatch": {
+          "id": 180198,
+          "name": "Rafael Carvalho"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 6 - F6-QP",
+    "time": "Início às 09:00",
+    "court": "CAMPO 3-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 250636,
+        "name": "Bárbara Simões",
+        "dbMatch": {
+          "id": 250636,
+          "name": "Bárbara Simões"
+        }
+      },
+      {
+        "id": 138279,
+        "name": "Rita Boleixa",
+        "dbMatch": {
+          "id": 138279,
+          "name": "Rita B."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 420153,
+        "name": "Joana Nunes Faustino",
+        "dbMatch": {
+          "id": 420153,
+          "name": "Joana F."
+        }
+      },
+      {
+        "id": 407460,
+        "name": "Mariana Bragança",
+        "dbMatch": {
+          "id": 407460,
+          "name": "Mariana B."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 5 - F5-QP",
+    "time": "Não antes de 10:15",
+    "court": "CAMPO 3-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 324786,
+        "name": "Joana Siro",
+        "dbMatch": {
+          "id": 324786,
+          "name": "Joana S."
+        }
+      },
+      {
+        "id": 72868,
+        "name": "Mafalda Chambel",
+        "dbMatch": {
+          "id": 72868,
+          "name": "Mafalda C."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 206874,
+        "name": "Catarina Fragoso",
+        "dbMatch": {
+          "id": 206874,
+          "name": "Catarina F."
+        }
+      },
+      {
+        "id": 197444,
+        "name": "Belén Garcia",
+        "dbMatch": {
+          "id": 197444,
+          "name": "Belén G."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 3 - F3-QP",
+    "time": "Início às 11:30",
+    "court": "CAMPO 3-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 294977,
+        "name": "Natacha Leão",
+        "dbMatch": {
+          "id": 294977,
+          "name": "Natacha L."
+        }
+      },
+      {
+        "id": 293094,
+        "name": "Sofia Bras Monteiro",
+        "dbMatch": {
+          "id": 293094,
+          "name": "Sofia Bras Monteiro"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 102047,
+        "name": "Joana Cortez",
+        "dbMatch": {
+          "id": 102047,
+          "name": "Joana C."
+        }
+      },
+      {
+        "id": 71034,
+        "name": "Teresa Moura Pereira",
+        "dbMatch": {
+          "id": 71034,
+          "name": "Teresa Moura Pereira"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 4 - F4-QP",
+    "time": "Não antes de 13:00",
+    "court": "CAMPO 3-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 262952,
+        "name": "Patrícia Correia",
+        "dbMatch": {
+          "id": 262952,
+          "name": "Patrícia Correia"
+        }
+      },
+      {
+        "id": 156806,
+        "name": "Luzi Reis",
+        "dbMatch": {
+          "id": 156806,
+          "name": "Luzi Reis"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 101567,
+        "name": "Vera Sollari Allegro",
+        "dbMatch": {
+          "id": 101567,
+          "name": "Vera Sollari Allegro"
+        }
+      },
+      {
+        "id": 99616,
+        "name": "Margarida Cruz",
+        "dbMatch": {
+          "id": 99616,
+          "name": "Margarida Cruz"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-QP",
+    "time": "Início às 14:15",
+    "court": "CAMPO 3-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 173813,
+        "name": "Vasco Conceição",
+        "dbMatch": {
+          "id": 173813,
+          "name": "Vasco C."
+        }
+      },
+      {
+        "id": 94605,
+        "name": "Afonso Roldão",
+        "dbMatch": {
+          "id": 94605,
+          "name": "Afonso R."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 181462,
+        "name": "Pedro Gonçalves",
+        "dbMatch": {
+          "id": 181462,
+          "name": "Pedro G."
+        }
+      },
+      {
+        "id": 147794,
+        "name": "Luis Paulino",
+        "dbMatch": {
+          "id": 147794,
+          "name": "Luis P."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 3 - M3-QP",
+    "time": "Não antes de 15:30",
+    "court": "CAMPO 3-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 44615,
+        "name": "Diogo Lã",
+        "dbMatch": {
+          "id": 44615,
+          "name": "Diogo L."
+        }
+      },
+      {
+        "id": 33986,
+        "name": "Diogo Branco",
+        "dbMatch": {
+          "id": 33986,
+          "name": "Diogo B."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 207509,
+        "name": "Gonçalo Branco",
+        "dbMatch": {
+          "id": 207509,
+          "name": "Gonçalo B."
+        }
+      },
+      {
+        "id": 118957,
+        "name": "Tomás Melro",
+        "dbMatch": {
+          "id": 118957,
+          "name": "Tomás Melro"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 2 - M2-QP",
+    "time": "Início às 17:00",
+    "court": "CAMPO 3-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 183229,
+        "name": "Pedro Valido",
+        "dbMatch": {
+          "id": 183229,
+          "name": "Pedro V."
+        }
+      },
+      {
+        "id": 88385,
+        "name": "Ricardo Vidigal",
+        "dbMatch": {
+          "id": 88385,
+          "name": "Ricardo V."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 161720,
+        "name": "André Macedo",
+        "dbMatch": {
+          "id": 161720,
+          "name": "André M."
+        }
+      },
+      {
+        "id": 138966,
+        "name": "Diogo Góis",
+        "dbMatch": {
+          "id": 138966,
+          "name": "Diogo G."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 4 - M4-QP",
+    "time": "Não antes de 18:15",
+    "court": "CAMPO 3-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 364691,
+        "name": "Gonçalo Dias",
+        "dbMatch": {
+          "id": 364691,
+          "name": "Gonçalo D."
+        }
+      },
+      {
+        "id": 310634,
+        "name": "Tiago MLC Santos",
+        "dbMatch": {
+          "id": 310634,
+          "name": "Tiago S."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 214195,
+        "name": "Miguel Correia",
+        "dbMatch": {
+          "id": 214195,
+          "name": "Miguel C."
+        }
+      },
+      {
+        "id": 77343,
+        "name": "António Afonso",
+        "dbMatch": {
+          "id": 77343,
+          "name": "António A."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 4 - M4-QP",
+    "time": "Início às 19:30",
+    "court": "CAMPO 3-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 226990,
+        "name": "Weder Dos Santos",
+        "dbMatch": {
+          "id": 226990,
+          "name": "Weder S."
+        }
+      },
+      {
+        "id": 176181,
+        "name": "Guilherme Afonso",
+        "dbMatch": {
+          "id": 176181,
+          "name": "Guilherme A."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 264890,
+        "name": "João Figueira",
+        "dbMatch": {
+          "id": 264890,
+          "name": "João Figueira"
+        }
+      },
+      {
+        "id": 186561,
+        "name": "Bruno Pais",
+        "dbMatch": {
+          "id": 186561,
+          "name": "Bruno Pais"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-QP",
+    "time": "Não antes de 21:00",
+    "court": "CAMPO 3-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 330782,
+        "name": "Diogo Carvalho Santos",
+        "dbMatch": {
+          "id": 330782,
+          "name": "Diogo S."
+        }
+      },
+      {
+        "id": 37412,
+        "name": "Gonçalo Amaro Gomes",
+        "dbMatch": {
+          "id": 37412,
+          "name": "Gonçalo G."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 211113,
+        "name": "Gonçalo Carvalho",
+        "dbMatch": {
+          "id": 211113,
+          "name": "Gonçalo C."
+        }
+      },
+      {
+        "id": 27618,
+        "name": "Afonso Amaral",
+        "dbMatch": {
+          "id": 27618,
+          "name": "Afonso Amaral"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-QP",
+    "time": "Não antes de 22:15",
+    "court": "CAMPO 3-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 337573,
+        "name": "Filipe Reis",
+        "dbMatch": {
+          "id": 337573,
+          "name": "Filipe Reis"
+        }
+      },
+      {
+        "id": 275747,
+        "name": "David Reis",
+        "dbMatch": {
+          "id": 275747,
+          "name": "David R."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 288167,
+        "name": "Tiago Luís",
+        "dbMatch": {
+          "id": 288167,
+          "name": "Tiago Luís"
+        }
+      },
+      {
+        "id": 191460,
+        "name": "Luís Rodrigues",
+        "dbMatch": {
+          "id": 191460,
+          "name": "Luís R."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 6 - F6-QP",
+    "time": "Início às 09:00",
+    "court": "CAMPO 4-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 407874,
+        "name": "Catarina Hesse",
+        "dbMatch": {
+          "id": 407874,
+          "name": "Catarina P."
+        }
+      },
+      {
+        "id": 324304,
+        "name": "Rita Capitão",
+        "dbMatch": {
+          "id": 324304,
+          "name": "Rita C."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 507381,
+        "name": "Liliana Coelho",
+        "dbMatch": {
+          "id": 507381,
+          "name": "Liliana C."
+        }
+      },
+      {
+        "id": 315395,
+        "name": "Andreia Gaspar",
+        "dbMatch": {
+          "id": 315395,
+          "name": "Andreia G."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 5 - F5-QP",
+    "time": "Não antes de 10:15",
+    "court": "CAMPO 4-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 275366,
+        "name": "Ana Lúcia Cabeça",
+        "dbMatch": {
+          "id": 275366,
+          "name": "Ana C."
+        }
+      },
+      {
+        "id": 257417,
+        "name": "Francisca Veloso da Veiga",
+        "dbMatch": {
+          "id": 257417,
+          "name": "Francisca V."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 501881,
+        "name": "Inês Patrocinio",
+        "dbMatch": {
+          "id": 501881,
+          "name": "Inês Patrocinio"
+        }
+      },
+      {
+        "id": 300795,
+        "name": "Carlota Vasconcellos",
+        "dbMatch": {
+          "id": 300795,
+          "name": "Carlota V."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 3 - F3-QP",
+    "time": "Início às 11:30",
+    "court": "CAMPO 4-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 227738,
+        "name": "Sofia Gião",
+        "dbMatch": {
+          "id": 227738,
+          "name": "Sofia Gião"
+        }
+      },
+      {
+        "id": 72164,
+        "name": "Mafalda Machado",
+        "dbMatch": {
+          "id": 72164,
+          "name": "Mafalda Machado"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 251285,
+        "name": "Maria Simões",
+        "dbMatch": {
+          "id": 251285,
+          "name": "Maria Simões"
+        }
+      },
+      {
+        "id": 174986,
+        "name": "Mariana Ribeiro",
+        "dbMatch": {
+          "id": 174986,
+          "name": "Mariana Ribeiro"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 4 - F4-QP",
+    "time": "Não antes de 13:00",
+    "court": "CAMPO 4-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 370841,
+        "name": "Veronica Tolakh",
+        "dbMatch": {
+          "id": 370841,
+          "name": "Veranika T."
+        }
+      },
+      {
+        "id": 185123,
+        "name": "Marta Matos",
+        "dbMatch": {
+          "id": 185123,
+          "name": "Marta Matos"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 412842,
+        "name": "Inês Alves Correia",
+        "dbMatch": {
+          "id": 412842,
+          "name": "Inês Alves Correia"
+        }
+      },
+      {
+        "id": 174955,
+        "name": "Margarida Martinez",
+        "dbMatch": {
+          "id": 174955,
+          "name": "Margarida Martinez"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-QP",
+    "time": "Início às 14:15",
+    "court": "CAMPO 4-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 506166,
+        "name": "Manuel Gata",
+        "dbMatch": {
+          "id": 506166,
+          "name": "Manuel G."
+        }
+      },
+      {
+        "id": 375044,
+        "name": "Diogo Santos",
+        "dbMatch": {
+          "id": 375044,
+          "name": "Diogo Santos"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 255846,
+        "name": "Guillermo Orive",
+        "dbMatch": {
+          "id": 255846,
+          "name": "Guillermo O."
+        }
+      },
+      {
+        "id": 201442,
+        "name": "Carlos A. Lopes",
+        "dbMatch": {
+          "id": 201442,
+          "name": "Carlos A. Lopes"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 3 - M3-QP",
+    "time": "Não antes de 15:30",
+    "court": "CAMPO 4-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 230365,
+        "name": "Vasco Ribeiro",
+        "dbMatch": {
+          "id": 230365,
+          "name": "VASCO R."
+        }
+      },
+      {
+        "id": 102296,
+        "name": "Afonso Esteves",
+        "dbMatch": {
+          "id": 102296,
+          "name": "Afonso E."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 227082,
+        "name": "Rui Terroso",
+        "dbMatch": {
+          "id": 227082,
+          "name": "Rui Terroso"
+        }
+      },
+      {
+        "id": 186539,
+        "name": "Ricardo Ginja",
+        "dbMatch": {
+          "id": 186539,
+          "name": "Ricardo Ginja"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 2 - M2-QP",
+    "time": "Início às 17:00",
+    "court": "CAMPO 4-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 154570,
+        "name": "André Figueiredo",
+        "dbMatch": {
+          "id": 154570,
+          "name": "André Figueiredo"
+        }
+      },
+      {
+        "id": 84398,
+        "name": "Tiago Tainha",
+        "dbMatch": {
+          "id": 84398,
+          "name": "Tiago Tainha"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 252143,
+        "name": "Franco Noriega",
+        "dbMatch": {
+          "id": 252143,
+          "name": "Franco Noriega"
+        }
+      },
+      {
+        "id": 81583,
+        "name": "David Pinto",
+        "dbMatch": {
+          "id": 81583,
+          "name": "David Pinto"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 4 - M4-QP",
+    "time": "Não antes de 18:15",
+    "court": "CAMPO 4-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 84391,
+        "name": "Ricardo #1 Ribas",
+        "dbMatch": {
+          "id": 84391,
+          "name": "Ricardo r."
+        }
+      },
+      {
+        "id": 79331,
+        "name": "Tiago Gonçalves",
+        "dbMatch": {
+          "id": 79331,
+          "name": "Tiago G."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 251905,
+        "name": "André Martins",
+        "dbMatch": {
+          "id": 251905,
+          "name": "André Martins"
+        }
+      },
+      {
+        "id": 104504,
+        "name": "Manuel Rocha",
+        "dbMatch": {
+          "id": 104504,
+          "name": "Manuel Rocha"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-QP",
+    "time": "Início às 19:30",
+    "court": "CAMPO 4-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 273825,
+        "name": "Zeca",
+        "dbMatch": {
+          "id": 273825,
+          "name": "José F."
+        }
+      },
+      {
+        "id": 101902,
+        "name": "José Carlos Fernandes",
+        "dbMatch": {
+          "id": 101902,
+          "name": "José F."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 465688,
+        "name": "Tiago Costa",
+        "dbMatch": {
+          "id": 465688,
+          "name": "Tiago C."
+        }
+      },
+      {
+        "id": 288321,
+        "name": "Kiko",
+        "dbMatch": {
+          "id": 288321,
+          "name": "Kiko"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-QP",
+    "time": "Não antes de 21:00",
+    "court": "CAMPO 4-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 251627,
+        "name": "André Campos",
+        "dbMatch": {
+          "id": 251627,
+          "name": "André Campos"
+        }
+      },
+      {
+        "id": 79087,
+        "name": "Fernando Silvério",
+        "dbMatch": {
+          "id": 79087,
+          "name": "Fernando Silvério"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 264961,
+        "name": "Joao Mendes",
+        "dbMatch": {
+          "id": 264961,
+          "name": "Joao Mendes"
+        }
+      },
+      {
+        "id": 240962,
+        "name": "Hugo Varão",
+        "dbMatch": {
+          "id": 240962,
+          "name": "Hugo V."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-QP",
+    "time": "Não antes de 22:15",
+    "court": "CAMPO 4-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 330876,
+        "name": "Leo",
+        "dbMatch": {
+          "id": 330876,
+          "name": "Leo P."
+        }
+      },
+      {
+        "id": 232933,
+        "name": "João Murta",
+        "dbMatch": {
+          "id": 232933,
+          "name": "João M."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 168827,
+        "name": "Diogo Freire Ferreira",
+        "dbMatch": {
+          "id": 168827,
+          "name": "Diogo Freire Ferreira"
+        }
+      },
+      {
+        "id": 83733,
+        "name": "Luis Daniel",
+        "dbMatch": {
+          "id": 83733,
+          "name": "Luis Daniel"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 5 - F5-QP",
+    "time": "Início às 09:00",
+    "court": "CAMPO 5-DFL/DOM FIÚZA",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 413800,
+        "name": "Ingrid Testa",
+        "dbMatch": {
+          "id": 413800,
+          "name": "Ingrid T."
+        }
+      },
+      {
+        "id": 119197,
+        "name": "Melissa Relva",
+        "dbMatch": {
+          "id": 119197,
+          "name": "Melissa Relva"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 401180,
+        "name": "Joana Cordeiro",
+        "dbMatch": {
+          "id": 401180,
+          "name": "Joana Cordeiro"
+        }
+      },
+      {
+        "id": 325181,
+        "name": "Marta Cabral",
+        "dbMatch": {
+          "id": 325181,
+          "name": "Marta Cabral"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 5 - F5-QP",
+    "time": "Não antes de 10:15",
+    "court": "CAMPO 5-DFL/DOM FIÚZA",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 301043,
+        "name": "Madalena Lemos Pires",
+        "dbMatch": {
+          "id": 301043,
+          "name": "Madalena P."
+        }
+      },
+      {
+        "id": 182090,
+        "name": "Catarina Farinha",
+        "dbMatch": {
+          "id": 182090,
+          "name": "Catarina Farinha"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 178940,
+        "name": "Ana Catarina Moniz",
+        "dbMatch": {
+          "id": 178940,
+          "name": "Ana Catarina Moniz"
+        }
+      },
+      {
+        "id": 77759,
+        "name": "Ana Isabel Santos",
+        "dbMatch": {
+          "id": 77759,
+          "name": "Ana S."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 2 - F2-QP",
+    "time": "Início às 11:30",
+    "court": "CAMPO 5-DFL/DOM FIÚZA",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 91736,
+        "name": "Alice Neves",
+        "dbMatch": {
+          "id": 91736,
+          "name": "Alice N."
+        }
+      },
+      {
+        "id": 40804,
+        "name": "Inês Macedo Santos",
+        "dbMatch": {
+          "id": 40804,
+          "name": "Inês S."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 370873,
+        "name": "Regina Orraca",
+        "dbMatch": {
+          "id": 370873,
+          "name": "Regina O."
+        }
+      },
+      {
+        "id": 282982,
+        "name": "Beatriz Katzenstein",
+        "dbMatch": {
+          "id": 282982,
+          "name": "Beatriz K."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 4 - F4-QP",
+    "time": "Não antes de 13:00",
+    "court": "CAMPO 5-DFL/DOM FIÚZA",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 269416,
+        "name": "Tiz Morais",
+        "dbMatch": {
+          "id": 269416,
+          "name": "Tiz Morais"
+        }
+      },
+      {
+        "id": 149724,
+        "name": "Rita Jesus",
+        "dbMatch": {
+          "id": 149724,
+          "name": "Rita J."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 196849,
+        "name": "Daniela Lopes",
+        "dbMatch": {
+          "id": 196849,
+          "name": "Daniela L."
+        }
+      },
+      {
+        "id": 136830,
+        "name": "Carmo Gomes",
+        "dbMatch": {
+          "id": 136830,
+          "name": "Carmo G."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-QP",
+    "time": "Início às 14:15",
+    "court": "CAMPO 5-DFL/DOM FIÚZA",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 353011,
+        "name": "Miguel Henriques",
+        "dbMatch": {
+          "id": 353011,
+          "name": "Miguel H."
+        }
+      },
+      {
+        "id": 142695,
+        "name": "Tiago de Paula",
+        "dbMatch": {
+          "id": 142695,
+          "name": "Tiago P."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 266937,
+        "name": "Pedro Borges Rodrigues",
+        "dbMatch": {
+          "id": 266937,
+          "name": "Pedro R."
+        }
+      },
+      {
+        "id": 104256,
+        "name": "Nuno Borges Rodrigues",
+        "dbMatch": {
+          "id": 104256,
+          "name": "Nuno R."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 3 - M3-QP",
+    "time": "Não antes de 15:30",
+    "court": "CAMPO 5-DFL/DOM FIÚZA",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 92970,
+        "name": "Goncalo",
+        "dbMatch": {
+          "id": 92970,
+          "name": "Goncalo D."
+        }
+      },
+      {
+        "id": 176450,
+        "name": "Hugo Matias Marques",
+        "dbMatch": {
+          "id": 176450,
+          "name": "Hugo Matias Marques"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 235743,
+        "name": "MIGUEL GOMES",
+        "dbMatch": {
+          "id": 235743,
+          "name": "Miguel G."
+        }
+      },
+      {
+        "id": 182404,
+        "name": "Bernardo Serra",
+        "dbMatch": {
+          "id": 182404,
+          "name": "Bernardo S."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 2 - M2-QP",
+    "time": "Início às 17:00",
+    "court": "CAMPO 5-DFL/DOM FIÚZA",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 154127,
+        "name": "Miguel Santos",
+        "dbMatch": {
+          "id": 154127,
+          "name": "Miguel S."
+        }
+      },
+      {
+        "id": 119328,
+        "name": "Rodrigo Alcobia",
+        "dbMatch": {
+          "id": 119328,
+          "name": "Rodrigo Alcobia"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 147598,
+        "name": "Afonso Manso",
+        "dbMatch": {
+          "id": 147598,
+          "name": "Afonso M."
+        }
+      },
+      {
+        "id": 136877,
+        "name": "Martim Dias",
+        "dbMatch": {
+          "id": 136877,
+          "name": "Martim D."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 3 - M3-QP",
+    "time": "Não antes de 18:15",
+    "court": "CAMPO 5-DFL/DOM FIÚZA",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 411446,
+        "name": "Leonardo Rua",
+        "dbMatch": {
+          "id": 411446,
+          "name": "Leonardo Rua"
+        }
+      },
+      {
+        "id": 92460,
+        "name": "Ricardo Rua",
+        "dbMatch": {
+          "id": 92460,
+          "name": "Ricardo Rua"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 242128,
+        "name": "Filipe Penha",
+        "dbMatch": {
+          "id": 242128,
+          "name": "Filipe Penha"
+        }
+      },
+      {
+        "id": 23412,
+        "name": "Pedro Borges",
+        "dbMatch": {
+          "id": 23412,
+          "name": "Pedro Borges"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 4 - M4-QP",
+    "time": "19:30",
+    "court": "CAMPO 5-DFL/DOM FIÚZA",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 144335,
+        "name": "Mário Martins",
+        "dbMatch": {
+          "id": 144335,
+          "name": "Mário M."
+        }
+      },
+      {
+        "id": 26552,
+        "name": "Paulo Antunes",
+        "dbMatch": {
+          "id": 26552,
+          "name": "Paulo Antunes"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 301611,
+        "name": "Gonçalo Rodrigues",
+        "dbMatch": {
+          "id": 301611,
+          "name": "Gonçalo Rodrigues"
+        }
+      },
+      {
+        "id": 231540,
+        "name": "Joao Santos",
+        "dbMatch": {
+          "id": 231540,
+          "name": "Joao Santos"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 6 - F6-QP",
+    "time": "Início às 09:00",
+    "court": "CAMPO 6-JOMALUX",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 403469,
+        "name": "Anabela Cachopo",
+        "dbMatch": {
+          "id": 403469,
+          "name": "Anabela C."
+        }
+      },
+      {
+        "id": 383101,
+        "name": "Ana marques(nita)",
+        "dbMatch": {
+          "id": 383101,
+          "name": "Ana marques(nita)"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 412339,
+        "name": "Sara Fernandes",
+        "dbMatch": {
+          "id": 412339,
+          "name": "Sara F."
+        }
+      },
+      {
+        "id": 385417,
+        "name": "Filipa Dias",
+        "dbMatch": {
+          "id": 385417,
+          "name": "Filipa Dias"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 5 - F5-QP",
+    "time": "Não antes de 10:15",
+    "court": "CAMPO 6-JOMALUX",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 476712,
+        "name": "Mia Nóbrega",
+        "dbMatch": {
+          "id": 476712,
+          "name": "Mia Nóbrega"
+        }
+      },
+      {
+        "id": 228290,
+        "name": "Ana Catarina",
+        "dbMatch": {
+          "id": 228290,
+          "name": "Ana Catarina"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 142482,
+        "name": "Joana Brito",
+        "dbMatch": {
+          "id": 142482,
+          "name": "Joana Brito"
+        }
+      },
+      {
+        "id": 160781,
+        "name": "Raquel Porteira",
+        "dbMatch": {
+          "id": 160781,
+          "name": "Raquel Porteira"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 2 - F2-QP",
+    "time": "Início às 11:30",
+    "court": "CAMPO 6-JOMALUX",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 175293,
+        "name": "Mónica Galambas",
+        "dbMatch": {
+          "id": 175293,
+          "name": "Mónica Galambas"
+        }
+      },
+      {
+        "id": 23233,
+        "name": "Maria Rodrigues",
+        "dbMatch": {
+          "id": 23233,
+          "name": "Maria R."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 384522,
+        "name": "Vera Cavalheiro",
+        "dbMatch": {
+          "id": 384522,
+          "name": "Vera C."
+        }
+      },
+      {
+        "id": 210392,
+        "name": "Bárbara Aragão Botelho",
+        "dbMatch": {
+          "id": 210392,
+          "name": "Bárbara B."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-QP",
+    "time": "Não antes de 13:00",
+    "court": "CAMPO 6-JOMALUX",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 254780,
+        "name": "Miguel Mauricio",
+        "dbMatch": {
+          "id": 254780,
+          "name": "Miguel M."
+        }
+      },
+      {
+        "id": 247393,
+        "name": "Fernando Mendes",
+        "dbMatch": {
+          "id": 247393,
+          "name": "Fernando M."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 242235,
+        "name": "Gonçalo Sardinha",
+        "dbMatch": {
+          "id": 242235,
+          "name": "Gonçalo S."
+        }
+      },
+      {
+        "id": 53748,
+        "name": "Vasco Barrambana",
+        "dbMatch": {
+          "id": 53748,
+          "name": "Vasco B."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-QP",
+    "time": "Início às 14:15",
+    "court": "CAMPO 6-JOMALUX",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 248693,
+        "name": "João Bernardo Silva",
+        "dbMatch": {
+          "id": 248693,
+          "name": "João S."
+        }
+      },
+      {
+        "id": 189917,
+        "name": "Afonso Côrte-Real",
+        "dbMatch": {
+          "id": 189917,
+          "name": "Afonso R."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 214239,
+        "name": "Nuno Pina Monteiro",
+        "dbMatch": {
+          "id": 214239,
+          "name": "Nuno M."
+        }
+      },
+      {
+        "id": 15904,
+        "name": "Alexandre Leitão",
+        "dbMatch": {
+          "id": 15904,
+          "name": "Alexandre L."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-QP",
+    "time": "Não antes de 15:30",
+    "court": "CAMPO 6-JOMALUX",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 153130,
+        "name": "João Ganhoto",
+        "dbMatch": {
+          "id": 153130,
+          "name": "João G."
+        }
+      },
+      {
+        "id": 80279,
+        "name": "David Coutinho",
+        "dbMatch": {
+          "id": 80279,
+          "name": "David C."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 368546,
+        "name": "Frederico Rodrigues",
+        "dbMatch": {
+          "id": 368546,
+          "name": "Frederico Rodrigues"
+        }
+      },
+      {
+        "id": 187399,
+        "name": "Rodrigo Ramos",
+        "dbMatch": {
+          "id": 187399,
+          "name": "Rodrigo Ramos"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 5 - M5-QP",
+    "time": "Início às 17:00",
+    "court": "CAMPO 6-JOMALUX",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 201682,
+        "name": "Filipe Sequeira",
+        "dbMatch": {
+          "id": 201682,
+          "name": "Filipe Sequeira"
+        }
+      },
+      {
+        "id": 101841,
+        "name": "Miguel Silva",
+        "dbMatch": {
+          "id": 101841,
+          "name": "Miguel S."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 222217,
+        "name": "Francisco Badalo",
+        "dbMatch": {
+          "id": 222217,
+          "name": "Francisco Badalo"
+        }
+      },
+      {
+        "id": 150962,
+        "name": "Manuel Maria Trigo",
+        "dbMatch": {
+          "id": 150962,
+          "name": "Manuel Maria Trigo"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 4 - M4-QP",
+    "time": "Não antes de 18:15",
+    "court": "CAMPO 6-JOMALUX",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 103889,
+        "name": "Ricardo Neto",
+        "dbMatch": {
+          "id": 103889,
+          "name": "Ricardo Neto"
+        }
+      },
+      {
+        "id": 79107,
+        "name": "Bruno Lemos",
+        "dbMatch": {
+          "id": 79107,
+          "name": "Bruno L."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 226722,
+        "name": "Tiago Calhau",
+        "dbMatch": {
+          "id": 226722,
+          "name": "Tiago C."
+        }
+      },
+      {
+        "id": 101401,
+        "name": "Miguel Leitão Amaro",
+        "dbMatch": {
+          "id": 101401,
+          "name": "Miguel A."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 6 - M6-QP",
+    "time": "Início às 19:30",
+    "court": "CAMPO 6-JOMALUX",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 334949,
+        "name": "Afonso Recto",
+        "dbMatch": {
+          "id": 334949,
+          "name": "Afonso R."
+        }
+      },
+      {
+        "id": 329924,
+        "name": "João Roso",
+        "dbMatch": {
+          "id": 329924,
+          "name": "João R."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 275967,
+        "name": "Hélio Esteves",
+        "dbMatch": {
+          "id": 275967,
+          "name": "Hélio E."
+        }
+      },
+      {
+        "id": 218442,
+        "name": "João Penedo",
+        "dbMatch": {
+          "id": 218442,
+          "name": "João P."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 6 - F6-QP",
+    "time": "Início às 09:00",
+    "court": "CAMPO 7-CARLSBERG",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 402136,
+        "name": "Carina Santos",
+        "dbMatch": null
+      },
+      {
+        "id": 243549,
+        "name": "Inês de Vasconcellos",
+        "dbMatch": {
+          "id": 243549,
+          "name": "Inês V."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 504477,
+        "name": "Pipa",
+        "dbMatch": null
+      },
+      {
+        "id": 504445,
+        "name": "Patricia Castilho",
+        "dbMatch": null
+      }
+    ]
+  },
+  {
+    "category": "Femininos 3 - F3-QP",
+    "time": "Não antes de 10:15",
+    "court": "CAMPO 7-CARLSBERG",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 141027,
+        "name": "Sara Calado",
+        "dbMatch": {
+          "id": 141027,
+          "name": "Sara C."
+        }
+      },
+      {
+        "id": 21622,
+        "name": "Djessika Eller",
+        "dbMatch": {
+          "id": 21622,
+          "name": "Djessika B."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 235643,
+        "name": "Sofia Ladino",
+        "dbMatch": {
+          "id": 235643,
+          "name": "Sofia L."
+        }
+      },
+      {
+        "id": 234241,
+        "name": "Laura Ferreira",
+        "dbMatch": {
+          "id": 234241,
+          "name": "Laura F."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 2 - F2-QP",
+    "time": "Início às 11:30",
+    "court": "CAMPO 7-CARLSBERG",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 182781,
+        "name": "Inês Paiva",
+        "dbMatch": {
+          "id": 182781,
+          "name": "Inês P."
+        }
+      },
+      {
+        "id": 92874,
+        "name": "Isabel  Vieira",
+        "dbMatch": {
+          "id": 92874,
+          "name": "Isabel V."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 226832,
+        "name": "Leticia Rubín",
+        "dbMatch": {
+          "id": 226832,
+          "name": "Leticia R."
+        }
+      },
+      {
+        "id": 206507,
+        "name": "Sílvia Santos",
+        "dbMatch": {
+          "id": 206507,
+          "name": "Sílvia S."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 1 - M1-QP",
+    "time": "Não antes de 13:00",
+    "court": "CAMPO 7-CARLSBERG",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 95632,
+        "name": "Manuel Correia",
+        "dbMatch": {
+          "id": 95632,
+          "name": "Manuel C."
+        }
+      },
+      {
+        "id": 81754,
+        "name": "Martim Nunes",
+        "dbMatch": {
+          "id": 81754,
+          "name": "Martim N."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 67522,
+        "name": "GONÇALO RIGUEIRA",
+        "dbMatch": {
+          "id": 67522,
+          "name": "Gonçalo R."
+        }
+      },
+      {
+        "id": 88841,
+        "name": "Martim Bica",
+        "dbMatch": {
+          "id": 88841,
+          "name": "Martim B."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 1 - M1-QP",
+    "time": "Início às 14:15",
+    "court": "CAMPO 7-CARLSBERG",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 83631,
+        "name": "Gonçalo Liberato",
+        "dbMatch": {
+          "id": 83631,
+          "name": "Gonçalo L."
+        }
+      },
+      {
+        "id": 13742,
+        "name": "Diogo Alves",
+        "dbMatch": {
+          "id": 13742,
+          "name": "Diogo A."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 84131,
+        "name": "Bernardo Monteiro",
+        "dbMatch": {
+          "id": 84131,
+          "name": "Bernardo M."
+        }
+      },
+      {
+        "id": 20594,
+        "name": "Martim Silva",
+        "dbMatch": {
+          "id": 20594,
+          "name": "Martim S."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 2 - M2-QP",
+    "time": "Início às 17:00",
+    "court": "CAMPO 7-CARLSBERG",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 199306,
+        "name": "Luís Carrasqueira",
+        "dbMatch": {
+          "id": 199306,
+          "name": "Luís C."
+        }
+      },
+      {
+        "id": 86706,
+        "name": "Rúben Sequeira",
+        "dbMatch": {
+          "id": 86706,
+          "name": "Rúben Sequeira"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 287585,
+        "name": "Diarmuid McGann",
+        "dbMatch": {
+          "id": 287585,
+          "name": "Diarmuid McGann"
+        }
+      },
+      {
+        "id": 92551,
+        "name": "Filipe Pereira",
+        "dbMatch": {
+          "id": 92551,
+          "name": "Filipe P."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 6 - F6-QP",
+    "time": "Início às 09:00",
+    "court": "CAMPO 8- MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 377170,
+        "name": "Fisoure",
+        "dbMatch": {
+          "id": 377170,
+          "name": "Fisoure"
+        }
+      },
+      {
+        "id": 268032,
+        "name": "Sofia Pinto",
+        "dbMatch": {
+          "id": 268032,
+          "name": "Sofia Pinto"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 183282,
+        "name": "Tania Gomes",
+        "dbMatch": {
+          "id": 183282,
+          "name": "Tania G."
+        }
+      },
+      {
+        "id": 170627,
+        "name": "Leila Gomes",
+        "dbMatch": {
+          "id": 170627,
+          "name": "Leila G."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 3 - F3-QP",
+    "time": "Não antes de 10:15",
+    "court": "CAMPO 8- MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 101163,
+        "name": "Vera Bernardez",
+        "dbMatch": {
+          "id": 101163,
+          "name": "Vera B."
+        }
+      },
+      {
+        "id": 43514,
+        "name": "Joana Lobo",
+        "dbMatch": {
+          "id": 43514,
+          "name": "Joana L."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 139204,
+        "name": "Sara Machado",
+        "dbMatch": {
+          "id": 139204,
+          "name": "Sara Machado"
+        }
+      },
+      {
+        "id": 139215,
+        "name": "Vera Machado",
+        "dbMatch": {
+          "id": 139215,
+          "name": "Vera Machado"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 1 - F1-QP",
+    "time": "Início às 11:30",
+    "court": "CAMPO 8- MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 101393,
+        "name": "Margarida Fonseca",
+        "dbMatch": {
+          "id": 101393,
+          "name": "Margarida C."
+        }
+      },
+      {
+        "id": 62404,
+        "name": "Patrícia Campos",
+        "dbMatch": {
+          "id": 62404,
+          "name": "Patrícia C."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 199833,
+        "name": "Maria Teresa Bica",
+        "dbMatch": {
+          "id": 199833,
+          "name": "Teresinha B."
+        }
+      },
+      {
+        "id": 162161,
+        "name": "Vladyslava Kaplina",
+        "dbMatch": {
+          "id": 162161,
+          "name": "Vladyslava Kaplina"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 1 - M1-QP",
+    "time": "Não antes de 13:00",
+    "court": "CAMPO 8- MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 78098,
+        "name": "Gonçalo Falcão de Berredo",
+        "dbMatch": {
+          "id": 78098,
+          "name": "Gonçalo B."
+        }
+      },
+      {
+        "id": 5303,
+        "name": "Miguel Ines Vaz",
+        "dbMatch": {
+          "id": 5303,
+          "name": "Miguel V."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 44592,
+        "name": "Virgílio Duarte",
+        "dbMatch": {
+          "id": 44592,
+          "name": "Virgílio D."
+        }
+      },
+      {
+        "id": 6674,
+        "name": "António Pedro Pragana",
+        "dbMatch": {
+          "id": 6674,
+          "name": "António P."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 1 - M1-QP",
+    "time": "Início às 14:15",
+    "court": "CAMPO 8- MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 92484,
+        "name": "Sebastião Dias",
+        "dbMatch": {
+          "id": 92484,
+          "name": "Sebastião D."
+        }
+      },
+      {
+        "id": 59910,
+        "name": "Miguel Ferreira",
+        "dbMatch": {
+          "id": 59910,
+          "name": "Miguel F."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 14881,
+        "name": "Diogo Agostinho",
+        "dbMatch": {
+          "id": 14881,
+          "name": "Diogo A."
+        }
+      },
+      {
+        "id": 13488,
+        "name": "Zé Maria Grilo",
+        "dbMatch": {
+          "id": 13488,
+          "name": "José G."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 1 - F1-QP",
+    "time": "Não antes de 15:30",
+    "court": "CAMPO 8- MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 151334,
+        "name": "Mariana Veiga",
+        "dbMatch": {
+          "id": 151334,
+          "name": "Mariana V."
+        }
+      },
+      {
+        "id": 137892,
+        "name": "Catarina Cardoso",
+        "dbMatch": {
+          "id": 137892,
+          "name": "Catarina C."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 76283,
+        "name": "Natalia Oxley",
+        "dbMatch": {
+          "id": 76283,
+          "name": "Natalia Oxley"
+        }
+      },
+      {
+        "id": 76280,
+        "name": "Sofia Formigal",
+        "dbMatch": {
+          "id": 76280,
+          "name": "Sofia Formigal"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 2 - M2-QP",
+    "time": "Início às 17:00",
+    "court": "CAMPO 8- MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 152189,
+        "name": "António João Ramires",
+        "dbMatch": {
+          "id": 152189,
+          "name": "António João Ramires"
+        }
+      },
+      {
+        "id": 94515,
+        "name": "Filipe Lucas Bernardo 💥",
+        "dbMatch": {
+          "id": 94515,
+          "name": "Filipe Lucas Bernardo 💥"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 150181,
+        "name": "Alejandro Solis",
+        "dbMatch": {
+          "id": 150181,
+          "name": "Alejandro S."
+        }
+      },
+      {
+        "id": 97966,
+        "name": "Stef",
+        "dbMatch": {
+          "id": 97966,
+          "name": "Stéphane C."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 3 - M3-QP",
+    "time": "Não antes de 18:15",
+    "court": "CAMPO 8- MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 176720,
+        "name": "Tiago Miranda",
+        "dbMatch": {
+          "id": 176720,
+          "name": "Tiago Miranda"
+        }
+      },
+      {
+        "id": 143139,
+        "name": "Francisco Formigal",
+        "dbMatch": {
+          "id": 143139,
+          "name": "Francisco F."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 413414,
+        "name": "Rodrigo Neves",
+        "dbMatch": {
+          "id": 413414,
+          "name": "Rodrigo Neves"
+        }
+      },
+      {
+        "id": 12050,
+        "name": "Filipe Oleacu",
+        "dbMatch": {
+          "id": 12050,
+          "name": "Filipe O."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 4 - M4-QP",
+    "time": "Início às 19:30",
+    "court": "CAMPO 8- MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 223162,
+        "name": "Pedro Rocha",
+        "dbMatch": {
+          "id": 223162,
+          "name": "Pedro Rocha"
+        }
+      },
+      {
+        "id": 223142,
+        "name": "Cláudio Silva",
+        "dbMatch": {
+          "id": 223142,
+          "name": "Claudio S."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 172041,
+        "name": "José Vieira Marques",
+        "dbMatch": {
+          "id": 172041,
+          "name": "José M."
+        }
+      },
+      {
+        "id": 95089,
+        "name": "Pedro Oliveira",
+        "dbMatch": {
+          "id": 95089,
+          "name": "Pedro O."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 5 - F5-QP",
+    "time": "Não antes de 10:15",
+    "court": "CAMPO 9-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 434822,
+        "name": "Michalina Marques",
+        "dbMatch": {
+          "id": 434822,
+          "name": "Michalina M."
+        }
+      },
+      {
+        "id": 102639,
+        "name": "Vera Santos",
+        "dbMatch": {
+          "id": 102639,
+          "name": "Vera S."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 324797,
+        "name": "Raquel Sousa",
+        "dbMatch": {
+          "id": 324797,
+          "name": "Raquel Sousa"
+        }
+      },
+      {
+        "id": 258011,
+        "name": "Inês Pires",
+        "dbMatch": {
+          "id": 258011,
+          "name": "Inês P."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 1 - F1-QP",
+    "time": "Início às 11:30",
+    "court": "CAMPO 9-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 78303,
+        "name": "Carlota Pais",
+        "dbMatch": {
+          "id": 78303,
+          "name": "Carlota P."
+        }
+      },
+      {
+        "id": 22393,
+        "name": "Caetana Cunha Girbal",
+        "dbMatch": {
+          "id": 22393,
+          "name": "Caetana G."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 419604,
+        "name": "Alexandra Mozharovska",
+        "dbMatch": {
+          "id": 419604,
+          "name": "Alexandra M."
+        }
+      },
+      {
+        "id": 283801,
+        "name": "Inês Val Bento",
+        "dbMatch": {
+          "id": 283801,
+          "name": "Inês B."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 1 - M1-QP",
+    "time": "Não antes de 13:00",
+    "court": "CAMPO 9-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 212838,
+        "name": "Guilherme Alves",
+        "dbMatch": {
+          "id": 212838,
+          "name": "Guilherme A."
+        }
+      },
+      {
+        "id": 84460,
+        "name": "Pedro Parada",
+        "dbMatch": {
+          "id": 84460,
+          "name": "Pedro P."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 176414,
+        "name": "Vasco Mensurado",
+        "dbMatch": {
+          "id": 176414,
+          "name": "Vasco M."
+        }
+      },
+      {
+        "id": 6607,
+        "name": "Manuel Sousa",
+        "dbMatch": {
+          "id": 6607,
+          "name": "Manuel S."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 1 - M1-QP",
+    "time": "Início às 14:15",
+    "court": "CAMPO 9-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 140838,
+        "name": "Vasco Piussa",
+        "dbMatch": {
+          "id": 140838,
+          "name": "Vasco P."
+        }
+      },
+      {
+        "id": 79944,
+        "name": "Lourenço Romão",
+        "dbMatch": {
+          "id": 79944,
+          "name": "Lourenço R."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 315020,
+        "name": "Poeira",
+        "dbMatch": {
+          "id": 315020,
+          "name": "André P."
+        }
+      },
+      {
+        "id": 176559,
+        "name": "Miguel Agapito",
+        "dbMatch": {
+          "id": 176559,
+          "name": "Miguel A."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 2 - M2-QP",
+    "time": "Início às 17:00",
+    "court": "CAMPO 9-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 83613,
+        "name": "Rodrigo Leite",
+        "dbMatch": {
+          "id": 83613,
+          "name": "Rodrigo L."
+        }
+      },
+      {
+        "id": 78045,
+        "name": "Filipe Varão",
+        "dbMatch": {
+          "id": 78045,
+          "name": "Filipe Varão"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 77249,
+        "name": "Nuno Gomes",
+        "dbMatch": {
+          "id": 77249,
+          "name": "Nuno G."
+        }
+      },
+      {
+        "id": 33994,
+        "name": "Fábio Gomes",
+        "dbMatch": {
+          "id": 33994,
+          "name": "Fábio G."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 3 - M3-QP",
+    "time": "Não antes de 18:15",
+    "court": "CAMPO 9-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 162669,
+        "name": "André Santos",
+        "dbMatch": {
+          "id": 162669,
+          "name": "André S."
+        }
+      },
+      {
+        "id": 145765,
+        "name": "João Marques Leal",
+        "dbMatch": {
+          "id": 145765,
+          "name": "João L."
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 182428,
+        "name": "João Marques",
+        "dbMatch": {
+          "id": 182428,
+          "name": "João Marques"
+        }
+      },
+      {
+        "id": 136126,
+        "name": "Guilherme Gomes",
+        "dbMatch": {
+          "id": 136126,
+          "name": "Guilherme G."
+        }
+      }
+    ]
+  },
+  {
+    "category": "Masculinos 4 - M4-QP",
+    "time": "Início às 19:30",
+    "court": "CAMPO 9-MPC",
+    "result": "",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 288218,
+        "name": "Diogo Petronilho",
+        "dbMatch": {
+          "id": 288218,
+          "name": "Diogo Petronilho"
+        }
+      },
+      {
+        "id": 76705,
+        "name": "Daniel Teodoro",
+        "dbMatch": {
+          "id": 76705,
+          "name": "Daniel Teodoro"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 266861,
+        "name": "Pedro Neto",
+        "dbMatch": {
+          "id": 266861,
+          "name": "Pedro N."
+        }
+      },
+      {
+        "id": 179337,
+        "name": "Daniel Dario",
+        "dbMatch": {
+          "id": 179337,
+          "name": "Daniel Dario"
+        }
+      }
+    ]
+  },
+  {
+    "category": "Femininos 6 - F6-QP",
+    "time": "",
+    "court": "Tba",
+    "result": "FC",
+    "date": "sáb, 21 mar",
+    "sideA": [
+      {
+        "id": 403302,
+        "name": "Matilde  Lamy",
+        "dbMatch": {
+          "id": 403302,
+          "name": "Matilde B."
+        }
+      },
+      {
+        "id": 302118,
+        "name": "Mathilde Prates",
+        "dbMatch": {
+          "id": 302118,
+          "name": "Mathilde Prates"
+        }
+      }
+    ],
+    "sideB": [
+      {
+        "id": 476008,
+        "name": "Marina Agudo",
+        "dbMatch": null
+      },
+      {
+        "id": 283053,
+        "name": "Catarina Dias",
+        "dbMatch": {
+          "id": 283053,
+          "name": "Catarina D."
+        }
+      }
+    ]
+  }
+]

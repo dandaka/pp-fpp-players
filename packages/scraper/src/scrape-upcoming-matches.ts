@@ -2,7 +2,7 @@ import { chromium } from "playwright";
 import { getDb } from "./db";
 import { scrapeMatchesPage } from "./scrape-matches-page";
 import { scrapeDrawsPage } from "./scrape-draws-page";
-import { crossReference, storeSchedule } from "./store-schedule";
+import { crossReference, storeSchedule, storeDrawsMatches } from "./store-schedule";
 
 function resolveTournamentUrl(input: string): { matchesUrl: string; drawsUrl: string; slug: string } {
   let slug = input;
@@ -51,21 +51,25 @@ export async function scrapeSchedule(tournamentId: number, urlOrSlug: string) {
     const matches = await scrapeMatchesPage(page, tournamentYear);
     console.log(`Total: ${matches.length} matches from Matches page`);
 
-    // Step 2: Scrape Draws page
+    // Step 2: Scrape Draws page (Encontros tab)
     console.log(`\n=== Scraping Draws: ${drawsUrl} ===`);
     await page.goto(drawsUrl, { waitUntil: "networkidle" });
     await page.waitForTimeout(2000);
     const draws = await scrapeDrawsPage(page);
-    console.log(`Total: ${draws.entries.length} draw entries`);
+    console.log(`Total: ${draws.length} draw matches`);
 
     // Step 3: Cross-reference
     console.log("\n=== Cross-referencing ===");
-    const crossRef = crossReference(matches, draws.entries);
-    console.log(`License updates: ${crossRef.licenseUpdates.length}`);
+    const crossRef = crossReference(tournamentId, draws);
+    console.log(`Round name mappings: ${crossRef.roundNames.size}`);
 
-    // Step 4: Store
+    // Step 4: Store matches from Matches page
     console.log("\n=== Storing ===");
     storeSchedule(tournamentId, tournamentName, matches, crossRef);
+
+    // Step 5: Store/update matches from Draws page
+    console.log("\n=== Storing Draws ===");
+    storeDrawsMatches(tournamentId, tournamentName, draws);
 
     // Update sync timestamp
     db.run(

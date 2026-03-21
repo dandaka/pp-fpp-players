@@ -1,136 +1,190 @@
 import type { Page } from "playwright";
 
-export interface DrawEntry {
-  categoryId: number;
-  categoryName: string; // e.g. "Masculinos 1"
-  subDraw: string;      // "QP" or "Quali"
-  roundNumber: number;
-  position: number;
-  player1Name: string;
-  player2Name: string;  // doubles partner
-  licenseNumber: string | null;
-  seeding: string | null; // "(1)", "WC", etc.
-  score: string;        // completed match score or ""
-  scheduleInfo: string; // "Court 1 10:00" or ""
-}
-
-export interface DrawData {
-  entries: DrawEntry[];
-  roundLabels: Map<string, Map<number, string>>; // categoryId+subDraw → roundNumber → "R32"|"QF"|etc.
-}
-
-const ROUND_LABELS: Record<number, string> = {
-  6: "R32", 5: "R16", 4: "QF", 3: "SF", 2: "F",
-};
-
-/**
- * Infer round labels based on draw size.
- * The highest round number = first round. Round 2 is always final.
- */
-export function inferRoundLabels(roundNumbers: number[]): Map<number, string> {
-  const labels = new Map<number, string>();
-  for (const rn of roundNumbers) {
-    if (ROUND_LABELS[rn]) labels.set(rn, ROUND_LABELS[rn]);
-  }
-  return labels;
+export interface DrawMatch {
+  categoryName: string;   // "Masculinos 6"
+  subDraw: string;        // "M6-QP" or "M6-Quali" or "QP" (default)
+  roundName: string;      // "16 avos de final", "Oitavos de final", "Quartos de Final"
+  dateTime: string;       // "2026-03-21, Não antes de 21:00" or "2026-03-19, 20:15"
+  sideA: { id: number | null; name: string }[];
+  sideB: { id: number | null; name: string }[];
+  result: string;         // "6-1  6-2" or "" if not played
+  court: string;          // "CAMPO 1-ANA JORGE - REMAX"
 }
 
 /**
- * Scrape all draws from the FPP Draws page.
- * @param page - Playwright page already navigated to the Draws URL
+ * Normalize Portuguese date-time strings to English.
+ * "2026-03-21, Não antes de 21:00" → "2026-03-21, After 21:00"
+ * "2026-03-21, Início às 17:00" → "2026-03-21, 17:00"
  */
-export async function scrapeDrawsPage(page: Page): Promise<DrawData> {
-  const entries: DrawEntry[] = [];
-  const roundLabels = new Map<string, Map<number, string>>();
+function normalizeDatetime(dt: string): string {
+  return dt
+    .replace(/Não antes de\s*/g, "After ")
+    .replace(/Início às\s*/g, "");
+}
 
-  // Get all category options from dropdown
+function extractPlayerId(href: string): number | null {
+  const match = href.match(/id=(\d+)/i);
+  return match ? parseInt(match[1]) : null;
+}
+
+/**
+ * Scrape match rows from the Encontros table currently displayed on the page.
+ */
+async function scrapeEncontrosTable(page: Page): Promise<{
+  dateTime: string;
+  sideA: { id: number | null; name: string }[];
+  sideB: { id: number | null; name: string }[];
+  result: string;
+  court: string;
+  roundName: string;
+}[]> {
+  const rawRows = await page.evaluate(() => {
+    const table = document.querySelector("table.rgMasterTable") || document.querySelector("table");
+    if (!table) return [];
+
+    const rows = table.querySelectorAll("tr");
+    const results: any[] = [];
+    let currentRound = "";
+
+    for (const row of rows) {
+      if (row.classList.contains("rgGroupHeader")) {
+        const cells = row.querySelectorAll("td");
+        currentRound = cells[1]?.textContent?.trim() || "";
+        continue;
+      }
+
+      const cells = row.querySelectorAll("td");
+      if (cells.length < 7) continue;
+
+      const dateTime = cells[1]?.textContent?.trim() || "";
+      if (!dateTime || dateTime === "Date") continue;
+
+      const sideALinks = Array.from(cells[2]?.querySelectorAll("a[href*='Dashboard']") || []);
+      const sideBLinks = Array.from(cells[4]?.querySelectorAll("a[href*='Dashboard']") || []);
+
+      if (sideALinks.length === 0 && sideBLinks.length === 0) continue;
+
+      const sideA = sideALinks.map((a: any) => ({
+        href: a.getAttribute("href") || "",
+        name: a.textContent?.trim() || "",
+      }));
+      const sideB = sideBLinks.map((a: any) => ({
+        href: a.getAttribute("href") || "",
+        name: a.textContent?.trim() || "",
+      }));
+
+      const result = cells[5]?.textContent?.trim() || "";
+      const court = cells[6]?.textContent?.trim() || "";
+
+      results.push({ dateTime, sideA, sideB, result, court, roundName: currentRound });
+    }
+    return results;
+  });
+
+  return rawRows.map((raw: any) => ({
+    ...raw,
+    dateTime: normalizeDatetime(raw.dateTime),
+    sideA: raw.sideA.map((p: any) => ({ id: extractPlayerId(p.href), name: p.name })),
+    sideB: raw.sideB.map((p: any) => ({ id: extractPlayerId(p.href), name: p.name })),
+  }));
+}
+
+/**
+ * Scrape all draws from the FPP Draws page using the Encontros (matches) tab.
+ * Returns structured match data with dates, scores, player IDs, courts, and round names.
+ */
+export async function scrapeDrawsPage(page: Page): Promise<DrawMatch[]> {
+  const drawsUrl = page.url();
+  const allMatches: DrawMatch[] = [];
+
+  // Step 1: Collect all category options from the dropdown
   const categories = await page.evaluate(() => {
-    const select = document.querySelector("select[id*='draws']") as HTMLSelectElement | null;
+    const select = document.getElementById("drop_tournaments") as HTMLSelectElement | null;
     if (!select) return [];
-    return Array.from(select.options).map((opt) => ({
-      value: parseInt(opt.value),
-      text: opt.textContent?.trim() || "",
-    }));
+    return Array.from(select.options)
+      .filter((opt) => opt.value && opt.value !== "0")
+      .map((opt) => ({
+        value: opt.value,
+        text: opt.textContent?.trim() || "",
+      }));
   });
 
   console.log(`Found ${categories.length} draw categories`);
 
+  // Step 2: For each category, reload page, select, click Encontros, scrape
   for (const cat of categories) {
     console.log(`  Scraping draw: ${cat.text}...`);
 
-    // Select category from dropdown
-    await page.selectOption("select[id*='draws']", String(cat.value));
-    await page.waitForTimeout(2000);
+    // Reload draws page to get fresh dropdown
+    await page.goto(drawsUrl, { waitUntil: "networkidle" });
+    await page.waitForTimeout(1000);
 
-    // Get sub-draw tabs (QP, Quali)
+    // Select category (triggers __doPostBack, page re-renders)
+    await page.selectOption("#drop_tournaments", cat.value);
+    await page.waitForTimeout(3000);
+
+    // Check for sub-draw tabs (e.g. M6-QP, M6-Quali)
     const subDrawTabs = await page.evaluate(() => {
       const tabs: { text: string; id: string }[] = [];
+      // Sub-draw tabs are links in menu_inside_tournament that look like "M6-QP"
+      const menuLinks = document.querySelectorAll("#menu_inside_tournament a, .menu_inside_tournament a");
+      for (const a of menuLinks) {
+        const text = a.textContent?.trim() || "";
+        if (text.match(/^(M|F)\d+-/)) {
+          tabs.push({ text, id: a.id });
+        }
+      }
+      // Also check for repeater-based sub-draw tabs
       document.querySelectorAll("a[id*='repeater_draw']").forEach((a) => {
-        tabs.push({
-          text: a.textContent?.trim() || "",
-          id: a.id,
-        });
+        const text = a.textContent?.trim() || "";
+        if (text && !tabs.some(t => t.text === text)) {
+          tabs.push({ text, id: a.id });
+        }
       });
-      return tabs.length > 0 ? tabs : [{ text: "QP", id: "" }]; // default if no tabs
+      return tabs;
     });
 
-    for (const subTab of subDrawTabs) {
+    const tabsToProcess = subDrawTabs.length > 0 ? subDrawTabs : [{ text: "QP", id: "" }];
+
+    for (const subTab of tabsToProcess) {
+      // Click sub-draw tab if needed
       if (subTab.id) {
         await page.click(`#${subTab.id}`);
         await page.waitForTimeout(2000);
       }
 
-      const drawEntries = await page.evaluate((catInfo) => {
-        const results: any[] = [];
-        // Draws are rendered as nested tables with round columns
-        const roundCols = document.querySelectorAll("[class*='round'], [id*='round']");
+      // Click Encontros inner tab
+      const clicked = await page.evaluate(() => {
+        const el = document.getElementById("link_tournament_open_matches");
+        if (el) { el.click(); return true; }
+        return false;
+      });
 
-        // Try to extract from bracket structure
-        const cells = document.querySelectorAll("td[class*='draw'], div[class*='draw']");
-        cells.forEach((cell, idx) => {
-          const nameSpan = cell.querySelector("span");
-          const name = nameSpan?.textContent?.trim() || "";
-          if (!name) return;
+      if (!clicked) {
+        console.log(`    Could not find Encontros tab for ${cat.text} ${subTab.text}`);
+        continue;
+      }
 
-          // Extract license number if present (format: "12345 - Player Name" or separate span)
-          const licenseMatch = name.match(/^(\d{4,6})\s*[-–]\s*/);
-          const license = licenseMatch ? licenseMatch[1] : null;
-          const cleanName = licenseMatch ? name.replace(licenseMatch[0], "").trim() : name;
+      await page.waitForTimeout(2000);
 
-          // Extract seeding
-          const seedMatch = cleanName.match(/\((\d+|WC)\)\s*$/);
-          const seeding = seedMatch ? seedMatch[1] : null;
-          const finalName = seedMatch ? cleanName.replace(seedMatch[0], "").trim() : cleanName;
+      // Scrape the matches table
+      const matches = await scrapeEncontrosTable(page);
+      console.log(`    ${subTab.text}: ${matches.length} matches`);
 
-          results.push({
-            name: finalName,
-            license,
-            seeding,
-            position: idx,
-          });
-        });
-
-        return results;
-      }, { value: cat.value, text: cat.text });
-
-      // Parse entries into DrawEntry objects
-      for (const raw of drawEntries) {
-        entries.push({
-          categoryId: cat.value,
+      for (const m of matches) {
+        allMatches.push({
           categoryName: cat.text,
           subDraw: subTab.text,
-          roundNumber: 0, // Will be inferred
-          position: raw.position,
-          player1Name: raw.name,
-          player2Name: "",
-          licenseNumber: raw.license,
-          seeding: raw.seeding,
-          score: "",
-          scheduleInfo: "",
+          roundName: m.roundName,
+          dateTime: m.dateTime,
+          sideA: m.sideA,
+          sideB: m.sideB,
+          result: m.result,
+          court: m.court,
         });
       }
     }
   }
 
-  return { entries, roundLabels };
+  return allMatches;
 }
