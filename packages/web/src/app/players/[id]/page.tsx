@@ -1,5 +1,6 @@
-import { getPlayer, getPlayerRanks, getPlayerRating } from "@fpp/db";
+import { getPlayer, getPlayerRanks, getPlayerRating, getPlayerUpcomingMatches } from "@fpp/db";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { RatingBadge } from "@/components/rating-badge";
 import { PlayerMatches } from "./matches";
 
@@ -10,6 +11,7 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
 
   const ranks = getPlayerRanks(player.id);
   const rating = getPlayerRating(player.id);
+  const upcomingMatches = getPlayerUpcomingMatches(player.id);
 
   return (
     <div className="space-y-6">
@@ -51,6 +53,41 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
                 <span className="text-muted-foreground"> of {ranks.club.total.toLocaleString()} in {ranks.club.label}</span>
               </p>
             )}
+          </div>
+        </div>
+      )}
+
+      {upcomingMatches.length > 0 && (
+        <div>
+          <h2 className="mb-3 text-sm font-medium text-muted-foreground">Upcoming Match</h2>
+          <div className="space-y-2">
+            {upcomingMatches.map((match) => (
+              <div key={match.guid} className="rounded-lg border border-primary/20 bg-primary/5 p-3 space-y-2">
+                <div className="flex items-center justify-between text-xs text-muted-foreground">
+                  <div className="flex gap-2">
+                    {match.category && <span>{match.category}{match.subcategory ? `-${match.subcategory}` : ""}</span>}
+                    {match.roundName && <span>{match.roundName}</span>}
+                  </div>
+                  <div className="flex gap-2">
+                    {match.court && <span>{match.court}</span>}
+                    {match.dateTime && <span>{match.dateTime}</span>}
+                  </div>
+                </div>
+                <div className="space-y-1">
+                  <div className="flex gap-1 text-sm">
+                    {match.sideA.map((p) => (
+                      <Link key={p.id} href={`/players/${p.id}`} className="hover:underline">{p.name}</Link>
+                    ))}
+                  </div>
+                  <div className="text-xs text-muted-foreground">vs</div>
+                  <div className="flex gap-1 text-sm">
+                    {match.sideB.map((p) => (
+                      <Link key={p.id} href={`/players/${p.id}`} className="hover:underline">{p.name}</Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       )}

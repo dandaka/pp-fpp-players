@@ -1,5 +1,5 @@
 import { getDb } from "../connection";
-import type { MatchDetail, PlayerRating } from "../types";
+import type { MatchDetail, PlayerRating, TournamentMatch } from "../types";
 
 function parseTournamentIdFromSource(source: string | null): number | null {
   if (!source) return null;
@@ -79,7 +79,7 @@ export function getPlayerMatches(
            m.side_a_ids, m.side_b_ids, m.side_a_names, m.side_b_names
     FROM matches m
     JOIN match_players mp ON mp.match_guid = m.guid
-    WHERE mp.player_id = ?
+    WHERE mp.player_id = ? AND m.winner_side IS NOT NULL
   `;
   const params: any[] = [playerId];
 
@@ -157,4 +157,60 @@ export function getPlayerMatches(
     : null;
 
   return { matches, nextCursor };
+}
+
+export function getPlayerUpcomingMatches(playerId: number): TournamentMatch[] {
+  const db = getDb();
+
+  const rows = db.query(`
+    SELECT m.guid, m.section_name, m.round_name, m.date_time, m.court,
+           m.category, m.subcategory, m.sets_json, m.winner_side,
+           m.side_a_ids, m.side_b_ids, m.side_a_names, m.side_b_names, m.source
+    FROM matches m
+    JOIN match_players mp ON mp.match_guid = m.guid
+    WHERE mp.player_id = ? AND m.winner_side IS NULL
+    ORDER BY m.date_time ASC
+  `).all(playerId) as Array<{
+    guid: string; section_name: string | null; round_name: string | null;
+    date_time: string | null; court: string | null; category: string | null;
+    subcategory: string | null; sets_json: string | null; winner_side: string | null;
+    side_a_ids: string; side_b_ids: string; side_a_names: string | null; side_b_names: string | null;
+    source: string | null;
+  }>;
+
+  // Batch-fetch player names
+  const allPlayerIds = new Set<number>();
+  for (const row of rows) {
+    for (const id of JSON.parse(row.side_a_ids)) allPlayerIds.add(id);
+    for (const id of JSON.parse(row.side_b_ids)) allPlayerIds.add(id);
+  }
+  const idList = [...allPlayerIds];
+  const nameMap = new Map<number, string>();
+  if (idList.length > 0) {
+    const placeholders = idList.map(() => "?").join(",");
+    const nameRows = db.query(
+      `SELECT id, name FROM players WHERE id IN (${placeholders})`
+    ).all(...idList) as Array<{ id: number; name: string }>;
+    for (const r of nameRows) nameMap.set(r.id, r.name);
+  }
+
+  return rows.map((row) => {
+    const sideAIds: number[] = JSON.parse(row.side_a_ids);
+    const sideBIds: number[] = JSON.parse(row.side_b_ids);
+    const sideANames = (row.side_a_names ?? "").split(" / ");
+    const sideBNames = (row.side_b_names ?? "").split(" / ");
+
+    return {
+      guid: row.guid,
+      category: row.category,
+      subcategory: row.subcategory,
+      roundName: row.round_name,
+      dateTime: row.date_time,
+      court: row.court,
+      sets: [],
+      winnerSide: null,
+      sideA: sideAIds.map((id, i) => ({ id, name: nameMap.get(id) ?? sideANames[i] ?? "" })),
+      sideB: sideBIds.map((id, i) => ({ id, name: nameMap.get(id) ?? sideBNames[i] ?? "" })),
+    };
+  });
 }
