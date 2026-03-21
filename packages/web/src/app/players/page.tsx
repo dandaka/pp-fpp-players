@@ -50,7 +50,7 @@ export default function PlayersPage() {
         placeholder="Search players by name..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="text-base"
+        className="h-12 text-base"
         autoFocus
       />
       {loading && (

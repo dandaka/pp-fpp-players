@@ -163,10 +163,12 @@ export async function getPlayerUpcomingMatches(
 export async function getTournaments(
   page?: number,
   pageSize?: number,
+  search?: string,
 ): Promise<GetTournamentsResponse> {
   const params = new URLSearchParams();
   if (page !== undefined) params.set("page", String(page));
   if (pageSize !== undefined) params.set("pageSize", String(pageSize));
+  if (search) params.set("q", search);
   const qs = params.toString();
   return apiFetch<GetTournamentsResponse>(
     `/tournaments${qs ? `?${qs}` : ""}`,

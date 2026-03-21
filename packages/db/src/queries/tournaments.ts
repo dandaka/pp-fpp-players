@@ -1,9 +1,21 @@
 import { getDb } from "../connection";
 import type { Tournament, TournamentDetail, TournamentPlayer, MatchDetail, UpcomingMatchDetail, PlayerRating } from "../types";
 
-export function getTournaments(page = 1, pageSize = 20): { tournaments: Tournament[]; total: number } {
+export function getTournaments(page = 1, pageSize = 20, search?: string): { tournaments: Tournament[]; total: number } {
   const db = getDb();
   const offset = (page - 1) * pageSize;
+
+  if (search && search.trim()) {
+    const pattern = `%${search.trim()}%`;
+    const total = db.query("SELECT COUNT(*) as total FROM tournaments WHERE name LIKE ?").get(pattern) as { total: number };
+    const rows = db.query(`
+      SELECT id, name, club, date FROM tournaments
+      WHERE name LIKE ?
+      ORDER BY date DESC
+      LIMIT ? OFFSET ?
+    `).all(pattern, pageSize, offset) as Tournament[];
+    return { tournaments: rows, total: total.total };
+  }
 
   const total = db.query("SELECT COUNT(*) as total FROM tournaments").get() as { total: number };
 

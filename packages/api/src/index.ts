@@ -53,7 +53,8 @@ const app = new Elysia()
 
   .get("/tournaments", ({ query }) => {
     const page = parseInt((query.page as string) || "1", 10);
-    return getTournaments(page, 20);
+    const search = (query.q as string) || undefined;
+    return getTournaments(page, 20, search);
   })
 
   .get("/tournaments/:id", ({ params, query, set }) => {

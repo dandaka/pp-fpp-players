@@ -17,9 +17,9 @@ export function Nav() {
     <nav className="fixed bottom-0 left-0 right-0 z-50 bg-background sm:static">
       <div className="mx-auto max-w-2xl px-4">
         <Tabs value={activeTab}>
-          <TabsList variant="line" className="w-full">
+          <TabsList variant="line" className="w-full !h-14">
             {tabs.map((tab) => (
-              <TabsTrigger key={tab.value} value={tab.value} nativeButton={false} render={<Link href={tab.value} />}>
+              <TabsTrigger key={tab.value} value={tab.value} nativeButton={false} render={<Link href={tab.value} />} className="text-base">
                 {tab.label}
               </TabsTrigger>
             ))}

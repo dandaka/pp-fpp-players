@@ -2,6 +2,9 @@
   "name": "pp-fpp-players",
   "private": true,
   "workspaces": ["packages/*"],
+  "scripts": {
+    "dev": "bun --hot packages/api/src/index.ts 2>&1 | sed 's/^/[api] /' & bun --cwd packages/web dev 2>&1 | sed 's/^/[web] /' & wait"
+  },
   "devDependencies": {
     "@types/bun": "latest",
     "typescript": "^5"
