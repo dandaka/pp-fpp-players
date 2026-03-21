@@ -143,7 +143,6 @@ async function scrapeTournament(tournamentId: number, tournamentName: string) {
     await Bun.sleep(200);
   }
 
-  setCursor(cursorKey, "done");
   return totalMatches;
 }
 
@@ -212,17 +211,29 @@ export async function scrapeAllTournaments(source = "db") {
 
   let grandTotal = 0;
   let processed = 0;
+  let skipped = 0;
 
   for (const t of targets) {
     processed++;
     const cursorKey = `scrape_tournament_${t.id}`;
-    if (getCursor(cursorKey) === "done") continue;
+    if (getCursor(cursorKey) === "done") {
+      skipped++;
+      continue;
+    }
 
-    console.log(`[${processed}/${targets.length}] ${t.name} (ID: ${t.id})`);
+    console.log(`[${processed}/${targets.length}] ${t.name} (ID: ${t.id})${skipped > 0 && processed === skipped + 1 ? ` (skipped ${skipped} already done)` : ""}`);
     try {
+      // Check sport from DB before making any API call
+      const knownSport = (db.query("SELECT sport FROM tournaments WHERE id = ?").get(t.id) as { sport: string | null } | null)?.sport;
+      if (knownSport && knownSport !== "Padel") {
+        console.log(`  Skipping matches (sport: ${knownSport})`);
+        setCursor(cursorKey, "done");
+        continue;
+      }
+
       await saveTournament(db, t.id, t.name, t.date);
 
-      // Only scrape matches from Padel tournaments
+      // Re-check sport after fetching detail (may have been unknown before)
       const sport = (db.query("SELECT sport FROM tournaments WHERE id = ?").get(t.id) as { sport: string | null } | null)?.sport;
       if (sport && sport !== "Padel") {
         console.log(`  Skipping matches (sport: ${sport})`);
@@ -253,6 +264,9 @@ export async function scrapeAllTournaments(source = "db") {
           }
         }
       }
+
+      // Mark tournament as done regardless of outcome
+      setCursor(cursorKey, "done");
     } catch (err) {
       console.error(`  Error scraping tournament ${t.id}: ${err}`);
     }
