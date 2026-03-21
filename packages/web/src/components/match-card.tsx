@@ -76,34 +76,30 @@ export function MatchCard({ match, court, sideAWinProbability }: MatchCardProps)
         </div>
         {hasProb && (
           <div className="shrink-0 flex flex-col justify-center gap-2 w-32 self-center">
-            {/* Favored side row */}
-            <div className="flex items-center gap-1.5">
-              <div className="flex-1 flex h-2 rounded-full overflow-hidden bg-muted">
-                {sideAFavored ? (
-                  <>
-                    <div className="bg-foreground/60 rounded-l-full" style={{ width: `${probA}%` }} />
-                    <div className="bg-foreground/20 rounded-r-full" style={{ width: `${probB}%` }} />
-                  </>
-                ) : (
-                  <div className="bg-foreground/10 rounded-full w-full" />
-                )}
+            {/* Side A probability */}
+            {sideAFavored ? (
+              <div className="flex items-center gap-1.5">
+                <div className="flex-1 flex h-2 rounded-full overflow-hidden bg-muted">
+                  <div className="bg-foreground/60 rounded-l-full" style={{ width: `${probA}%` }} />
+                  <div className="bg-foreground/20 rounded-r-full" style={{ width: `${probB}%` }} />
+                </div>
+                <span className="text-xs text-muted-foreground shrink-0">{probA}% win</span>
               </div>
-              <span className="text-xs text-muted-foreground w-14 text-right">{sideAFavored ? `${probA}% win` : `${probA}% lose`}</span>
-            </div>
-            {/* Other side row */}
-            <div className="flex items-center gap-1.5">
-              <div className="flex-1 flex h-2 rounded-full overflow-hidden bg-muted">
-                {!sideAFavored ? (
-                  <>
-                    <div className="bg-foreground/60 rounded-l-full" style={{ width: `${probB}%` }} />
-                    <div className="bg-foreground/20 rounded-r-full" style={{ width: `${probA}%` }} />
-                  </>
-                ) : (
-                  <div className="bg-foreground/10 rounded-full w-full" />
-                )}
+            ) : (
+              <div />
+            )}
+            {/* Side B probability */}
+            {!sideAFavored ? (
+              <div className="flex items-center gap-1.5">
+                <div className="flex-1 flex h-2 rounded-full overflow-hidden bg-muted">
+                  <div className="bg-foreground/60 rounded-l-full" style={{ width: `${probB}%` }} />
+                  <div className="bg-foreground/20 rounded-r-full" style={{ width: `${probA}%` }} />
+                </div>
+                <span className="text-xs text-muted-foreground shrink-0">{probB}% win</span>
               </div>
-              <span className="text-xs text-muted-foreground w-14 text-right">{!sideAFavored ? `${probB}% win` : `${probB}% lose`}</span>
-            </div>
+            ) : (
+              <div />
+            )}
           </div>
         )}
       </div>
