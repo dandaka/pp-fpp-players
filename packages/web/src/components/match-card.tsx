@@ -43,7 +43,7 @@ export function MatchCard({ match }: MatchCardProps) {
         )}
         <span />
         {match.sets.map((s, i) => (
-          <span key={i} className={`text-sm ${match.winnerSide === "a" ? "font-semibold" : "text-muted-foreground"}`}>
+          <span key={i} className={`text-sm ${s.setA > s.setB ? "font-semibold" : "text-muted-foreground"}`}>
             {s.setA}
           </span>
         ))}
@@ -58,7 +58,7 @@ export function MatchCard({ match }: MatchCardProps) {
         )}
         <span />
         {match.sets.map((s, i) => (
-          <span key={i} className={`text-sm ${match.winnerSide === "b" ? "font-semibold" : "text-muted-foreground"}`}>
+          <span key={i} className={`text-sm ${s.setB > s.setA ? "font-semibold" : "text-muted-foreground"}`}>
             {s.setB}
           </span>
         ))}

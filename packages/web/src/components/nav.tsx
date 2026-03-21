@@ -2,31 +2,29 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const tabs = [
-  { href: "/players", label: "Players" },
-  { href: "/tournaments", label: "Tournaments" },
+  { value: "/players", label: "Players" },
+  { value: "/tournaments", label: "Tournaments" },
 ];
 
 export function Nav() {
   const pathname = usePathname();
+  const activeTab = tabs.find((t) => pathname.startsWith(t.value))?.value ?? tabs[0].value;
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 border-t bg-background sm:static sm:border-b sm:border-t-0">
-      <div className="mx-auto flex max-w-2xl">
-        {tabs.map((tab) => (
-          <Link
-            key={tab.href}
-            href={tab.href}
-            className={`flex-1 py-3 text-center text-sm font-medium transition-colors ${
-              pathname.startsWith(tab.href)
-                ? "text-foreground border-b-2 border-foreground sm:border-b-0 sm:border-t-2"
-                : "text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            {tab.label}
-          </Link>
-        ))}
+    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-background sm:static">
+      <div className="mx-auto max-w-2xl px-4">
+        <Tabs value={activeTab}>
+          <TabsList variant="line" className="w-full">
+            {tabs.map((tab) => (
+              <TabsTrigger key={tab.value} value={tab.value} nativeButton={false} render={<Link href={tab.value} />}>
+                {tab.label}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </Tabs>
       </div>
     </nav>
   );
