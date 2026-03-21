@@ -29,83 +29,82 @@ export function MatchCard({ match, court, sideAWinProbability }: MatchCardProps)
   const isDoubles = maxPlayers > 1;
   const hasScores = match.sets.length > 0;
   const hasProb = sideAWinProbability != null && !hasScores;
-  const sideAFavored = hasProb && sideAWinProbability! >= 0.5;
 
   const playerCols = isDoubles ? "auto auto auto" : "auto";
   const scoreCols = hasScores ? ` 1.5rem${" auto".repeat(match.sets.length)}` : "";
-  const probCol = hasProb ? " 1.5rem 1fr" : "";
-  const gridCols = `${playerCols}${scoreCols}${!hasScores && !hasProb ? "" : probCol}`;
+  const gridCols = `${playerCols}${scoreCols}`;
 
   const probA = hasProb ? Math.round(sideAWinProbability! * 100) : 0;
   const probB = hasProb ? 100 - probA : 0;
+  const sideAFavored = probA >= 50;
 
   return (
     <div className="rounded-lg border p-3 space-y-1">
-      <div className="inline-grid items-center gap-x-2 gap-y-2" style={{ gridTemplateColumns: gridCols }}>
-        {/* Side A row */}
-        <PlayerCell player={match.sideA[0]} isWinnerSide={match.winnerSide === "a"} />
-        {isDoubles && (
-          <>
-            <span className="text-muted-foreground text-sm">×</span>
-            <PlayerCell player={match.sideA[1]} isWinnerSide={match.winnerSide === "a"} />
-          </>
-        )}
-        {hasScores && <span />}
-        {match.sets.map((s, i) => (
-          <span key={i} className={`text-sm ${s.setA > s.setB ? "font-semibold" : "text-muted-foreground"}`}>
-            {s.setA}
-          </span>
-        ))}
-        {hasProb && (
-          <>
-            <span />
-            {sideAFavored ? (
-              <div className="flex items-center gap-2">
-                <div className="flex-1 flex h-2 rounded-full overflow-hidden bg-muted">
-                  <div className="bg-foreground/60 rounded-l-full" style={{ width: `${probA}%` }} />
-                  <div className="bg-foreground/20 rounded-r-full" style={{ width: `${probB}%` }} />
-                </div>
-                <span className="text-xs text-muted-foreground shrink-0">{probA}% win</span>
-              </div>
-            ) : (
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-muted-foreground shrink-0">{probA}% lose</span>
-              </div>
+      <div className="flex items-start gap-3">
+        <div className="flex-1 min-w-0">
+          <div className="inline-grid items-center gap-x-2 gap-y-2" style={{ gridTemplateColumns: gridCols }}>
+            {/* Side A row */}
+            <PlayerCell player={match.sideA[0]} isWinnerSide={match.winnerSide === "a"} />
+            {isDoubles && (
+              <>
+                <span className="text-muted-foreground text-sm">×</span>
+                <PlayerCell player={match.sideA[1]} isWinnerSide={match.winnerSide === "a"} />
+              </>
             )}
-          </>
-        )}
+            {hasScores && <span />}
+            {match.sets.map((s, i) => (
+              <span key={i} className={`text-sm ${s.setA > s.setB ? "font-semibold" : "text-muted-foreground"}`}>
+                {s.setA}
+              </span>
+            ))}
 
-        {/* Side B row */}
-        <PlayerCell player={match.sideB[0]} isWinnerSide={match.winnerSide === "b"} />
-        {isDoubles && (
-          <>
-            <span className="text-muted-foreground text-sm">×</span>
-            <PlayerCell player={match.sideB[1]} isWinnerSide={match.winnerSide === "b"} />
-          </>
-        )}
-        {hasScores && <span />}
-        {match.sets.map((s, i) => (
-          <span key={i} className={`text-sm ${s.setB > s.setA ? "font-semibold" : "text-muted-foreground"}`}>
-            {s.setB}
-          </span>
-        ))}
-        {hasProb && (
-          <>
-            <span />
-            {!sideAFavored ? (
-              <div className="flex items-center gap-2">
-                <div className="flex-1 flex h-2 rounded-full overflow-hidden bg-muted">
-                  <div className="bg-foreground/60 rounded-l-full" style={{ width: `${probB}%` }} />
-                  <div className="bg-foreground/20 rounded-r-full" style={{ width: `${probA}%` }} />
-                </div>
-                <span className="text-xs text-muted-foreground shrink-0">{probB}% win</span>
-              </div>
-            ) : (
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-muted-foreground shrink-0">{probB}% lose</span>
-              </div>
+            {/* Side B row */}
+            <PlayerCell player={match.sideB[0]} isWinnerSide={match.winnerSide === "b"} />
+            {isDoubles && (
+              <>
+                <span className="text-muted-foreground text-sm">×</span>
+                <PlayerCell player={match.sideB[1]} isWinnerSide={match.winnerSide === "b"} />
+              </>
             )}
-          </>
+            {hasScores && <span />}
+            {match.sets.map((s, i) => (
+              <span key={i} className={`text-sm ${s.setB > s.setA ? "font-semibold" : "text-muted-foreground"}`}>
+                {s.setB}
+              </span>
+            ))}
+          </div>
+        </div>
+        {hasProb && (
+          <div className="shrink-0 flex flex-col justify-center gap-2 w-32 self-center">
+            {/* Favored side row */}
+            <div className="flex items-center gap-1.5">
+              <div className="flex-1 flex h-2 rounded-full overflow-hidden bg-muted">
+                {sideAFavored ? (
+                  <>
+                    <div className="bg-foreground/60 rounded-l-full" style={{ width: `${probA}%` }} />
+                    <div className="bg-foreground/20 rounded-r-full" style={{ width: `${probB}%` }} />
+                  </>
+                ) : (
+                  <div className="bg-foreground/10 rounded-full w-full" />
+                )}
+              </div>
+              <span className="text-xs text-muted-foreground w-14 text-right">{sideAFavored ? `${probA}% win` : `${probA}% lose`}</span>
+            </div>
+            {/* Other side row */}
+            <div className="flex items-center gap-1.5">
+              <div className="flex-1 flex h-2 rounded-full overflow-hidden bg-muted">
+                {!sideAFavored ? (
+                  <>
+                    <div className="bg-foreground/60 rounded-l-full" style={{ width: `${probB}%` }} />
+                    <div className="bg-foreground/20 rounded-r-full" style={{ width: `${probA}%` }} />
+                  </>
+                ) : (
+                  <div className="bg-foreground/10 rounded-full w-full" />
+                )}
+              </div>
+              <span className="text-xs text-muted-foreground w-14 text-right">{!sideAFavored ? `${probB}% win` : `${probB}% lose`}</span>
+            </div>
+          </div>
         )}
       </div>
 
