@@ -95,8 +95,32 @@ function migrate(db: Database) {
   `);
 
   db.run("CREATE INDEX IF NOT EXISTS idx_matches_date ON matches(date_time)");
+  db.run("CREATE INDEX IF NOT EXISTS idx_matches_source ON matches(source)");
+  db.run("CREATE INDEX IF NOT EXISTS idx_matches_tournament_name ON matches(tournament_name)");
   db.run("CREATE INDEX IF NOT EXISTS idx_match_players_player ON match_players(player_id)");
+  db.run("CREATE INDEX IF NOT EXISTS idx_match_players_guid ON match_players(match_guid)");
   db.run("CREATE INDEX IF NOT EXISTS idx_ratings_ordinal ON ratings(ordinal DESC)");
+  db.run("CREATE INDEX IF NOT EXISTS idx_players_gender ON players(gender)");
+
+  // New columns for schedule scraping
+  const matchCols = db.query("PRAGMA table_info(matches)").all() as Array<{ name: string }>;
+  const colNames = new Set(matchCols.map((c) => c.name));
+
+  if (!colNames.has("tournament_id")) {
+    db.run("ALTER TABLE matches ADD COLUMN tournament_id INTEGER REFERENCES tournaments(id)");
+  }
+  if (!colNames.has("court")) {
+    db.run("ALTER TABLE matches ADD COLUMN court TEXT");
+  }
+  if (!colNames.has("category")) {
+    db.run("ALTER TABLE matches ADD COLUMN category TEXT");
+  }
+  if (!colNames.has("subcategory")) {
+    db.run("ALTER TABLE matches ADD COLUMN subcategory TEXT");
+  }
+
+  db.run("CREATE INDEX IF NOT EXISTS idx_matches_tournament_id ON matches(tournament_id)");
+  db.run("CREATE INDEX IF NOT EXISTS idx_matches_category ON matches(category)");
 }
 
 export function getCursor(key: string): string | null {
