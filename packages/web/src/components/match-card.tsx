@@ -25,19 +25,19 @@ interface MatchCardProps {
 export function MatchCard({ match }: MatchCardProps) {
   const maxPlayers = Math.max(match.sideA.length, match.sideB.length);
   const isDoubles = maxPlayers > 1;
-  // columns: player1, [×, player2], gap, score1, score2, ...
+  // columns: player1, ×, player2, gap, score1, score2, ...
   const gridCols = isDoubles
     ? `auto auto auto 1.5rem${" auto".repeat(match.sets.length)}`
     : `auto 1.5rem${" auto".repeat(match.sets.length)}`;
 
   return (
     <div className="rounded-lg border p-3 space-y-1">
-      <div className="inline-grid items-center gap-x-4 gap-y-1" style={{ gridTemplateColumns: gridCols }}>
+      <div className="inline-grid items-center gap-x-2 gap-y-2" style={{ gridTemplateColumns: gridCols }}>
         {/* Side A row */}
         <PlayerCell player={match.sideA[0]} isWinnerSide={match.winnerSide === "a"} />
         {isDoubles && (
           <>
-            <span className="row-span-2 self-center text-muted-foreground text-sm">×</span>
+            <span className="text-muted-foreground text-sm">×</span>
             <PlayerCell player={match.sideA[1]} isWinnerSide={match.winnerSide === "a"} />
           </>
         )}
@@ -51,7 +51,10 @@ export function MatchCard({ match }: MatchCardProps) {
         {/* Side B row */}
         <PlayerCell player={match.sideB[0]} isWinnerSide={match.winnerSide === "b"} />
         {isDoubles && (
-          <PlayerCell player={match.sideB[1]} isWinnerSide={match.winnerSide === "b"} />
+          <>
+            <span className="text-muted-foreground text-sm">×</span>
+            <PlayerCell player={match.sideB[1]} isWinnerSide={match.winnerSide === "b"} />
+          </>
         )}
         <span />
         {match.sets.map((s, i) => (

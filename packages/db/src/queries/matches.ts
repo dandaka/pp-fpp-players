@@ -115,6 +115,13 @@ export function getPlayerMatches(
   const genderRanks = batchGetGenderRanks(allPlayerIdList);
   const ratings = batchGetRatings(allPlayerIdList);
 
+  // Batch-fetch full names from players table
+  const namePlaceholders = allPlayerIdList.map(() => "?").join(",");
+  const nameRows = allPlayerIdList.length > 0
+    ? db.query(`SELECT id, name FROM players WHERE id IN (${namePlaceholders})`).all(...allPlayerIdList) as Array<{ id: number; name: string }>
+    : [];
+  const fullNames = new Map(nameRows.map((r) => [r.id, r.name]));
+
   const matches: MatchDetail[] = parsedRows.map((row) => {
     const sideANames = (row.side_a_names ?? "").split(" / ");
     const sideBNames = (row.side_b_names ?? "").split(" / ");
@@ -130,14 +137,14 @@ export function getPlayerMatches(
       winnerSide: row.winner_side,
       sideA: row.sideAIds.map((id: number, i: number) => ({
         id,
-        name: sideANames[i] ?? "",
+        name: fullNames.get(id) ?? sideANames[i] ?? "",
         genderRank: genderRanks.get(id) ?? null,
         categoryRank: null,
         rating: ratings.get(id) ?? null,
       })),
       sideB: row.sideBIds.map((id: number, i: number) => ({
         id,
-        name: sideBNames[i] ?? "",
+        name: fullNames.get(id) ?? sideBNames[i] ?? "",
         genderRank: genderRanks.get(id) ?? null,
         categoryRank: null,
         rating: ratings.get(id) ?? null,
