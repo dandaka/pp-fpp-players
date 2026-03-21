@@ -245,6 +245,7 @@ export async function scrapeAllTournaments(source = "db") {
       if (count > 0) {
         console.log(`  → ${count} matches`);
         grandTotal += count;
+        setCursor(cursorKey, "done");
       } else {
         // News feed had no player-level data (e.g. Liga de Clubes team results).
         // Fall back to Playwright scraping of the Matches/Draws pages.
@@ -252,6 +253,7 @@ export async function scrapeAllTournaments(source = "db") {
         if (linkWeb) {
           console.log(`  News feed empty, trying Playwright scrape (120s timeout)...`);
           const ac = new AbortController();
+          let scrapeOk = false;
           try {
             const result = await Promise.race([
               scrapeSchedule(t.id, linkWeb, { signal: ac.signal }).then(() => "ok" as const),
@@ -260,16 +262,21 @@ export async function scrapeAllTournaments(source = "db") {
             if (result === "timeout") {
               ac.abort();
               console.error(`  Playwright scrape timed out after 120s`);
+            } else {
+              scrapeOk = true;
             }
           } catch (err) {
             ac.abort();
             console.error(`  Playwright scrape failed: ${err}`);
           }
+          if (scrapeOk) {
+            setCursor(cursorKey, "done");
+          }
+        } else {
+          // No link_web, nothing more we can do
+          setCursor(cursorKey, "done");
         }
       }
-
-      // Mark tournament as done regardless of outcome
-      setCursor(cursorKey, "done");
     } catch (err) {
       console.error(`  Error scraping tournament ${t.id}: ${err}`);
     }
