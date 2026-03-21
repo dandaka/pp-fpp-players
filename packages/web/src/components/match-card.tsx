@@ -20,9 +20,10 @@ function PlayerCell({ player, isWinnerSide }: { player: MatchPlayerInfo; isWinne
 interface MatchCardProps {
   match: MatchDetail;
   currentPlayerId: number;
+  court?: string | null;
 }
 
-export function MatchCard({ match }: MatchCardProps) {
+export function MatchCard({ match, court }: MatchCardProps) {
   const maxPlayers = Math.max(match.sideA.length, match.sideB.length);
   const isDoubles = maxPlayers > 1;
   // columns: player1, ×, player2, gap, score1, score2, ...
@@ -65,14 +66,15 @@ export function MatchCard({ match }: MatchCardProps) {
       </div>
 
       <div className="flex items-center justify-between text-xs text-muted-foreground">
-        <div className="min-w-0 flex-1">
+        <div className="min-w-0 flex-1 flex items-center gap-1">
           {match.tournamentId ? (
-            <Link href={`/tournaments/${match.tournamentId}`} className="hover:underline truncate block">
+            <Link href={`/tournaments/${match.tournamentId}`} className="hover:underline truncate">
               {match.tournamentName}
             </Link>
           ) : (
-            <span className="truncate block">{match.tournamentName}</span>
+            <span className="truncate">{match.tournamentName}</span>
           )}
+          {court && <span className="shrink-0">· {court}</span>}
         </div>
         {match.dateTime && <span className="shrink-0 ml-2">{match.dateTime}</span>}
       </div>

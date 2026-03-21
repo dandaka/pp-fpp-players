@@ -61,32 +61,24 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
         <div>
           <h2 className="mb-3 text-sm font-medium text-muted-foreground">Upcoming Match</h2>
           <div className="space-y-2">
-            {upcomingMatches.map((match) => (
-              <div key={match.guid} className="space-y-2">
-                <MatchCard match={match} currentPlayerId={player.id} />
-                {match.sideAWinProbability != null && (
-                  <div className="px-3 space-y-1">
-                    <div className="flex justify-between text-xs text-muted-foreground">
-                      <span>{Math.round(match.sideAWinProbability * 100)}%</span>
-                      <span>{Math.round((1 - match.sideAWinProbability) * 100)}%</span>
+            {upcomingMatches.map((match) => {
+              const prob = match.sideAWinProbability;
+              return (
+                <div key={match.guid} className="space-y-1">
+                  <MatchCard match={match} currentPlayerId={player.id} court={match.court} />
+                  {prob != null && (
+                    <div className="flex items-center gap-2 px-3">
+                      <span className="text-xs font-medium shrink-0">{Math.round(prob * 100)}% win</span>
+                      <div className="flex-1 flex h-1.5 rounded-full overflow-hidden bg-muted">
+                        <div className="bg-foreground/60 rounded-l-full" style={{ width: `${prob * 100}%` }} />
+                        <div className="bg-foreground/20 rounded-r-full" style={{ width: `${(1 - prob) * 100}%` }} />
+                      </div>
+                      <span className="text-xs font-medium shrink-0">{Math.round((1 - prob) * 100)}% win</span>
                     </div>
-                    <div className="flex h-1.5 rounded-full overflow-hidden bg-muted">
-                      <div
-                        className="bg-foreground/60 rounded-l-full"
-                        style={{ width: `${match.sideAWinProbability * 100}%` }}
-                      />
-                      <div
-                        className="bg-foreground/20 rounded-r-full"
-                        style={{ width: `${(1 - match.sideAWinProbability) * 100}%` }}
-                      />
-                    </div>
-                  </div>
-                )}
-                {match.court && (
-                  <p className="px-3 text-xs text-muted-foreground">{match.court}</p>
-                )}
-              </div>
-            ))}
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
