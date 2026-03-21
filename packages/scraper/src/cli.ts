@@ -88,6 +88,18 @@ switch (cmd) {
     break;
   }
 
+  case "schedule": {
+    const { scrapeSchedule, resolveScheduleInput } = await import("./scrape-upcoming-matches");
+    const input = process.argv[3];
+    if (!input) {
+      console.log("Usage: bun src/cli.ts schedule <tournament-id|url>");
+      break;
+    }
+    const { tournamentId, url } = resolveScheduleInput(input);
+    await scrapeSchedule(tournamentId, url);
+    break;
+  }
+
   default:
     console.log(`Usage: bun src/cli.ts <command>
 
@@ -98,6 +110,7 @@ Commands:
   enrich [n]          Enrich n player profiles from API (default: 50)
   import [file]       Import matches from scraped JSON (default: matches.json)
   scrape [file|api]   Scrape matches from tournaments
+  schedule <id|url>   Scrape match schedule for a tournament
   rate [n]            Calculate ratings and show top n (default: 30)
   recalculate [n]     Clear and recalculate all ratings
   leaderboard [n]     Show top n rated players
