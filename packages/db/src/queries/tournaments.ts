@@ -1,5 +1,5 @@
 import { getDb } from "../connection";
-import type { Tournament, TournamentDetail, TournamentPlayer, TournamentMatch } from "../types";
+import type { Tournament, TournamentDetail, TournamentPlayer, MatchDetail, UpcomingMatchDetail, PlayerRating } from "../types";
 
 export function getTournaments(page = 1, pageSize = 20): { tournaments: Tournament[]; total: number } {
   const db = getDb();
@@ -58,17 +58,21 @@ export function getTournamentPlayers(
   const tournament = db.query("SELECT name FROM tournaments WHERE id = ?").get(tournamentId) as { name: string } | null;
   if (!tournament) return [];
 
-  // Pre-compute gender ranks in one pass instead of correlated subquery per row
+  // Pre-compute global and gender ranks in one pass
+  const globalRanks = new Map<number, number>();
   const genderRanks = new Map<number, number>();
   const rankRows = db.query(`
     SELECT r.player_id, p.gender,
+      RANK() OVER (ORDER BY r.ordinal DESC) as global_rank,
       RANK() OVER (PARTITION BY p.gender ORDER BY r.ordinal DESC) as gender_rank
     FROM ratings r
     JOIN players p ON p.id = r.player_id
-    WHERE p.gender IS NOT NULL
-  `).all() as Array<{ player_id: number; gender: string; gender_rank: number }>;
+  `).all() as Array<{ player_id: number; gender: string | null; global_rank: number; gender_rank: number }>;
   for (const row of rankRows) {
-    genderRanks.set(row.player_id, row.gender_rank);
+    globalRanks.set(row.player_id, row.global_rank);
+    if (row.gender !== null) {
+      genderRanks.set(row.player_id, row.gender_rank);
+    }
   }
 
   let query = `
@@ -95,16 +99,55 @@ export function getTournamentPlayers(
   return rows.map((row) => ({
     id: row.id,
     name: row.name,
+    globalRank: globalRanks.get(row.id) ?? null,
     genderRank: genderRanks.get(row.id) ?? null,
     categoryRank: null,
     ordinal: row.ordinal ?? 0,
   }));
 }
 
+const RELIABILITY_K = 5;
+
+function parseTournamentIdFromSource(source: string | null): number | null {
+  if (!source) return null;
+  const match = source.match(/(?:scrape|schedule):tournament:(\d+)/);
+  return match ? parseInt(match[1]) : null;
+}
+
+function parseSets(setsJson: string | null): MatchDetail["sets"] {
+  if (!setsJson) return [];
+  try {
+    const raw = JSON.parse(setsJson);
+    return raw.map((s: any) => ({
+      setA: s.set_a ?? 0, setB: s.set_b ?? 0,
+      tieA: s.tie_a ?? -1, tieB: s.tie_b ?? -1,
+    }));
+  } catch { return []; }
+}
+
+function computeWinProbability(
+  sideA: Array<{ mu: number; sigma: number }>,
+  sideB: Array<{ mu: number; sigma: number }>
+): number | null {
+  if (sideA.length === 0 || sideB.length === 0) return null;
+  const muA = sideA.reduce((s, r) => s + r.mu, 0);
+  const muB = sideB.reduce((s, r) => s + r.mu, 0);
+  const sigmaA = Math.sqrt(sideA.reduce((s, r) => s + r.sigma * r.sigma, 0));
+  const sigmaB = Math.sqrt(sideB.reduce((s, r) => s + r.sigma * r.sigma, 0));
+  const deltaMu = muA - muB;
+  const denom = Math.sqrt(2 * (sigmaA * sigmaA + sigmaB * sigmaB));
+  if (denom === 0) return 0.5;
+  const x = deltaMu / denom;
+  const t = 1 / (1 + 0.3275911 * Math.abs(x));
+  const erf = 1 - (0.254829592 * t - 0.284496736 * t * t + 1.421413741 * t ** 3
+    - 1.453152027 * t ** 4 + 1.061405429 * t ** 5) * Math.exp(-x * x);
+  return Math.round(0.5 * (1 + (x >= 0 ? erf : -erf)) * 100) / 100;
+}
+
 export function getTournamentMatches(
   tournamentId: number,
   category?: string
-): { upcoming: TournamentMatch[]; completed: TournamentMatch[] } {
+): { upcoming: UpcomingMatchDetail[]; completed: MatchDetail[] } {
   const db = getDb();
 
   const tournament = db.query("SELECT name FROM tournaments WHERE id = ?").get(tournamentId) as { name: string } | null;
@@ -112,8 +155,9 @@ export function getTournamentMatches(
 
   let query = `
     SELECT m.guid, m.section_name, m.round_name, m.date_time, m.court,
-           m.category, m.subcategory, m.sets_json, m.winner_side,
-           m.side_a_ids, m.side_b_ids, m.side_a_names, m.side_b_names
+           m.category, m.subcategory, m.sets_json, m.winner_side, m.source,
+           m.side_a_ids, m.side_b_ids, m.side_a_names, m.side_b_names,
+           m.tournament_name
     FROM matches m
     WHERE (m.source = ? OR m.source = ? OR m.tournament_name = ?)
   `;
@@ -134,64 +178,104 @@ export function getTournamentMatches(
     guid: string; section_name: string | null; round_name: string | null;
     date_time: string | null; court: string | null; category: string | null;
     subcategory: string | null; sets_json: string | null; winner_side: string | null;
+    source: string | null; tournament_name: string | null;
     side_a_ids: string; side_b_ids: string; side_a_names: string | null; side_b_names: string | null;
   }>;
 
-  // Batch-fetch player names
+  // Collect all player IDs
   const allPlayerIds = new Set<number>();
   for (const row of rows) {
     for (const id of JSON.parse(row.side_a_ids)) allPlayerIds.add(id);
     for (const id of JSON.parse(row.side_b_ids)) allPlayerIds.add(id);
   }
   const idList = [...allPlayerIds];
-  const nameMap = new Map<number, string>();
+
+  // Batch-fetch player names, photos, ratings, gender ranks, mu/sigma
+  const fullNames = new Map<number, string>();
+  const photoUrls = new Map<number, string | null>();
+  const muSigma = new Map<number, { mu: number; sigma: number }>();
+  const ratingsMap = new Map<number, PlayerRating>();
+  const genderRanks = new Map<number, number | null>();
+
   if (idList.length > 0) {
     const placeholders = idList.map(() => "?").join(",");
+
     const nameRows = db.query(
-      `SELECT id, name FROM players WHERE id IN (${placeholders})`
-    ).all(...idList) as Array<{ id: number; name: string }>;
-    for (const r of nameRows) nameMap.set(r.id, r.name);
+      `SELECT id, name, photo_url FROM players WHERE id IN (${placeholders})`
+    ).all(...idList) as Array<{ id: number; name: string; photo_url: string | null }>;
+    for (const r of nameRows) { fullNames.set(r.id, r.name); photoUrls.set(r.id, r.photo_url); }
+
+    const bounds = db.query("SELECT MIN(ordinal) as minOrd, MAX(ordinal) as maxOrd FROM ratings").get() as { minOrd: number; maxOrd: number };
+    const range = bounds.maxOrd - bounds.minOrd;
+
+    const ratingRows = db.query(
+      `SELECT player_id, ordinal, matches_counted, mu, sigma FROM ratings WHERE player_id IN (${placeholders})`
+    ).all(...idList) as Array<{ player_id: number; ordinal: number; matches_counted: number; mu: number; sigma: number }>;
+    for (const r of ratingRows) {
+      const score = range > 0 ? Math.round(((r.ordinal - bounds.minOrd) / range) * 1000) / 10 : 0;
+      const reliability = Math.round((r.matches_counted / (r.matches_counted + RELIABILITY_K)) * 100);
+      ratingsMap.set(r.player_id, { score, reliability });
+      muSigma.set(r.player_id, { mu: r.mu, sigma: r.sigma });
+    }
+
+    const genderRows = db.query(`
+      SELECT p.id,
+        (SELECT COUNT(*) + 1 FROM ratings r2
+         JOIN players p2 ON p2.id = r2.player_id
+         WHERE r2.ordinal > r.ordinal AND p2.gender = p.gender) as genderRank
+      FROM players p
+      JOIN ratings r ON r.player_id = p.id
+      WHERE p.id IN (${placeholders}) AND p.gender IS NOT NULL AND p.gender != ''
+    `).all(...idList) as Array<{ id: number; genderRank: number }>;
+    for (const id of idList) genderRanks.set(id, null);
+    for (const r of genderRows) genderRanks.set(r.id, r.genderRank);
   }
 
-  function toMatch(row: typeof rows[0]): TournamentMatch {
+  function buildPlayerInfo(id: number, fallbackName: string) {
+    return {
+      id,
+      name: fullNames.get(id) ?? fallbackName,
+      photoUrl: photoUrls.get(id) ?? null,
+      genderRank: genderRanks.get(id) ?? null,
+      categoryRank: null,
+      rating: ratingsMap.get(id) ?? null,
+    };
+  }
+
+  const upcoming: UpcomingMatchDetail[] = [];
+  const completed: MatchDetail[] = [];
+
+  for (const row of rows) {
     const sideAIds: number[] = JSON.parse(row.side_a_ids);
     const sideBIds: number[] = JSON.parse(row.side_b_ids);
     const sideANames = (row.side_a_names ?? "").split(" / ");
     const sideBNames = (row.side_b_names ?? "").split(" / ");
 
-    let sets: TournamentMatch["sets"] = [];
-    if (row.sets_json) {
-      try {
-        sets = JSON.parse(row.sets_json).map((s: any) => ({
-          setA: s.set_a ?? 0, setB: s.set_b ?? 0,
-          tieA: s.tie_a ?? -1, tieB: s.tie_b ?? -1,
-        }));
-      } catch {}
-    }
-
-    return {
+    const base: MatchDetail = {
       guid: row.guid,
-      category: row.category,
-      subcategory: row.subcategory,
+      tournamentId: parseTournamentIdFromSource(row.source),
+      tournamentName: row.tournament_name,
+      sectionName: row.section_name,
       roundName: row.round_name,
       dateTime: row.date_time,
-      court: row.court,
-      sets,
+      sets: parseSets(row.sets_json),
       winnerSide: row.winner_side,
-      sideA: sideAIds.map((id, i) => ({ id, name: nameMap.get(id) ?? sideANames[i] ?? "" })),
-      sideB: sideBIds.map((id, i) => ({ id, name: nameMap.get(id) ?? sideBNames[i] ?? "" })),
+      sideA: sideAIds.map((id, i) => buildPlayerInfo(id, sideANames[i] ?? "")),
+      sideB: sideBIds.map((id, i) => buildPlayerInfo(id, sideBNames[i] ?? "")),
     };
-  }
 
-  const upcoming: TournamentMatch[] = [];
-  const completed: TournamentMatch[] = [];
-
-  for (const row of rows) {
-    const match = toMatch(row);
     if (row.winner_side) {
-      completed.push(match);
+      completed.push(base);
     } else {
-      upcoming.push(match);
+      const sideARatingsRaw = sideAIds.map((id) => muSigma.get(id)).filter(Boolean) as Array<{ mu: number; sigma: number }>;
+      const sideBRatingsRaw = sideBIds.map((id) => muSigma.get(id)).filter(Boolean) as Array<{ mu: number; sigma: number }>;
+      upcoming.push({
+        ...base,
+        court: row.court,
+        category: row.category,
+        subcategory: row.subcategory,
+        sideAWinProbability: computeWinProbability(sideARatingsRaw, sideBRatingsRaw),
+      });
     }
   }
 

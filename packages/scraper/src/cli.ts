@@ -22,9 +22,8 @@ switch (cmd) {
     break;
 
   case "scrape": {
-    // Pass source as argv[3] so scrape-all-tournaments picks it up
-    if (!process.argv[3]) process.argv[3] = "db";
-    await import("./scrape-all-tournaments");
+    const { scrapeAllTournaments } = await import("./scrape-all-tournaments");
+    await scrapeAllTournaments(process.argv[3] ?? "db");
     break;
   }
 
@@ -88,6 +87,11 @@ switch (cmd) {
     break;
   }
 
+  case "daemon": {
+    await import("./daemon");
+    break;
+  }
+
   case "schedule": {
     const { scrapeSchedule, resolveScheduleInput } = await import("./scrape-upcoming-matches");
     const input = process.argv[3];
@@ -110,6 +114,7 @@ Commands:
   enrich [n]          Enrich n player profiles from API (default: 50)
   import [file]       Import matches from scraped JSON (default: matches.json)
   scrape [file|api]   Scrape matches from tournaments
+  daemon              Start sync daemon (news feed + draws loops)
   schedule <id|url>   Scrape match schedule for a tournament
   rate [n]            Calculate ratings and show top n (default: 30)
   recalculate [n]     Clear and recalculate all ratings

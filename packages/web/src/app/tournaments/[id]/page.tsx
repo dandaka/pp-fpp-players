@@ -4,7 +4,10 @@ import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { RankBadge } from "@/components/rank-badge";
+import { MatchCard } from "@/components/match-card";
 import { CategoryFilter } from "./category-filter";
+
+import type { MatchDetail, UpcomingMatchDetail } from "@fpp/db";
 
 interface Tournament {
   id: number;
@@ -17,27 +20,15 @@ interface Tournament {
 interface TournamentPlayer {
   id: number;
   name: string;
+  globalRank: number | null;
   genderRank: number | null;
   categoryRank: number | null;
   ordinal: number;
 }
 
-interface TournamentMatchData {
-  guid: string;
-  category: string | null;
-  subcategory: string | null;
-  roundName: string | null;
-  dateTime: string | null;
-  court: string | null;
-  sets: Array<{ setA: number; setB: number }>;
-  winnerSide: string | null;
-  sideA: Array<{ id: number; name: string }>;
-  sideB: Array<{ id: number; name: string }>;
-}
-
 interface MatchesData {
-  upcoming: TournamentMatchData[];
-  completed: TournamentMatchData[];
+  upcoming: UpcomingMatchDetail[];
+  completed: MatchDetail[];
 }
 
 export default function TournamentPage() {
@@ -90,60 +81,6 @@ export default function TournamentPage() {
     return <p className="py-8 text-center text-muted-foreground">Tournament not found</p>;
   }
 
-  function renderMatchCard(match: TournamentMatchData) {
-    const isUpcoming = !match.winnerSide;
-    return (
-      <div key={match.guid} className="rounded-lg border p-3 space-y-2">
-        <div className="flex items-center justify-between text-xs text-muted-foreground">
-          <div className="flex gap-2">
-            {match.category && <span>{match.category}{match.subcategory ? `-${match.subcategory}` : ""}</span>}
-            {match.roundName && <span>{match.roundName}</span>}
-          </div>
-          <div className="flex gap-2">
-            {match.court && <span>{match.court}</span>}
-            {match.dateTime && (
-              <span>
-                {new Date(match.dateTime).toLocaleDateString("pt-PT", { day: "numeric", month: "short" })}
-                {" "}
-                {match.dateTime.includes(" ") ? match.dateTime.split(" ")[1]?.substring(0, 5) : ""}
-              </span>
-            )}
-          </div>
-        </div>
-
-        <div className="space-y-1">
-          {/* Side A */}
-          <div className={`flex items-center justify-between ${match.winnerSide === "a" ? "font-semibold" : ""}`}>
-            <div className="flex gap-1">
-              {match.sideA.map((p) => (
-                <Link key={p.id} href={`/players/${p.id}`} className="hover:underline">{p.name}</Link>
-              ))}
-            </div>
-            {!isUpcoming && (
-              <div className="flex gap-2 text-sm tabular-nums">
-                {match.sets.map((s, i) => <span key={i}>{s.setA}</span>)}
-              </div>
-            )}
-          </div>
-
-          {/* Side B */}
-          <div className={`flex items-center justify-between ${match.winnerSide === "b" ? "font-semibold" : ""}`}>
-            <div className="flex gap-1">
-              {match.sideB.map((p) => (
-                <Link key={p.id} href={`/players/${p.id}`} className="hover:underline">{p.name}</Link>
-              ))}
-            </div>
-            {!isUpcoming && (
-              <div className="flex gap-2 text-sm tabular-nums">
-                {match.sets.map((s, i) => <span key={i}>{s.setB}</span>)}
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="space-y-4">
       <div>
@@ -188,14 +125,17 @@ export default function TournamentPage() {
         {activeTab === "players" && (
           <>
             {players.length > 0 ? (
-              players.map((player, idx) => (
+              [...players].sort((a, b) => {
+                if (a.globalRank === null && b.globalRank === null) return 0;
+                if (a.globalRank === null) return 1;
+                if (b.globalRank === null) return -1;
+                return a.globalRank - b.globalRank;
+              }).map((player) => (
                 <Link key={player.id} href={`/players/${player.id}`} className="block">
                   <div className="flex items-center justify-between rounded-lg border p-3 transition-colors hover:bg-muted/50">
-                    <div className="flex items-center gap-3 min-w-0">
-                      <span className="shrink-0 w-8 text-right text-sm text-muted-foreground">{idx + 1}.</span>
-                      <span className="truncate font-medium">{player.name}</span>
-                    </div>
+                    <span className="truncate font-medium">{player.name}</span>
                     <div className="flex items-center gap-1 shrink-0 ml-2">
+                      <RankBadge rank={player.globalRank} />
                       <RankBadge rank={player.genderRank} label="gender" />
                       <RankBadge rank={player.categoryRank} label="cat" />
                     </div>
@@ -211,7 +151,15 @@ export default function TournamentPage() {
         {activeTab === "upcoming" && (
           <>
             {matches.upcoming.length > 0 ? (
-              matches.upcoming.map(renderMatchCard)
+              matches.upcoming.map((match) => (
+                <MatchCard
+                  key={match.guid}
+                  match={match}
+                  currentPlayerId={0}
+                  court={match.court}
+                  sideAWinProbability={match.sideAWinProbability}
+                />
+              ))
             ) : (
               <p className="py-8 text-center text-muted-foreground">No upcoming matches</p>
             )}
@@ -221,7 +169,9 @@ export default function TournamentPage() {
         {activeTab === "completed" && (
           <>
             {matches.completed.length > 0 ? (
-              matches.completed.map(renderMatchCard)
+              matches.completed.map((match) => (
+                <MatchCard key={match.guid} match={match} currentPlayerId={0} />
+              ))
             ) : (
               <p className="py-8 text-center text-muted-foreground">No completed matches</p>
             )}

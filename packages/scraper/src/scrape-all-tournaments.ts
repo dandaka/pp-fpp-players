@@ -152,13 +152,8 @@ function saveTournament(db: ReturnType<typeof getDb>, id: number, name: string, 
   );
 }
 
-async function main() {
+export async function scrapeAllTournaments(source = "db") {
   const db = getDb();
-  // When called via cli.ts, source is argv[3]; when called directly, argv[2]
-  const source = process.argv[3] && !process.argv[3].startsWith("-")
-    ? process.argv[3]
-    : process.argv[2] ?? "api";
-
   let targets: { id: number; name: string; date: string }[];
 
   if (source === "db") {
@@ -207,4 +202,9 @@ async function main() {
   console.log(`Total players: ${stats.players}`);
 }
 
-main().catch(console.error);
+if (import.meta.main) {
+  const source = process.argv[3] && !process.argv[3].startsWith("-")
+    ? process.argv[3]
+    : process.argv[2] ?? "api";
+  scrapeAllTournaments(source).catch(console.error);
+}
