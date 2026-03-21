@@ -71,3 +71,16 @@ export interface TournamentPlayer {
   categoryRank: number | null
   ordinal: number
 }
+
+export interface TournamentMatch {
+  guid: string
+  category: string | null
+  subcategory: string | null
+  roundName: string | null
+  dateTime: string | null
+  court: string | null
+  sets: Array<{ setA: number; setB: number; tieA: number; tieB: number }>
+  winnerSide: string | null
+  sideA: Array<{ id: number; name: string }>
+  sideB: Array<{ id: number; name: string }>
+}
