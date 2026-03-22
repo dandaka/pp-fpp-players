@@ -1,0 +1,25 @@
+services:
+  api:
+    image: ghcr.io/dandaka/pp-fpp-players/api:latest
+    ports:
+      - "${API_PORT:-3001}:3001"
+    volumes:
+      - db-data:/data
+    environment:
+      - DB_PATH=/data/padel.db
+      - API_PORT=3001
+    restart: unless-stopped
+
+  scraper:
+    image: ghcr.io/dandaka/pp-fpp-players/scraper:latest
+    volumes:
+      - db-data:/data
+    environment:
+      - DB_PATH=/data/padel.db
+    restart: unless-stopped
+    depends_on:
+      - api
+
+volumes:
+  db-data:
+    driver: local
