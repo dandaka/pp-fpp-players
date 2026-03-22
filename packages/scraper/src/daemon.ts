@@ -1,4 +1,4 @@
-import { getDb } from "./db";
+import { getDb, shouldSkipTournament, recordScrapeFailure, clearScrapeFailure } from "./db";
 import { scrapeAllTournaments } from "./scrape-all-tournaments";
 import { scrapeSchedule } from "./scrape-upcoming-matches";
 import { calculateRatings } from "./calculate-ratings";
@@ -7,6 +7,7 @@ import { scanTournaments } from "./find-tournaments";
 // Intervals in minutes
 const NEWS_FEED_INTERVAL = 60;
 const DRAWS_INTERVAL = 60;
+const SCRAPE_TIMEOUT_MS = 5 * 60 * 1000; // 5 min per tournament
 
 function log(msg: string) {
   console.log(`[${new Date().toISOString()}] ${msg}`);
@@ -83,10 +84,25 @@ async function drawsLoop() {
   log(`Found ${active.length} active tournament(s): ${active.map((t) => t.name).join(", ")}`);
 
   for (const t of active) {
+    const check = shouldSkipTournament(t.id);
+    if (check.skip) {
+      log(`Skipping ${t.name} (ID: ${t.id}): ${check.reason}`);
+      continue;
+    }
+
     try {
       log(`Scraping draws for: ${t.name} (ID: ${t.id})`);
-      await scrapeSchedule(t.id, t.url);
+      const ac = new AbortController();
+      const timer = setTimeout(() => ac.abort(), SCRAPE_TIMEOUT_MS);
+      try {
+        await scrapeSchedule(t.id, t.url, { signal: ac.signal });
+      } finally {
+        clearTimeout(timer);
+      }
+      clearScrapeFailure(t.id);
     } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      recordScrapeFailure(t.id, msg);
       logError(`Draws scrape failed for ${t.name} (${t.id}):`, err);
     }
   }

@@ -178,3 +178,64 @@ export function setCursor(key: string, value: string) {
     [key, value, value]
   );
 }
+
+interface ScrapeFailure {
+  count: number;
+  lastError: string;
+  lastAt: string;
+  skipUntil: string;
+}
+
+const BACKOFF_HOURS = [1, 6, 24, 72, 168]; // 1h, 6h, 1d, 3d, 7d
+
+export function recordScrapeFailure(tournamentId: number, error: string) {
+  const key = `scrape_fail_${tournamentId}`;
+  const existing = getCursor(key);
+  const now = new Date().toISOString();
+
+  let fail: ScrapeFailure;
+  if (existing) {
+    fail = JSON.parse(existing);
+    fail.count += 1;
+  } else {
+    fail = { count: 1, lastError: "", lastAt: now, skipUntil: "" };
+  }
+
+  fail.lastError = error.slice(0, 200);
+  fail.lastAt = now;
+
+  const backoffIdx = Math.min(fail.count - 1, BACKOFF_HOURS.length - 1);
+  const skipMs = BACKOFF_HOURS[backoffIdx] * 3600_000;
+  fail.skipUntil = new Date(Date.now() + skipMs).toISOString();
+
+  setCursor(key, JSON.stringify(fail));
+}
+
+export function shouldSkipTournament(tournamentId: number): { skip: boolean; reason?: string } {
+  const key = `scrape_fail_${tournamentId}`;
+  const raw = getCursor(key);
+  if (!raw) return { skip: false };
+
+  const fail: ScrapeFailure = JSON.parse(raw);
+  if (new Date(fail.skipUntil) > new Date()) {
+    return {
+      skip: true,
+      reason: `${fail.count} consecutive failures, skip until ${fail.skipUntil} (last: ${fail.lastError})`,
+    };
+  }
+  return { skip: false };
+}
+
+export function clearScrapeFailure(tournamentId: number) {
+  getDb().run("DELETE FROM sync_cursors WHERE key = ?", [`scrape_fail_${tournamentId}`]);
+}
+
+export function listScrapeFailures(): { tournamentId: number; failure: ScrapeFailure }[] {
+  const rows = getDb()
+    .query("SELECT key, value FROM sync_cursors WHERE key LIKE 'scrape_fail_%'")
+    .all() as { key: string; value: string }[];
+  return rows.map((r) => ({
+    tournamentId: parseInt(r.key.replace("scrape_fail_", "")),
+    failure: JSON.parse(r.value),
+  }));
+}

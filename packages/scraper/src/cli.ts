@@ -92,6 +92,33 @@ switch (cmd) {
     break;
   }
 
+  case "failures": {
+    const { listScrapeFailures, clearScrapeFailure } = await import("./db");
+    const subCmd = process.argv[3];
+    if (subCmd === "clear") {
+      const tid = parseInt(process.argv[4]);
+      if (tid) {
+        clearScrapeFailure(tid);
+        console.log(`Cleared failure record for tournament ${tid}`);
+      } else {
+        const all = listScrapeFailures();
+        for (const f of all) clearScrapeFailure(f.tournamentId);
+        console.log(`Cleared ${all.length} failure record(s)`);
+      }
+    } else {
+      const db = getDb();
+      const failures = listScrapeFailures();
+      if (failures.length === 0) { console.log("No scrape failures recorded"); break; }
+      for (const f of failures) {
+        const t = db.query("SELECT name FROM tournaments WHERE id = ?").get(f.tournamentId) as { name: string } | null;
+        const name = t?.name ?? "Unknown";
+        console.log(`[${f.tournamentId}] ${name} — ${f.failure.count} failures, skip until ${f.failure.skipUntil}`);
+        console.log(`  Last error: ${f.failure.lastError}`);
+      }
+    }
+    break;
+  }
+
   case "schedule": {
     const { scrapeSchedule, resolveScheduleInput } = await import("./scrape-upcoming-matches");
     const input = process.argv[3];
@@ -120,5 +147,7 @@ Commands:
   recalculate [n]     Clear and recalculate all ratings
   leaderboard [n]     Show top n rated players
   player <name>       Search player by name
-  stats               Show database statistics`);
+  stats               Show database statistics
+  failures            List tournaments with scrape failures
+  failures clear [id] Clear failure records (all or by tournament ID)`);
 }
