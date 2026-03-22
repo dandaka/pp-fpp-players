@@ -99,7 +99,7 @@ export function getPlayerMatches(
 
   let query = `
     SELECT DISTINCT m.guid, m.tournament_name, m.section_name, m.round_name, m.date_time,
-           m.sets_json, m.winner_side, m.source,
+           m.sets_json, m.winner_side, m.result_type, m.source,
            m.side_a_ids, m.side_b_ids, m.side_a_names, m.side_b_names
     FROM matches m
     JOIN match_players mp ON mp.match_guid = m.guid
@@ -119,7 +119,7 @@ export function getPlayerMatches(
   const rows = db.query(query).all(...params) as Array<{
     guid: string; tournament_name: string | null; section_name: string | null;
     round_name: string | null; date_time: string | null; sets_json: string | null;
-    winner_side: string | null; source: string | null;
+    winner_side: string | null; result_type: string | null; source: string | null;
     side_a_ids: string; side_b_ids: string; side_a_names: string | null; side_b_names: string | null;
   }>;
 
@@ -164,6 +164,7 @@ export function getPlayerMatches(
       dateTime: row.date_time,
       sets: parseSets(row.sets_json),
       winnerSide: row.winner_side,
+      resultType: (row.result_type as "normal" | "walkover" | "retired") ?? "normal",
       sideA: row.sideAIds.map((id: number, i: number) => {
         const mr = matchRatingDeltas.get(`${row.guid}:${id}`);
         return {
@@ -298,6 +299,7 @@ export function getPlayerUpcomingMatches(playerId: number): UpcomingMatchDetail[
       subcategory: row.subcategory,
       sets: [],
       winnerSide: null,
+      resultType: "normal" as const,
       sideA: sideAIds.map((id, i) => ({
         id,
         name: fullNames.get(id) ?? sideANames[i] ?? "",

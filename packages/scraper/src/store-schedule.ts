@@ -118,7 +118,7 @@ export function storeSchedule(
   `);
 
   const updateMatchResult = db.prepare(`
-    UPDATE matches SET sets_json = ?, winner_side = ?, date_time = ? WHERE guid = ?
+    UPDATE matches SET sets_json = ?, winner_side = ?, date_time = ?, result_type = ? WHERE guid = ?
   `);
 
   const insertMatchPlayer = db.prepare(`
@@ -200,7 +200,7 @@ export function storeSchedule(
       if (existing) {
         if (!existing.winner_side && winnerSide) {
           // Upcoming → now has result: update
-          updateMatchResult.run(JSON.stringify(sets), winnerSide, dateTime, guid);
+          updateMatchResult.run(JSON.stringify(sets), winnerSide, dateTime, "normal", guid);
           updated++;
         } else {
           skipped++;
@@ -281,7 +281,7 @@ export function storeDrawsMatches(
   `);
 
   const updateMatchResult = db.prepare(`
-    UPDATE matches SET sets_json = ?, winner_side = ?, date_time = ?, round_name = ?, court = ?
+    UPDATE matches SET sets_json = ?, winner_side = ?, date_time = ?, round_name = ?, court = ?, result_type = ?
     WHERE guid = ?
   `);
 
@@ -324,7 +324,7 @@ export function storeDrawsMatches(
       if (existing) {
         if (!existing.winner_side && winnerSide) {
           updateMatchResult.run(
-            JSON.stringify(sets), winnerSide, d.dateTime, d.roundName, d.court, guid
+            JSON.stringify(sets), winnerSide, d.dateTime, d.roundName, d.court, "normal", guid
           );
           updated++;
         } else {

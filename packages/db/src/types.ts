@@ -33,6 +33,7 @@ export interface MatchDetail {
   dateTime: string | null
   sets: Array<{ setA: number; setB: number; tieA: number; tieB: number }>
   winnerSide: string | null
+  resultType: "normal" | "walkover" | "retired"
   sideA: MatchPlayerInfo[]
   sideB: MatchPlayerInfo[]
 }
@@ -93,6 +94,7 @@ export interface TournamentMatch {
   court: string | null
   sets: Array<{ setA: number; setB: number; tieA: number; tieB: number }>
   winnerSide: string | null
+  resultType: "normal" | "walkover" | "retired"
   sideA: Array<{ id: number; name: string }>
   sideB: Array<{ id: number; name: string }>
 }

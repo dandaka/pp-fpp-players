@@ -118,6 +118,9 @@ function migrate(db: Database) {
   if (!colNames.has("subcategory")) {
     db.run("ALTER TABLE matches ADD COLUMN subcategory TEXT");
   }
+  if (!colNames.has("result_type")) {
+    db.run("ALTER TABLE matches ADD COLUMN result_type TEXT DEFAULT 'normal'");
+  }
 
   db.run("CREATE INDEX IF NOT EXISTS idx_matches_tournament_id ON matches(tournament_id)");
   db.run("CREATE INDEX IF NOT EXISTS idx_matches_category ON matches(category)");

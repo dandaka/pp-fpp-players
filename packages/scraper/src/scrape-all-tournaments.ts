@@ -54,8 +54,24 @@ function parseWinner(title: string): "a" | "b" | null {
   return null;
 }
 
+type ResultType = "normal" | "walkover" | "retired";
+
+function detectResultType(scores: string): ResultType {
+  if (!scores) return "normal";
+  if (/walkover/i.test(scores)) return "walkover";
+  if (/ret/i.test(scores)) return "retired";
+  return "normal";
+}
+
+const DEFAULT_WALKOVER_SETS = [
+  { set_a: 6, set_b: 0, tie_a: -1, tie_b: -1 },
+  { set_a: 6, set_b: 0, tie_a: -1, tie_b: -1 },
+];
+
 function parseScores(scores: string) {
   if (!scores) return [];
+  const resultType = detectResultType(scores);
+  if (resultType !== "normal") return DEFAULT_WALKOVER_SETS;
   return scores.split(", ").map((set) => {
     const parts = set.split("-");
     return {
@@ -78,8 +94,8 @@ async function scrapeTournament(tournamentId: number, tournamentName: string) {
 
   const insertMatch = db.prepare(`
     INSERT OR IGNORE INTO matches (guid, tournament_name, section_name, round_name, date_time,
-      is_singles, side_a_ids, side_b_ids, side_a_names, side_b_names, sets_json, winner_side, source, tournament_id)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      is_singles, side_a_ids, side_b_ids, side_a_names, side_b_names, sets_json, winner_side, source, tournament_id, result_type)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `);
 
   const insertMatchPlayer = db.prepare(`
@@ -113,6 +129,7 @@ async function scrapeTournament(tournamentId: number, tournamentName: string) {
         if (isSingles) continue; // Skip singles matches
 
         const winner = parseWinner(item.TEXT_TITLE);
+        const resultType = detectResultType(item.SCORES);
         const sets = parseScores(item.SCORES);
 
         insertMatch.run(
@@ -123,7 +140,7 @@ async function scrapeTournament(tournamentId: number, tournamentName: string) {
           sideA.map((p) => p.name).join(" / "),
           sideB.map((p) => p.name).join(" / "),
           JSON.stringify(sets), winner, `scrape:tournament:${tournamentId}`,
-          tournamentId
+          tournamentId, resultType
         );
 
         for (const p of sideA) {

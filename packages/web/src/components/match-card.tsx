@@ -72,6 +72,7 @@ export function MatchCard({
       : null
     : (sideAWinProbability ?? null);
 
+  const resultType = match.resultType ?? "normal";
   const maxPlayers = Math.max(sideA.length, sideB.length);
   const isDoubles = maxPlayers > 1;
   const hasScores = sets.length > 0;
@@ -164,6 +165,12 @@ export function MatchCard({
             <span className="truncate">{match.tournamentName}</span>
           )}
           {court && <span className="shrink-0">· {court}</span>}
+          {resultType === "walkover" && (
+            <span className="shrink-0 rounded bg-amber-100 px-1 py-0.5 text-[10px] font-medium text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">W/O</span>
+          )}
+          {resultType === "retired" && (
+            <span className="shrink-0 rounded bg-orange-100 px-1 py-0.5 text-[10px] font-medium text-orange-700 dark:bg-orange-900/30 dark:text-orange-400">Ret.</span>
+          )}
         </div>
         {match.dateTime && (
           <span className="shrink-0 ml-2">{match.dateTime}</span>

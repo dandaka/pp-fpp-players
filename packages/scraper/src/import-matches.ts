@@ -17,7 +17,22 @@ interface MatchesFile {
   matches: ScrapedMatch[];
 }
 
+function detectResultType(scores: string): "normal" | "walkover" | "retired" {
+  if (!scores) return "normal";
+  if (/walkover/i.test(scores)) return "walkover";
+  if (/ret/i.test(scores)) return "retired";
+  return "normal";
+}
+
 function parseScores(scores: string) {
+  if (!scores) return [];
+  const resultType = detectResultType(scores);
+  if (resultType !== "normal") {
+    return [
+      { set_a: 6, set_b: 0, tie_a: -1, tie_b: -1 },
+      { set_a: 6, set_b: 0, tie_a: -1, tie_b: -1 },
+    ];
+  }
   return scores.split(", ").map((set) => {
     const parts = set.split("-");
     return {

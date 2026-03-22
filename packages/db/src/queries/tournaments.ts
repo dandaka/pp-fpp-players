@@ -167,7 +167,7 @@ export function getTournamentMatches(
 
   let query = `
     SELECT m.guid, m.section_name, m.round_name, m.date_time, m.court,
-           m.category, m.subcategory, m.sets_json, m.winner_side, m.source,
+           m.category, m.subcategory, m.sets_json, m.winner_side, m.result_type, m.source,
            m.side_a_ids, m.side_b_ids, m.side_a_names, m.side_b_names,
            m.tournament_name
     FROM matches m
@@ -190,7 +190,7 @@ export function getTournamentMatches(
     guid: string; section_name: string | null; round_name: string | null;
     date_time: string | null; court: string | null; category: string | null;
     subcategory: string | null; sets_json: string | null; winner_side: string | null;
-    source: string | null; tournament_name: string | null;
+    result_type: string | null; source: string | null; tournament_name: string | null;
     side_a_ids: string; side_b_ids: string; side_a_names: string | null; side_b_names: string | null;
   }>;
 
@@ -274,6 +274,7 @@ export function getTournamentMatches(
       dateTime: row.date_time,
       sets: parseSets(row.sets_json),
       winnerSide: row.winner_side,
+      resultType: (row.result_type as "normal" | "walkover" | "retired") ?? "normal",
       sideA: sideAIds.map((id, i) => buildPlayerInfo(id, sideANames[i] ?? "")),
       sideB: sideBIds.map((id, i) => buildPlayerInfo(id, sideBNames[i] ?? "")),
     };
