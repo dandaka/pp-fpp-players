@@ -89,6 +89,30 @@ async function scrapeEncontrosTable(page: Page): Promise<{
   }));
 }
 
+const STEP_TIMEOUT = 30_000;
+const MAX_RETRIES = 3;
+
+async function withRetry<T>(label: string, fn: () => Promise<T>): Promise<T | null> {
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      const result = await Promise.race([
+        fn(),
+        new Promise<never>((_, reject) =>
+          setTimeout(() => reject(new Error(`Step timed out after ${STEP_TIMEOUT / 1000}s`)), STEP_TIMEOUT)
+        ),
+      ]);
+      return result;
+    } catch (err) {
+      console.error(`    ${label}: attempt ${attempt}/${MAX_RETRIES} failed: ${err}`);
+      if (attempt === MAX_RETRIES) {
+        console.error(`    ${label}: giving up after ${MAX_RETRIES} attempts`);
+        return null;
+      }
+    }
+  }
+  return null;
+}
+
 /**
  * Scrape all draws from the FPP Draws page using the Encontros (matches) tab.
  * Returns structured match data with dates, scores, player IDs, courts, and round names.
@@ -115,77 +139,83 @@ export async function scrapeDrawsPage(page: Page): Promise<DrawMatch[]> {
   for (const cat of categories) {
     console.log(`  Scraping draw: ${cat.text}...`);
 
-    // Reload draws page to get fresh dropdown
-    await page.goto(drawsUrl, { waitUntil: "networkidle", timeout: 30_000 });
-    await page.waitForTimeout(1000);
+    const catMatches = await withRetry(`draw:${cat.text}`, async () => {
+      const matches: DrawMatch[] = [];
 
-    // Select category (triggers __doPostBack, page re-renders)
-    await page.selectOption("#drop_tournaments", cat.value);
-    await page.waitForTimeout(3000);
+      // Reload draws page to get fresh dropdown
+      await page.goto(drawsUrl, { waitUntil: "networkidle", timeout: 30_000 });
+      await page.waitForTimeout(1000);
 
-    // Check for sub-draw tabs (e.g. M6-QP, M6-Quali, Grupo A, Grupo B)
-    const subDrawTabs = await page.evaluate(() => {
-      const navTabIds = new Set([
-        "link_tournament_open_draw", "link_tournament_open_matches",
-        "link_tournament_open_teams", "link_tournament_open_info",
-      ]);
-      const tabs: { text: string; id: string }[] = [];
-      const menuLinks = document.querySelectorAll("#menu_inside_tournament a, .menu_inside_tournament a");
-      for (const a of menuLinks) {
-        const text = a.textContent?.trim() || "";
-        if (text && a.id && !navTabIds.has(a.id)) {
-          tabs.push({ text, id: a.id });
+      // Select category (triggers __doPostBack, page re-renders)
+      await page.selectOption("#drop_tournaments", cat.value);
+      await page.waitForTimeout(3000);
+
+      // Check for sub-draw tabs (e.g. M6-QP, M6-Quali, Grupo A, Grupo B)
+      const subDrawTabs = await page.evaluate(() => {
+        const navTabIds = new Set([
+          "link_tournament_open_draw", "link_tournament_open_matches",
+          "link_tournament_open_teams", "link_tournament_open_info",
+        ]);
+        const tabs: { text: string; id: string }[] = [];
+        const menuLinks = document.querySelectorAll("#menu_inside_tournament a, .menu_inside_tournament a");
+        for (const a of menuLinks) {
+          const text = a.textContent?.trim() || "";
+          if (text && a.id && !navTabIds.has(a.id)) {
+            tabs.push({ text, id: a.id });
+          }
+        }
+        document.querySelectorAll("a[id*='repeater_draw']").forEach((a) => {
+          const text = a.textContent?.trim() || "";
+          if (!tabs.some(t => t.text === text)) {
+            tabs.push({ text, id: a.id });
+          }
+        });
+        return tabs;
+      });
+
+      const tabsToProcess = subDrawTabs.length > 0 ? subDrawTabs : [{ text: "QP", id: "" }];
+
+      for (const subTab of tabsToProcess) {
+        if (subTab.id) {
+          await page.click(`#${subTab.id}`);
+          await page.waitForTimeout(2000);
+        }
+
+        const clicked = await page.evaluate(() => {
+          const el = document.getElementById("link_tournament_open_matches");
+          if (el) { el.click(); return true; }
+          return false;
+        });
+
+        if (!clicked) {
+          console.log(`    Could not find Encontros tab for ${cat.text} ${subTab.text}`);
+          continue;
+        }
+
+        await page.waitForTimeout(2000);
+
+        const tableMatches = await scrapeEncontrosTable(page);
+        console.log(`    ${subTab.text}: ${tableMatches.length} matches`);
+
+        for (const m of tableMatches) {
+          matches.push({
+            categoryName: cat.text,
+            subDraw: subTab.text,
+            roundName: m.roundName,
+            dateTime: m.dateTime,
+            sideA: m.sideA,
+            sideB: m.sideB,
+            result: m.result,
+            court: m.court,
+          });
         }
       }
-      // Also check for repeater-based sub-draw tabs
-      document.querySelectorAll("a[id*='repeater_draw']").forEach((a) => {
-        const text = a.textContent?.trim() || "";
-        if (text && !tabs.some(t => t.text === text)) {
-          tabs.push({ text, id: a.id });
-        }
-      });
-      return tabs;
+
+      return matches;
     });
 
-    const tabsToProcess = subDrawTabs.length > 0 ? subDrawTabs : [{ text: "QP", id: "" }];
-
-    for (const subTab of tabsToProcess) {
-      // Click sub-draw tab if needed
-      if (subTab.id) {
-        await page.click(`#${subTab.id}`);
-        await page.waitForTimeout(2000);
-      }
-
-      // Click Encontros inner tab
-      const clicked = await page.evaluate(() => {
-        const el = document.getElementById("link_tournament_open_matches");
-        if (el) { el.click(); return true; }
-        return false;
-      });
-
-      if (!clicked) {
-        console.log(`    Could not find Encontros tab for ${cat.text} ${subTab.text}`);
-        continue;
-      }
-
-      await page.waitForTimeout(2000);
-
-      // Scrape the matches table
-      const matches = await scrapeEncontrosTable(page);
-      console.log(`    ${subTab.text}: ${matches.length} matches`);
-
-      for (const m of matches) {
-        allMatches.push({
-          categoryName: cat.text,
-          subDraw: subTab.text,
-          roundName: m.roundName,
-          dateTime: m.dateTime,
-          sideA: m.sideA,
-          sideB: m.sideB,
-          result: m.result,
-          court: m.court,
-        });
-      }
+    if (catMatches) {
+      allMatches.push(...catMatches);
     }
   }
 

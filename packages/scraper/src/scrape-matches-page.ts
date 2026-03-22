@@ -169,6 +169,30 @@ function toMatchRow(raw: RawMatch, isoDate: string): ScrapedMatchRow {
   };
 }
 
+const STEP_TIMEOUT = 30_000;
+const MAX_RETRIES = 3;
+
+async function withRetry<T>(label: string, fn: () => Promise<T>): Promise<T | null> {
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      const result = await Promise.race([
+        fn(),
+        new Promise<never>((_, reject) =>
+          setTimeout(() => reject(new Error(`Step timed out after ${STEP_TIMEOUT / 1000}s`)), STEP_TIMEOUT)
+        ),
+      ]);
+      return result;
+    } catch (err) {
+      console.error(`    ${label}: attempt ${attempt}/${MAX_RETRIES} failed: ${err}`);
+      if (attempt === MAX_RETRIES) {
+        console.error(`    ${label}: giving up after ${MAX_RETRIES} attempts`);
+        return null;
+      }
+    }
+  }
+  return null;
+}
+
 /**
  * Scrape all matches from the FPP Matches page.
  * @param page - Playwright page already navigated to the Matches URL
@@ -205,57 +229,68 @@ export async function scrapeMatchesPage(
     console.log(`Found ${dateTabs.length} date tabs: ${dateTabs.map((t) => t.text).join(", ")}`);
     for (const tab of dateTabs) {
       console.log(`Scraping ${tab.text}...`);
-      await page.click(`#${tab.id}`);
-      await page.waitForLoadState("networkidle", { timeout: 15_000 }).catch(() => {});
-      await page.waitForTimeout(1000);
 
-      const matches = await scrapeAllPages(page, tab.text, tournamentYear);
-      console.log(`  Found ${matches.length} matches`);
-      allMatches.push(...matches);
+      const tabMatches = await withRetry(`matches:${tab.text}`, async () => {
+        await page.click(`#${tab.id}`);
+        await page.waitForLoadState("networkidle", { timeout: 15_000 }).catch(() => {});
+        await page.waitForTimeout(1000);
+        return scrapeAllPages(page, tab.text, tournamentYear);
+      });
+
+      if (tabMatches) {
+        console.log(`  Found ${tabMatches.length} matches`);
+        allMatches.push(...tabMatches);
+      }
     }
   } else if (dateDropdown.length > 0) {
     console.log(`Found ${dateDropdown.length} dates in dropdown`);
     for (const opt of dateDropdown) {
       console.log(`Scraping ${opt.text}...`);
-      await page.selectOption("#drop_days_all_matches", opt.value);
-      await page.waitForLoadState("networkidle", { timeout: 15_000 }).catch(() => {});
-      await page.waitForTimeout(1000);
 
-      // Dropdown value is already ISO date (e.g. "2023-03-17"), use directly
-      const isoDate = opt.value;
-      const firstPage = await scrapeCurrentPage(page);
-      const matchRows = firstPage.map((raw) => toMatchRow(raw, isoDate));
+      const optMatches = await withRetry(`matches:${opt.text}`, async () => {
+        await page.selectOption("#drop_days_all_matches", opt.value);
+        await page.waitForLoadState("networkidle", { timeout: 15_000 }).catch(() => {});
+        await page.waitForTimeout(1000);
 
-      // Handle pagination
-      const pageCount = await page.evaluate(() => {
-        const links = document.querySelectorAll("a[href*='grid_all_matches']");
-        let max = 1;
-        links.forEach((a) => {
-          const num = parseInt(a.textContent?.trim() || "0");
-          if (num > max) max = num;
+        const isoDate = opt.value;
+        const firstPage = await scrapeCurrentPage(page);
+        const matchRows = firstPage.map((raw) => toMatchRow(raw, isoDate));
+
+        // Handle pagination
+        const pageCount = await page.evaluate(() => {
+          const links = document.querySelectorAll("a[href*='grid_all_matches']");
+          let max = 1;
+          links.forEach((a) => {
+            const num = parseInt(a.textContent?.trim() || "0");
+            if (num > max) max = num;
+          });
+          return max;
         });
-        return max;
+
+        for (let p = 2; p <= pageCount; p++) {
+          const clicked = await page.evaluate((pageNum) => {
+            const links = document.querySelectorAll('a[href*="grid_all_matches"]');
+            for (const link of links) {
+              if (link.textContent?.trim() === String(pageNum)) {
+                (link as HTMLElement).click();
+                return true;
+              }
+            }
+            return false;
+          }, p);
+          if (!clicked) break;
+          await page.waitForTimeout(2000);
+          const pageData = await scrapeCurrentPage(page);
+          matchRows.push(...pageData.map((raw) => toMatchRow(raw, isoDate)));
+        }
+
+        return matchRows;
       });
 
-      for (let p = 2; p <= pageCount; p++) {
-        const clicked = await page.evaluate((pageNum) => {
-          const links = document.querySelectorAll('a[href*="grid_all_matches"]');
-          for (const link of links) {
-            if (link.textContent?.trim() === String(pageNum)) {
-              (link as HTMLElement).click();
-              return true;
-            }
-          }
-          return false;
-        }, p);
-        if (!clicked) break;
-        await page.waitForTimeout(2000);
-        const pageData = await scrapeCurrentPage(page);
-        matchRows.push(...pageData.map((raw) => toMatchRow(raw, isoDate)));
+      if (optMatches) {
+        console.log(`  Found ${optMatches.length} matches`);
+        allMatches.push(...optMatches);
       }
-
-      console.log(`  Found ${matchRows.length} matches`);
-      allMatches.push(...matchRows);
     }
   } else {
     console.log("No date tabs or dropdown found");

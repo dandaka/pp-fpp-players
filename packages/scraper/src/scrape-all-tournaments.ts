@@ -252,17 +252,17 @@ export async function scrapeAllTournaments(source = "db") {
         // Fall back to Playwright scraping of the Matches/Draws pages.
         const linkWeb = (db.query("SELECT link_web FROM tournaments WHERE id = ?").get(t.id) as { link_web: string | null } | null)?.link_web;
         if (linkWeb) {
-          console.log(`  News feed empty, trying Playwright scrape (120s timeout)...`);
+          console.log(`  News feed empty, trying Playwright scrape (300s timeout)...`);
           const ac = new AbortController();
           let scrapeOk = false;
           try {
             const result = await Promise.race([
               scrapeSchedule(t.id, linkWeb, { signal: ac.signal }).then(() => "ok" as const),
-              Bun.sleep(120_000).then(() => "timeout" as const),
+              Bun.sleep(300_000).then(() => "timeout" as const),
             ]);
             if (result === "timeout") {
               ac.abort();
-              console.error(`  Playwright scrape timed out after 120s`);
+              console.error(`  Playwright scrape timed out after 300s`);
             } else {
               scrapeOk = true;
             }
