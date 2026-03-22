@@ -241,6 +241,14 @@ export async function scrapeAllTournaments(source = "db") {
       continue;
     }
 
+    // Skip tournaments with broken Playwright parser early
+    if (SKIP_PLAYWRIGHT_PATTERNS.some((p) => p.test(t.name))) {
+      console.log(`[${processed}/${targets.length}] ${t.name} (ID: ${t.id}) — skipping (unsupported tournament format)`);
+      setCursor(cursorKey, "skip:playwright");
+      skipped++;
+      continue;
+    }
+
     console.log(`[${processed}/${targets.length}] ${t.name} (ID: ${t.id})${skipped > 0 && processed === skipped + 1 ? ` (skipped ${skipped} already done)` : ""}`);
     try {
       // Check sport from DB before making any API call
@@ -267,16 +275,7 @@ export async function scrapeAllTournaments(source = "db") {
         grandTotal += count;
         setCursor(cursorKey, "done");
       } else {
-        // News feed had no player-level data (e.g. Liga de Clubes team results).
-        // Check if this tournament should skip Playwright scraping
-        const shouldSkipPlaywright = SKIP_PLAYWRIGHT_PATTERNS.some((p) => p.test(t.name));
-        if (shouldSkipPlaywright) {
-          console.log(`  Skipping Playwright scrape (unsupported tournament format: ${t.name})`);
-          setCursor(cursorKey, "skip:playwright");
-          continue;
-        }
-
-        // Fall back to Playwright scraping of the Matches/Draws pages.
+        // News feed had no player-level data — fall back to Playwright scraping.
         const linkWeb = (db.query("SELECT link_web FROM tournaments WHERE id = ?").get(t.id) as { link_web: string | null } | null)?.link_web;
         if (linkWeb) {
           console.log(`  News feed empty, trying Playwright scrape (300s timeout)...`);
