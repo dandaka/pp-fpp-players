@@ -1,6 +1,7 @@
 services:
   api:
     image: ghcr.io/dandaka/pp-fpp-players/api:latest
+    pull_policy: always
     ports:
       - "${API_PORT:-3001}:3001"
     volumes:
@@ -12,6 +13,7 @@ services:
 
   scraper:
     image: ghcr.io/dandaka/pp-fpp-players/scraper:latest
+    pull_policy: always
     volumes:
       - db-data:/data
     environment:
