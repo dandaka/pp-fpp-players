@@ -43,6 +43,8 @@ export interface MatchPlayerInfo {
   categoryRank: number | null;
   genderRank: number | null;
   rating: PlayerRating | null;
+  ratingBefore: number | null;
+  ratingDelta: number | null;
 }
 
 export interface MatchDetail {

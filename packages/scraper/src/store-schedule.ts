@@ -2,6 +2,17 @@ import { getDb } from "./db";
 import type { ScrapedMatchRow } from "./scrape-matches-page";
 import type { DrawMatch } from "./scrape-draws-page";
 
+/**
+ * Derive category/subcategory from DrawMatch fields.
+ * subDraw is like "M6-QP" → category "M6", subcategory "QP"
+ * Falls back to categoryName if subDraw doesn't match.
+ */
+function parseDrawCategory(categoryName: string, subDraw: string): { category: string; subcategory: string } {
+  const m = subDraw.match(/^([A-Z]\d+)-(.+)$/);
+  if (m) return { category: m[1], subcategory: m[2] };
+  return { category: categoryName, subcategory: subDraw };
+}
+
 interface SetScore {
   set_a: number;
   set_b: number;
@@ -243,8 +254,8 @@ export function storeDrawsMatches(
   const insertMatch = db.prepare(`
     INSERT INTO matches (guid, tournament_name, section_name, round_name, date_time,
       is_singles, side_a_ids, side_b_ids, side_a_names, side_b_names,
-      sets_json, winner_side, source, tournament_id, court)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      sets_json, winner_side, source, tournament_id, court, category, subcategory)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `);
 
   const insertMatchPlayer = db.prepare(`
@@ -265,7 +276,7 @@ export function storeDrawsMatches(
 
   const updateFeedMatch = db.prepare(`
     UPDATE matches SET date_time = ?, round_name = ?, court = ?, tournament_id = ?,
-      side_a_names = ?, side_b_names = ?
+      side_a_names = ?, side_b_names = ?, category = ?, subcategory = ?
     WHERE guid = ?
   `);
 
@@ -329,17 +340,19 @@ export function storeDrawsMatches(
 
       if (feedMatch) {
         // Update the news feed match with correct date/time, round name, and full names from draws
-        updateFeedMatch.run(d.dateTime, d.roundName, d.court, tournamentId, sideANames, sideBNames, feedMatch.guid);
+        const catParts = parseDrawCategory(d.categoryName, d.subDraw);
+        updateFeedMatch.run(d.dateTime, d.roundName, d.court, tournamentId, sideANames, sideBNames, catParts.category, catParts.subcategory, feedMatch.guid);
         updated++;
         continue;
       }
 
       // Insert new match (only exists in draws, e.g. later rounds)
+      const catParts2 = parseDrawCategory(d.categoryName, d.subDraw);
       insertMatch.run(
         guid, tournamentName, d.categoryName, d.roundName, d.dateTime,
         isSingles, sideAIdsJson, sideBIdsJson, sideANames, sideBNames,
         sets.length > 0 ? JSON.stringify(sets) : null, winnerSide, source,
-        tournamentId, d.court
+        tournamentId, d.court, catParts2.category, catParts2.subcategory
       );
 
       for (const id of sideAIds) insertMatchPlayer.run(guid, id, "a");

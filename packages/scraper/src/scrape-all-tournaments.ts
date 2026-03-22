@@ -78,8 +78,8 @@ async function scrapeTournament(tournamentId: number, tournamentName: string) {
 
   const insertMatch = db.prepare(`
     INSERT OR IGNORE INTO matches (guid, tournament_name, section_name, round_name, date_time,
-      is_singles, side_a_ids, side_b_ids, side_a_names, side_b_names, sets_json, winner_side, source)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      is_singles, side_a_ids, side_b_ids, side_a_names, side_b_names, sets_json, winner_side, source, tournament_id)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `);
 
   const insertMatchPlayer = db.prepare(`
@@ -122,7 +122,8 @@ async function scrapeTournament(tournamentId: number, tournamentName: string) {
           JSON.stringify(sideB.map((p) => p.id)),
           sideA.map((p) => p.name).join(" / "),
           sideB.map((p) => p.name).join(" / "),
-          JSON.stringify(sets), winner, `scrape:tournament:${tournamentId}`
+          JSON.stringify(sets), winner, `scrape:tournament:${tournamentId}`,
+          tournamentId
         );
 
         for (const p of sideA) {

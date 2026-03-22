@@ -25,7 +25,7 @@ function getActiveTournaments(): { id: number; name: string; url: string }[] {
   const rows = db.query(`
     SELECT DISTINCT t.id, t.name, t.link_web
     FROM tournaments t
-    JOIN matches m ON m.tournament_id = t.id
+    JOIN matches m ON m.tournament_id = t.id OR m.tournament_name = t.name
     WHERE m.date_time >= date('now', '-7 days')
       AND t.link_web IS NOT NULL
       AND (t.sport IS NULL OR t.sport = 'Padel')

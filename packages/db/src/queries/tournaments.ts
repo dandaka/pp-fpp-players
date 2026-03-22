@@ -251,6 +251,8 @@ export function getTournamentMatches(
       genderRank: genderRanks.get(id) ?? null,
       categoryRank: null,
       rating: ratingsMap.get(id) ?? null,
+      ratingBefore: null,
+      ratingDelta: null,
     };
   }
 

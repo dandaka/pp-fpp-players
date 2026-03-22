@@ -4,6 +4,16 @@ import { RatingBadge } from "./rating-badge";
 
 import type { MatchDetail, MatchPlayerInfo } from "@/lib/api-client";
 
+function DeltaBadge({ delta, className = "" }: { delta: number; className?: string }) {
+  const rounded = Math.round(delta * 10) / 10;
+  const color = rounded > 0 ? "text-green-600" : rounded < 0 ? "text-red-500" : "text-muted-foreground";
+  return (
+    <span className={`inline-flex items-center rounded-md bg-muted px-1.5 py-0.5 text-xs font-medium ${color} ${className}`}>
+      {rounded > 0 ? "+" : ""}{rounded.toFixed(1)}
+    </span>
+  );
+}
+
 function PlayerCell({
   player,
   isWinnerSide,
@@ -23,8 +33,11 @@ function PlayerCell({
       >
         {player.name}
       </Link>
-      {player.rating && (
-        <RatingBadge score={player.rating.score} className="shrink-0" />
+      {player.ratingBefore != null && (
+        <RatingBadge score={player.ratingBefore} className="shrink-0" />
+      )}
+      {player.ratingDelta != null && (
+        <DeltaBadge delta={player.ratingDelta} className="shrink-0" />
       )}
     </div>
   );

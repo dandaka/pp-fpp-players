@@ -66,6 +66,30 @@ function batchGetRatings(playerIds: number[]): Map<number, PlayerRating> {
   return map;
 }
 
+function batchGetMatchRatingDeltas(
+  db: ReturnType<typeof getDb>,
+  matchGuids: string[]
+): Map<string, { scoreBefore: number; scoreDelta: number }> {
+  if (matchGuids.length === 0) return new Map();
+  const bounds = db.query("SELECT MIN(ordinal) as minOrd, MAX(ordinal) as maxOrd FROM ratings").get() as { minOrd: number; maxOrd: number };
+  const range = bounds.maxOrd - bounds.minOrd;
+  if (range <= 0) return new Map();
+
+  const placeholders = matchGuids.map(() => "?").join(",");
+  const rows = db.query(`
+    SELECT match_guid, player_id, ordinal_before, ordinal_delta
+    FROM match_ratings WHERE match_guid IN (${placeholders})
+  `).all(...matchGuids) as Array<{ match_guid: string; player_id: number; ordinal_before: number; ordinal_delta: number }>;
+
+  const map = new Map<string, { scoreBefore: number; scoreDelta: number }>();
+  for (const r of rows) {
+    const scoreBefore = Math.round(((r.ordinal_before - bounds.minOrd) / range) * 1000) / 10;
+    const scoreDelta = Math.round((r.ordinal_delta / range) * 1000) / 10;
+    map.set(`${r.match_guid}:${r.player_id}`, { scoreBefore, scoreDelta });
+  }
+  return map;
+}
+
 export function getPlayerMatches(
   playerId: number,
   cursor?: string,
@@ -115,6 +139,10 @@ export function getPlayerMatches(
   const genderRanks = batchGetGenderRanks(allPlayerIdList);
   const ratings = batchGetRatings(allPlayerIdList);
 
+  // Batch-fetch match rating deltas from match_ratings table
+  const matchGuids = parsedRows.map((r) => r.guid);
+  const matchRatingDeltas = batchGetMatchRatingDeltas(db, matchGuids);
+
   // Batch-fetch full names and photos from players table
   const namePlaceholders = allPlayerIdList.map(() => "?").join(",");
   const nameRows = allPlayerIdList.length > 0
@@ -136,22 +164,32 @@ export function getPlayerMatches(
       dateTime: row.date_time,
       sets: parseSets(row.sets_json),
       winnerSide: row.winner_side,
-      sideA: row.sideAIds.map((id: number, i: number) => ({
-        id,
-        name: fullNames.get(id) ?? sideANames[i] ?? "",
-        photoUrl: photoUrls.get(id) ?? null,
-        genderRank: genderRanks.get(id) ?? null,
-        categoryRank: null,
-        rating: ratings.get(id) ?? null,
-      })),
-      sideB: row.sideBIds.map((id: number, i: number) => ({
-        id,
-        name: fullNames.get(id) ?? sideBNames[i] ?? "",
-        photoUrl: photoUrls.get(id) ?? null,
-        genderRank: genderRanks.get(id) ?? null,
-        categoryRank: null,
-        rating: ratings.get(id) ?? null,
-      })),
+      sideA: row.sideAIds.map((id: number, i: number) => {
+        const mr = matchRatingDeltas.get(`${row.guid}:${id}`);
+        return {
+          id,
+          name: fullNames.get(id) ?? sideANames[i] ?? "",
+          photoUrl: photoUrls.get(id) ?? null,
+          genderRank: genderRanks.get(id) ?? null,
+          categoryRank: null,
+          rating: ratings.get(id) ?? null,
+          ratingBefore: mr?.scoreBefore ?? null,
+          ratingDelta: mr?.scoreDelta ?? null,
+        };
+      }),
+      sideB: row.sideBIds.map((id: number, i: number) => {
+        const mr = matchRatingDeltas.get(`${row.guid}:${id}`);
+        return {
+          id,
+          name: fullNames.get(id) ?? sideBNames[i] ?? "",
+          photoUrl: photoUrls.get(id) ?? null,
+          genderRank: genderRanks.get(id) ?? null,
+          categoryRank: null,
+          rating: ratings.get(id) ?? null,
+          ratingBefore: mr?.scoreBefore ?? null,
+          ratingDelta: mr?.scoreDelta ?? null,
+        };
+      }),
     };
   });
 
@@ -267,6 +305,8 @@ export function getPlayerUpcomingMatches(playerId: number): UpcomingMatchDetail[
         genderRank: genderRanks.get(id) ?? null,
         categoryRank: null,
         rating: ratings.get(id) ?? null,
+        ratingBefore: null,
+        ratingDelta: null,
       })),
       sideB: sideBIds.map((id, i) => ({
         id,
@@ -275,6 +315,8 @@ export function getPlayerUpcomingMatches(playerId: number): UpcomingMatchDetail[
         genderRank: genderRanks.get(id) ?? null,
         categoryRank: null,
         rating: ratings.get(id) ?? null,
+        ratingBefore: null,
+        ratingDelta: null,
       })),
       sideAWinProbability: computeWinProbability(sideARatingsRaw, sideBRatingsRaw),
     };
