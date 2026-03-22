@@ -111,31 +111,29 @@ export function MatchCard({
 
         {/* Score column */}
         {hasScores && (
-          <div className="shrink-0 flex flex-col justify-center gap-2">
-            <div className="flex items-center justify-end gap-4 text-3xl font-mono leading-tight">
-              {sets.map((s, i) => (
-                <span
-                  key={i}
-                  className={
-                    s.setA > s.setB ? "font-bold" : "text-muted-foreground"
-                  }
-                >
-                  {s.setA}
-                </span>
-              ))}
-            </div>
-            <div className="flex items-center justify-end gap-4 text-3xl font-mono leading-tight">
-              {sets.map((s, i) => (
-                <span
-                  key={i}
-                  className={
-                    s.setB > s.setA ? "font-bold" : "text-muted-foreground"
-                  }
-                >
-                  {s.setB}
-                </span>
-              ))}
-            </div>
+          <div
+            className="shrink-0 grid items-center text-3xl font-mono leading-tight text-center"
+            style={{
+              gridTemplateColumns: `repeat(${sets.length}, minmax(1.5rem, auto))`,
+              gap: "0.25rem 1rem",
+            }}
+          >
+            {sets.map((s, i) => (
+              <span
+                key={`a${i}`}
+                className={s.setA > s.setB ? "font-bold" : "text-muted-foreground"}
+              >
+                {s.setA}
+              </span>
+            ))}
+            {sets.map((s, i) => (
+              <span
+                key={`b${i}`}
+                className={s.setB > s.setA ? "font-bold" : "text-muted-foreground"}
+              >
+                {s.setB}
+              </span>
+            ))}
           </div>
         )}
 
