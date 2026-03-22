@@ -1,6 +1,5 @@
 import { getDb, setCursor, getCursor } from "./db";
 import { getTournaments, getTournament } from "./api";
-import { scrapeSchedule } from "./scrape-upcoming-matches";
 import { SKIP_PLAYWRIGHT_PATTERNS } from "./skip-list";
 
 const PAGE_SIZE = 10;
@@ -275,36 +274,9 @@ export async function scrapeAllTournaments(source = "db") {
         grandTotal += count;
         setCursor(cursorKey, "done");
       } else {
-        // News feed had no player-level data — fall back to Playwright scraping.
-        const linkWeb = (db.query("SELECT link_web FROM tournaments WHERE id = ?").get(t.id) as { link_web: string | null } | null)?.link_web;
-        if (linkWeb) {
-          console.log(`  News feed empty, trying Playwright scrape (300s timeout)...`);
-          const ac = new AbortController();
-          let scrapeOk = false;
-          try {
-            const timeout = setTimeout(() => ac.abort(), 300_000);
-            try {
-              await scrapeSchedule(t.id, linkWeb, { signal: ac.signal });
-              scrapeOk = true;
-            } finally {
-              clearTimeout(timeout);
-            }
-          } catch (err) {
-            if (!ac.signal.aborted) ac.abort();
-            const msg = err instanceof Error ? err.message : String(err);
-            if (msg.includes("aborted")) {
-              console.error(`  Playwright scrape timed out after 300s`);
-            } else {
-              console.error(`  Playwright scrape failed: ${msg}`);
-            }
-          }
-          if (scrapeOk) {
-            setCursor(cursorKey, "done");
-          }
-        } else {
-          // No link_web, nothing more we can do
-          setCursor(cursorKey, "done");
-        }
+        // News feed had no player-level data — mark done.
+        // Playwright scraping for active tournaments is handled by the draws loop.
+        setCursor(cursorKey, "done");
       }
     } catch (err) {
       console.error(`  Error scraping tournament ${t.id}: ${err}`);
