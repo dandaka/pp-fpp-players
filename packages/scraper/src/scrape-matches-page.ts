@@ -111,11 +111,13 @@ async function scrapeCurrentPage(page: Page): Promise<RawMatch[]> {
   });
 }
 
-async function waitForPostback(page: Page, timeout = 30_000): Promise<void> {
-  // Wait for any in-flight navigation/postback to complete
-  await page.waitForLoadState("load", { timeout }).catch(() => {});
+/** Click an element that triggers ASP.NET __doPostBack and wait for the resulting page reload. */
+async function clickAndWaitForPostback(page: Page, clickAction: () => Promise<unknown>, timeout = 30_000): Promise<void> {
+  await Promise.all([
+    page.waitForEvent("load", { timeout }),
+    clickAction(),
+  ]);
   await page.waitForLoadState("networkidle", { timeout }).catch(() => {});
-  await page.waitForSelector("table", { state: "attached", timeout: 5_000 }).catch(() => {});
 }
 
 async function scrapeAllPages(page: Page, date: string, tournamentYear: number): Promise<ScrapedMatchRow[]> {
@@ -125,27 +127,22 @@ async function scrapeAllPages(page: Page, date: string, tournamentYear: number):
   const firstPage = await scrapeCurrentPage(page);
   allMatches.push(...firstPage.map((raw) => toMatchRow(raw, isoDate)));
 
-  const pageCount = await page.evaluate(() => {
-    const links = document.querySelectorAll("a[href*='grid_all_matches']");
-    let max = 1;
-    links.forEach((a) => {
-      const num = parseInt(a.textContent?.trim() || "0");
-      if (num > max) max = num;
-    });
-    return max;
-  });
-
-  for (let p = 2; p <= pageCount; p++) {
-    const pageData = await withRetry(`pagination:${date}:p${p}`, async () => {
-      const link = page.locator(`a[href*="grid_all_matches"]`).filter({ hasText: String(p) });
+  // Iterate pagination: ASP.NET grids use sliding page windows,
+  // so re-check for next page link after each page load
+  let currentPage = 1;
+  const MAX_PAGES = 50;
+  while (currentPage < MAX_PAGES) {
+    const nextPage = currentPage + 1;
+    const pageData = await withRetry(`pagination:${date}:p${nextPage}`, async () => {
+      const link = page.locator(`a[href*="grid_all_matches"]`).filter({ hasText: new RegExp(`^${nextPage}$`) });
       if (await link.count() === 0) return null;
-      await link.first().click({ timeout: 15_000 });
-      await waitForPostback(page);
+      await clickAndWaitForPostback(page, () => link.first().click({ timeout: 15_000 }));
       return scrapeCurrentPage(page);
     });
 
     if (!pageData) break;
     allMatches.push(...pageData.map((raw) => toMatchRow(raw, isoDate)));
+    currentPage = nextPage;
   }
 
   return allMatches;
@@ -235,8 +232,7 @@ export async function scrapeMatchesPage(
       let tabMatches: ScrapedMatchRow[] | null = null;
       for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
         try {
-          await page.click(`#${tab.id}`, { timeout: 15_000 });
-          await waitForPostback(page);
+          await clickAndWaitForPostback(page, () => page.click(`#${tab.id}`, { timeout: 15_000 }));
           tabMatches = await scrapeAllPages(page, tab.text, tournamentYear);
           break;
         } catch (err) {
@@ -265,8 +261,7 @@ export async function scrapeMatchesPage(
       let optMatches: ScrapedMatchRow[] | null = null;
       for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
         try {
-          await page.selectOption("#drop_days_all_matches", opt.value);
-          await waitForPostback(page);
+          await clickAndWaitForPostback(page, () => page.selectOption("#drop_days_all_matches", opt.value));
           const matchRows = await scrapeAllPages(page, opt.text, tournamentYear);
           // Fix dates for dropdown: use opt.value (ISO date) instead of parsed tab text
           optMatches = matchRows.map((m) => ({ ...m, date: opt.value }));
