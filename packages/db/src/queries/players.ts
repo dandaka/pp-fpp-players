@@ -144,6 +144,50 @@ export function getPlayerStartYear(id: number): number | null {
   return new Date(row.firstMatch).getFullYear();
 }
 
+export function getTopPlayers(limit = 50): PlayerSearchResult[] {
+  const db = getDb();
+
+  const rows = db.query(`
+    SELECT p.id, p.name, p.club,
+      r.ordinal, r.matches_counted,
+      (SELECT COUNT(*) + 1 FROM ratings r2 WHERE r2.ordinal > r.ordinal) as globalRank,
+      (SELECT MIN(ordinal) FROM ratings) as minOrd,
+      (SELECT MAX(ordinal) FROM ratings) as maxOrd
+    FROM ratings r
+    JOIN players p ON p.id = r.player_id
+    ORDER BY r.ordinal DESC
+    LIMIT ?
+  `).all(limit) as Array<{
+    id: number; name: string; club: string | null;
+    ordinal: number; matches_counted: number;
+    globalRank: number; minOrd: number; maxOrd: number;
+  }>;
+
+  if (rows.length === 0) return [];
+
+  const ids = rows.map((r) => r.id);
+  const placeholders = ids.map(() => "?").join(",");
+
+  const lastMatchRows = db.query(`
+    SELECT mp.player_id as id, MAX(m.date_time) as lastMatch
+    FROM match_players mp
+    JOIN matches m ON m.guid = mp.match_guid
+    WHERE mp.player_id IN (${placeholders}) AND m.date_time IS NOT NULL
+    GROUP BY mp.player_id
+  `).all(...ids) as Array<{ id: number; lastMatch: string }>;
+
+  const lastMatchMap = new Map(lastMatchRows.map((r) => [r.id, r.lastMatch]));
+
+  return rows.map((row) => ({
+    id: row.id,
+    name: row.name,
+    club: row.club,
+    globalRank: row.globalRank,
+    rating: computeRating(row.ordinal, row.matches_counted, row.minOrd, row.maxOrd),
+    lastMatch: lastMatchMap.get(row.id) ?? null,
+  }));
+}
+
 export function getPlayerRanks(id: number): PlayerRanks | null {
   const db = getDb();
 

@@ -135,6 +135,11 @@ async function apiFetch<T>(path: string): Promise<T> {
   return res.json();
 }
 
+export async function getTopPlayers(limit = 50): Promise<PlayerSearchResult[]> {
+  const params = new URLSearchParams({ limit: String(limit) });
+  return apiFetch<PlayerSearchResult[]>(`/players/top?${params}`);
+}
+
 export async function searchPlayers(
   query: string,
   limit = 20,

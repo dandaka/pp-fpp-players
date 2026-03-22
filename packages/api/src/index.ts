@@ -2,6 +2,7 @@ import { Elysia } from "elysia";
 import cors from "@elysiajs/cors";
 import {
   searchPlayers,
+  getTopPlayers,
   getPlayer,
   getPlayerRanks,
   getPlayerRating,
@@ -23,6 +24,11 @@ const app = new Elysia()
   .use(cors())
 
   .get("/health", () => ({ status: "ok" }))
+
+  .get("/players/top", ({ query }) => {
+    const limit = parseInt((query.limit as string) || "50", 10);
+    return getTopPlayers(limit);
+  })
 
   .get("/players/search", ({ query }) => {
     const q = (query.q as string) || "";
