@@ -89,7 +89,13 @@ async function drawsLoop() {
   log(`Found ${active.length} active tournament(s): ${active.map((t) => t.name).join(", ")}`);
 
   // Share one browser, recycle every N tournaments to cap memory
-  let browser = await chromium.launch({ headless: true });
+  let browser;
+  try {
+    browser = await chromium.launch({ headless: true });
+  } catch (err) {
+    logError("Failed to launch browser, skipping draws loop:", err);
+    return;
+  }
   let usedCount = 0;
 
   try {
@@ -104,7 +110,12 @@ async function drawsLoop() {
       if (usedCount >= BROWSER_RECYCLE_EVERY) {
         log(`Recycling browser after ${usedCount} tournaments`);
         await browser.close().catch(() => {});
-        browser = await chromium.launch({ headless: true });
+        try {
+          browser = await chromium.launch({ headless: true });
+        } catch (err) {
+          logError("Failed to relaunch browser, stopping draws loop:", err);
+          return;
+        }
         usedCount = 0;
       }
 

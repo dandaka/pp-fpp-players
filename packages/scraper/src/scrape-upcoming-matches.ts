@@ -47,7 +47,13 @@ export async function scrapeSchedule(tournamentId: number, urlOrSlug: string, op
 
   // Reuse shared browser or launch a new one
   const ownsBrowser = !options?.browser;
-  const browser = options?.browser ?? await chromium.launch({ headless: true });
+  let browser: Browser;
+  try {
+    browser = options?.browser ?? await chromium.launch({ headless: true });
+  } catch (err) {
+    console.error(`Failed to launch browser: ${err}`);
+    return;
+  }
 
   // Close browser if abort signal fires (only if we own it)
   const onAbort = () => { if (ownsBrowser) browser.close().catch(() => {}); };

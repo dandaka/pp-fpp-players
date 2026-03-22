@@ -282,19 +282,21 @@ export async function scrapeAllTournaments(source = "db") {
           const ac = new AbortController();
           let scrapeOk = false;
           try {
-            const result = await Promise.race([
-              scrapeSchedule(t.id, linkWeb, { signal: ac.signal }).then(() => "ok" as const),
-              Bun.sleep(300_000).then(() => "timeout" as const),
-            ]);
-            if (result === "timeout") {
-              ac.abort();
-              console.error(`  Playwright scrape timed out after 300s`);
-            } else {
+            const timeout = setTimeout(() => ac.abort(), 300_000);
+            try {
+              await scrapeSchedule(t.id, linkWeb, { signal: ac.signal });
               scrapeOk = true;
+            } finally {
+              clearTimeout(timeout);
             }
           } catch (err) {
-            ac.abort();
-            console.error(`  Playwright scrape failed: ${err}`);
+            if (!ac.signal.aborted) ac.abort();
+            const msg = err instanceof Error ? err.message : String(err);
+            if (msg.includes("aborted")) {
+              console.error(`  Playwright scrape timed out after 300s`);
+            } else {
+              console.error(`  Playwright scrape failed: ${msg}`);
+            }
           }
           if (scrapeOk) {
             setCursor(cursorKey, "done");
