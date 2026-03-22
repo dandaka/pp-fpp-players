@@ -139,19 +139,24 @@ export async function scrapeDrawsPage(page: Page): Promise<DrawMatch[]> {
   for (const cat of categories) {
     console.log(`  Scraping draw: ${cat.text}...`);
 
-    const catMatches = await withRetry(`draw:${cat.text}`, async () => {
-      const matches: DrawMatch[] = [];
-
-      // Reload draws page to get fresh dropdown
+    // Step 2a: Reload draws page and select category
+    const navOk = await withRetry(`draw:${cat.text}:navigate`, async () => {
       await page.goto(drawsUrl, { waitUntil: "networkidle", timeout: 30_000 });
       await page.waitForTimeout(1000);
+      return true;
+    });
+    if (!navOk) continue;
 
-      // Select category (triggers __doPostBack, page re-renders)
+    const selectOk = await withRetry(`draw:${cat.text}:select`, async () => {
       await page.selectOption("#drop_tournaments", cat.value);
       await page.waitForTimeout(3000);
+      return true;
+    });
+    if (!selectOk) continue;
 
-      // Check for sub-draw tabs (e.g. M6-QP, M6-Quali, Grupo A, Grupo B)
-      const subDrawTabs = await page.evaluate(() => {
+    // Step 2b: Collect sub-draw tabs
+    const subDrawTabs = await withRetry(`draw:${cat.text}:tabs`, async () => {
+      return page.evaluate(() => {
         const navTabIds = new Set([
           "link_tournament_open_draw", "link_tournament_open_matches",
           "link_tournament_open_teams", "link_tournament_open_info",
@@ -172,10 +177,14 @@ export async function scrapeDrawsPage(page: Page): Promise<DrawMatch[]> {
         });
         return tabs;
       });
+    });
+    if (!subDrawTabs) continue;
 
-      const tabsToProcess = subDrawTabs.length > 0 ? subDrawTabs : [{ text: "QP", id: "" }];
+    const tabsToProcess = subDrawTabs.length > 0 ? subDrawTabs : [{ text: "QP", id: "" }];
 
-      for (const subTab of tabsToProcess) {
+    // Step 2c: For each sub-tab, click Encontros and scrape
+    for (const subTab of tabsToProcess) {
+      const subMatches = await withRetry(`draw:${cat.text}:${subTab.text}`, async () => {
         if (subTab.id) {
           await page.click(`#${subTab.id}`);
           await page.waitForTimeout(2000);
@@ -189,7 +198,7 @@ export async function scrapeDrawsPage(page: Page): Promise<DrawMatch[]> {
 
         if (!clicked) {
           console.log(`    Could not find Encontros tab for ${cat.text} ${subTab.text}`);
-          continue;
+          return [];
         }
 
         await page.waitForTimeout(2000);
@@ -197,26 +206,23 @@ export async function scrapeDrawsPage(page: Page): Promise<DrawMatch[]> {
         const tableMatches = await scrapeEncontrosTable(page);
         console.log(`    ${subTab.text}: ${tableMatches.length} matches`);
 
-        for (const m of tableMatches) {
-          matches.push({
-            categoryName: cat.text,
-            subDraw: subTab.text,
-            roundName: m.roundName,
-            dateTime: m.dateTime,
-            sideA: m.sideA,
-            sideB: m.sideB,
-            result: m.result,
-            court: m.court,
-          });
-        }
+        return tableMatches.map((m) => ({
+          categoryName: cat.text,
+          subDraw: subTab.text,
+          roundName: m.roundName,
+          dateTime: m.dateTime,
+          sideA: m.sideA,
+          sideB: m.sideB,
+          result: m.result,
+          court: m.court,
+        }));
+      });
+
+      if (subMatches) {
+        allMatches.push(...subMatches);
       }
-
-      return matches;
-    });
-
-    if (catMatches) {
-      allMatches.push(...catMatches);
     }
+
   }
 
   return allMatches;

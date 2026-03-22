@@ -129,21 +129,24 @@ async function scrapeAllPages(page: Page, date: string, tournamentYear: number):
   });
 
   for (let p = 2; p <= pageCount; p++) {
-    const clicked = await page.evaluate((pageNum) => {
-      const links = document.querySelectorAll('a[href*="grid_all_matches"]');
-      for (const link of links) {
-        if (link.textContent?.trim() === String(pageNum)) {
-          (link as HTMLElement).click();
-          return true;
+    const pageData = await withRetry(`pagination:${date}:p${p}`, async () => {
+      const clicked = await page.evaluate((pageNum) => {
+        const links = document.querySelectorAll('a[href*="grid_all_matches"]');
+        for (const link of links) {
+          if (link.textContent?.trim() === String(pageNum)) {
+            (link as HTMLElement).click();
+            return true;
+          }
         }
-      }
-      return false;
-    }, p);
+        return false;
+      }, p);
 
-    if (!clicked) break;
-    await page.waitForTimeout(2000);
+      if (!clicked) return null;
+      await page.waitForTimeout(2000);
+      return scrapeCurrentPage(page);
+    });
 
-    const pageData = await scrapeCurrentPage(page);
+    if (!pageData) break;
     allMatches.push(...pageData.map((raw) => toMatchRow(raw, isoDate)));
   }
 
