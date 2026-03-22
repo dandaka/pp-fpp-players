@@ -1,6 +1,7 @@
 name: Build & Push Docker Images
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
     paths:
@@ -8,9 +9,10 @@ on:
       - 'packages/api/**'
       - 'packages/scraper/**'
       - 'Dockerfile'
-      - 'docker-compose.yaml'
+      - 'docker-compose*.yaml'
       - 'package.json'
       - 'bun.lock'
+      - '.github/workflows/build-images.yml'
 
 env:
   REGISTRY: ghcr.io
