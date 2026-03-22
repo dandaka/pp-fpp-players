@@ -99,6 +99,8 @@ export interface GetPlayerResponse {
   ranks: PlayerRanks | null;
   rating: PlayerRating | null;
   tournamentsCount: number;
+  matchesCount: number;
+  startYear: number | null;
 }
 
 export interface GetPlayerMatchesResponse {

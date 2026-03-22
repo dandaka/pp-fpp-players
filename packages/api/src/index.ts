@@ -6,6 +6,8 @@ import {
   getPlayerRanks,
   getPlayerRating,
   getPlayerTournamentsCount,
+  getPlayerMatchesCount,
+  getPlayerStartYear,
   getPlayerMatches,
   getPlayerUpcomingMatches,
   getTournaments,
@@ -37,7 +39,9 @@ const app = new Elysia()
     const ranks = getPlayerRanks(id);
     const rating = getPlayerRating(id);
     const tournamentsCount = getPlayerTournamentsCount(id);
-    return { player, ranks, rating, tournamentsCount };
+    const matchesCount = getPlayerMatchesCount(id);
+    const startYear = getPlayerStartYear(id);
+    return { player, ranks, rating, tournamentsCount, matchesCount, startYear };
   })
 
   .get("/players/:id/matches", ({ params, query }) => {

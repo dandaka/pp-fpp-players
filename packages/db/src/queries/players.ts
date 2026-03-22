@@ -124,6 +124,26 @@ export function getPlayerTournamentsCount(id: number): number {
   return row.count;
 }
 
+export function getPlayerMatchesCount(id: number): number {
+  const db = getDb();
+  const row = db.query(`
+    SELECT COUNT(*) as count FROM match_players WHERE player_id = ?
+  `).get(id) as { count: number };
+  return row.count;
+}
+
+export function getPlayerStartYear(id: number): number | null {
+  const db = getDb();
+  const row = db.query(`
+    SELECT MIN(m.date_time) as firstMatch
+    FROM matches m
+    JOIN match_players mp ON mp.match_guid = m.guid
+    WHERE mp.player_id = ? AND m.date_time IS NOT NULL
+  `).get(id) as { firstMatch: string | null } | null;
+  if (!row?.firstMatch) return null;
+  return new Date(row.firstMatch).getFullYear();
+}
+
 export function getPlayerRanks(id: number): PlayerRanks | null {
   const db = getDb();
 
