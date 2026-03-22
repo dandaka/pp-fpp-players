@@ -1,3 +1,4 @@
+import { chromium } from "playwright";
 import { getDb, shouldSkipTournament, recordScrapeFailure, clearScrapeFailure } from "./db";
 import { scrapeAllTournaments } from "./scrape-all-tournaments";
 import { scrapeSchedule } from "./scrape-upcoming-matches";
@@ -8,6 +9,7 @@ import { scanTournaments } from "./find-tournaments";
 const NEWS_FEED_INTERVAL = 60;
 const DRAWS_INTERVAL = 60;
 const SCRAPE_TIMEOUT_MS = 5 * 60 * 1000; // 5 min per tournament
+const BROWSER_RECYCLE_EVERY = 5; // Restart browser every N tournaments to cap memory
 
 function log(msg: string) {
   console.log(`[${new Date().toISOString()}] ${msg}`);
@@ -83,28 +85,45 @@ async function drawsLoop() {
 
   log(`Found ${active.length} active tournament(s): ${active.map((t) => t.name).join(", ")}`);
 
-  for (const t of active) {
-    const check = shouldSkipTournament(t.id);
-    if (check.skip) {
-      log(`Skipping ${t.name} (ID: ${t.id}): ${check.reason}`);
-      continue;
-    }
+  // Share one browser, recycle every N tournaments to cap memory
+  let browser = await chromium.launch({ headless: true });
+  let usedCount = 0;
 
-    try {
-      log(`Scraping draws for: ${t.name} (ID: ${t.id})`);
-      const ac = new AbortController();
-      const timer = setTimeout(() => ac.abort(), SCRAPE_TIMEOUT_MS);
-      try {
-        await scrapeSchedule(t.id, t.url, { signal: ac.signal });
-      } finally {
-        clearTimeout(timer);
+  try {
+    for (const t of active) {
+      const check = shouldSkipTournament(t.id);
+      if (check.skip) {
+        log(`Skipping ${t.name} (ID: ${t.id}): ${check.reason}`);
+        continue;
       }
-      clearScrapeFailure(t.id);
-    } catch (err) {
-      const msg = err instanceof Error ? err.message : String(err);
-      recordScrapeFailure(t.id, msg);
-      logError(`Draws scrape failed for ${t.name} (${t.id}):`, err);
+
+      // Recycle browser to free accumulated memory
+      if (usedCount >= BROWSER_RECYCLE_EVERY) {
+        log(`Recycling browser after ${usedCount} tournaments`);
+        await browser.close().catch(() => {});
+        browser = await chromium.launch({ headless: true });
+        usedCount = 0;
+      }
+
+      try {
+        log(`Scraping draws for: ${t.name} (ID: ${t.id})`);
+        const ac = new AbortController();
+        const timer = setTimeout(() => ac.abort(), SCRAPE_TIMEOUT_MS);
+        try {
+          await scrapeSchedule(t.id, t.url, { signal: ac.signal, browser });
+        } finally {
+          clearTimeout(timer);
+        }
+        usedCount++;
+        clearScrapeFailure(t.id);
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : String(err);
+        recordScrapeFailure(t.id, msg);
+        logError(`Draws scrape failed for ${t.name} (${t.id}):`, err);
+      }
     }
+  } finally {
+    await browser.close().catch(() => {});
   }
 
   try {

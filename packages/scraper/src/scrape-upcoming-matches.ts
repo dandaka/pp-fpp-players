@@ -1,4 +1,4 @@
-import { chromium } from "playwright";
+import { chromium, type Browser } from "playwright";
 import { getDb } from "./db";
 import { scrapeMatchesPage } from "./scrape-matches-page";
 import { scrapeDrawsPage } from "./scrape-draws-page";
@@ -31,7 +31,7 @@ function getTournamentYear(tournamentId: number): number {
   return new Date().getFullYear();
 }
 
-export async function scrapeSchedule(tournamentId: number, urlOrSlug: string, options?: { signal?: AbortSignal }) {
+export async function scrapeSchedule(tournamentId: number, urlOrSlug: string, options?: { signal?: AbortSignal; browser?: Browser }) {
   const { matchesUrl, drawsUrl, slug } = resolveTournamentUrl(urlOrSlug);
   const tournamentYear = getTournamentYear(tournamentId);
 
@@ -45,14 +45,16 @@ export async function scrapeSchedule(tournamentId: number, urlOrSlug: string, op
     return;
   }
 
-  const browser = await chromium.launch({ headless: true });
+  // Reuse shared browser or launch a new one
+  const ownsBrowser = !options?.browser;
+  const browser = options?.browser ?? await chromium.launch({ headless: true });
 
-  // Close browser if abort signal fires (timeout from caller)
-  const onAbort = () => { browser.close().catch(() => {}); };
+  // Close browser if abort signal fires (only if we own it)
+  const onAbort = () => { if (ownsBrowser) browser.close().catch(() => {}); };
   options?.signal?.addEventListener("abort", onAbort, { once: true });
 
+  const page = await browser.newPage();
   try {
-    const page = await browser.newPage();
     page.setDefaultNavigationTimeout(30_000);
     page.setDefaultTimeout(15_000);
 
@@ -91,8 +93,9 @@ export async function scrapeSchedule(tournamentId: number, urlOrSlug: string, op
 
     console.log("\nDone!");
   } finally {
+    await page.close().catch(() => {});
     options?.signal?.removeEventListener("abort", onAbort);
-    await browser.close().catch(() => {});
+    if (ownsBrowser) await browser.close().catch(() => {});
   }
 }
 
