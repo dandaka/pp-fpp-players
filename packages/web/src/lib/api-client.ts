@@ -14,6 +14,7 @@ export interface PlayerSearchResult {
   id: number;
   name: string;
   club: string | null;
+  licenseNumber: string | null;
   globalRank: number;
   rating: PlayerRating | null;
   lastMatch: string | null;

@@ -28,25 +28,45 @@ export function searchPlayers(query: string, limit = 20): PlayerSearchResult[] {
   if (!query || query.trim().length === 0) return [];
 
   const db = getDb();
+  const trimmed = query.trim();
 
-  // Build WHERE clause: each query word must appear in the name
-  const words = query.trim().split(/\s+/).filter(Boolean);
-  const conditions = words.map(() => "name LIKE ?").join(" AND ");
-  const params = words.map((w) => `%${w}%`);
+  // If query is only digits, search by license number
+  const isLicenseSearch = /^\d+$/.test(trimmed);
 
-  const rows = db.query(`
-    SELECT id, name, club FROM players
-    WHERE ${conditions}
-    ORDER BY name
-    LIMIT ?
-  `).all(...params, limit * 3) as Array<{ id: number; name: string; club: string | null }>;
+  let scored: Array<{ id: number; name: string; club: string | null; license_number: string | null; score: number }>;
 
-  // Re-rank with fuzzy scoring
-  const scored = rows
-    .map((row) => ({ ...row, score: scoreMatch(query, row.name) }))
-    .filter((r) => r.score > 0)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, limit);
+  if (isLicenseSearch) {
+    const rows = db.query(`
+      SELECT id, name, club, license_number FROM players
+      WHERE license_number LIKE ?
+      ORDER BY license_number
+      LIMIT ?
+    `).all(`${trimmed}%`, limit) as Array<{ id: number; name: string; club: string | null; license_number: string | null }>;
+
+    scored = rows.map((row) => ({
+      ...row,
+      score: row.license_number === trimmed ? 100 : 90,
+    }));
+  } else {
+    // Build WHERE clause: each query word must appear in the name
+    const words = trimmed.split(/\s+/).filter(Boolean);
+    const conditions = words.map(() => "name LIKE ?").join(" AND ");
+    const params = words.map((w) => `%${w}%`);
+
+    const rows = db.query(`
+      SELECT id, name, club, license_number FROM players
+      WHERE ${conditions}
+      ORDER BY name
+      LIMIT ?
+    `).all(...params, limit * 3) as Array<{ id: number; name: string; club: string | null; license_number: string | null }>;
+
+    // Re-rank with fuzzy scoring
+    scored = rows
+      .map((row) => ({ ...row, score: scoreMatch(query, row.name) }))
+      .filter((r) => r.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, limit);
+  }
 
   if (scored.length === 0) return [];
 
@@ -81,8 +101,9 @@ export function searchPlayers(query: string, limit = 20): PlayerSearchResult[] {
 
   const lastMatchMap = new Map(lastMatchRows.map((r) => [r.id, r.lastMatch]));
 
-  return scored.map(({ score, ...rest }) => ({
+  return scored.map(({ score, license_number, ...rest }) => ({
     ...rest,
+    licenseNumber: license_number,
     globalRank: rankMap.get(rest.id) ?? 0,
     rating: ratingMap.get(rest.id) ?? null,
     lastMatch: lastMatchMap.get(rest.id) ?? null,
@@ -148,7 +169,7 @@ export function getTopPlayers(limit = 50): PlayerSearchResult[] {
   const db = getDb();
 
   const rows = db.query(`
-    SELECT p.id, p.name, p.club,
+    SELECT p.id, p.name, p.club, p.license_number,
       r.ordinal, r.matches_counted,
       (SELECT COUNT(*) + 1 FROM ratings r2 WHERE r2.ordinal > r.ordinal) as globalRank,
       (SELECT MIN(ordinal) FROM ratings) as minOrd,
@@ -158,7 +179,7 @@ export function getTopPlayers(limit = 50): PlayerSearchResult[] {
     ORDER BY r.ordinal DESC
     LIMIT ?
   `).all(limit) as Array<{
-    id: number; name: string; club: string | null;
+    id: number; name: string; club: string | null; license_number: string | null;
     ordinal: number; matches_counted: number;
     globalRank: number; minOrd: number; maxOrd: number;
   }>;
@@ -182,6 +203,7 @@ export function getTopPlayers(limit = 50): PlayerSearchResult[] {
     id: row.id,
     name: row.name,
     club: row.club,
+    licenseNumber: row.license_number,
     globalRank: row.globalRank,
     rating: computeRating(row.ordinal, row.matches_counted, row.minOrd, row.maxOrd),
     lastMatch: lastMatchMap.get(row.id) ?? null,

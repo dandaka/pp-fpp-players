@@ -4,11 +4,14 @@ import { scrapeAllTournaments } from "./scrape-all-tournaments";
 import { scrapeSchedule } from "./scrape-upcoming-matches";
 import { calculateRatings } from "./calculate-ratings";
 import { scanTournaments } from "./find-tournaments";
+import { enrichPlayerProfiles } from "./sync-players";
 import { SKIP_PLAYWRIGHT_PATTERNS } from "./skip-list";
 
 // Intervals in minutes
 const NEWS_FEED_INTERVAL = 60;
 const DRAWS_INTERVAL = 60;
+const ENRICH_INTERVAL = 30;
+const ENRICH_BATCH_SIZE = 50;
 const SCRAPE_TIMEOUT_MS = 5 * 60 * 1000; // 5 min per tournament
 const BROWSER_RECYCLE_EVERY = 5; // Restart browser every N tournaments to cap memory
 
@@ -150,6 +153,21 @@ async function drawsLoop() {
   log("=== Draws Sync complete ===\n");
 }
 
+/**
+ * Loop 3: Enrich player profiles (photo, licence number, gender) from TieSports API.
+ */
+async function enrichLoop() {
+  log("=== Player Enrichment starting ===");
+
+  try {
+    await enrichPlayerProfiles(ENRICH_BATCH_SIZE, 200, true);
+  } catch (err) {
+    logError("Player enrichment failed:", err);
+  }
+
+  log("=== Player Enrichment complete ===\n");
+}
+
 function scheduleLoop(name: string, fn: () => Promise<void>, intervalMin: number) {
   const run = async () => {
     try {
@@ -167,19 +185,25 @@ async function main() {
   log("Daemon starting");
   log(`News feed interval: ${NEWS_FEED_INTERVAL}min`);
   log(`Draws interval: ${DRAWS_INTERVAL}min`);
+  log(`Enrich interval: ${ENRICH_INTERVAL}min (batch: ${ENRICH_BATCH_SIZE})`);
   log("");
 
-  // Run both loops immediately on startup
+  // Run all loops immediately on startup
   // News feed first (fast, API only), then draws (slow, browser)
   const newsLoop = scheduleLoop("news-feed", newsFeedLoop, NEWS_FEED_INTERVAL);
   const drawLoop = scheduleLoop("draws", drawsLoop, DRAWS_INTERVAL);
+  const playerEnrichLoop = scheduleLoop("enrich", enrichLoop, ENRICH_INTERVAL);
 
   // Start news feed immediately
   await newsLoop();
 
   // Start draws loop (staggered by 5 min to avoid overlap on startup)
   setTimeout(drawLoop, 5 * 60 * 1000);
-  log("Draws loop will start in 5 minutes\n");
+  log("Draws loop will start in 5 minutes");
+
+  // Start enrichment loop (staggered by 2 min)
+  setTimeout(playerEnrichLoop, 2 * 60 * 1000);
+  log("Enrich loop will start in 2 minutes\n");
 
   // Keep process alive
   process.on("SIGINT", () => {

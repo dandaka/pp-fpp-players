@@ -9,6 +9,7 @@ interface PlayerResult {
   id: number;
   name: string;
   club: string | null;
+  licenseNumber: string | null;
   globalRank: number;
   rating: { score: number; reliability: number } | null;
   lastMatch: string | null;
@@ -59,7 +60,7 @@ export default function PlayersPage() {
   return (
     <div className="space-y-4">
       <Input
-        placeholder="Search players by name..."
+        placeholder="Search by name or licence number..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         className="h-12 text-base"
