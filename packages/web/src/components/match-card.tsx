@@ -27,7 +27,7 @@ function PlayerCell({
       {ratingScore != null && (
         <span className="inline-flex items-center shrink-0 rounded-md bg-muted px-1.5 py-0.5 text-xs font-medium text-muted-foreground gap-1">
           <span>{Math.round(ratingScore)}</span>
-          {delta != null && (
+          {delta != null && delta !== 0 && (
             <span className={`opacity-60 ${delta > 0 ? "text-green-600" : delta < 0 ? "text-red-500" : ""}`}>
               {delta > 0 ? "+" : ""}{(Math.round(delta * 10) / 10).toFixed(1)}
             </span>

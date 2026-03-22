@@ -111,6 +111,13 @@ async function scrapeCurrentPage(page: Page): Promise<RawMatch[]> {
   });
 }
 
+async function waitForPostback(page: Page, timeout = 30_000): Promise<void> {
+  // Wait for any in-flight navigation/postback to complete
+  await page.waitForLoadState("load", { timeout }).catch(() => {});
+  await page.waitForLoadState("networkidle", { timeout }).catch(() => {});
+  await page.waitForSelector("table", { state: "attached", timeout: 5_000 }).catch(() => {});
+}
+
 async function scrapeAllPages(page: Page, date: string, tournamentYear: number): Promise<ScrapedMatchRow[]> {
   const allMatches: ScrapedMatchRow[] = [];
   const isoDate = parsePortugueseDate(date, tournamentYear);
@@ -130,19 +137,10 @@ async function scrapeAllPages(page: Page, date: string, tournamentYear: number):
 
   for (let p = 2; p <= pageCount; p++) {
     const pageData = await withRetry(`pagination:${date}:p${p}`, async () => {
-      const clicked = await page.evaluate((pageNum) => {
-        const links = document.querySelectorAll('a[href*="grid_all_matches"]');
-        for (const link of links) {
-          if (link.textContent?.trim() === String(pageNum)) {
-            (link as HTMLElement).click();
-            return true;
-          }
-        }
-        return false;
-      }, p);
-
-      if (!clicked) return null;
-      await page.waitForTimeout(2000);
+      const link = page.locator(`a[href*="grid_all_matches"]`).filter({ hasText: String(p) });
+      if (await link.count() === 0) return null;
+      await link.first().click({ timeout: 15_000 });
+      await waitForPostback(page);
       return scrapeCurrentPage(page);
     });
 
@@ -230,15 +228,28 @@ export async function scrapeMatchesPage(
 
   if (dateTabs.length > 0) {
     console.log(`Found ${dateTabs.length} date tabs: ${dateTabs.map((t) => t.text).join(", ")}`);
+    const pageUrl = page.url();
     for (const tab of dateTabs) {
       console.log(`Scraping ${tab.text}...`);
 
-      const tabMatches = await withRetry(`matches:${tab.text}`, async () => {
-        await page.click(`#${tab.id}`);
-        await page.waitForLoadState("networkidle", { timeout: 15_000 }).catch(() => {});
-        await page.waitForTimeout(1000);
-        return scrapeAllPages(page, tab.text, tournamentYear);
-      });
+      let tabMatches: ScrapedMatchRow[] | null = null;
+      for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+        try {
+          await page.click(`#${tab.id}`, { timeout: 15_000 });
+          await waitForPostback(page);
+          tabMatches = await scrapeAllPages(page, tab.text, tournamentYear);
+          break;
+        } catch (err) {
+          console.error(`    matches:${tab.text}: attempt ${attempt}/${MAX_RETRIES} failed: ${err}`);
+          if (attempt < MAX_RETRIES) {
+            console.log(`    Re-navigating to reset page state...`);
+            await page.goto(pageUrl, { waitUntil: "networkidle", timeout: 30_000 }).catch(() => {});
+            await page.waitForTimeout(1000);
+          } else {
+            console.error(`    matches:${tab.text}: giving up after ${MAX_RETRIES} attempts`);
+          }
+        }
+      }
 
       if (tabMatches) {
         console.log(`  Found ${tabMatches.length} matches`);
@@ -247,48 +258,30 @@ export async function scrapeMatchesPage(
     }
   } else if (dateDropdown.length > 0) {
     console.log(`Found ${dateDropdown.length} dates in dropdown`);
+    const pageUrl = page.url();
     for (const opt of dateDropdown) {
       console.log(`Scraping ${opt.text}...`);
 
-      const optMatches = await withRetry(`matches:${opt.text}`, async () => {
-        await page.selectOption("#drop_days_all_matches", opt.value);
-        await page.waitForLoadState("networkidle", { timeout: 15_000 }).catch(() => {});
-        await page.waitForTimeout(1000);
-
-        const isoDate = opt.value;
-        const firstPage = await scrapeCurrentPage(page);
-        const matchRows = firstPage.map((raw) => toMatchRow(raw, isoDate));
-
-        // Handle pagination
-        const pageCount = await page.evaluate(() => {
-          const links = document.querySelectorAll("a[href*='grid_all_matches']");
-          let max = 1;
-          links.forEach((a) => {
-            const num = parseInt(a.textContent?.trim() || "0");
-            if (num > max) max = num;
-          });
-          return max;
-        });
-
-        for (let p = 2; p <= pageCount; p++) {
-          const clicked = await page.evaluate((pageNum) => {
-            const links = document.querySelectorAll('a[href*="grid_all_matches"]');
-            for (const link of links) {
-              if (link.textContent?.trim() === String(pageNum)) {
-                (link as HTMLElement).click();
-                return true;
-              }
-            }
-            return false;
-          }, p);
-          if (!clicked) break;
-          await page.waitForTimeout(2000);
-          const pageData = await scrapeCurrentPage(page);
-          matchRows.push(...pageData.map((raw) => toMatchRow(raw, isoDate)));
+      let optMatches: ScrapedMatchRow[] | null = null;
+      for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+        try {
+          await page.selectOption("#drop_days_all_matches", opt.value);
+          await waitForPostback(page);
+          const matchRows = await scrapeAllPages(page, opt.text, tournamentYear);
+          // Fix dates for dropdown: use opt.value (ISO date) instead of parsed tab text
+          optMatches = matchRows.map((m) => ({ ...m, date: opt.value }));
+          break;
+        } catch (err) {
+          console.error(`    matches:${opt.text}: attempt ${attempt}/${MAX_RETRIES} failed: ${err}`);
+          if (attempt < MAX_RETRIES) {
+            console.log(`    Re-navigating to reset page state...`);
+            await page.goto(pageUrl, { waitUntil: "networkidle", timeout: 30_000 }).catch(() => {});
+            await page.waitForTimeout(1000);
+          } else {
+            console.error(`    matches:${opt.text}: giving up after ${MAX_RETRIES} attempts`);
+          }
         }
-
-        return matchRows;
-      });
+      }
 
       if (optMatches) {
         console.log(`  Found ${optMatches.length} matches`);
