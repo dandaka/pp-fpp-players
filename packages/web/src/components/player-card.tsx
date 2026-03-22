@@ -12,7 +12,12 @@ interface PlayerCardProps {
 }
 
 function formatLastMatch(dateStr: string): string {
-  const date = new Date(dateStr);
+  // date_time values are inconsistent ("2025-12-07, 15:00", "2026-01-25 Início às 15:00", etc.)
+  // Extract just the YYYY-MM-DD portion for reliable parsing
+  const match = dateStr.match(/(\d{4}-\d{2}-\d{2})/);
+  if (!match) return "";
+  const date = new Date(match[1] + "T00:00:00");
+  if (isNaN(date.getTime())) return "";
   const now = new Date();
   const diffMs = now.getTime() - date.getTime();
   const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
