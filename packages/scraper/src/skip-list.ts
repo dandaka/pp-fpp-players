@@ -2,4 +2,6 @@
 // These tournaments will be retried once a better parser is implemented.
 export const SKIP_PLAYWRIGHT_PATTERNS = [
   /liga\s+de\s+clubes/i,
+  /campeonato\s+nacional\s+de\s+clubes/i,
+  /interclubs?\s+afp/i,
 ];
