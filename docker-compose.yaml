@@ -1,8 +1,6 @@
 services:
   api:
-    build:
-      context: .
-      target: api
+    image: ghcr.io/dandaka/pp-fpp-players/api:latest
     ports:
       - "${API_PORT:-3001}:3001"
     volumes:
@@ -13,9 +11,7 @@ services:
     restart: unless-stopped
 
   scraper:
-    build:
-      context: .
-      target: scraper
+    image: ghcr.io/dandaka/pp-fpp-players/scraper:latest
     volumes:
       - db-data:/data
     environment:
