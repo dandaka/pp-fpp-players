@@ -56,10 +56,7 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
             {ranks && (
               <div className="flex justify-between items-center">
                 <span className="text-sm text-muted-foreground">Ranking</span>
-                <span className="text-sm">
-                  <span className="font-semibold">#{ranks.global.rank.toLocaleString()}</span>
-                  <span className="text-muted-foreground"> ({ranks.global.total.toLocaleString()})</span>
-                </span>
+                <span className="text-sm font-semibold">#{ranks.global.rank.toLocaleString()}</span>
               </div>
             )}
           </div>
