@@ -1,5 +1,7 @@
 {
   "name": "pp-fpp-players",
+  "version": "1.0.0",
+  "license": "MIT",
   "private": true,
   "workspaces": ["packages/*"],
   "scripts": {
