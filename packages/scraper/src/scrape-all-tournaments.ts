@@ -1,6 +1,7 @@
 import { getDb, setCursor, getCursor } from "./db";
 import { getTournaments, getTournament } from "./api";
 import { scrapeSchedule } from "./scrape-upcoming-matches";
+import { SKIP_PLAYWRIGHT_PATTERNS } from "./skip-list";
 
 const PAGE_SIZE = 10;
 
@@ -234,7 +235,8 @@ export async function scrapeAllTournaments(source = "db") {
   for (const t of targets) {
     processed++;
     const cursorKey = `scrape_tournament_${t.id}`;
-    if (getCursor(cursorKey) === "done") {
+    const cursorVal = getCursor(cursorKey);
+    if (cursorVal === "done" || cursorVal === "skip:playwright") {
       skipped++;
       continue;
     }
@@ -266,6 +268,14 @@ export async function scrapeAllTournaments(source = "db") {
         setCursor(cursorKey, "done");
       } else {
         // News feed had no player-level data (e.g. Liga de Clubes team results).
+        // Check if this tournament should skip Playwright scraping
+        const shouldSkipPlaywright = SKIP_PLAYWRIGHT_PATTERNS.some((p) => p.test(t.name));
+        if (shouldSkipPlaywright) {
+          console.log(`  Skipping Playwright scrape (unsupported tournament format: ${t.name})`);
+          setCursor(cursorKey, "skip:playwright");
+          continue;
+        }
+
         // Fall back to Playwright scraping of the Matches/Draws pages.
         const linkWeb = (db.query("SELECT link_web FROM tournaments WHERE id = ?").get(t.id) as { link_web: string | null } | null)?.link_web;
         if (linkWeb) {

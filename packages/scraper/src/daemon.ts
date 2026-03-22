@@ -4,6 +4,7 @@ import { scrapeAllTournaments } from "./scrape-all-tournaments";
 import { scrapeSchedule } from "./scrape-upcoming-matches";
 import { calculateRatings } from "./calculate-ratings";
 import { scanTournaments } from "./find-tournaments";
+import { SKIP_PLAYWRIGHT_PATTERNS } from "./skip-list";
 
 // Intervals in minutes
 const NEWS_FEED_INTERVAL = 60;
@@ -35,7 +36,9 @@ function getActiveTournaments(): { id: number; name: string; url: string }[] {
     ORDER BY t.id DESC
   `).all() as { id: number; name: string; link_web: string }[];
 
-  return rows.map((r) => ({ id: r.id, name: r.name, url: r.link_web }));
+  return rows
+    .filter((r) => !SKIP_PLAYWRIGHT_PATTERNS.some((p) => p.test(r.name)))
+    .map((r) => ({ id: r.id, name: r.name, url: r.link_web }));
 }
 
 /**
