@@ -33,15 +33,15 @@ export function searchPlayers(query: string, limit = 20): PlayerSearchResult[] {
   // If query is only digits, search by license number
   const isLicenseSearch = /^\d+$/.test(trimmed);
 
-  let scored: Array<{ id: number; name: string; club: string | null; license_number: string | null; score: number }>;
+  let scored: Array<{ id: number; name: string; club: string | null; photo_url: string | null; license_number: string | null; score: number }>;
 
   if (isLicenseSearch) {
     const rows = db.query(`
-      SELECT id, name, club, license_number FROM players
+      SELECT id, name, club, photo_url, license_number FROM players
       WHERE license_number LIKE ?
       ORDER BY license_number
       LIMIT ?
-    `).all(`${trimmed}%`, limit) as Array<{ id: number; name: string; club: string | null; license_number: string | null }>;
+    `).all(`${trimmed}%`, limit) as Array<{ id: number; name: string; club: string | null; photo_url: string | null; license_number: string | null }>;
 
     scored = rows.map((row) => ({
       ...row,
@@ -54,11 +54,11 @@ export function searchPlayers(query: string, limit = 20): PlayerSearchResult[] {
     const params = words.map((w) => `%${w}%`);
 
     const rows = db.query(`
-      SELECT id, name, club, license_number FROM players
+      SELECT id, name, club, photo_url, license_number FROM players
       WHERE ${conditions}
       ORDER BY name
       LIMIT ?
-    `).all(...params, limit * 3) as Array<{ id: number; name: string; club: string | null; license_number: string | null }>;
+    `).all(...params, limit * 3) as Array<{ id: number; name: string; club: string | null; photo_url: string | null; license_number: string | null }>;
 
     // Re-rank with fuzzy scoring
     scored = rows
@@ -101,8 +101,9 @@ export function searchPlayers(query: string, limit = 20): PlayerSearchResult[] {
 
   const lastMatchMap = new Map(lastMatchRows.map((r) => [r.id, r.lastMatch]));
 
-  return scored.map(({ score, license_number, ...rest }) => ({
+  return scored.map(({ score, license_number, photo_url, ...rest }) => ({
     ...rest,
+    photoUrl: photo_url,
     licenseNumber: license_number,
     globalRank: rankMap.get(rest.id) ?? 0,
     rating: ratingMap.get(rest.id) ?? null,
@@ -169,7 +170,7 @@ export function getTopPlayers(limit = 50): PlayerSearchResult[] {
   const db = getDb();
 
   const rows = db.query(`
-    SELECT p.id, p.name, p.club, p.license_number,
+    SELECT p.id, p.name, p.club, p.photo_url, p.license_number,
       r.ordinal, r.matches_counted,
       (SELECT COUNT(*) + 1 FROM ratings r2 WHERE r2.ordinal > r.ordinal) as globalRank,
       (SELECT MIN(ordinal) FROM ratings) as minOrd,
@@ -179,7 +180,7 @@ export function getTopPlayers(limit = 50): PlayerSearchResult[] {
     ORDER BY r.ordinal DESC
     LIMIT ?
   `).all(limit) as Array<{
-    id: number; name: string; club: string | null; license_number: string | null;
+    id: number; name: string; club: string | null; photo_url: string | null; license_number: string | null;
     ordinal: number; matches_counted: number;
     globalRank: number; minOrd: number; maxOrd: number;
   }>;
@@ -203,6 +204,7 @@ export function getTopPlayers(limit = 50): PlayerSearchResult[] {
     id: row.id,
     name: row.name,
     club: row.club,
+    photoUrl: row.photo_url,
     licenseNumber: row.license_number,
     globalRank: row.globalRank,
     rating: computeRating(row.ordinal, row.matches_counted, row.minOrd, row.maxOrd),

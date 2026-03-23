@@ -2,6 +2,7 @@ export interface PlayerSearchResult {
   id: number
   name: string
   club: string | null
+  photoUrl: string | null
   licenseNumber: string | null
   globalRank: number
   rating: PlayerRating | null
