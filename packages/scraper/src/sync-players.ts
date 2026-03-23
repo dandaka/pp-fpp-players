@@ -67,7 +67,9 @@ export async function enrichPlayerProfiles(batchSize = 10, delayMs = 200, loop =
         }
 
         const gender = profile.list?.find((l) => l.title === "Gender")?.text ?? null;
-        const license = profile.list?.find((l) => l.title?.includes("License"))?.text ?? null;
+        const licenseEntry = profile.list?.find((l) => l.title?.includes("Padel"));
+        const licenseRaw = licenseEntry?.text ?? null;
+        const license = licenseRaw?.match(/No\.\s*(\d+)/)?.[1] ?? null;
 
         update.run(profile.player_photo, profile.share_url, license, gender, p.id);
         totalEnriched++;
@@ -89,6 +91,17 @@ export async function enrichPlayerProfiles(batchSize = 10, delayMs = 200, loop =
   console.log(`\nDone: ${totalEnriched} enriched, ${totalSkipped} skipped, ${totalErrors} errors`);
 }
 
+export function resetEnrichment(onlyMissingLicense = true) {
+  const db = getDb();
+  if (onlyMissingLicense) {
+    const result = db.run("UPDATE players SET profile_synced_at = NULL WHERE profile_synced_at IS NOT NULL AND (license_number IS NULL OR license_number = '')");
+    console.log(`Reset ${result.changes} players with missing license for re-enrichment`);
+  } else {
+    const result = db.run("UPDATE players SET profile_synced_at = NULL");
+    console.log(`Reset ${result.changes} players for re-enrichment`);
+  }
+}
+
 if (import.meta.main) {
   const cmd = process.argv[2] ?? "seed";
   if (cmd === "seed") {
@@ -96,7 +109,10 @@ if (import.meta.main) {
   } else if (cmd === "enrich") {
     const batch = parseInt(process.argv[3] ?? "50");
     await enrichPlayerProfiles(batch);
+  } else if (cmd === "reset-enrich") {
+    const all = process.argv[3] === "--all";
+    resetEnrichment(!all);
   } else {
-    console.log("Usage: bun src/sync-players.ts [seed|enrich] [batchSize]");
+    console.log("Usage: bun src/sync-players.ts [seed|enrich|reset-enrich] [batchSize|--all]");
   }
 }
