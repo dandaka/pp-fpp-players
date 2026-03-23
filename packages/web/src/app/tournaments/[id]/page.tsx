@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "next/navigation";
-import Link from "next/link";
-import { RankBadge } from "@/components/rank-badge";
+import { PlayerCard } from "@/components/player-card";
 import { MatchCard } from "@/components/match-card";
 import { CategoryFilter } from "./category-filter";
 
@@ -20,10 +19,15 @@ interface Tournament {
 interface TournamentPlayer {
   id: number;
   name: string;
+  club: string | null;
+  photoUrl: string | null;
+  licenseNumber: string | null;
   globalRank: number | null;
   genderRank: number | null;
   categoryRank: number | null;
   ordinal: number;
+  rating: { score: number; reliability: number } | null;
+  lastMatch: string | null;
 }
 
 interface MatchesData {
@@ -131,16 +135,17 @@ export default function TournamentPage() {
                 if (b.globalRank === null) return -1;
                 return a.globalRank - b.globalRank;
               }).map((player) => (
-                <Link key={player.id} href={`/players/${player.id}`} className="block">
-                  <div className="flex items-center justify-between rounded-lg border p-3 transition-colors hover:bg-muted/50">
-                    <span className="truncate font-medium">{player.name}</span>
-                    <div className="flex items-center gap-1 shrink-0 ml-2">
-                      <RankBadge rank={player.globalRank} />
-                      <RankBadge rank={player.genderRank} label="gender" />
-                      <RankBadge rank={player.categoryRank} label="cat" />
-                    </div>
-                  </div>
-                </Link>
+                <PlayerCard
+                  key={player.id}
+                  id={player.id}
+                  name={player.name}
+                  club={player.club}
+                  photoUrl={player.photoUrl}
+                  licenseNumber={player.licenseNumber}
+                  globalRank={player.globalRank ?? 0}
+                  rating={player.rating}
+                  lastMatch={player.lastMatch}
+                />
               ))
             ) : (
               <p className="py-8 text-center text-muted-foreground">No players found</p>

@@ -88,7 +88,9 @@ export function getTournamentPlayers(
   }
 
   let query = `
-    SELECT DISTINCT p.id, p.name, p.gender, r.ordinal
+    SELECT DISTINCT p.id, p.name, p.gender, p.club, p.photo_url, p.license_number,
+      r.ordinal, r.score as rating_score, r.reliability as rating_reliability,
+      (SELECT MAX(m2.date_time) FROM matches m2 JOIN match_players mp2 ON mp2.match_guid = m2.guid WHERE mp2.player_id = p.id) as last_match
     FROM players p
     JOIN match_players mp ON mp.player_id = p.id
     JOIN matches m ON m.guid = mp.match_guid
@@ -105,16 +107,24 @@ export function getTournamentPlayers(
   query += " ORDER BY r.ordinal DESC NULLS LAST";
 
   const rows = db.query(query).all(...params) as Array<{
-    id: number; name: string; gender: string | null; ordinal: number | null;
+    id: number; name: string; gender: string | null; club: string | null;
+    photo_url: string | null; license_number: string | null;
+    ordinal: number | null; rating_score: number | null; rating_reliability: number | null;
+    last_match: string | null;
   }>;
 
   return rows.map((row) => ({
     id: row.id,
     name: row.name,
+    club: row.club ?? null,
+    photoUrl: row.photo_url ?? null,
+    licenseNumber: row.license_number ?? null,
     globalRank: globalRanks.get(row.id) ?? null,
     genderRank: genderRanks.get(row.id) ?? null,
     categoryRank: null,
     ordinal: row.ordinal ?? 0,
+    rating: row.rating_score != null ? { score: row.rating_score, reliability: row.rating_reliability ?? 0 } : null,
+    lastMatch: row.last_match ?? null,
   }));
 }
 

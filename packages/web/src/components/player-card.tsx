@@ -57,7 +57,7 @@ export function PlayerCard({ id, name, photoUrl, licenseNumber, globalRank, rati
           <div className="flex items-center gap-2">
             <p className="truncate font-medium">{name}</p>
             <div className="flex shrink-0 items-center gap-1.5">
-              {rating && <RatingBadge score={rating.score} reliability={rating.reliability} />}
+              {rating && <RatingBadge score={rating.score} />}
               <RankBadge rank={globalRank} />
             </div>
           </div>

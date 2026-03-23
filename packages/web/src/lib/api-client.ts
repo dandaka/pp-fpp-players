@@ -88,10 +88,15 @@ export interface TournamentDetail {
 export interface TournamentPlayer {
   id: number;
   name: string;
+  club: string | null;
+  photoUrl: string | null;
+  licenseNumber: string | null;
   globalRank: number | null;
   genderRank: number | null;
   categoryRank: number | null;
   ordinal: number;
+  rating: PlayerRating | null;
+  lastMatch: string | null;
 }
 
 // ── Response shapes ────────────────────────────────────────────────────────
