@@ -87,9 +87,11 @@ export function getTournamentPlayers(
     }
   }
 
+  const bounds = db.query("SELECT MIN(ordinal) as minOrd, MAX(ordinal) as maxOrd FROM ratings").get() as { minOrd: number; maxOrd: number };
+
   let query = `
     SELECT DISTINCT p.id, p.name, p.gender, p.club, p.photo_url, p.license_number,
-      r.ordinal, r.score as rating_score, r.reliability as rating_reliability,
+      r.ordinal, r.matches_counted,
       (SELECT MAX(m2.date_time) FROM matches m2 JOIN match_players mp2 ON mp2.match_guid = m2.guid WHERE mp2.player_id = p.id) as last_match
     FROM players p
     JOIN match_players mp ON mp.player_id = p.id
@@ -109,23 +111,33 @@ export function getTournamentPlayers(
   const rows = db.query(query).all(...params) as Array<{
     id: number; name: string; gender: string | null; club: string | null;
     photo_url: string | null; license_number: string | null;
-    ordinal: number | null; rating_score: number | null; rating_reliability: number | null;
+    ordinal: number | null; matches_counted: number | null;
     last_match: string | null;
   }>;
 
-  return rows.map((row) => ({
-    id: row.id,
-    name: row.name,
-    club: row.club ?? null,
-    photoUrl: row.photo_url ?? null,
-    licenseNumber: row.license_number ?? null,
-    globalRank: globalRanks.get(row.id) ?? null,
-    genderRank: genderRanks.get(row.id) ?? null,
-    categoryRank: null,
-    ordinal: row.ordinal ?? 0,
-    rating: row.rating_score != null ? { score: row.rating_score, reliability: row.rating_reliability ?? 0 } : null,
-    lastMatch: row.last_match ?? null,
-  }));
+  const range = bounds.maxOrd - bounds.minOrd;
+
+  return rows.map((row) => {
+    let rating: PlayerRating | null = null;
+    if (row.ordinal != null && row.matches_counted != null) {
+      const score = range > 0 ? Math.round(((row.ordinal - bounds.minOrd) / range) * 1000) / 10 : 0;
+      const reliability = Math.round((row.matches_counted / (row.matches_counted + RELIABILITY_K)) * 100);
+      rating = { score, reliability };
+    }
+    return {
+      id: row.id,
+      name: row.name,
+      club: row.club ?? null,
+      photoUrl: row.photo_url ?? null,
+      licenseNumber: row.license_number ?? null,
+      globalRank: globalRanks.get(row.id) ?? null,
+      genderRank: genderRanks.get(row.id) ?? null,
+      categoryRank: null,
+      ordinal: row.ordinal ?? 0,
+      rating,
+      lastMatch: row.last_match ?? null,
+    };
+  });
 }
 
 const RELIABILITY_K = 5;
