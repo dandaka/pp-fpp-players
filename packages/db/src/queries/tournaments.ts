@@ -63,61 +63,93 @@ export function getTournamentCategories(tournamentId: number): string[] {
 
 export function getTournamentPlayers(
   tournamentId: number,
-  category?: string
-): TournamentPlayer[] {
+  category?: string,
+  page = 1,
+  pageSize = 50
+): { players: TournamentPlayer[]; total: number } {
   const db = getDb();
 
   const tournament = db.query("SELECT name FROM tournaments WHERE id = ?").get(tournamentId) as { name: string } | null;
-  if (!tournament) return [];
+  if (!tournament) return { players: [], total: 0 };
 
-  // Pre-compute global and gender ranks in one pass
-  const globalRanks = new Map<number, number>();
-  const genderRanks = new Map<number, number>();
-  const rankRows = db.query(`
-    SELECT r.player_id, p.gender,
-      RANK() OVER (ORDER BY r.ordinal DESC) as global_rank,
-      RANK() OVER (PARTITION BY p.gender ORDER BY r.ordinal DESC) as gender_rank
-    FROM ratings r
-    JOIN players p ON p.id = r.player_id
-  `).all() as Array<{ player_id: number; gender: string | null; global_rank: number; gender_rank: number }>;
-  for (const row of rankRows) {
-    globalRanks.set(row.player_id, row.global_rank);
-    if (row.gender !== null) {
-      genderRanks.set(row.player_id, row.gender_rank);
-    }
-  }
-
-  const bounds = db.query("SELECT MIN(ordinal) as minOrd, MAX(ordinal) as maxOrd FROM ratings").get() as { minOrd: number; maxOrd: number };
-
-  let query = `
-    SELECT DISTINCT p.id, p.name, p.gender, p.club, p.photo_url, p.license_number,
-      r.ordinal, r.matches_counted,
-      (SELECT MAX(m2.date_time) FROM matches m2 JOIN match_players mp2 ON mp2.match_guid = m2.guid WHERE mp2.player_id = p.id) as last_match
-    FROM players p
-    JOIN match_players mp ON mp.player_id = p.id
+  // Step 1: Get all tournament player IDs sorted by ordinal (fast, uses indexes)
+  let playerIdQuery = `
+    SELECT DISTINCT mp.player_id, COALESCE(r.ordinal, -999999) as ord
+    FROM match_players mp
     JOIN matches m ON m.guid = mp.match_guid
-    LEFT JOIN ratings r ON r.player_id = p.id
+    LEFT JOIN ratings r ON r.player_id = mp.player_id
     WHERE (m.source = ? OR m.tournament_name = ?)
   `;
-  const params: any[] = [`scrape:tournament:${tournamentId}`, tournament.name];
+  const playerIdParams: any[] = [`scrape:tournament:${tournamentId}`, tournament.name];
 
   if (category) {
-    query += " AND m.section_name = ?";
-    params.push(category);
+    playerIdQuery += " AND m.section_name = ?";
+    playerIdParams.push(category);
   }
 
-  query += " ORDER BY r.ordinal DESC NULLS LAST";
+  playerIdQuery += " ORDER BY ord DESC";
 
-  const rows = db.query(query).all(...params) as Array<{
+  const allPlayerIdRows = db.query(playerIdQuery).all(...playerIdParams) as Array<{ player_id: number; ord: number }>;
+  const total = allPlayerIdRows.length;
+
+  if (total === 0) return { players: [], total: 0 };
+
+  // Step 2: Paginate the player IDs
+  const offset = (page - 1) * pageSize;
+  const pagePlayerIds = allPlayerIdRows.slice(offset, offset + pageSize).map((r) => r.player_id);
+
+  if (pagePlayerIds.length === 0) return { players: [], total };
+
+  const placeholders = pagePlayerIds.map(() => "?").join(",");
+
+  // Step 3: Get player details + ratings for this page only
+  const rows = db.query(`
+    SELECT p.id, p.name, p.gender, p.club, p.photo_url, p.license_number,
+      r.ordinal, r.matches_counted
+    FROM players p
+    LEFT JOIN ratings r ON r.player_id = p.id
+    WHERE p.id IN (${placeholders})
+    ORDER BY r.ordinal DESC NULLS LAST
+  `).all(...pagePlayerIds) as Array<{
     id: number; name: string; gender: string | null; club: string | null;
     photo_url: string | null; license_number: string | null;
     ordinal: number | null; matches_counted: number | null;
-    last_match: string | null;
   }>;
 
+  // Step 4: Get ranks using window functions (single pass, filter to page players)
+  const globalRanks = new Map<number, number>();
+  const genderRanks = new Map<number, number>();
+  const rankRows = db.query(`
+    SELECT player_id, global_rank, gender_rank FROM (
+      SELECT r.player_id,
+        RANK() OVER (ORDER BY r.ordinal DESC) as global_rank,
+        RANK() OVER (PARTITION BY p.gender ORDER BY r.ordinal DESC) as gender_rank
+      FROM ratings r
+      JOIN players p ON p.id = r.player_id
+    ) WHERE player_id IN (${placeholders})
+  `).all(...pagePlayerIds) as Array<{ player_id: number; global_rank: number; gender_rank: number }>;
+  for (const row of rankRows) {
+    globalRanks.set(row.player_id, row.global_rank);
+    genderRanks.set(row.player_id, row.gender_rank);
+  }
+
+  // Step 5: Get last match dates for page players only
+  const lastMatchMap = new Map<number, string>();
+  const lastMatchRows = db.query(`
+    SELECT mp.player_id, MAX(m.date_time) as last_match
+    FROM match_players mp
+    JOIN matches m ON m.guid = mp.match_guid
+    WHERE mp.player_id IN (${placeholders})
+    GROUP BY mp.player_id
+  `).all(...pagePlayerIds) as Array<{ player_id: number; last_match: string | null }>;
+  for (const r of lastMatchRows) {
+    if (r.last_match) lastMatchMap.set(r.player_id, r.last_match);
+  }
+
+  const bounds = db.query("SELECT MIN(ordinal) as minOrd, MAX(ordinal) as maxOrd FROM ratings").get() as { minOrd: number; maxOrd: number };
   const range = bounds.maxOrd - bounds.minOrd;
 
-  return rows.map((row) => {
+  const players = rows.map((row) => {
     let rating: PlayerRating | null = null;
     if (row.ordinal != null && row.matches_counted != null) {
       const score = range > 0 ? Math.round(((row.ordinal - bounds.minOrd) / range) * 1000) / 10 : 0;
@@ -135,9 +167,11 @@ export function getTournamentPlayers(
       categoryRank: null,
       ordinal: row.ordinal ?? 0,
       rating,
-      lastMatch: row.last_match ?? null,
+      lastMatch: lastMatchMap.get(row.id) ?? null,
     };
   });
+
+  return { players, total };
 }
 
 const RELIABILITY_K = 5;

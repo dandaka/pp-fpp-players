@@ -124,6 +124,7 @@ export interface GetTournamentResponse {
   tournament: TournamentDetail;
   categories: string[];
   players: TournamentPlayer[];
+  totalPlayers: number;
   matches: {
     upcoming: UpcomingMatchDetail[];
     completed: MatchDetail[];
@@ -195,9 +196,11 @@ export async function getTournaments(
 export async function getTournament(
   id: number,
   category?: string,
+  page?: number,
 ): Promise<GetTournamentResponse> {
   const params = new URLSearchParams();
   if (category) params.set("category", category);
+  if (page !== undefined) params.set("page", String(page));
   const qs = params.toString();
   return apiFetch<GetTournamentResponse>(
     `/tournaments/${id}${qs ? `?${qs}` : ""}`,

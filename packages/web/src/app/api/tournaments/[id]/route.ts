@@ -7,9 +7,10 @@ export async function GET(
 ) {
   const { id } = await params;
   const category = request.nextUrl.searchParams.get("category") ?? undefined;
+  const page = request.nextUrl.searchParams.get("page") ?? undefined;
 
   try {
-    const data = await getTournament(parseInt(id), category);
+    const data = await getTournament(parseInt(id), category, page ? parseInt(page) : undefined);
     return NextResponse.json(data);
   } catch (err) {
     console.error("API fetch failed:", err);

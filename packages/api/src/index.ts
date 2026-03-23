@@ -70,6 +70,7 @@ const app = new Elysia()
   .get("/tournaments/:id", ({ params, query, set }) => {
     const id = parseInt(params.id, 10);
     const category = (query.category as string) || undefined;
+    const page = parseInt((query.page as string) || "1", 10);
 
     const tournament = getTournament(id);
     if (!tournament) {
@@ -78,10 +79,10 @@ const app = new Elysia()
     }
 
     const categories = getTournamentCategories(id);
-    const players = getTournamentPlayers(id, category);
+    const { players, total: totalPlayers } = getTournamentPlayers(id, category, page);
     const matches = getTournamentMatches(id, category);
 
-    return { tournament, categories, players, matches };
+    return { tournament, categories, players, totalPlayers, matches };
   })
 
   .listen(port);

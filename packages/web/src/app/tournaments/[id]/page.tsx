@@ -43,12 +43,16 @@ export default function TournamentPage() {
   const [tournament, setTournament] = useState<Tournament | null>(null);
   const [categories, setCategories] = useState<string[]>([]);
   const [players, setPlayers] = useState<TournamentPlayer[]>([]);
+  const [totalPlayers, setTotalPlayers] = useState(0);
+  const [playersPage, setPlayersPage] = useState(1);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [loading, setLoading] = useState(true);
   const [matches, setMatches] = useState<MatchesData>({ upcoming: [], completed: [] });
   const [activeTab, setActiveTab] = useState<"players" | "upcoming" | "completed">("players");
 
   useEffect(() => {
     setLoading(true);
+    setPlayersPage(1);
     const url = category
       ? `/api/tournaments/${id}?category=${encodeURIComponent(category)}`
       : `/api/tournaments/${id}`;
@@ -62,10 +66,28 @@ export default function TournamentPage() {
         setTournament(data.tournament);
         setCategories(data.categories);
         setPlayers(data.players);
+        setTotalPlayers(data.totalPlayers ?? data.players.length);
         setMatches(data.matches ?? { upcoming: [], completed: [] });
       })
       .finally(() => setLoading(false));
   }, [id, category]);
+
+  const loadMorePlayers = () => {
+    const nextPage = playersPage + 1;
+    setLoadingMore(true);
+    const params = new URLSearchParams({ page: String(nextPage) });
+    if (category) params.set("category", category);
+
+    fetch(`/api/tournaments/${id}?${params}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setPlayers((prev) => [...prev, ...data.players]);
+        setPlayersPage(nextPage);
+      })
+      .finally(() => setLoadingMore(false));
+  };
+
+  const hasMorePlayers = players.length < totalPlayers;
 
   if (loading) {
     return (
@@ -107,7 +129,7 @@ export default function TournamentPage() {
       {/* Tab navigation */}
       <div className="flex gap-1 rounded-lg bg-muted p-1">
         {[
-          { key: "players" as const, label: "Players", count: players.length },
+          { key: "players" as const, label: "Players", count: totalPlayers },
           { key: "upcoming" as const, label: "Upcoming", count: matches.upcoming.length },
           { key: "completed" as const, label: "Results", count: matches.completed.length },
         ].filter((t) => t.count > 0 || t.key === "players").map((tab) => (
@@ -129,24 +151,30 @@ export default function TournamentPage() {
         {activeTab === "players" && (
           <>
             {players.length > 0 ? (
-              [...players].sort((a, b) => {
-                if (a.globalRank === null && b.globalRank === null) return 0;
-                if (a.globalRank === null) return 1;
-                if (b.globalRank === null) return -1;
-                return a.globalRank - b.globalRank;
-              }).map((player) => (
-                <PlayerCard
-                  key={player.id}
-                  id={player.id}
-                  name={player.name}
-                  club={player.club}
-                  photoUrl={player.photoUrl}
-                  licenseNumber={player.licenseNumber}
-                  globalRank={player.globalRank ?? 0}
-                  rating={player.rating}
-                  lastMatch={player.lastMatch}
-                />
-              ))
+              <>
+                {players.map((player) => (
+                  <PlayerCard
+                    key={player.id}
+                    id={player.id}
+                    name={player.name}
+                    club={player.club}
+                    photoUrl={player.photoUrl}
+                    licenseNumber={player.licenseNumber}
+                    globalRank={player.globalRank ?? 0}
+                    rating={player.rating}
+                    lastMatch={player.lastMatch}
+                  />
+                ))}
+                {hasMorePlayers && (
+                  <button
+                    onClick={loadMorePlayers}
+                    disabled={loadingMore}
+                    className="w-full rounded-lg border border-border py-2 text-sm text-muted-foreground hover:bg-muted transition-colors disabled:opacity-50"
+                  >
+                    {loadingMore ? "Loading..." : `Show more (${players.length} of ${totalPlayers})`}
+                  </button>
+                )}
+              </>
             ) : (
               <p className="py-8 text-center text-muted-foreground">No players found</p>
             )}
