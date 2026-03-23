@@ -1,4 +1,5 @@
 import { getDb } from "../connection";
+import { batchGetMatchRatingDeltas } from "./matches";
 import type { Tournament, TournamentDetail, TournamentPlayer, MatchDetail, UpcomingMatchDetail, PlayerRating } from "../types";
 
 export function getTournaments(page = 1, pageSize = 20, search?: string): { tournaments: Tournament[]; total: number } {
@@ -299,7 +300,12 @@ export function getTournamentMatches(
     for (const r of genderRows) genderRanks.set(r.id, r.genderRank);
   }
 
-  function buildPlayerInfo(id: number, fallbackName: string) {
+  // Batch-fetch match rating deltas
+  const matchGuids = rows.map((r) => r.guid);
+  const matchRatingDeltas = batchGetMatchRatingDeltas(db, matchGuids);
+
+  function buildPlayerInfo(id: number, fallbackName: string, matchGuid: string) {
+    const mr = matchRatingDeltas.get(`${matchGuid}:${id}`);
     return {
       id,
       name: fullNames.get(id) ?? fallbackName,
@@ -307,8 +313,8 @@ export function getTournamentMatches(
       genderRank: genderRanks.get(id) ?? null,
       categoryRank: null,
       rating: ratingsMap.get(id) ?? null,
-      ratingBefore: null,
-      ratingDelta: null,
+      ratingBefore: mr?.scoreBefore ?? null,
+      ratingDelta: mr?.scoreDelta ?? null,
     };
   }
 
@@ -331,8 +337,8 @@ export function getTournamentMatches(
       sets: parseSets(row.sets_json),
       winnerSide: row.winner_side,
       resultType: (row.result_type as "normal" | "walkover" | "retired") ?? "normal",
-      sideA: sideAIds.map((id, i) => buildPlayerInfo(id, sideANames[i] ?? "")),
-      sideB: sideBIds.map((id, i) => buildPlayerInfo(id, sideBNames[i] ?? "")),
+      sideA: sideAIds.map((id, i) => buildPlayerInfo(id, sideANames[i] ?? "", row.guid)),
+      sideB: sideBIds.map((id, i) => buildPlayerInfo(id, sideBNames[i] ?? "", row.guid)),
     };
 
     if (row.winner_side) {

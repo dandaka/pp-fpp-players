@@ -66,7 +66,7 @@ function batchGetRatings(playerIds: number[]): Map<number, PlayerRating> {
   return map;
 }
 
-function batchGetMatchRatingDeltas(
+export function batchGetMatchRatingDeltas(
   db: ReturnType<typeof getDb>,
   matchGuids: string[]
 ): Map<string, { scoreBefore: number; scoreDelta: number }> {
