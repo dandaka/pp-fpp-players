@@ -199,11 +199,12 @@ export async function syncTournamentMatches(opts: SyncMatchesOptions): Promise<S
   const { db, tournamentId } = opts;
   const result: SyncMatchesResult = { inserted: 0, updated: 0, skipped: 0, sections: 0, newPlayers: 0 };
 
-  const draws = await retry(() => getTournamentDraws(tournamentId));
-  result.sections = draws.sections.length;
+  // First get sections list
+  const allDraws = await retry(() => getTournamentDraws(tournamentId));
+  result.sections = allDraws.sections.length;
 
-  if (draws.rounds.length === 0) {
-    log(`No draws data for tournament ${tournamentId}`);
+  if (allDraws.sections.length === 0) {
+    log(`No sections for tournament ${tournamentId}`);
     return result;
   }
 
@@ -235,85 +236,99 @@ export async function syncTournamentMatches(opts: SyncMatchesOptions): Promise<S
   const tournamentName = tournamentRow?.name ?? "";
   const source = `api:tournament:${tournamentId}`;
 
-  const tx = db.transaction(() => {
-    for (const round of draws.rounds) {
-      for (const match of round.matches) {
-        const sideA = match.side_a ?? [];
-        const sideB = match.side_b ?? [];
+  // Fetch draws per section so we know which category each match belongs to
+  for (const section of allDraws.sections) {
+    const sectionName = section.name;
+    const categoryCode = parseCategoryCode(sectionName);
+    const sectionId = section.id;
 
-        const sideAIds = sideA.map((p) => p.id).filter((id) => id > 0);
-        const sideBIds = sideB.map((p) => p.id).filter((id) => id > 0);
-
-        if (sideAIds.length === 0 || sideBIds.length === 0) {
-          result.skipped++;
-          continue;
-        }
-
-        const isSingles = sideA.length === 1 && sideB.length === 1 ? 1 : 0;
-        if (isSingles) {
-          result.skipped++;
-          continue;
-        }
-
-        for (const p of [...sideA, ...sideB]) {
-          if (p.id > 0) {
-            const r = insertPlayer.run(p.id, p.name);
-            if (r.changes > 0) result.newPlayers++;
-          }
-        }
-
-        const guid = match.id;
-        const sectionName = match.infos?.title_left ?? "";
-        const categoryCode = parseCategoryCode(sectionName);
-        const sectionId = draws.sections.find((s) => s.name === sectionName)?.id ?? null;
-        const dateTime = match.infos?.date_time?.str ?? null;
-        const court = match.infos?.top_left ?? null;
-        const roundName = match.infos?.top_right ?? round.name ?? null;
-
-        let winnerSide: string | null = null;
-        if (match.winner_a) winnerSide = "a";
-        else if (match.winner_b) winnerSide = "b";
-
-        const setsJson = match.sets?.length > 0 ? JSON.stringify(match.sets) : null;
-        const sideAIdsJson = JSON.stringify(sideAIds);
-        const sideBIdsJson = JSON.stringify(sideBIds);
-        const sideANames = sideA.map((p) => p.name).join(" / ");
-        const sideBNames = sideB.map((p) => p.name).join(" / ");
-
-        const existing = existingMatch.get(guid) as { guid: string; winner_side: string | null } | null;
-        if (existing) {
-          if (!existing.winner_side && winnerSide) {
-            updateMatchResult.run(setsJson, winnerSide, dateTime, court, categoryCode, guid);
-            result.updated++;
-          } else {
-            result.skipped++;
-          }
-          continue;
-        }
-
-        const feedMatch = findByPlayers.get(
-          tournamentId, sideAIdsJson, sideBIdsJson, sideBIdsJson, sideAIdsJson
-        ) as { guid: string; winner_side: string | null } | null;
-        if (feedMatch) {
-          enrichExisting.run(categoryCode, sectionId, sectionName, court, roundName, feedMatch.guid);
-          result.updated++;
-          continue;
-        }
-
-        insertMatch.run(
-          guid, tournamentId, tournamentName, sectionName, roundName, dateTime,
-          isSingles, sideAIdsJson, sideBIdsJson, sideANames, sideBNames,
-          setsJson, winnerSide, source, court, sectionName, categoryCode, sectionId
-        );
-
-        for (const id of sideAIds) insertMatchPlayer.run(guid, id, "a");
-        for (const id of sideBIds) insertMatchPlayer.run(guid, id, "b");
-
-        result.inserted++;
-      }
+    let sectionDraws;
+    try {
+      sectionDraws = await retry(() => getTournamentDraws(tournamentId, sectionId));
+    } catch (err) {
+      log(`Failed to get draws for section ${sectionId} (${sectionName}): ${err}`);
+      continue;
     }
-  });
-  tx();
+
+    const tx = db.transaction(() => {
+      for (const round of sectionDraws.rounds) {
+        for (const match of round.matches) {
+          const sideA = match.side_a ?? [];
+          const sideB = match.side_b ?? [];
+
+          const sideAIds = sideA.map((p) => p.id).filter((id) => id > 0);
+          const sideBIds = sideB.map((p) => p.id).filter((id) => id > 0);
+
+          if (sideAIds.length === 0 || sideBIds.length === 0) {
+            result.skipped++;
+            continue;
+          }
+
+          const isSingles = sideA.length === 1 && sideB.length === 1 ? 1 : 0;
+          if (isSingles) {
+            result.skipped++;
+            continue;
+          }
+
+          for (const p of [...sideA, ...sideB]) {
+            if (p.id > 0) {
+              const r = insertPlayer.run(p.id, p.name);
+              if (r.changes > 0) result.newPlayers++;
+            }
+          }
+
+          const guid = match.id;
+          const dateTime = match.infos?.date_time?.str ?? null;
+          const court = match.infos?.top_left ?? null;
+          const roundName = match.infos?.title_left ?? round.name ?? null;
+
+          let winnerSide: string | null = null;
+          if (match.winner_a) winnerSide = "a";
+          else if (match.winner_b) winnerSide = "b";
+
+          const setsJson = match.sets?.length > 0 ? JSON.stringify(match.sets) : null;
+          const sideAIdsJson = JSON.stringify(sideAIds);
+          const sideBIdsJson = JSON.stringify(sideBIds);
+          const sideANames = sideA.map((p) => p.name).join(" / ");
+          const sideBNames = sideB.map((p) => p.name).join(" / ");
+
+          const existing = existingMatch.get(guid) as { guid: string; winner_side: string | null } | null;
+          if (existing) {
+            if (!existing.winner_side && winnerSide) {
+              updateMatchResult.run(setsJson, winnerSide, dateTime, court, categoryCode, guid);
+              result.updated++;
+            } else {
+              result.skipped++;
+            }
+            continue;
+          }
+
+          const feedMatch = findByPlayers.get(
+            tournamentId, sideAIdsJson, sideBIdsJson, sideBIdsJson, sideAIdsJson
+          ) as { guid: string; winner_side: string | null } | null;
+          if (feedMatch) {
+            enrichExisting.run(categoryCode, sectionId, sectionName, court, roundName, feedMatch.guid);
+            result.updated++;
+            continue;
+          }
+
+          insertMatch.run(
+            guid, tournamentId, tournamentName, sectionName, roundName, dateTime,
+            isSingles, sideAIdsJson, sideBIdsJson, sideANames, sideBNames,
+            setsJson, winnerSide, source, court, sectionName, categoryCode, sectionId
+          );
+
+          for (const id of sideAIds) insertMatchPlayer.run(guid, id, "a");
+          for (const id of sideBIds) insertMatchPlayer.run(guid, id, "b");
+
+          result.inserted++;
+        }
+      }
+    });
+    tx();
+
+    await Bun.sleep(BATCH_DELAY_MS);
+  }
 
   db.run("UPDATE tournaments SET matches_synced_at = datetime('now') WHERE id = ?", [tournamentId]);
 
@@ -367,19 +382,23 @@ export async function syncTournamentPlayers(opts: SyncPlayersOptions): Promise<S
     result.sections++;
 
     const tx = db.transaction(() => {
+      // First pass: insert all players
+      for (const entry of entries) {
+        for (const p of (entry.players ?? [])) {
+          if (p.id <= 0) continue;
+          insertPlayer.run(p.id, p.name);
+          if (p.national_id) {
+            updateLicense.run(p.national_id, p.id);
+          }
+        }
+      }
+      // Second pass: upsert tournament_players (all FKs now satisfied)
       for (const entry of entries) {
         const players = entry.players ?? [];
         const playerIds = players.map((p) => p.id).filter((id) => id > 0);
 
         for (const p of players) {
           if (p.id <= 0) continue;
-
-          insertPlayer.run(p.id, p.name);
-
-          if (p.national_id) {
-            updateLicense.run(p.national_id, p.id);
-          }
-
           const partnerId = playerIds.find((id) => id !== p.id) ?? null;
           upsertTournamentPlayer.run(tournamentId, p.id, categoryCode, partnerId, section.id);
           result.upserted++;
