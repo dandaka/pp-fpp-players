@@ -1,44 +1,42 @@
-import { seedPlayersFromJson, enrichPlayerProfiles } from "./sync-players";
-import { importMatchesFromJson } from "./import-matches";
+import { enrichPlayerProfiles } from "./sync-players";
 import { calculateRatings, printLeaderboard } from "./calculate-ratings";
 import { getDb } from "./db";
 
 const cmd = process.argv[2];
 
 switch (cmd) {
-  case "seed":
-    await seedPlayersFromJson();
+  case "discover": {
+    const { discoverTournaments, rescanGaps } = await import("./sync-tournaments");
+    const db = getDb();
+    const subCmd = process.argv[3];
+    if (subCmd === "gaps") {
+      const gaps = await rescanGaps({ db });
+      console.log(`Discovered ${gaps.length} tournaments from gaps`);
+    } else {
+      const startId = parseInt(process.argv[3] ?? "0") || undefined;
+      const endId = parseInt(process.argv[4] ?? "0") || undefined;
+      const discovered = await discoverTournaments({ db, startId, endId });
+      console.log(`Discovered ${discovered.length} new tournament(s)`);
+    }
     break;
+  }
+
+  case "sync": {
+    const { syncTournamentMatches, syncTournamentPlayers } = await import("./sync-tournaments");
+    const tid = parseInt(process.argv[3]);
+    if (!tid) { console.log("Usage: bun src/cli.ts sync <tournament-id>"); break; }
+    const db = getDb();
+    const matchResult = await syncTournamentMatches({ db, tournamentId: tid });
+    console.log(`Matches: ${matchResult.inserted} inserted, ${matchResult.updated} updated`);
+    const playerResult = await syncTournamentPlayers({ db, tournamentId: tid });
+    console.log(`Players: ${playerResult.upserted} upserted`);
+    break;
+  }
 
   case "enrich": {
     const allFlag = process.argv.includes("--all");
     const batch = parseInt(process.argv[3] ?? "100");
     await enrichPlayerProfiles(batch, 200, allFlag);
-    break;
-  }
-
-  case "import":
-    await importMatchesFromJson(process.argv[3]);
-    break;
-
-  case "scrape": {
-    const { scrapeAllTournaments } = await import("./scrape-all-tournaments");
-    await scrapeAllTournaments(process.argv[3] ?? "db");
-    break;
-  }
-
-  case "scan": {
-    const { scanTournaments } = await import("./find-tournaments");
-    const scanArgs = process.argv.slice(3).filter((a) => !a.startsWith("--"));
-    const force = process.argv.includes("--force");
-    if (force) {
-      const db = getDb();
-      db.run("DELETE FROM sync_cursors WHERE key = 'scan_tournaments_last_id'");
-      console.log("Force mode: resetting scan cursor");
-    }
-    const start = parseInt(scanArgs[0] ?? "1");
-    const end = parseInt(scanArgs[1] ?? "25000");
-    await scanTournaments(start, end);
     break;
   }
 
@@ -80,9 +78,11 @@ switch (cmd) {
     const rated = db.query("SELECT COUNT(*) as cnt FROM ratings").get() as { cnt: number };
     const withResults = db.query("SELECT COUNT(*) as cnt FROM matches WHERE winner_side IS NOT NULL").get() as { cnt: number };
     const tournaments = db.query("SELECT COUNT(*) as cnt FROM tournaments").get() as { cnt: number };
+    const tPlayers = db.query("SELECT COUNT(*) as cnt FROM tournament_players").get() as { cnt: number };
     console.log(`Players: ${players.cnt}`);
     console.log(`Matches: ${matches.cnt} (${withResults.cnt} with results)`);
     console.log(`Tournaments: ${tournaments.cnt}`);
+    console.log(`Tournament players: ${tPlayers.cnt}`);
     console.log(`Rated players: ${rated.cnt}`);
     break;
   }
@@ -119,35 +119,20 @@ switch (cmd) {
     break;
   }
 
-  case "schedule": {
-    const { scrapeSchedule, resolveScheduleInput } = await import("./scrape-upcoming-matches");
-    const input = process.argv[3];
-    if (!input) {
-      console.log("Usage: bun src/cli.ts schedule <tournament-id|url>");
-      break;
-    }
-    const { tournamentId, url } = resolveScheduleInput(input);
-    await scrapeSchedule(tournamentId, url);
-    break;
-  }
-
   default:
     console.log(`Usage: bun src/cli.ts <command>
 
 Commands:
-  scan [start] [end]  Scan tournament IDs and store to DB (default: 1-25000)
-    --force           Rescan from beginning
-  seed                Seed players from players.json
-  enrich [n]          Enrich n player profiles from API (default: 50)
-  import [file]       Import matches from scraped JSON (default: matches.json)
-  scrape [file|api]   Scrape matches from tournaments
-  daemon              Start sync daemon (news feed + draws loops)
-  schedule <id|url>   Scrape match schedule for a tournament
-  rate [n]            Calculate ratings and show top n (default: 30)
-  recalculate [n]     Clear and recalculate all ratings
-  leaderboard [n]     Show top n rated players
-  player <name>       Search player by name
-  stats               Show database statistics
-  failures            List tournaments with scrape failures
-  failures clear [id] Clear failure records (all or by tournament ID)`);
+  discover [start] [end]  Discover new tournaments via API
+  discover gaps            Rescan gaps in known ID range
+  sync <tournament-id>     Sync matches + players for a tournament
+  enrich [n]               Enrich n player profiles from API (default: 100)
+  daemon                   Start sync daemon
+  rate [n]                 Calculate ratings and show top n (default: 30)
+  recalculate [n]          Clear and recalculate all ratings
+  leaderboard [n]          Show top n rated players
+  player <name>            Search player by name
+  stats                    Show database statistics
+  failures                 List tournaments with scrape failures
+  failures clear [id]      Clear failure records`);
 }
