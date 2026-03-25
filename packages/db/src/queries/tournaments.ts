@@ -329,7 +329,7 @@ const RELIABILITY_K = 5;
 
 function parseTournamentIdFromSource(source: string | null): number | null {
   if (!source) return null;
-  const match = source.match(/(?:scrape|schedule):tournament:(\d+)/);
+  const match = source.match(/(?:scrape|schedule|api):tournament:(\d+)/);
   return match ? parseInt(match[1]) : null;
 }
 
@@ -378,11 +378,12 @@ export function getTournamentMatches(
            m.side_a_ids, m.side_b_ids, m.side_a_names, m.side_b_names,
            m.tournament_name
     FROM matches m
-    WHERE (m.source = ? OR m.source = ? OR m.tournament_name = ?)
+    WHERE (m.source = ? OR m.source = ? OR m.source = ? OR m.tournament_name = ?)
   `;
   const params: any[] = [
     `scrape:tournament:${tournamentId}`,
     `schedule:tournament:${tournamentId}`,
+    `api:tournament:${tournamentId}`,
     tournament.name,
   ];
 
