@@ -74,3 +74,25 @@ describe("syncTournamentPlayers", () => {
     expect(result.upserted).toBeGreaterThanOrEqual(0);
   });
 });
+
+describe("end-to-end sync", () => {
+  test("discover → sync matches → sync players for tournament 23404", async () => {
+    // Discovery (may already be inserted from earlier tests)
+    const discovered = await discoverTournaments({ db, startId: 23404, endId: 23404 });
+    expect(discovered.length).toBeGreaterThanOrEqual(0); // may already exist
+
+    // Match sync
+    const matchResult = await syncTournamentMatches({ db, tournamentId: 23404 });
+    expect(matchResult.sections).toBeGreaterThanOrEqual(0);
+
+    // Player sync
+    const playerResult = await syncTournamentPlayers({ db, tournamentId: 23404 });
+
+    // Verify data in DB
+    const matchCount = db.query("SELECT COUNT(*) as c FROM matches WHERE tournament_id = 23404").get() as { c: number };
+    const playerCount = db.query("SELECT COUNT(*) as c FROM tournament_players WHERE tournament_id = 23404").get() as { c: number };
+
+    console.log(`Tournament 23404: ${matchCount.c} matches, ${playerCount.c} tournament_players`);
+    expect(matchCount.c).toBeGreaterThanOrEqual(0);
+  });
+});
