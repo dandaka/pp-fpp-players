@@ -2,6 +2,7 @@ import { getDb, getCursor, setCursor, shouldSkipTournament, recordScrapeFailure,
 import { discoverTournaments, rescanGaps, syncTournamentMatches, syncTournamentPlayers } from "./sync-tournaments";
 import { calculateRatings } from "./calculate-ratings";
 import { enrichPlayerProfiles } from "./sync-players";
+import { runMigrations } from "./migrations";
 
 const DISCOVERY_INTERVAL = 60;
 const SYNC_INTERVAL = 60;
@@ -130,6 +131,14 @@ function scheduleLoop(name: string, fn: () => Promise<void>, intervalMin: number
 
 async function main() {
   log("Daemon starting (API-based)");
+
+  // Run pending migrations before anything else
+  const db = getDb();
+  const { ranCount, needsResync } = runMigrations(db);
+  if (ranCount > 0) {
+    log(`Ran ${ranCount} migration(s)${needsResync ? " — full resync triggered" : ""}`);
+  }
+
   log(`Discovery interval: ${DISCOVERY_INTERVAL}min`);
   log(`Sync interval: ${SYNC_INTERVAL}min`);
   log(`Enrich interval: ${ENRICH_INTERVAL}min (batch: ${ENRICH_BATCH_SIZE})`);
@@ -141,8 +150,14 @@ async function main() {
 
   await discovery();
 
-  setTimeout(sync, 5 * 60 * 1000);
-  log("Sync loop will start in 5 minutes");
+  // If resync was triggered, start sync immediately instead of waiting 5min
+  if (needsResync) {
+    log("Starting sync loop immediately (resync triggered)");
+    sync();
+  } else {
+    setTimeout(sync, 5 * 60 * 1000);
+    log("Sync loop will start in 5 minutes");
+  }
 
   setTimeout(enrich, 2 * 60 * 1000);
   log("Enrich loop will start in 2 minutes\n");
