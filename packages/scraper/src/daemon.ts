@@ -25,7 +25,7 @@ function getTournamentsToSync(): { id: number; name: string }[] {
     ORDER BY
       CASE WHEN matches_synced_at IS NULL THEN 0 ELSE 1 END,
       matches_synced_at ASC
-    LIMIT 20
+    LIMIT 1000
   `).all() as { id: number; name: string }[];
 }
 
