@@ -72,3 +72,44 @@ export interface ApiTournamentDetail {
   cover: string;
   link_web: string;
 }
+
+// --- Draws / Sections API types ---
+
+export interface ApiSection {
+  id: number;
+  name: string;
+}
+
+export interface ApiRound {
+  id: number;
+  name: string;
+  matches: ApiMatch[];
+}
+
+export interface ApiDrawsResponse {
+  sections: ApiSection[];
+  rounds: ApiRound[];
+  web_url: string;
+}
+
+export interface ApiSectionPlayer {
+  id: number;
+  name: string;
+  photo: string;
+  national_id: string;
+  age_group: string;
+  ranking: string;
+}
+
+export interface ApiPlayerEntry {
+  row_title: string;
+  players: ApiSectionPlayer[];
+  national_id: string;
+  club: string;
+  ranking: string;
+  age_group: string;
+}
+
+export interface ApiPlayerEntriesResponse {
+  list: ApiPlayerEntry[];
+}

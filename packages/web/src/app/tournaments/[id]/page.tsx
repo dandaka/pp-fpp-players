@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "next/navigation";
 import { PlayerCard } from "@/components/player-card";
 import { MatchCard } from "@/components/match-card";
-import { CategoryFilter } from "./category-filter";
+import { CategoryFilter, type CategoryInfo } from "./category-filter";
 
 import type { MatchDetail, UpcomingMatchDetail } from "@/lib/api-client";
 
@@ -41,7 +41,7 @@ export default function TournamentPage() {
   const category = searchParams.get("category") ?? undefined;
 
   const [tournament, setTournament] = useState<Tournament | null>(null);
-  const [categories, setCategories] = useState<string[]>([]);
+  const [categories, setCategories] = useState<CategoryInfo[]>([]);
   const [players, setPlayers] = useState<TournamentPlayer[]>([]);
   const [totalPlayers, setTotalPlayers] = useState(0);
   const [playersPage, setPlayersPage] = useState(1);

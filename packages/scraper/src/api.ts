@@ -1,5 +1,5 @@
 import { API_BASE, API_TOKEN, USER_AGENT } from "./types";
-import type { ApiPlayerProfile, ApiMatch, ApiTournament, ApiTournamentDetail } from "./types";
+import type { ApiPlayerProfile, ApiMatch, ApiTournament, ApiTournamentDetail, ApiDrawsResponse, ApiPlayerEntry } from "./types";
 
 const headers = {
   Accept: "application/json",
@@ -63,4 +63,49 @@ export async function getTournamentMatches(
 
 export async function getMatchDetail(matchGuid: string): Promise<unknown> {
   return get(`/matches.asmx/get_match_v1?match_id=${matchGuid}&Set_Match_id=0`);
+}
+
+export async function getTournamentDraws(
+  tournamentId: number,
+  sectionId = 0
+): Promise<ApiDrawsResponse> {
+  const data = (await get(
+    `/tournaments.asmx/get_matches?tournament_id=${tournamentId}&section_id=${sectionId}&round=0&count_items=0`
+  )) as ApiDrawsResponse;
+  return {
+    sections: data.sections ?? [],
+    rounds: data.rounds ?? [],
+    web_url: (data as any).web_url ?? "",
+  };
+}
+
+export async function getSectionPlayers(
+  sectionId: number,
+  offset = 0
+): Promise<ApiPlayerEntry[]> {
+  const data = (await get(
+    `/tournaments.asmx/get_players_by_section?section_id=${sectionId}&count_items=${offset}`
+  )) as { list: ApiPlayerEntry[] };
+  return data.list ?? [];
+}
+
+export async function getUpcomingMatches(
+  tournamentId: number,
+  offset = 0,
+  flag = ""
+): Promise<{ matches: ApiMatch[]; hasMore: boolean }> {
+  const data = (await get(
+    `/tournaments.asmx/get_homepage_matches?tournament_id=${tournamentId}&count_items=${offset}&flag=${flag}`
+  )) as { lists: ApiMatch[]; load_more_latest: boolean };
+  return { matches: data.lists ?? [], hasMore: data.load_more_latest ?? false };
+}
+
+export async function searchTournaments(
+  query: string,
+  offset = 0
+): Promise<ApiTournament[]> {
+  const data = (await get(
+    `/tournaments.asmx/get_search_tournaments_v2?search_type=2&search_by_name=${encodeURIComponent(query)}&lat=0&lng=0&distance_km=100&filter_date=&count_tournaments=${offset}&country_id=0&city_id=0&age_group_id=0&categories=`
+  )) as { list: ApiTournament[] };
+  return data.list ?? [];
 }

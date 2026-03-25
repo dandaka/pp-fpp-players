@@ -1,19 +1,13 @@
-import { chromium } from "playwright";
-import { getDb, shouldSkipTournament, recordScrapeFailure, clearScrapeFailure } from "./db";
-import { scrapeAllTournaments } from "./scrape-all-tournaments";
-import { scrapeSchedule } from "./scrape-upcoming-matches";
+import { getDb, getCursor, setCursor, shouldSkipTournament, recordScrapeFailure, clearScrapeFailure } from "./db";
+import { discoverTournaments, rescanGaps, syncTournamentMatches, syncTournamentPlayers } from "./sync-tournaments";
 import { calculateRatings } from "./calculate-ratings";
-import { scanTournaments } from "./find-tournaments";
 import { enrichPlayerProfiles } from "./sync-players";
-import { SKIP_PLAYWRIGHT_PATTERNS } from "./skip-list";
 
-// Intervals in minutes
-const NEWS_FEED_INTERVAL = 60;
-const DRAWS_INTERVAL = 60;
+const DISCOVERY_INTERVAL = 60;
+const SYNC_INTERVAL = 60;
 const ENRICH_INTERVAL = 30;
 const ENRICH_BATCH_SIZE = 50;
-const SCRAPE_TIMEOUT_MS = 5 * 60 * 1000; // 5 min per tournament
-const BROWSER_RECYCLE_EVERY = 5; // Restart browser every N tournaments to cap memory
+const GAP_RESCAN_HOURS = 24;
 
 function log(msg: string) {
   console.log(`[${new Date().toISOString()}] ${msg}`);
@@ -23,124 +17,38 @@ function logError(msg: string, err: unknown) {
   console.error(`[${new Date().toISOString()}] ${msg}`, err);
 }
 
-/**
- * Find tournaments with matches in the last 7 days or future,
- * that have a link_web (needed for draws scraping).
- */
-function getActiveTournaments(): { id: number; name: string; url: string }[] {
+function getTournamentsToSync(): { id: number; name: string }[] {
   const db = getDb();
-  const rows = db.query(`
-    SELECT DISTINCT t.id, t.name, t.link_web
-    FROM tournaments t
-    JOIN matches m ON m.tournament_id = t.id OR m.tournament_name = t.name
-    WHERE m.date_time >= date('now', '-7 days')
-      AND t.link_web IS NOT NULL
-      AND (t.sport IS NULL OR t.sport = 'Padel')
-    ORDER BY t.id DESC
-  `).all() as { id: number; name: string; link_web: string }[];
-
-  return rows
-    .filter((r) => !SKIP_PLAYWRIGHT_PATTERNS.some((p) => p.test(r.name)))
-    .map((r) => ({ id: r.id, name: r.name, url: r.link_web }));
+  return db.query(`
+    SELECT id, name FROM tournaments
+    WHERE sport IS NULL OR sport = 'Padel'
+    ORDER BY
+      CASE WHEN matches_synced_at IS NULL THEN 0 ELSE 1 END,
+      matches_synced_at ASC
+    LIMIT 1000
+  `).all() as { id: number; name: string }[];
 }
 
-/**
- * Loop 1: Scan for new tournaments, scrape news feed, recalculate ratings.
- */
-async function newsFeedLoop() {
-  log("=== News Feed Sync starting ===");
+async function discoveryLoop() {
+  log("=== Discovery Sync starting ===");
 
   try {
-    // Discover new tournaments
-    log("Scanning for new tournaments...");
-    await scanTournaments(1, 25000);
-  } catch (err) {
-    logError("Tournament scan failed:", err);
-  }
+    const db = getDb();
+    const discovered = await discoverTournaments({ db });
+    log(`Discovered ${discovered.length} new tournament(s)`);
 
-  try {
-    // Scrape match results from news feed API
-    log("Scraping match results from news feed...");
-    await scrapeAllTournaments("db");
-  } catch (err) {
-    logError("News feed scrape failed:", err);
-  }
-
-  try {
-    log("Recalculating ratings...");
-    calculateRatings();
-  } catch (err) {
-    logError("Rating calculation failed:", err);
-  }
-
-  log("=== News Feed Sync complete ===\n");
-}
-
-/**
- * Loop 2: Scrape draws for active tournaments.
- */
-async function drawsLoop() {
-  log("=== Draws Sync starting ===");
-
-  const active = getActiveTournaments();
-  if (active.length === 0) {
-    log("No active tournaments found");
-    log("=== Draws Sync complete ===\n");
-    return;
-  }
-
-  log(`Found ${active.length} active tournament(s): ${active.map((t) => t.name).join(", ")}`);
-
-  // Share one browser, recycle every N tournaments to cap memory
-  let browser;
-  try {
-    browser = await chromium.launch({ headless: true });
-  } catch (err) {
-    logError("Failed to launch browser, skipping draws loop:", err);
-    return;
-  }
-  let usedCount = 0;
-
-  try {
-    for (const t of active) {
-      const check = shouldSkipTournament(t.id);
-      if (check.skip) {
-        log(`Skipping ${t.name} (ID: ${t.id}): ${check.reason}`);
-        continue;
-      }
-
-      // Recycle browser to free accumulated memory
-      if (usedCount >= BROWSER_RECYCLE_EVERY) {
-        log(`Recycling browser after ${usedCount} tournaments`);
-        await browser.close().catch(() => {});
-        try {
-          browser = await chromium.launch({ headless: true });
-        } catch (err) {
-          logError("Failed to relaunch browser, stopping draws loop:", err);
-          return;
-        }
-        usedCount = 0;
-      }
-
-      try {
-        log(`Scraping draws for: ${t.name} (ID: ${t.id})`);
-        const ac = new AbortController();
-        const timer = setTimeout(() => ac.abort(), SCRAPE_TIMEOUT_MS);
-        try {
-          await scrapeSchedule(t.id, t.url, { signal: ac.signal, browser });
-        } finally {
-          clearTimeout(timer);
-        }
-        usedCount++;
-        clearScrapeFailure(t.id);
-      } catch (err) {
-        const msg = err instanceof Error ? err.message : String(err);
-        recordScrapeFailure(t.id, msg);
-        logError(`Draws scrape failed for ${t.name} (${t.id}):`, err);
-      }
+    const lastGapRescan = getCursor("last_gap_rescan");
+    const hoursSinceRescan = lastGapRescan
+      ? (Date.now() - new Date(lastGapRescan).getTime()) / 3600_000
+      : Infinity;
+    if (hoursSinceRescan >= GAP_RESCAN_HOURS) {
+      log("Running 24h gap rescan...");
+      const gaps = await rescanGaps({ db });
+      log(`Gap rescan: ${gaps.length} new tournament(s)`);
+      setCursor("last_gap_rescan", new Date().toISOString());
     }
-  } finally {
-    await browser.close().catch(() => {});
+  } catch (err) {
+    logError("Tournament discovery failed:", err);
   }
 
   try {
@@ -150,12 +58,52 @@ async function drawsLoop() {
     logError("Rating calculation failed:", err);
   }
 
-  log("=== Draws Sync complete ===\n");
+  log("=== Discovery Sync complete ===\n");
 }
 
-/**
- * Loop 3: Enrich player profiles (photo, licence number, gender) from TieSports API.
- */
+async function syncLoop() {
+  log("=== Match/Player Sync starting ===");
+
+  const tournaments = getTournamentsToSync();
+  if (tournaments.length === 0) {
+    log("No tournaments to sync");
+    log("=== Match/Player Sync complete ===\n");
+    return;
+  }
+
+  log(`Syncing ${tournaments.length} tournament(s)`);
+
+  const db = getDb();
+
+  for (const t of tournaments) {
+    const check = shouldSkipTournament(t.id);
+    if (check.skip) {
+      log(`Skipping ${t.name} (ID: ${t.id}): ${check.reason}`);
+      continue;
+    }
+
+    try {
+      log(`Syncing matches: ${t.name} (ID: ${t.id})`);
+      await syncTournamentMatches({ db, tournamentId: t.id });
+      await syncTournamentPlayers({ db, tournamentId: t.id });
+      clearScrapeFailure(t.id);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      recordScrapeFailure(t.id, msg);
+      logError(`Sync failed for ${t.name} (${t.id}):`, err);
+    }
+  }
+
+  try {
+    log("Recalculating ratings...");
+    calculateRatings();
+  } catch (err) {
+    logError("Rating calculation failed:", err);
+  }
+
+  log("=== Match/Player Sync complete ===\n");
+}
+
 async function enrichLoop() {
   log("=== Player Enrichment starting ===");
 
@@ -177,43 +125,30 @@ function scheduleLoop(name: string, fn: () => Promise<void>, intervalMin: number
     }
     setTimeout(run, intervalMin * 60 * 1000);
   };
-  // Stagger start: draws loop starts 5 min after news feed
   return run;
 }
 
 async function main() {
-  log("Daemon starting");
-  log(`News feed interval: ${NEWS_FEED_INTERVAL}min`);
-  log(`Draws interval: ${DRAWS_INTERVAL}min`);
+  log("Daemon starting (API-based)");
+  log(`Discovery interval: ${DISCOVERY_INTERVAL}min`);
+  log(`Sync interval: ${SYNC_INTERVAL}min`);
   log(`Enrich interval: ${ENRICH_INTERVAL}min (batch: ${ENRICH_BATCH_SIZE})`);
   log("");
 
-  // Run all loops immediately on startup
-  // News feed first (fast, API only), then draws (slow, browser)
-  const newsLoop = scheduleLoop("news-feed", newsFeedLoop, NEWS_FEED_INTERVAL);
-  const drawLoop = scheduleLoop("draws", drawsLoop, DRAWS_INTERVAL);
-  const playerEnrichLoop = scheduleLoop("enrich", enrichLoop, ENRICH_INTERVAL);
+  const discovery = scheduleLoop("discovery", discoveryLoop, DISCOVERY_INTERVAL);
+  const sync = scheduleLoop("sync", syncLoop, SYNC_INTERVAL);
+  const enrich = scheduleLoop("enrich", enrichLoop, ENRICH_INTERVAL);
 
-  // Start news feed immediately
-  await newsLoop();
+  await discovery();
 
-  // Start draws loop (staggered by 5 min to avoid overlap on startup)
-  setTimeout(drawLoop, 5 * 60 * 1000);
-  log("Draws loop will start in 5 minutes");
+  setTimeout(sync, 5 * 60 * 1000);
+  log("Sync loop will start in 5 minutes");
 
-  // Start enrichment loop (staggered by 2 min)
-  setTimeout(playerEnrichLoop, 2 * 60 * 1000);
+  setTimeout(enrich, 2 * 60 * 1000);
   log("Enrich loop will start in 2 minutes\n");
 
-  // Keep process alive
-  process.on("SIGINT", () => {
-    log("Received SIGINT, shutting down...");
-    process.exit(0);
-  });
-  process.on("SIGTERM", () => {
-    log("Received SIGTERM, shutting down...");
-    process.exit(0);
-  });
+  process.on("SIGINT", () => { log("Received SIGINT, shutting down..."); process.exit(0); });
+  process.on("SIGTERM", () => { log("Received SIGTERM, shutting down..."); process.exit(0); });
 }
 
 main().catch((err) => {

@@ -46,20 +46,61 @@ export function getTournament(id: number): TournamentDetail | null {
   };
 }
 
-export function getTournamentCategories(tournamentId: number): string[] {
+export interface CategoryInfo {
+  code: string;
+  name: string;
+  matchCount: number;
+  playerCount: number;
+}
+
+export function getTournamentCategories(tournamentId: number): CategoryInfo[] {
   const db = getDb();
 
   const tournament = db.query("SELECT name FROM tournaments WHERE id = ?").get(tournamentId) as { name: string } | null;
   if (!tournament) return [];
 
   const rows = db.query(`
-    SELECT DISTINCT section_name FROM matches
-    WHERE (source = ? OR tournament_name = ?)
-    AND section_name IS NOT NULL AND length(section_name) > 0
-    ORDER BY section_name
-  `).all(`scrape:tournament:${tournamentId}`, tournament.name) as Array<{ section_name: string }>;
+    SELECT
+      COALESCE(m.category_code, m.section_name) as code,
+      COALESCE(m.category, m.section_name) as name,
+      COUNT(DISTINCT m.guid) as matchCount,
+      COUNT(DISTINCT mp.player_id) as playerCount
+    FROM matches m
+    LEFT JOIN match_players mp ON mp.match_guid = m.guid
+    WHERE (m.tournament_id = ? OR m.source LIKE ? OR m.tournament_name = ?)
+    AND COALESCE(m.category_code, m.section_name) IS NOT NULL
+    AND length(COALESCE(m.category_code, m.section_name)) > 0
+    GROUP BY code
+    ORDER BY code
+  `).all(tournamentId, `%tournament:${tournamentId}`, tournament.name) as CategoryInfo[];
 
-  return rows.map((r) => r.section_name);
+  // Merge with tournament_players data (table may not exist if migration hasn't run)
+  try {
+    const tpRows = db.query(`
+      SELECT category_code as code, COUNT(DISTINCT player_id) as cnt
+      FROM tournament_players
+      WHERE tournament_id = ?
+      GROUP BY category_code
+    `).all(tournamentId) as Array<{ code: string; cnt: number }>;
+
+    const tpMap = new Map(tpRows.map((r) => [r.code, r.cnt]));
+
+    for (const row of rows) {
+      const tpCount = tpMap.get(row.code);
+      if (tpCount != null) row.playerCount = tpCount;
+    }
+
+    const existingCodes = new Set(rows.map((r) => r.code));
+    for (const [code, cnt] of tpMap) {
+      if (!existingCodes.has(code)) {
+        rows.push({ code, name: code, matchCount: 0, playerCount: cnt });
+      }
+    }
+  } catch {
+    // tournament_players table doesn't exist yet
+  }
+
+  return rows;
 }
 
 export function getTournamentPlayers(
@@ -70,6 +111,115 @@ export function getTournamentPlayers(
 ): { players: TournamentPlayer[]; total: number } {
   const db = getDb();
 
+  // Try tournament_players first (table may not exist if migration hasn't run)
+  try {
+    const tpCount = db.query(
+      "SELECT COUNT(*) as c FROM tournament_players WHERE tournament_id = ?"
+    ).get(tournamentId) as { c: number };
+
+    if (tpCount.c > 0) {
+      return getTournamentPlayersFromTp(db, tournamentId, category, page, pageSize);
+    }
+  } catch {
+    // tournament_players table doesn't exist yet
+  }
+
+  return getTournamentPlayersFromMatches(db, tournamentId, category, page, pageSize);
+}
+
+function getTournamentPlayersFromTp(
+  db: ReturnType<typeof getDb>,
+  tournamentId: number,
+  category: string | undefined,
+  page: number,
+  pageSize: number
+): { players: TournamentPlayer[]; total: number } {
+  let countQuery = "SELECT COUNT(DISTINCT tp.player_id) as c FROM tournament_players tp WHERE tp.tournament_id = ?";
+  let idQuery = `
+    SELECT DISTINCT tp.player_id, COALESCE(r.ordinal, -999999) as ord
+    FROM tournament_players tp
+    LEFT JOIN ratings r ON r.player_id = tp.player_id
+    WHERE tp.tournament_id = ?
+  `;
+  const params: any[] = [tournamentId];
+
+  if (category) {
+    countQuery += " AND tp.category_code = ?";
+    idQuery += " AND tp.category_code = ?";
+    params.push(category);
+  }
+
+  idQuery += " ORDER BY ord DESC";
+
+  const total = (db.query(countQuery).get(...params) as { c: number }).c;
+  if (total === 0) return { players: [], total: 0 };
+
+  const allIds = db.query(idQuery).all(...params) as Array<{ player_id: number; ord: number }>;
+  const offset = (page - 1) * pageSize;
+  const pagePlayerIds = allIds.slice(offset, offset + pageSize).map((r) => r.player_id);
+  if (pagePlayerIds.length === 0) return { players: [], total };
+
+  const placeholders = pagePlayerIds.map(() => "?").join(",");
+
+  const rows = db.query(`
+    SELECT p.id, p.name, p.gender, p.club, p.photo_url, p.license_number,
+      r.ordinal, r.matches_counted
+    FROM players p
+    LEFT JOIN ratings r ON r.player_id = p.id
+    WHERE p.id IN (${placeholders})
+    ORDER BY r.ordinal DESC NULLS LAST
+  `).all(...pagePlayerIds) as Array<{
+    id: number; name: string; gender: string | null; club: string | null;
+    photo_url: string | null; license_number: string | null;
+    ordinal: number | null; matches_counted: number | null;
+  }>;
+
+  const globalRanks = new Map<number, number>();
+  const genderRanks = new Map<number, number>();
+  const rankRows = db.query(`
+    SELECT player_id, global_rank, gender_rank FROM (
+      SELECT r.player_id,
+        RANK() OVER (ORDER BY r.ordinal DESC) as global_rank,
+        RANK() OVER (PARTITION BY p.gender ORDER BY r.ordinal DESC) as gender_rank
+      FROM ratings r
+      JOIN players p ON p.id = r.player_id
+    ) WHERE player_id IN (${placeholders})
+  `).all(...pagePlayerIds) as Array<{ player_id: number; global_rank: number; gender_rank: number }>;
+  for (const row of rankRows) {
+    globalRanks.set(row.player_id, row.global_rank);
+    genderRanks.set(row.player_id, row.gender_rank);
+  }
+
+  const bounds = db.query("SELECT MIN(ordinal) as minOrd, MAX(ordinal) as maxOrd FROM ratings").get() as { minOrd: number; maxOrd: number };
+  const range = bounds.maxOrd - bounds.minOrd;
+
+  const players = rows.map((row) => {
+    let rating: PlayerRating | null = null;
+    if (row.ordinal != null && row.matches_counted != null) {
+      const score = range > 0 ? Math.round(((row.ordinal - bounds.minOrd) / range) * 1000) / 10 : 0;
+      const reliability = Math.round((row.matches_counted / (row.matches_counted + RELIABILITY_K)) * 100);
+      rating = { score, reliability };
+    }
+    return {
+      id: row.id, name: row.name, club: row.club ?? null,
+      photoUrl: row.photo_url ?? null, licenseNumber: row.license_number ?? null,
+      globalRank: globalRanks.get(row.id) ?? null,
+      genderRank: genderRanks.get(row.id) ?? null,
+      categoryRank: null, ordinal: row.ordinal ?? 0, rating,
+      lastMatch: null,
+    };
+  });
+
+  return { players, total };
+}
+
+function getTournamentPlayersFromMatches(
+  db: ReturnType<typeof getDb>,
+  tournamentId: number,
+  category: string | undefined,
+  page: number,
+  pageSize: number
+): { players: TournamentPlayer[]; total: number } {
   const tournament = db.query("SELECT name FROM tournaments WHERE id = ?").get(tournamentId) as { name: string } | null;
   if (!tournament) return { players: [], total: 0 };
 
@@ -179,7 +329,7 @@ const RELIABILITY_K = 5;
 
 function parseTournamentIdFromSource(source: string | null): number | null {
   if (!source) return null;
-  const match = source.match(/(?:scrape|schedule):tournament:(\d+)/);
+  const match = source.match(/(?:scrape|schedule|api):tournament:(\d+)/);
   return match ? parseInt(match[1]) : null;
 }
 
@@ -228,11 +378,12 @@ export function getTournamentMatches(
            m.side_a_ids, m.side_b_ids, m.side_a_names, m.side_b_names,
            m.tournament_name
     FROM matches m
-    WHERE (m.source = ? OR m.source = ? OR m.tournament_name = ?)
+    WHERE (m.source = ? OR m.source = ? OR m.source = ? OR m.tournament_name = ?)
   `;
   const params: any[] = [
     `scrape:tournament:${tournamentId}`,
     `schedule:tournament:${tournamentId}`,
+    `api:tournament:${tournamentId}`,
     tournament.name,
   ];
 

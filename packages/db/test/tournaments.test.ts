@@ -32,6 +32,8 @@ test("getTournament returns null for nonexistent", () => {
 test("getTournamentPlayers returns players for a tournament", () => {
   const { tournaments } = getTournaments(1, 1);
   if (tournaments.length === 0) return;
-  const players = getTournamentPlayers(tournaments[0].id);
-  expect(Array.isArray(players)).toBe(true);
+  const result = getTournamentPlayers(tournaments[0].id);
+  expect(result).toHaveProperty("players");
+  expect(result).toHaveProperty("total");
+  expect(Array.isArray(result.players)).toBe(true);
 });
