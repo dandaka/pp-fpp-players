@@ -56,9 +56,6 @@ export interface CategoryInfo {
 export function getTournamentCategories(tournamentId: number): CategoryInfo[] {
   const db = getDb();
 
-  const tournament = db.query("SELECT name FROM tournaments WHERE id = ?").get(tournamentId) as { name: string } | null;
-  if (!tournament) return [];
-
   const rows = db.query(`
     SELECT
       COALESCE(m.category_code, m.section_name) as code,
@@ -67,12 +64,12 @@ export function getTournamentCategories(tournamentId: number): CategoryInfo[] {
       COUNT(DISTINCT mp.player_id) as playerCount
     FROM matches m
     LEFT JOIN match_players mp ON mp.match_guid = m.guid
-    WHERE (m.tournament_id = ? OR m.source LIKE ? OR m.tournament_name = ?)
+    WHERE (m.tournament_id = ? OR m.source IN (?, ?, ?))
     AND COALESCE(m.category_code, m.section_name) IS NOT NULL
     AND length(COALESCE(m.category_code, m.section_name)) > 0
     GROUP BY code
     ORDER BY code
-  `).all(tournamentId, `%tournament:${tournamentId}`, tournament.name) as CategoryInfo[];
+  `).all(tournamentId, `scrape:tournament:${tournamentId}`, `schedule:tournament:${tournamentId}`, `api:tournament:${tournamentId}`) as CategoryInfo[];
 
   // Merge with tournament_players data (table may not exist if migration hasn't run)
   try {
@@ -220,18 +217,15 @@ function getTournamentPlayersFromMatches(
   page: number,
   pageSize: number
 ): { players: TournamentPlayer[]; total: number } {
-  const tournament = db.query("SELECT name FROM tournaments WHERE id = ?").get(tournamentId) as { name: string } | null;
-  if (!tournament) return { players: [], total: 0 };
-
   // Step 1: Get all tournament player IDs sorted by ordinal (fast, uses indexes)
   let playerIdQuery = `
     SELECT DISTINCT mp.player_id, COALESCE(r.ordinal, -999999) as ord
     FROM match_players mp
     JOIN matches m ON m.guid = mp.match_guid
     LEFT JOIN ratings r ON r.player_id = mp.player_id
-    WHERE (m.source = ? OR m.tournament_name = ?)
+    WHERE m.source IN (?, ?, ?)
   `;
-  const playerIdParams: any[] = [`scrape:tournament:${tournamentId}`, tournament.name];
+  const playerIdParams: any[] = [`scrape:tournament:${tournamentId}`, `schedule:tournament:${tournamentId}`, `api:tournament:${tournamentId}`];
 
   if (category) {
     playerIdQuery += " AND m.section_name = ?";
@@ -369,22 +363,18 @@ export function getTournamentMatches(
 ): { upcoming: UpcomingMatchDetail[]; completed: MatchDetail[] } {
   const db = getDb();
 
-  const tournament = db.query("SELECT name FROM tournaments WHERE id = ?").get(tournamentId) as { name: string } | null;
-  if (!tournament) return { upcoming: [], completed: [] };
-
   let query = `
     SELECT m.guid, m.section_name, m.round_name, m.date_time, m.court,
            m.category, m.subcategory, m.sets_json, m.winner_side, m.result_type, m.source,
            m.side_a_ids, m.side_b_ids, m.side_a_names, m.side_b_names,
            m.tournament_name
     FROM matches m
-    WHERE (m.source = ? OR m.source = ? OR m.source = ? OR m.tournament_name = ?)
+    WHERE m.source IN (?, ?, ?)
   `;
   const params: any[] = [
     `scrape:tournament:${tournamentId}`,
     `schedule:tournament:${tournamentId}`,
     `api:tournament:${tournamentId}`,
-    tournament.name,
   ];
 
   if (category) {
