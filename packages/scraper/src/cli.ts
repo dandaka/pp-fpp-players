@@ -87,6 +87,47 @@ switch (cmd) {
     break;
   }
 
+  case "sync-all": {
+    const { syncTournamentMatches, syncTournamentPlayers } = await import("./sync-tournaments");
+    const { shouldSkipTournament, clearScrapeFailure, recordScrapeFailure } = await import("./db");
+    const db = getDb();
+    const tournaments = db.query(`
+      SELECT id, name FROM tournaments
+      WHERE (sport IS NULL OR sport = 'Padel') AND matches_synced_at IS NULL
+      ORDER BY id ASC
+    `).all() as { id: number; name: string }[];
+
+    console.log(`Syncing all ${tournaments.length} unsynced Padel tournaments...`);
+    let done = 0, errors = 0;
+
+    for (const t of tournaments) {
+      const check = shouldSkipTournament(t.id);
+      if (check.skip) { done++; continue; }
+
+      try {
+        const mr = await syncTournamentMatches({ db, tournamentId: t.id });
+        await syncTournamentPlayers({ db, tournamentId: t.id });
+        clearScrapeFailure(t.id);
+        done++;
+        if (done % 50 === 0 || mr.updated > 0) {
+          console.log(`[${done}/${tournaments.length}] ${t.name} (${t.id}): ${mr.inserted} new, ${mr.updated} enriched`);
+        }
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : String(err);
+        recordScrapeFailure(t.id, msg);
+        errors++;
+        console.error(`[${done}/${tournaments.length}] FAIL ${t.name} (${t.id}): ${msg}`);
+      }
+    }
+
+    console.log(`\nDone: ${done} synced, ${errors} errors`);
+    const { calculateRatings } = await import("./calculate-ratings");
+    console.log("Recalculating ratings...");
+    calculateRatings();
+    console.log("Complete.");
+    break;
+  }
+
   case "daemon": {
     await import("./daemon");
     break;
@@ -126,6 +167,7 @@ Commands:
   discover [start] [end]  Discover new tournaments via API
   discover gaps            Rescan gaps in known ID range
   sync <tournament-id>     Sync matches + players for a tournament
+  sync-all                 Sync ALL unsynced Padel tournaments (runs for hours)
   enrich [n]               Enrich n player profiles from API (default: 100)
   daemon                   Start sync daemon
   rate [n]                 Calculate ratings and show top n (default: 30)

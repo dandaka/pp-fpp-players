@@ -1,5 +1,4 @@
 import { Database } from "bun:sqlite";
-import { parseCategoryCode } from "./parse-category";
 
 let _db: Database | null = null;
 
@@ -191,27 +190,6 @@ function migrate(db: Database) {
   }
   db.run("CREATE INDEX IF NOT EXISTS idx_matches_category_code ON matches(category_code)");
 
-  // Backfill category_code from existing data
-  const needsBackfill = db.query(
-    "SELECT COUNT(*) as c FROM matches WHERE category_code IS NULL AND (category IS NOT NULL OR section_name IS NOT NULL)"
-  ).get() as { c: number };
-
-  if (needsBackfill.c > 0) {
-    const rows = db.query(
-      "SELECT guid, category, section_name FROM matches WHERE category_code IS NULL AND (category IS NOT NULL OR section_name IS NOT NULL)"
-    ).all() as Array<{ guid: string; category: string | null; section_name: string | null }>;
-
-    const update = db.prepare("UPDATE matches SET category_code = ? WHERE guid = ?");
-    const tx = db.transaction(() => {
-      for (const row of rows) {
-        const raw = row.category || row.section_name || "";
-        const code = parseCategoryCode(raw);
-        update.run(code, row.guid);
-      }
-    });
-    tx();
-    console.log(`Backfilled category_code for ${rows.length} matches`);
-  }
 }
 
 export function getCursor(key: string): string | null {

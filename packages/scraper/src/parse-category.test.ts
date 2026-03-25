@@ -51,6 +51,32 @@ describe("parseCategoryCode", () => {
     expect(parseCategoryCode("Qualificação F4")).toBe("F4");
   });
 
+  test("accented Femíninos with Nível", () => {
+    expect(parseCategoryCode("Femíninos Nível 4 - Main")).toBe("F4");
+    expect(parseCategoryCode("Femíninos Nível 5 - Grupo P")).toBe("F5");
+    expect(parseCategoryCode("Femíninos Nível 5 - Grupo O")).toBe("F5");
+    expect(parseCategoryCode("Femíninos Nível 4 - Nível 4F Quadro B")).toBe("F4");
+  });
+
+  test("MX with space", () => {
+    expect(parseCategoryCode("MX 5 - Main")).toBe("MX5");
+    expect(parseCategoryCode("MX 3")).toBe("MX3");
+  });
+
+  test("gender-only (no level)", () => {
+    expect(parseCategoryCode("Mistos - Grupo B")).toBe("MX");
+    expect(parseCategoryCode("Mistos - Grupo A")).toBe("MX");
+    expect(parseCategoryCode("Masculino - Grupo ELITE")).toBe("M");
+    expect(parseCategoryCode("Masculino - Grupo CHALLENGE")).toBe("M");
+  });
+
+  test("Corporate/Executive with gender", () => {
+    expect(parseCategoryCode("1ªEtapa - Lisboa - Corporate Masculino - Grupo B")).toBe("M");
+    expect(parseCategoryCode("1ªEtapa - Lisboa - Corporate Feminino - Grupo A")).toBe("F");
+    expect(parseCategoryCode("2ªEtapa - Algarve - Executive Masculino - Grupo A")).toBe("M");
+    expect(parseCategoryCode("2ªEtapa - Algarve - Executive Feminino - Grupo A")).toBe("F");
+  });
+
   test("unknown returns UNKNOWN", () => {
     expect(parseCategoryCode("")).toBe("UNKNOWN");
     expect(parseCategoryCode("Some Random Text")).toBe("UNKNOWN");
