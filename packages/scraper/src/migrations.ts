@@ -44,6 +44,30 @@ const migrations: Migration[] = [
       console.log(`[migration:2] Re-parsed category_code for ${rows.length} matches`);
     },
   },
+  {
+    version: 3,
+    name: "recreate-tournament-players-table",
+    resync: true,
+    run: (db) => {
+      db.run("DROP TABLE IF EXISTS tournament_players");
+      db.run(`
+        CREATE TABLE tournament_players (
+          tournament_id INTEGER NOT NULL,
+          player_id INTEGER NOT NULL,
+          category_code TEXT NOT NULL DEFAULT 'UNKNOWN',
+          partner_id INTEGER,
+          section_id INTEGER,
+          UNIQUE(tournament_id, player_id, category_code),
+          FOREIGN KEY (tournament_id) REFERENCES tournaments(id),
+          FOREIGN KEY (player_id) REFERENCES players(id),
+          FOREIGN KEY (partner_id) REFERENCES players(id)
+        )
+      `);
+      db.run("CREATE INDEX IF NOT EXISTS idx_tournament_players_tournament ON tournament_players(tournament_id, category_code)");
+      db.run("CREATE INDEX IF NOT EXISTS idx_tournament_players_player ON tournament_players(player_id)");
+      console.log("[migration:3] Recreated tournament_players table with correct schema");
+    },
+  },
 ];
 
 export function runMigrations(db: Database): { ranCount: number; needsResync: boolean } {

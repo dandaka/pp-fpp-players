@@ -136,7 +136,7 @@ export default function TournamentPage() {
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
-            className={`flex-1 rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+            className={`cursor-pointer flex-1 rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
               activeTab === tab.key
                 ? "bg-background shadow-sm"
                 : "text-muted-foreground hover:text-foreground"

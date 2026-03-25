@@ -1,6 +1,10 @@
 import { enrichPlayerProfiles } from "./sync-players";
 import { calculateRatings, printLeaderboard } from "./calculate-ratings";
 import { getDb } from "./db";
+import { runMigrations } from "./migrations";
+
+const db = getDb();
+runMigrations(db);
 
 const cmd = process.argv[2];
 

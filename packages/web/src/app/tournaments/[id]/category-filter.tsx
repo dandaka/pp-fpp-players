@@ -29,26 +29,21 @@ export function CategoryFilter({ categories, selected, tournamentId }: CategoryF
     <div className="flex flex-wrap gap-2">
       <button
         onClick={() => handleChange(null)}
-        className={`rounded-full px-3 py-1 text-sm transition-colors ${
+        className={`cursor-pointer rounded-full px-3 py-1 text-sm transition-colors ${
           !selected ? "bg-foreground text-background" : "bg-muted text-muted-foreground hover:bg-muted/80"
         }`}
       >
         All
       </button>
-      {categories.map((cat) => (
+      {categories.filter((cat) => cat.code && cat.name).map((cat) => (
         <button
           key={cat.code}
           onClick={() => handleChange(cat.code)}
-          className={`rounded-full px-3 py-1 text-sm transition-colors ${
+          className={`cursor-pointer rounded-full px-3 py-1 text-sm transition-colors ${
             selected === cat.code ? "bg-foreground text-background" : "bg-muted text-muted-foreground hover:bg-muted/80"
           }`}
         >
           {cat.name}
-          {cat.playerCount > 0 && (
-            <span className="ml-1.5 rounded-full bg-black/10 px-1.5 py-0.5 text-xs dark:bg-white/10">
-              {cat.playerCount}
-            </span>
-          )}
         </button>
       ))}
     </div>
