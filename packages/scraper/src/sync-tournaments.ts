@@ -205,6 +205,7 @@ export async function syncTournamentMatches(opts: SyncMatchesOptions): Promise<S
 
   if (allDraws.sections.length === 0) {
     log(`No sections for tournament ${tournamentId}`);
+    db.run("UPDATE tournaments SET matches_synced_at = datetime('now') WHERE id = ?", [tournamentId]);
     return result;
   }
 
