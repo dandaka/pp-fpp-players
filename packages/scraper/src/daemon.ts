@@ -18,16 +18,30 @@ function logError(msg: string, err: unknown) {
   console.error(`[${new Date().toISOString()}] ${msg}`, err);
 }
 
-function getTournamentsToSync(): { id: number; name: string }[] {
+const RECENT_DAYS = 30;
+
+interface TournamentToSync {
+  id: number;
+  name: string;
+  isRecent: boolean;
+  hasPlayers: boolean;
+}
+
+function getTournamentsToSync(): TournamentToSync[] {
   const db = getDb();
-  return db.query(`
-    SELECT id, name FROM tournaments
-    WHERE sport IS NULL OR sport = 'Padel'
+  const rows = db.query(`
+    SELECT
+      t.id, t.name,
+      CASE WHEN t.date >= datetime('now', '-${RECENT_DAYS} days') THEN 1 ELSE 0 END as isRecent,
+      CASE WHEN EXISTS (SELECT 1 FROM tournament_players tp WHERE tp.tournament_id = t.id) THEN 1 ELSE 0 END as hasPlayers
+    FROM tournaments t
+    WHERE (t.sport IS NULL OR t.sport = 'Padel')
     ORDER BY
-      CASE WHEN matches_synced_at IS NULL THEN 0 ELSE 1 END,
-      matches_synced_at ASC
+      CASE WHEN t.matches_synced_at IS NULL THEN 0 ELSE 1 END,
+      t.matches_synced_at ASC
     LIMIT 1000
-  `).all() as { id: number; name: string }[];
+  `).all() as Array<{ id: number; name: string; isRecent: number; hasPlayers: number }>;
+  return rows.map(r => ({ id: r.id, name: r.name, isRecent: r.isRecent === 1, hasPlayers: r.hasPlayers === 1 }));
 }
 
 async function discoveryLoop() {
@@ -84,9 +98,12 @@ async function syncLoop() {
     }
 
     try {
-      log(`Syncing matches: ${t.name} (ID: ${t.id})`);
+      const skipPlayers = !t.isRecent && t.hasPlayers;
+      log(`Syncing matches: ${t.name} (ID: ${t.id})${skipPlayers ? " [skip players: old + already populated]" : ""}`);
       await syncTournamentMatches({ db, tournamentId: t.id });
-      await syncTournamentPlayers({ db, tournamentId: t.id });
+      if (!skipPlayers) {
+        await syncTournamentPlayers({ db, tournamentId: t.id });
+      }
       clearScrapeFailure(t.id);
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
