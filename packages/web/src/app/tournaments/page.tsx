@@ -13,9 +13,25 @@ interface Tournament {
   date: string | null;
 }
 
+interface TournamentCounts {
+  thisWeek: number;
+  upcoming: number;
+  past: number;
+}
+
+type FilterTab = "this_week" | "upcoming" | "past";
+
+const TABS: { key: FilterTab; label: string; countKey: keyof TournamentCounts }[] = [
+  { key: "this_week", label: "This Week", countKey: "thisWeek" },
+  { key: "upcoming", label: "Upcoming", countKey: "upcoming" },
+  { key: "past", label: "Past", countKey: "past" },
+];
+
 export default function TournamentsPage() {
   const [query, setQuery] = useState("");
+  const [activeTab, setActiveTab] = useState<FilterTab>("this_week");
   const [tournaments, setTournaments] = useState<Tournament[]>([]);
+  const [counts, setCounts] = useState<TournamentCounts>({ thisWeek: 0, upcoming: 0, past: 0 });
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
@@ -34,11 +50,13 @@ export default function TournamentsPage() {
         const params = new URLSearchParams();
         params.set("page", String(page));
         params.set("pageSize", String(pageSize));
+        params.set("filter", activeTab);
         if (query.trim()) params.set("q", query.trim());
         const res = await fetch(`/api/tournaments?${params}`);
         const data = await res.json();
         setTournaments(data.tournaments);
         setTotal(data.total);
+        if (data.counts) setCounts(data.counts);
       } finally {
         setLoading(false);
       }
@@ -47,14 +65,33 @@ export default function TournamentsPage() {
     return () => {
       if (debounceRef.current) clearTimeout(debounceRef.current);
     };
-  }, [query, page]);
+  }, [query, page, activeTab]);
 
   useEffect(() => {
     setPage(1);
-  }, [query]);
+  }, [query, activeTab]);
 
   return (
     <div className="space-y-4">
+      <div className="flex rounded-lg bg-muted p-1">
+        {TABS.map((tab) => (
+          <button
+            key={tab.key}
+            onClick={() => setActiveTab(tab.key)}
+            className={`cursor-pointer flex-1 rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+              activeTab === tab.key
+                ? "bg-background shadow-sm"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            {tab.label}
+            {counts[tab.countKey] > 0 && (
+              <span className="ml-1 text-xs opacity-60">({counts[tab.countKey]})</span>
+            )}
+          </button>
+        ))}
+      </div>
+
       <Input
         placeholder="Search tournaments by name..."
         value={query}
@@ -87,8 +124,10 @@ export default function TournamentsPage() {
         </div>
       )}
 
-      {!loading && query.trim() && tournaments.length === 0 && (
-        <p className="py-8 text-center text-muted-foreground">No tournaments found</p>
+      {!loading && tournaments.length === 0 && (
+        <p className="py-8 text-center text-muted-foreground">
+          {query.trim() ? "No tournaments found" : "No tournaments"}
+        </p>
       )}
 
       {!loading && totalPages > 1 && (

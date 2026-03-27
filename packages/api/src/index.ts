@@ -12,6 +12,7 @@ import {
   getPlayerMatches,
   getPlayerUpcomingMatches,
   getTournaments,
+  getTournamentCounts,
   getTournament,
   getTournamentCategories,
   getTournamentPlayers,
@@ -63,8 +64,14 @@ const app = new Elysia()
 
   .get("/tournaments", ({ query }) => {
     const page = parseInt((query.page as string) || "1", 10);
+    const pageSize = parseInt((query.pageSize as string) || "20", 10);
     const search = (query.q as string) || undefined;
-    return getTournaments(page, 20, search);
+    const filter = (query.filter as string) || undefined;
+    return getTournaments(page, pageSize, search, filter);
+  })
+
+  .get("/tournaments/counts", () => {
+    return getTournamentCounts();
   })
 
   .get("/tournaments/:id", ({ params, query, set }) => {

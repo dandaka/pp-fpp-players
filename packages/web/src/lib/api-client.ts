@@ -182,15 +182,27 @@ export async function getTournaments(
   page?: number,
   pageSize?: number,
   search?: string,
+  filter?: string,
 ): Promise<GetTournamentsResponse> {
   const params = new URLSearchParams();
   if (page !== undefined) params.set("page", String(page));
   if (pageSize !== undefined) params.set("pageSize", String(pageSize));
   if (search) params.set("q", search);
+  if (filter) params.set("filter", filter);
   const qs = params.toString();
   return apiFetch<GetTournamentsResponse>(
     `/tournaments${qs ? `?${qs}` : ""}`,
   );
+}
+
+export interface TournamentCounts {
+  thisWeek: number;
+  upcoming: number;
+  past: number;
+}
+
+export async function getTournamentCounts(): Promise<TournamentCounts> {
+  return apiFetch<TournamentCounts>("/tournaments/counts");
 }
 
 export async function getTournament(

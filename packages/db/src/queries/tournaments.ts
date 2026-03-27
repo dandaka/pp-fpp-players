@@ -2,31 +2,100 @@ import { getDb } from "../connection";
 import { batchGetMatchRatingDeltas } from "./matches";
 import type { Tournament, TournamentDetail, TournamentPlayer, MatchDetail, UpcomingMatchDetail, PlayerRating } from "../types";
 
-export function getTournaments(page = 1, pageSize = 20, search?: string): { tournaments: Tournament[]; total: number } {
+// Tournament date is the start date; tournament runs until Sunday of that week.
+// "This week" = tournament whose week (start..Sunday) overlaps the current week.
+// Since date is the start and end is always Sunday of that week:
+//   - A tournament is "this week" if date <= currentSunday AND tournamentEndSunday >= currentMonday
+//   - Simplification: date's week Sunday = date + (7 - dayOfWeek(date)) for non-Sunday, or date itself
+//   - We use: date <= currentWeekEnd AND date >= currentWeekStart - 6 (covers any day in current week)
+//   Actually simpler: tournament is active this week if its start date falls in current Mon-Sun range,
+//   OR if its start date is earlier but its end (Sunday of start week) >= current Monday.
+//   Since end = start + (7 - dow(start)) % 7, the simplest SQL: the tournament's week overlaps current week
+//   iff date <= currentSunday (tournament starts before current week ends)
+//   AND sundayOfDateWeek >= currentMonday (tournament ends after current week starts).
+//   In SQLite: sundayOfDateWeek = date(date, 'weekday 0') but weekday 0 = Sunday NEXT occurrence.
+//   So we use: date(date, 'weekday 0') gives the Sunday on or after that date.
+
+function getCurrentWeekBounds(): { weekStart: string; weekEnd: string } {
+  const now = new Date();
+  const day = now.getDay();
+  const diffToMonday = day === 0 ? -6 : 1 - day;
+  const monday = new Date(now);
+  monday.setDate(now.getDate() + diffToMonday);
+  monday.setHours(0, 0, 0, 0);
+  const sunday = new Date(monday);
+  sunday.setDate(monday.getDate() + 6);
+  return {
+    weekStart: monday.toISOString().slice(0, 10),
+    weekEnd: sunday.toISOString().slice(0, 10),
+  };
+}
+
+function buildDateFilter(filter?: string): { where: string; params: any[] } {
+  if (!filter) return { where: "", params: [] };
+  const { weekStart, weekEnd } = getCurrentWeekBounds();
+  switch (filter) {
+    case "this_week":
+      // Tournament active this week: starts <= Sunday AND its end (Sunday of its week) >= Monday
+      // SQLite: date(date, 'weekday 0') gives next Sunday (or same day if already Sunday)
+      return {
+        where: "AND date <= ? AND date(date, 'weekday 0') >= ?",
+        params: [weekEnd, weekStart],
+      };
+    case "upcoming":
+      // Starts after current Sunday (not active this week)
+      return { where: "AND date > ?", params: [weekEnd] };
+    case "past":
+      // Tournament's end (Sunday of its week) is before current Monday
+      return { where: "AND date(date, 'weekday 0') < ?", params: [weekStart] };
+    default:
+      return { where: "", params: [] };
+  }
+}
+
+export function getTournaments(page = 1, pageSize = 20, search?: string, filter?: string): { tournaments: Tournament[]; total: number } {
   const db = getDb();
   const offset = (page - 1) * pageSize;
+  const dateFilter = buildDateFilter(filter);
 
   if (search && search.trim()) {
     const pattern = `%${search.trim()}%`;
-    const total = db.query("SELECT COUNT(*) as total FROM tournaments WHERE name LIKE ?").get(pattern) as { total: number };
+    const total = db.query(`SELECT COUNT(*) as total FROM tournaments WHERE name LIKE ? ${dateFilter.where}`).get(pattern, ...dateFilter.params) as { total: number };
     const rows = db.query(`
       SELECT id, name, club, date FROM tournaments
-      WHERE name LIKE ?
+      WHERE name LIKE ? ${dateFilter.where}
       ORDER BY date DESC
       LIMIT ? OFFSET ?
-    `).all(pattern, pageSize, offset) as Tournament[];
+    `).all(pattern, ...dateFilter.params, pageSize, offset) as Tournament[];
     return { tournaments: rows, total: total.total };
   }
 
-  const total = db.query("SELECT COUNT(*) as total FROM tournaments").get() as { total: number };
+  const total = db.query(`SELECT COUNT(*) as total FROM tournaments WHERE 1=1 ${dateFilter.where}`).get(...dateFilter.params) as { total: number };
 
   const rows = db.query(`
     SELECT id, name, club, date FROM tournaments
+    WHERE 1=1 ${dateFilter.where}
     ORDER BY date DESC
     LIMIT ? OFFSET ?
-  `).all(pageSize, offset) as Tournament[];
+  `).all(...dateFilter.params, pageSize, offset) as Tournament[];
 
   return { tournaments: rows, total: total.total };
+}
+
+export function getTournamentCounts(): { thisWeek: number; upcoming: number; past: number } {
+  const db = getDb();
+  const { weekStart, weekEnd } = getCurrentWeekBounds();
+
+  const row = db.query(`
+    SELECT
+      SUM(CASE WHEN date <= ? AND date(date, 'weekday 0') >= ? THEN 1 ELSE 0 END) as thisWeek,
+      SUM(CASE WHEN date > ? THEN 1 ELSE 0 END) as upcoming,
+      SUM(CASE WHEN date(date, 'weekday 0') < ? THEN 1 ELSE 0 END) as past
+    FROM tournaments
+    WHERE date IS NOT NULL
+  `).get(weekEnd, weekStart, weekEnd, weekStart) as { thisWeek: number; upcoming: number; past: number };
+
+  return { thisWeek: row.thisWeek ?? 0, upcoming: row.upcoming ?? 0, past: row.past ?? 0 };
 }
 
 export function getTournament(id: number): TournamentDetail | null {
