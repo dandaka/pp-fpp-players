@@ -43,7 +43,7 @@ export function CategoryFilter({ categories, selected, tournamentId }: CategoryF
             selected === cat.code ? "bg-foreground text-background" : "bg-muted text-muted-foreground hover:bg-muted/80"
           }`}
         >
-          {cat.name}
+          {cat.code}
         </button>
       ))}
     </div>
