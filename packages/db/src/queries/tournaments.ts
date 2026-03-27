@@ -378,8 +378,8 @@ export function getTournamentMatches(
   ];
 
   if (category) {
-    query += " AND (m.category = ? OR m.section_name = ?)";
-    params.push(category, category);
+    query += " AND (m.category_code = ? OR m.category = ? OR m.section_name = ?)";
+    params.push(category, category, category);
   }
 
   query += " ORDER BY m.date_time ASC";
