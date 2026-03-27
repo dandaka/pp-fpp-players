@@ -31,23 +31,26 @@ function getCurrentWeekBounds(): { weekStart: string; weekEnd: string } {
   };
 }
 
+// date column contains "YYYY-MM-DD" or "YYYY-MM-DD, HH:MM" — extract clean date with substr
+const CLEAN_DATE = "substr(date, 1, 10)";
+const TOURNAMENT_END = `date(${CLEAN_DATE}, 'weekday 0')`; // Sunday of tournament's week
+
 function buildDateFilter(filter?: string): { where: string; params: any[] } {
   if (!filter) return { where: "", params: [] };
   const { weekStart, weekEnd } = getCurrentWeekBounds();
   switch (filter) {
     case "this_week":
       // Tournament active this week: starts <= Sunday AND its end (Sunday of its week) >= Monday
-      // SQLite: date(date, 'weekday 0') gives next Sunday (or same day if already Sunday)
       return {
-        where: "AND date <= ? AND date(date, 'weekday 0') >= ?",
+        where: `AND ${CLEAN_DATE} <= ? AND ${TOURNAMENT_END} >= ?`,
         params: [weekEnd, weekStart],
       };
     case "upcoming":
-      // Starts after current Sunday (not active this week)
-      return { where: "AND date > ?", params: [weekEnd] };
+      // Starts after current Sunday
+      return { where: `AND ${CLEAN_DATE} > ?`, params: [weekEnd] };
     case "past":
       // Tournament's end (Sunday of its week) is before current Monday
-      return { where: "AND date(date, 'weekday 0') < ?", params: [weekStart] };
+      return { where: `AND ${TOURNAMENT_END} < ?`, params: [weekStart] };
     default:
       return { where: "", params: [] };
   }
@@ -88,9 +91,9 @@ export function getTournamentCounts(): { thisWeek: number; upcoming: number; pas
 
   const row = db.query(`
     SELECT
-      SUM(CASE WHEN date <= ? AND date(date, 'weekday 0') >= ? THEN 1 ELSE 0 END) as thisWeek,
-      SUM(CASE WHEN date > ? THEN 1 ELSE 0 END) as upcoming,
-      SUM(CASE WHEN date(date, 'weekday 0') < ? THEN 1 ELSE 0 END) as past
+      SUM(CASE WHEN ${CLEAN_DATE} <= ? AND ${TOURNAMENT_END} >= ? THEN 1 ELSE 0 END) as thisWeek,
+      SUM(CASE WHEN ${CLEAN_DATE} > ? THEN 1 ELSE 0 END) as upcoming,
+      SUM(CASE WHEN ${TOURNAMENT_END} < ? THEN 1 ELSE 0 END) as past
     FROM tournaments
     WHERE date IS NOT NULL
   `).get(weekEnd, weekStart, weekEnd, weekStart) as { thisWeek: number; upcoming: number; past: number };
