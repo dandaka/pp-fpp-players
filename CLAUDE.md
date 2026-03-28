@@ -109,3 +109,30 @@ bun --hot ./index.ts
 ```
 
 For more information, read the Bun API docs in `node_modules/bun-types/docs/**.mdx`.
+
+## Daemon & Sync Architecture
+
+### sync_cursors table
+
+The `sync_cursors` table (key TEXT PK, value TEXT, updated_at TEXT) in `packages/scraper/src/db.ts` tracks daemon state via `getCursor()`/`setCursor()`.
+
+Cursor types:
+- `migration_version` — integer string, tracks which migrations have run
+- `last_gap_rescan` — ISO timestamp, throttles gap-rescan to once per 24h
+- `enrich_dates_offset` — integer string, informational counter for date backfill progress
+- `scrape_fail_{id}` — JSON with exponential backoff (1h, 6h, 1d, 3d, 7d), cleared on success
+
+### One-shot enrichment loop pattern
+
+For backfill tasks (like `enrichDatesLoop` in `daemon.ts`):
+1. Query rows that still need work (`WHERE column IS NULL`) — not offset-based
+2. Process a small batch (10-30) with API calls + sleep between each
+3. Advance cursor (informational only — the query itself is idempotent)
+4. Self-terminate when query returns 0 rows
+5. Loop continues on interval but no-ops once complete
+
+The cursor offset is for logging. Real progress is the DB update. Daemon restart picks up remaining NULL rows.
+
+### Migrations
+
+Defined in `packages/scraper/src/migrations.ts`. Each migration has `version`, `name`, `resync` flag. When `resync: true`, `matches_synced_at` is cleared for all tournaments after migration, forcing full re-sync. Run once at daemon startup before loops.

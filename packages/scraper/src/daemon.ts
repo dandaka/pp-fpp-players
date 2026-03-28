@@ -3,12 +3,16 @@ import { discoverTournaments, rescanGaps, syncTournamentMatches, syncTournamentP
 import { calculateRatings } from "./calculate-ratings";
 import { enrichPlayerProfiles } from "./sync-players";
 import { runMigrations } from "./migrations";
+import { getTournament as getTournamentApi } from "./api";
+import { parseDate } from "./parse-date";
 
 const DISCOVERY_INTERVAL = 60;
 const SYNC_INTERVAL = 60;
 const ENRICH_INTERVAL = 30;
 const ENRICH_BATCH_SIZE = 50;
 const GAP_RESCAN_HOURS = 24;
+const ENRICH_DATES_INTERVAL = 2;
+const ENRICH_DATES_BATCH_SIZE = 20;
 
 function log(msg: string) {
   console.log(`[${new Date().toISOString()}] ${msg}`);
@@ -134,6 +138,60 @@ async function enrichLoop() {
   log("=== Player Enrichment complete ===\n");
 }
 
+async function enrichDatesLoop() {
+  log("=== Date Enrichment starting ===");
+
+  try {
+    const db = getDb();
+    const offsetStr = getCursor("enrich_dates_offset") ?? "0";
+    let offset = parseInt(offsetStr);
+
+    const rows = db.query(
+      "SELECT id FROM tournaments WHERE date IS NULL ORDER BY id LIMIT ?"
+    ).all(ENRICH_DATES_BATCH_SIZE) as Array<{ id: number }>;
+
+    if (rows.length === 0) {
+      log("No more NULL-date tournaments — date enrichment complete");
+      log("=== Date Enrichment complete ===\n");
+      return;
+    }
+
+    const updateDate = db.prepare("UPDATE tournaments SET date = ? WHERE id = ?");
+    let enriched = 0;
+
+    for (const row of rows) {
+      try {
+        const tournament = await getTournamentApi(row.id);
+        if (!tournament || !tournament.id) continue;
+
+        const dateInfo = tournament.info_texts?.find(
+          (t: any) => t.title === "Date" || t.title === "Data"
+        );
+        const date = parseDate(dateInfo?.text, tournament.header_texts);
+
+        if (date) {
+          updateDate.run(date, row.id);
+          enriched++;
+          log(`Enriched date for tournament ${row.id}: ${date}`);
+        }
+
+        await Bun.sleep(200);
+      } catch (err) {
+        logError(`Failed to enrich date for tournament ${row.id}:`, err);
+      }
+    }
+
+    offset += rows.length;
+    setCursor("enrich_dates_offset", String(offset));
+
+    log(`Date enrichment: ${enriched}/${rows.length} tournaments updated (offset: ${offset})`);
+  } catch (err) {
+    logError("Date enrichment failed:", err);
+  }
+
+  log("=== Date Enrichment complete ===\n");
+}
+
 function scheduleLoop(name: string, fn: () => Promise<void>, intervalMin: number) {
   const run = async () => {
     try {
@@ -159,11 +217,13 @@ async function main() {
   log(`Discovery interval: ${DISCOVERY_INTERVAL}min`);
   log(`Sync interval: ${SYNC_INTERVAL}min`);
   log(`Enrich interval: ${ENRICH_INTERVAL}min (batch: ${ENRICH_BATCH_SIZE})`);
+  log(`Enrich dates interval: ${ENRICH_DATES_INTERVAL}min (batch: ${ENRICH_DATES_BATCH_SIZE})`);
   log("");
 
   const discovery = scheduleLoop("discovery", discoveryLoop, DISCOVERY_INTERVAL);
   const sync = scheduleLoop("sync", syncLoop, SYNC_INTERVAL);
   const enrich = scheduleLoop("enrich", enrichLoop, ENRICH_INTERVAL);
+  const enrichDates = scheduleLoop("enrichDates", enrichDatesLoop, ENRICH_DATES_INTERVAL);
 
   await discovery();
 
@@ -177,7 +237,10 @@ async function main() {
   }
 
   setTimeout(enrich, 2 * 60 * 1000);
-  log("Enrich loop will start in 2 minutes\n");
+  log("Enrich loop will start in 2 minutes");
+
+  setTimeout(enrichDates, 1 * 60 * 1000);
+  log("Enrich dates loop will start in 1 minute\n");
 
   process.on("SIGINT", () => { log("Received SIGINT, shutting down..."); process.exit(0); });
   process.on("SIGTERM", () => { log("Received SIGTERM, shutting down..."); process.exit(0); });

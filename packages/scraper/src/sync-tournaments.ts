@@ -1,6 +1,7 @@
 import { Database } from "bun:sqlite";
 import { getTournament, getTournamentDraws, getSectionPlayers } from "./api";
 import { parseCategoryCode } from "./parse-category";
+import { parseDate } from "./parse-date";
 import type { ApiPlayerEntry } from "./types";
 
 const MAX_CONCURRENT = 5;
@@ -99,12 +100,13 @@ export async function discoverTournaments(opts: DiscoverOptions): Promise<Discov
       if (sport && sport !== "Padel") continue;
 
       const dateInfo = tournament.info_texts?.find((t) => t.title === "Date" || t.title === "Data");
+      const date = parseDate(dateInfo?.text, tournament.header_texts);
 
       insertTournament.run(
         tournament.id,
         tournament.name,
         tournament.club?.name ?? null,
-        dateInfo?.text ?? null,
+        date,
         tournament.link_web ?? null,
         sport,
         tournament.club?.id ?? null,
@@ -165,9 +167,10 @@ export async function rescanGaps(opts: { db: Database }): Promise<DiscoveredTour
       if (sport && sport !== "Padel") continue;
 
       const dateInfo = tournament.info_texts?.find((t: any) => t.title === "Date" || t.title === "Data");
+      const date = parseDate(dateInfo?.text, tournament.header_texts);
       insertTournament.run(
         tournament.id, tournament.name, tournament.club?.name ?? null,
-        dateInfo?.text ?? null, tournament.link_web ?? null, sport,
+        date, tournament.link_web ?? null, sport,
         tournament.club?.id ?? null, tournament.cover ?? null,
         tournament.location?.latitude ?? null, tournament.location?.longitude ?? null,
         tournament.location?.address ?? null

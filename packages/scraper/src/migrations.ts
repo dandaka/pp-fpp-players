@@ -68,6 +68,17 @@ const migrations: Migration[] = [
       console.log("[migration:3] Recreated tournament_players table with correct schema");
     },
   },
+  {
+    version: 4,
+    name: "normalize-tournament-dates",
+    resync: false,
+    run: (db) => {
+      const result = db.run(`
+        UPDATE tournaments SET date = substr(date, 1, 10) WHERE date LIKE '____-__-__, %'
+      `);
+      console.log(`[migration:4] Normalized ${result.changes} tournament dates (stripped time suffix)`);
+    },
+  },
 ];
 
 export function runMigrations(db: Database): { ranCount: number; needsResync: boolean } {
