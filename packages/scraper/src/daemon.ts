@@ -40,10 +40,11 @@ function getTournamentsToSync(): TournamentToSync[] {
       CASE WHEN EXISTS (SELECT 1 FROM tournament_players tp WHERE tp.tournament_id = t.id) THEN 1 ELSE 0 END as hasPlayers
     FROM tournaments t
     WHERE (t.sport IS NULL OR t.sport = 'Padel')
+      AND (t.matches_synced_at IS NULL OR t.date >= datetime('now', '-${RECENT_DAYS} days'))
     ORDER BY
       CASE WHEN t.matches_synced_at IS NULL THEN 0 ELSE 1 END,
       t.matches_synced_at ASC
-    LIMIT 1000
+    LIMIT 10000
   `).all() as Array<{ id: number; name: string; isRecent: number; hasPlayers: number }>;
   return rows.map(r => ({ id: r.id, name: r.name, isRecent: r.isRecent === 1, hasPlayers: r.hasPlayers === 1 }));
 }
