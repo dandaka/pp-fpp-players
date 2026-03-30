@@ -1,5 +1,6 @@
 import { Database } from "bun:sqlite";
 import { parseCategoryCode } from "./parse-category";
+import { parseMatchDateTime } from "./parse-date";
 
 interface Migration {
   version: number;
@@ -86,6 +87,34 @@ const migrations: Migration[] = [
     run: (db) => {
       db.run("DELETE FROM sync_cursors WHERE key = 'enrich_dates_offset'");
       console.log("[migration:5] Reset enrich_dates_offset cursor — date enrichment will rescan all NULL-date tournaments");
+    },
+  },
+  {
+    version: 6,
+    name: "normalize-match-datetimes",
+    resync: false,
+    run: (db) => {
+      const rows = db.query(`
+        SELECT m.guid, m.date_time, t.date AS tournament_date
+        FROM matches m
+        LEFT JOIN tournaments t ON m.tournament_id = t.id
+        WHERE m.date_time IS NOT NULL
+          AND m.date_time NOT LIKE '____-__-__T%'
+      `).all() as Array<{ guid: string; date_time: string; tournament_date: string | null }>;
+
+      const update = db.prepare("UPDATE matches SET date_time = ? WHERE guid = ?");
+      let updated = 0;
+      const tx = db.transaction(() => {
+        for (const row of rows) {
+          const normalized = parseMatchDateTime(row.date_time, row.tournament_date);
+          if (normalized) {
+            update.run(normalized, row.guid);
+            updated++;
+          }
+        }
+      });
+      tx();
+      console.log(`[migration:6] Normalized date_time for ${updated}/${rows.length} matches`);
     },
   },
 ];

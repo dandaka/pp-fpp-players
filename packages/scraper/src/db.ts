@@ -4,7 +4,7 @@ let _db: Database | null = null;
 
 export function getDb(): Database {
   if (_db) return _db;
-  _db = new Database(process.env.DB_PATH || "padel.db", { create: true });
+  _db = new Database(process.env.DB_PATH || new URL("../../../../padel.db", import.meta.url).pathname, { create: true });
   _db.run("PRAGMA journal_mode = WAL");
   _db.run("PRAGMA foreign_keys = ON");
   migrate(_db);

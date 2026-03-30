@@ -2,6 +2,15 @@ import Link from "next/link";
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
 import type { MatchDetail, MatchPlayerInfo } from "@/lib/api-client";
 
+function formatMatchDate(dateTime: string): string {
+  // ISO format: "2025-03-27T22:30:00"
+  const d = new Date(dateTime);
+  if (isNaN(d.getTime())) return dateTime; // fallback to raw string
+  const time = dateTime.includes("T00:00:00") ? "" : d.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+  const date = d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+  return time ? `${time}, ${date}` : date;
+}
+
 function PlayerCell({
   player,
   isWinnerSide,
@@ -176,7 +185,7 @@ export function MatchCard({
           )}
         </div>
         {match.dateTime && (
-          <span className="shrink-0 ml-2">{match.dateTime}</span>
+          <span className="shrink-0 ml-2">{formatMatchDate(match.dateTime)}</span>
         )}
       </div>
     </div>

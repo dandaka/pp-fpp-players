@@ -1,7 +1,7 @@
 import { Database } from "bun:sqlite";
 import { getTournament, getTournamentDraws, getSectionPlayers } from "./api";
 import { parseCategoryCode } from "./parse-category";
-import { parseDate } from "./parse-date";
+import { parseDate, parseMatchDateTime } from "./parse-date";
 import type { ApiPlayerEntry } from "./types";
 
 const MAX_CONCURRENT = 5;
@@ -236,8 +236,9 @@ export async function syncTournamentMatches(opts: SyncMatchesOptions): Promise<S
     WHERE guid = ?
   `);
 
-  const tournamentRow = db.query("SELECT name FROM tournaments WHERE id = ?").get(tournamentId) as { name: string } | null;
+  const tournamentRow = db.query("SELECT name, date FROM tournaments WHERE id = ?").get(tournamentId) as { name: string; date: string | null } | null;
   const tournamentName = tournamentRow?.name ?? "";
+  const tournamentDate = tournamentRow?.date ?? null;
   const source = `api:tournament:${tournamentId}`;
 
   // Fetch draws per section so we know which category each match belongs to
@@ -282,7 +283,7 @@ export async function syncTournamentMatches(opts: SyncMatchesOptions): Promise<S
           }
 
           const guid = match.id;
-          const dateTime = match.infos?.date_time?.str ?? null;
+          const dateTime = parseMatchDateTime(match.infos?.date_time?.str, tournamentDate) ?? match.infos?.date_time?.str ?? null;
           const court = match.infos?.top_left ?? null;
           const roundName = match.infos?.title_left ?? round.name ?? null;
 
@@ -299,7 +300,8 @@ export async function syncTournamentMatches(opts: SyncMatchesOptions): Promise<S
           const existing = existingMatch.get(guid) as { guid: string; winner_side: string | null } | null;
           if (existing) {
             if (!existing.winner_side && winnerSide) {
-              updateMatchResult.run(setsJson, winnerSide, dateTime, court, categoryCode, guid);
+              const updateDateTime = parseMatchDateTime(match.infos?.date_time?.str, tournamentDate) ?? match.infos?.date_time?.str ?? null;
+              updateMatchResult.run(setsJson, winnerSide, updateDateTime, court, categoryCode, guid);
               result.updated++;
             } else {
               result.skipped++;

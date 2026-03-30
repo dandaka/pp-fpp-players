@@ -75,3 +75,83 @@ export function parseDate(infoDate: string | undefined | null, headerTexts: stri
   }
   return parseDateFromHeader(headerTexts);
 }
+
+const SHORT_MONTHS: Record<string, number> = {
+  jan: 1, feb: 2, mar: 3, apr: 4, may: 5, jun: 6,
+  jul: 7, aug: 8, sep: 9, oct: 10, nov: 11, dec: 12,
+};
+
+/**
+ * Parse a match date_time string like "22:30, Fri 27 Mar" or "14:00, Sat 5 Apr"
+ * into ISO format "YYYY-MM-DDThh:mm:00" using the tournament date to infer the year.
+ *
+ * Also handles already-ISO strings like "2021-12-26, 14:00" by normalizing to ISO.
+ */
+export function parseMatchDateTime(raw: string | null | undefined, tournamentDate: string | null | undefined): string | null {
+  if (!raw) return null;
+
+  const trimmed = raw.trim();
+
+  // Already ISO-ish: "2021-12-26, 14:00" or "2021-12-26"
+  const isoMatch = trimmed.match(/^(\d{4}-\d{2}-\d{2})(?:,?\s*(\d{2}:\d{2}))?/);
+  if (isoMatch) {
+    const date = isoMatch[1];
+    const time = isoMatch[2] ?? "00:00";
+    return `${date}T${time}:00`;
+  }
+
+  // Pattern: "22:30, Fri 27 Mar" or "14:00, Sat 5 Apr"
+  const matchTimeDay = trimmed.match(/^(\d{1,2}:\d{2}),?\s*\w+\s+(\d{1,2})\s+(\w{3})/i);
+  if (matchTimeDay) {
+    const time = matchTimeDay[1];
+    const day = parseInt(matchTimeDay[2]);
+    const monthStr = matchTimeDay[3].toLowerCase();
+    const month = SHORT_MONTHS[monthStr];
+
+    if (month && day >= 1 && day <= 31) {
+      const year = inferYear(month, day, tournamentDate);
+      if (year) {
+        return `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}T${time}:00`;
+      }
+    }
+  }
+
+  // Pattern: "Fri 27 Mar" (no time)
+  const matchDayOnly = trimmed.match(/^\w+\s+(\d{1,2})\s+(\w{3})/i);
+  if (matchDayOnly) {
+    const day = parseInt(matchDayOnly[1]);
+    const monthStr = matchDayOnly[2].toLowerCase();
+    const month = SHORT_MONTHS[monthStr];
+
+    if (month && day >= 1 && day <= 31) {
+      const year = inferYear(month, day, tournamentDate);
+      if (year) {
+        return `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}T00:00:00`;
+      }
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Infer the year for a match date using the tournament's known date.
+ * The match month/day should be close to the tournament date.
+ */
+function inferYear(month: number, day: number, tournamentDate: string | null | undefined): number | null {
+  if (!tournamentDate) return null;
+
+  const tdMatch = tournamentDate.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (!tdMatch) return null;
+
+  const tYear = parseInt(tdMatch[1]);
+  const tMonth = parseInt(tdMatch[2]);
+
+  // If tournament is in Dec and match is in Jan, it's next year
+  // If tournament is in Jan and match is in Dec, it's previous year
+  // Otherwise use the tournament year
+  const monthDiff = month - tMonth;
+  if (monthDiff < -6) return tYear + 1;   // e.g. tournament=Nov, match=Jan
+  if (monthDiff > 6) return tYear - 1;    // e.g. tournament=Jan, match=Dec
+  return tYear;
+}

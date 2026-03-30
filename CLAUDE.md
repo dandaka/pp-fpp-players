@@ -133,6 +133,14 @@ For backfill tasks (like `enrichDatesLoop` in `daemon.ts`):
 
 The cursor offset is for logging. Real progress is the DB update. Daemon restart picks up remaining NULL rows.
 
+## Database
+
+The real database is at the **repo root**: `padel.db` (i.e. `/Users/dandaka/projects/pp-fpp-players/padel.db`).
+
+`packages/scraper/padel.db` is a stale empty file created when the scraper runs from its own directory. Never query it.
+
+To inspect: `sqlite3 /Users/dandaka/projects/pp-fpp-players/padel.db "<query>"`
+
 ### Migrations
 
 Defined in `packages/scraper/src/migrations.ts`. Each migration has `version`, `name`, `resync` flag. When `resync: true`, `matches_synced_at` is cleared for all tournaments after migration, forcing full re-sync. Run once at daemon startup before loops.
