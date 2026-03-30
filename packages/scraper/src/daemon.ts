@@ -12,7 +12,6 @@ const ENRICH_INTERVAL = 30;
 const ENRICH_BATCH_SIZE = 50;
 const GAP_RESCAN_HOURS = 24;
 const ENRICH_DATES_INTERVAL = 2;
-const ENRICH_DATES_BATCH_SIZE = 20;
 
 function log(msg: string) {
   console.log(`[${new Date().toISOString()}] ${msg}`);
@@ -148,8 +147,8 @@ async function enrichDatesLoop() {
     let offset = parseInt(offsetStr);
 
     const rows = db.query(
-      "SELECT id FROM tournaments WHERE date IS NULL ORDER BY id LIMIT ?"
-    ).all(ENRICH_DATES_BATCH_SIZE) as Array<{ id: number }>;
+      "SELECT id FROM tournaments WHERE date IS NULL ORDER BY id"
+    ).all() as Array<{ id: number }>;
 
     if (rows.length === 0) {
       log("No more NULL-date tournaments — date enrichment complete");
@@ -218,7 +217,7 @@ async function main() {
   log(`Discovery interval: ${DISCOVERY_INTERVAL}min`);
   log(`Sync interval: ${SYNC_INTERVAL}min`);
   log(`Enrich interval: ${ENRICH_INTERVAL}min (batch: ${ENRICH_BATCH_SIZE})`);
-  log(`Enrich dates interval: ${ENRICH_DATES_INTERVAL}min (batch: ${ENRICH_DATES_BATCH_SIZE})`);
+  log(`Enrich dates interval: ${ENRICH_DATES_INTERVAL}min`);
   log("");
 
   const discovery = scheduleLoop("discovery", discoveryLoop, DISCOVERY_INTERVAL);
