@@ -79,6 +79,15 @@ const migrations: Migration[] = [
       console.log(`[migration:4] Normalized ${result.changes} tournament dates (stripped time suffix)`);
     },
   },
+  {
+    version: 5,
+    name: "reset-date-enrichment-cursor",
+    resync: false,
+    run: (db) => {
+      db.run("DELETE FROM sync_cursors WHERE key = 'enrich_dates_offset'");
+      console.log("[migration:5] Reset enrich_dates_offset cursor — date enrichment will rescan all NULL-date tournaments");
+    },
+  },
 ];
 
 export function runMigrations(db: Database): { ranCount: number; needsResync: boolean } {

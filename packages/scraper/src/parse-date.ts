@@ -16,7 +16,29 @@ function parseDateFromHeader(headerTexts: string[] | undefined): string | null {
   for (let i = headerTexts.length - 1; i >= 0; i--) {
     const text = headerTexts[i].trim().toLowerCase();
 
-    // Pattern: "25 - 29 march 2026" or "25-29 march 2026"
+    // Pattern: "19 november 2022 - 31 march 2023" (cross-year long-span)
+    const longSpanMatch = text.match(/^(\d{1,2})\s+([\p{L}]+)\s+(\d{4})\s*-\s*\d{1,2}\s+[\p{L}]+\s+\d{4}$/u);
+    if (longSpanMatch) {
+      const day = parseInt(longSpanMatch[1]);
+      const month = MONTHS[longSpanMatch[2]];
+      const year = parseInt(longSpanMatch[3]);
+      if (month && day >= 1 && day <= 31 && year >= 2000) {
+        return `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+      }
+    }
+
+    // Pattern: "13 january - 11 february 2024" (cross-month range)
+    const crossMonthMatch = text.match(/^(\d{1,2})\s+([\p{L}]+)\s*-\s*\d{1,2}\s+[\p{L}]+\s+(\d{4})$/u);
+    if (crossMonthMatch) {
+      const day = parseInt(crossMonthMatch[1]);
+      const month = MONTHS[crossMonthMatch[2]];
+      const year = parseInt(crossMonthMatch[3]);
+      if (month && day >= 1 && day <= 31 && year >= 2000) {
+        return `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+      }
+    }
+
+    // Pattern: "25 - 29 march 2026" or "25-29 march 2026" (same-month range)
     const rangeMatch = text.match(/^(\d{1,2})\s*-\s*\d{1,2}\s+([\p{L}]+)\s+(\d{4})$/u);
     if (rangeMatch) {
       const day = parseInt(rangeMatch[1]);
