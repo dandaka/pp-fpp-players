@@ -41,38 +41,28 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
         <h2 className="mb-3 text-sm font-medium text-muted-foreground">Profile</h2>
         <div className="grid grid-cols-2 gap-3">
           <div className="rounded-lg border p-4 space-y-1.5">
-            {rating && (
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">Rating</span>
-                <span className="text-sm font-semibold">{rating.score}</span>
-              </div>
-            )}
-            {rating && (
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">Reliability</span>
-                <span className="text-sm font-semibold">{rating.reliability}%</span>
-              </div>
-            )}
-            {ranks && (
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">Ranking</span>
-                <span className="text-sm font-semibold">#{ranks.global.rank.toLocaleString()}</span>
-              </div>
-            )}
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-muted-foreground">Rating</span>
+              <span className="text-sm font-semibold">{rating ? rating.score : "-"}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-muted-foreground">Reliability</span>
+              <span className="text-sm font-semibold">{rating ? `${rating.reliability}%` : "-"}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-muted-foreground">Ranking</span>
+              <span className="text-sm font-semibold">{ranks ? `#${ranks.global.rank.toLocaleString()}` : "-"}</span>
+            </div>
           </div>
           <div className="rounded-lg border p-4 space-y-1.5">
-            {tournamentsCount > 0 && (
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">Tournaments</span>
-                <span className="text-sm font-semibold">{tournamentsCount}</span>
-              </div>
-            )}
-            {matchesCount > 0 && (
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">Matches</span>
-                <span className="text-sm font-semibold">{matchesCount}</span>
-              </div>
-            )}
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-muted-foreground">Tournaments</span>
+              <span className="text-sm font-semibold">{tournamentsCount}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-muted-foreground">Matches</span>
+              <span className="text-sm font-semibold">{matchesCount}</span>
+            </div>
             {startYear && (
               <div className="flex justify-between items-center">
                 <span className="text-sm text-muted-foreground">Started</span>

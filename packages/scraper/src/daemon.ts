@@ -11,7 +11,7 @@ const SYNC_INTERVAL = 60;
 const ENRICH_INTERVAL = 30;
 const ENRICH_BATCH_SIZE = 50;
 const GAP_RESCAN_HOURS = 24;
-const ENRICH_DATES_INTERVAL = 2;
+const ENRICH_DATES_INTERVAL = 1;
 
 function log(msg: string) {
   console.log(`[${new Date().toISOString()}] ${msg}`);
