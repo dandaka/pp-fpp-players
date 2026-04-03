@@ -3,7 +3,7 @@ import type { MatchDetail, PlayerRating, UpcomingMatchDetail } from "../types";
 
 function parseTournamentIdFromSource(source: string | null): number | null {
   if (!source) return null;
-  const match = source.match(/(?:scrape|schedule):tournament:(\d+)/);
+  const match = source.match(/(?:scrape|schedule|api):tournament:(\d+)/);
   return match ? parseInt(match[1]) : null;
 }
 
