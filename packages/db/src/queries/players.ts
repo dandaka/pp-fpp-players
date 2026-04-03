@@ -160,7 +160,7 @@ export function getPlayerStartYear(id: number): number | null {
     SELECT MIN(m.date_time) as firstMatch
     FROM matches m
     JOIN match_players mp ON mp.match_guid = m.guid
-    WHERE mp.player_id = ? AND m.date_time IS NOT NULL
+    WHERE mp.player_id = ? AND m.date_time IS NOT NULL AND m.date_time != ''
   `).get(id) as { firstMatch: string | null } | null;
   if (!row?.firstMatch) return null;
   return new Date(row.firstMatch).getFullYear();
