@@ -133,6 +133,10 @@ For backfill tasks (like `enrichDatesLoop` in `daemon.ts`):
 
 The cursor offset is for logging. Real progress is the DB update. Daemon restart picks up remaining NULL rows.
 
+## Rating System
+
+See [docs/rating-system.md](docs/rating-system.md) for full details on OpenSkill ratings, displayed scores, and win probability calculation.
+
 ## Database
 
 The real database is at the **repo root**: `padel.db` (i.e. `/Users/dandaka/projects/pp-fpp-players/padel.db`).
