@@ -146,6 +146,13 @@ export function MatchCard({
           </div>
         )}
 
+        {/* No score indicator for completed matches without sets */}
+        {!hasScores && match.winnerSide && (
+          <div className="shrink-0 flex items-center">
+            <span className="text-xs text-muted-foreground italic">No score</span>
+          </div>
+        )}
+
         {/* Win probability column */}
         {hasProb && (
           <div className="shrink-0 flex flex-col items-end justify-start gap-1">

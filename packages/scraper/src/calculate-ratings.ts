@@ -18,6 +18,7 @@ export function calculateRatings() {
     FROM matches m
     LEFT JOIN tournaments t ON t.id = m.tournament_id
     WHERE m.winner_side IS NOT NULL
+      AND m.sets_json IS NOT NULL
       AND m.is_singles = 0
       AND (t.sport IS NULL OR t.sport = 'Padel')
     ORDER BY m.date_time ASC
