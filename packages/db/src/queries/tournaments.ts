@@ -408,23 +408,32 @@ function parseSets(setsJson: string | null): MatchDetail["sets"] {
   } catch { return []; }
 }
 
+// OpenSkill defaults: mu=25, sigma=25/3, beta=sigma/2
+// Z=1: conservative skill estimate penalizing uncertainty (1-sigma)
+const OS_Z = 1;
+const OS_BETA_SQ = ((25 / 3 / 2) ** 2); // ≈17.36
+
+function normalCdf(x: number): number {
+  const t = 1 / (1 + 0.3275911 * Math.abs(x));
+  const erf = 1 - (0.254829592 * t - 0.284496736 * t * t + 1.421413741 * t ** 3
+    - 1.453152027 * t ** 4 + 1.061405429 * t ** 5) * Math.exp(-x * x);
+  return 0.5 * (1 + (x >= 0 ? erf : -erf));
+}
+
 function computeWinProbability(
   sideA: Array<{ mu: number; sigma: number }>,
   sideB: Array<{ mu: number; sigma: number }>
 ): number | null {
   if (sideA.length === 0 || sideB.length === 0) return null;
-  const muA = sideA.reduce((s, r) => s + r.mu, 0);
-  const muB = sideB.reduce((s, r) => s + r.mu, 0);
-  const sigmaA = Math.sqrt(sideA.reduce((s, r) => s + r.sigma * r.sigma, 0));
-  const sigmaB = Math.sqrt(sideB.reduce((s, r) => s + r.sigma * r.sigma, 0));
-  const deltaMu = muA - muB;
-  const denom = Math.sqrt(2 * (sigmaA * sigmaA + sigmaB * sigmaB));
+  const ordA = sideA.reduce((s, r) => s + (r.mu - OS_Z * r.sigma), 0);
+  const ordB = sideB.reduce((s, r) => s + (r.mu - OS_Z * r.sigma), 0);
+  const sigmaSqA = sideA.reduce((s, r) => s + r.sigma * r.sigma, 0);
+  const sigmaSqB = sideB.reduce((s, r) => s + r.sigma * r.sigma, 0);
+  const n = 2;
+  const denom = Math.sqrt(n * OS_BETA_SQ + sigmaSqA + sigmaSqB);
   if (denom === 0) return 0.5;
-  const x = deltaMu / denom;
-  const t = 1 / (1 + 0.3275911 * Math.abs(x));
-  const erf = 1 - (0.254829592 * t - 0.284496736 * t * t + 1.421413741 * t ** 3
-    - 1.453152027 * t ** 4 + 1.061405429 * t ** 5) * Math.exp(-x * x);
-  return Math.round(0.5 * (1 + (x >= 0 ? erf : -erf)) * 100) / 100;
+  const x = (ordA - ordB) / denom;
+  return Math.round(normalCdf(x) * 100) / 100;
 }
 
 export function getTournamentMatches(

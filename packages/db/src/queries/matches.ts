@@ -205,29 +205,40 @@ export function getPlayerMatches(
  * Compute win probability for side A using Bradley-Terry model from OpenSkill mu/sigma.
  * For doubles, combine team ratings by summing mu and root-sum-square of sigma.
  */
+// OpenSkill defaults: mu=25, sigma=25/3, beta=sigma/2
+// Z=1: conservative skill estimate penalizing uncertainty (1-sigma)
+const OS_Z = 1;
+const OS_BETA_SQ = ((25 / 3 / 2) ** 2); // ≈17.36
+
+function normalCdf(x: number): number {
+  const t = 1 / (1 + 0.3275911 * Math.abs(x));
+  const erf = 1 - (0.254829592 * t - 0.284496736 * t * t + 1.421413741 * t ** 3
+    - 1.453152027 * t ** 4 + 1.061405429 * t ** 5) * Math.exp(-x * x);
+  return 0.5 * (1 + (x >= 0 ? erf : -erf));
+}
+
+/**
+ * Compute win probability for side A using ordinal (mu - Z*sigma) as the
+ * conservative skill estimate, matching the rating scores shown in the UI.
+ * Uses OpenSkill's predictWin denominator (n*β² + σA² + σB²).
+ */
 function computeWinProbability(
   sideARatings: Array<{ mu: number; sigma: number }>,
   sideBRatings: Array<{ mu: number; sigma: number }>
 ): number | null {
   if (sideARatings.length === 0 || sideBRatings.length === 0) return null;
 
-  const muA = sideARatings.reduce((sum, r) => sum + r.mu, 0);
-  const muB = sideBRatings.reduce((sum, r) => sum + r.mu, 0);
-  const sigmaA = Math.sqrt(sideARatings.reduce((sum, r) => sum + r.sigma * r.sigma, 0));
-  const sigmaB = Math.sqrt(sideBRatings.reduce((sum, r) => sum + r.sigma * r.sigma, 0));
+  const ordA = sideARatings.reduce((sum, r) => sum + (r.mu - OS_Z * r.sigma), 0);
+  const ordB = sideBRatings.reduce((sum, r) => sum + (r.mu - OS_Z * r.sigma), 0);
+  const sigmaSqA = sideARatings.reduce((sum, r) => sum + r.sigma * r.sigma, 0);
+  const sigmaSqB = sideBRatings.reduce((sum, r) => sum + r.sigma * r.sigma, 0);
 
-  const deltaMu = muA - muB;
-  const denominator = Math.sqrt(2 * (sigmaA * sigmaA + sigmaB * sigmaB));
+  const n = 2; // two teams
+  const denominator = Math.sqrt(n * OS_BETA_SQ + sigmaSqA + sigmaSqB);
   if (denominator === 0) return 0.5;
 
-  // Approximation of normal CDF using error function
-  const x = deltaMu / denominator;
-  const t = 1 / (1 + 0.3275911 * Math.abs(x));
-  const erf = 1 - (0.254829592 * t - 0.284496736 * t * t + 1.421413741 * t ** 3
-    - 1.453152027 * t ** 4 + 1.061405429 * t ** 5) * Math.exp(-x * x);
-  const phi = 0.5 * (1 + (x >= 0 ? erf : -erf));
-
-  return Math.round(phi * 100) / 100;
+  const x = (ordA - ordB) / denominator;
+  return Math.round(normalCdf(x) * 100) / 100;
 }
 
 export function getPlayerUpcomingMatches(playerId: number): UpcomingMatchDetail[] {
